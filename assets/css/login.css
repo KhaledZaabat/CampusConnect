@@ -1,0 +1,129 @@
+/* Log in page style */
+*,
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('/assets/img/pic5.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+.login-form {
+    position: relative;
+    height: 520px;
+    width: 400px;
+    background-color: rgba(255, 255, 255, 0.13);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px #0f0b32;
+    padding: 50px 35px;
+}
+
+.login-form * {
+    font-family: 'Poppins', sans-serif;
+    color: #0f0b32;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+
+.title-login {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+    color: #0f0b32;
+}
+
+.login-username-label,
+.login-password-label {
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.input-login {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: #ffffff12;
+    border-radius: 10px;
+    border: 2px solid #d8d7db;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    transition: all 0.3s ease;
+}
+
+.input-login:focus {
+    border-color: #0f0b32;
+    outline: none;
+}
+
+.input-login::placeholder {
+    color: #0f0b32;
+}
+
+.input-login:focus::placeholder {
+    color: transparent; /* Hide placeholder on focus */
+}
+
+.login-button {
+    display: inline-block; /* Make the link behave like a block element */
+    text-align: center;    /* Center the text inside the link */
+    width: 80%;         
+    background-color: #ffffff;
+    color: #0f0b32;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 15px;
+    cursor: pointer;
+    text-decoration: none; 
+    transition: background-color 0.3s ease;
+    margin: 13% auto;
+    display: block;
+}
+
+.login-button:hover {
+    background-color: #0f0b32;
+    color: white; 
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-form {
+        width: 90%; /* Take 90% of the width for smaller screens */
+        padding: 40px 20px; /* Adjust padding */
+    }
+}
+
+.logo-login {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo-login img {
+    width: 100px;
+    height: auto;
+}

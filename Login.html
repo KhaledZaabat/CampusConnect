@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Campus Connect</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!-- Replace the Blade asset helper with a static or relative path to the CSS file -->
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body> 
+    <form class="login-form">
+        <div class="logo-login">
+            <!-- Replace the Blade asset helper with a static or relative path to the image -->
+            <img src="assets/img/logo.png" alt="Logo">
+        </div>
+        <h3 class="title-login">Campus Connect</h3>
+
+        <label for="username" class="login-username-label">Username</label>
+        <input type="text" placeholder="BAC ID" id="username" class="input-login" required>
+
+        <label for="password" class="label-hadi">Password</label>
+        <input type="password" placeholder="Password" id="password" class="input-login" required>
+        
+        <!-- Replace the Laravel route with a static or relative URL -->
+        <a href="/home" class="login-button">Log In</a>
+    </form>
+</body>
+</html>

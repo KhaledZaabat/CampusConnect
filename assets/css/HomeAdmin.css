@@ -1,0 +1,96 @@
+.text-content {
+    max-width: 600px;              /* Maximum width for text content */
+}
+
+h1 {
+    font-size: 3em;                /* Font size for headings */
+    color: #2c3e50;                /* Heading color */
+}
+
+p {
+    font-size: 1.2em;              /* Font size for paragraphs */
+    margin: 20px 0;                /* Margin above and below paragraphs */
+}
+
+/* Features section styles */
+.features {
+    display: flex;                  /* Enable flexbox for features */
+    justify-content: space-between; /* Space between feature items */
+    margin: 20px 0;                /* Margin above and below features */
+}
+
+.feature-item {
+    text-align: center;             /* Center text in feature items */
+}
+
+.feature-item i {
+    font-size: 2em;                /* Icon size */
+    margin-bottom: 10px;           /* Margin below icons */
+}
+
+/* Button styles */
+.buttons {
+    margin-top: 30px;              /* Margin above buttons */
+}
+
+.explore-btn,
+.news-btn {
+    padding: 10px 20px;            /* Padding for buttons */
+    border: none;                  /* Remove border */
+    cursor: pointer;               /* Pointer cursor on hover */
+    font-size: 1em;                /* Font size for buttons */
+}
+
+.explore-btn {
+    background-color: #3498db;     /* Background color for explore button */
+    color: white;                  /* Text color for explore button */
+    margin-right: 10px;            /* Right margin for spacing */
+    border-radius: 30px;           /* Rounded corners */
+}
+
+.news-btn {
+    background-color: white;        /* Background color for news button */
+    color: #3498db;                 /* Text color for news button */
+    border: 2px solid #3498db;      /* Border for news button */
+    border-radius: 30px;           /* Rounded corners */
+}
+
+/* Carousel styles */
+.carousel {
+    width: 400px;                  /* Fixed width for carousel */
+    height: auto;                  /* Auto height to maintain aspect ratio */
+    margin-left: 20px;             /* Spacing between text and carousel */
+}
+
+.carousel-inner img {
+    height: auto;                  /* Maintain aspect ratio of images */
+    border-radius: 15px;           /* Rounded corners for images */
+}
+
+/* Carousel controls */
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent background for controls */
+    border-radius: 50%;           /* Circular controls */
+}
+
+/* Carousel transition effects */
+.carousel-item {
+    transition: transform 1s ease-in-out; /* Smooth transition for slides */
+}
+
+.carousel-item img {
+    width: 100%;                  /* Full width of the carousel */
+    border-radius: 15px;         /* Keep rounded corners */
+}
+
+/* Styles for the active and adjacent slides */
+.carousel-item.active {
+    opacity: 1;                  /* Fully visible active slide */
+    transform: scale(1);         /* Scale up the active slide */
+}
+
+.carousel-item:not(.active) {
+    opacity: 0.5;                /* Fade out non-active slides */
+    transform: scale(0.8);       /* Slightly scale down non-active slides */
+}
