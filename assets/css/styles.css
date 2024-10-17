@@ -285,3 +285,12 @@ body{
         margin-bottom: 20px;
     }
 }
+
+.logo_img {
+    height: 70px;
+    width:70px;
+}
+
+.logo_footer{
+    height: 160px;
+}

@@ -8,12 +8,11 @@
 }
 
 body {
-    background-image: url('/assets/img/pic5.jpg');
+    background-image: url('../img/pic5.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
-
 
 .login-form {
     position: relative;
