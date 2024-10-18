@@ -88,7 +88,9 @@ Provide a user-friendly interface in Arabic and English.
 - **Login Page**
 - **CRUD Student Page**: Create, Read, Update, Delete functionality for student records.
 - **CRUD USERS Page**: Create, Read, Update, Delete functionality for admin users. (+ CRUD Users)
-- **Receiving Issues Page**: Handle issue states (Pending, Declined, Done).
+- **Canteen Schedule (Student)**: Display the canteen schedule for students.
+- **Canteen Management (Admin)**: Admin page for managing canteen schedules and operations.
+
 
 #### Kadouci:
 - **Layout**: Design and implement the layout (Nav bar + About Us section).
@@ -106,8 +108,7 @@ Provide a user-friendly interface in Arabic and English.
 - **Student Profile Page**: Profile management for students.
 - **News Page (Student)**: Display news relevant to students.
 - **Managing News Page (Admin)**: Admin interface for managing news content.
-- **Canteen Schedule (Student)**: Display the canteen schedule for students.
-- **Canteen Management (Admin)**: Admin page for managing canteen schedules and operations.
+- **Receiving Issues Page**: Handle issue states (Pending, Declined, Done).
 
 
 ---
