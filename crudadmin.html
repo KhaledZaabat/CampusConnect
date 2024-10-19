@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>CRUD STUDENT</title> <!-- Static title for the Home page -->
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
+    <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
+    <link rel="stylesheet" href="assets/css/crudadmin.css">
+    <link rel="stylesheet" href="assets/css/lostfound.css">
+    <link rel="stylesheet" href="assets/css/HomeAdmin.css"> <!-- custom css --> 
+    <!-- font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+</head>
+
+<header>
+    <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
+        <div class="container">
+            <a class="navbar-brand-logo" href="#">
+                <img class ="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
+            </a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Canteen Schedule</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li class="dropdown-header">Maintenance Services</li>
+                            <li><a class="dropdown-item" href="/maintenance/report">Report Issues</a></li>
+                            <li class="dropdown-header">Housing Services</li>
+                            <li><a class="dropdown-item" href="/housing/book">Book Rooms</a></li>
+                            <li><a class="dropdown-item" href="/housing/change">Change Rooms</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="dropdown text-end">
+                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="Profile Image" width="32" height="32" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<body>
+    
+    <div class="container">
+        <h1>Admin Management</h1>
+        <form action="#" method="post" class="student-form" enctype="multipart/form-data">
+            <input type="file" accept="image/*" name="studentImage" >
+            <input type="text" placeholder="User ID" name="UserID" required>
+            <input type="text" placeholder="First Name" name="firstName" required>
+            <input type="text" placeholder="Last Name" name="lastName" required>
+            <input type="email" placeholder="Email" name="email" >
+            <input type="tel" placeholder="Phone Number" name="phone" required>
+            <label for="role"></label>
+                <select id="role" name="role">
+                    <option value="" disabled selected hidden>Role</option>
+                    <option value="Maintenance">Maintenance Worker</option>
+                    <option value="Housing">Housing Worker</option>
+                    <option value="Chef">Chef</option>
+                </select>
+            <button type="submit">Add User</button>
+        </form>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>User ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Role</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td>1</td>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john.doe@example.com</td>
+                    <td>1234567890</td>
+                    <td>Maintenance</td>
+                    <td>
+                        <a href="#" class="Edit"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
+                    <td>2</td>
+                    <td>Jane</td>
+                    <td>Smith</td>
+                    <td>jane.smith@example.com</td>
+                    <td>0987654321</td>
+                    <td>Chef</td>
+                    <td>
+                        <a href="#" class="Edit"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer-spacing"></div> <!-- Spacing before the footer -->
+</body>
+
+<footer class="page-footer custom-bg-black">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div>
+            <ul class="list-unstyled">
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contribute on GitHub</a></li>
+            </ul>
+        </div>
+        <div>
+            <img class="logo_footer" src="assets/img/logo.png" alt="Brand Logo">
+        </div>
+    </div>
+    <div class="text-center custom-bg-black p-1">
+        <p>©ENSIA. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</html>
