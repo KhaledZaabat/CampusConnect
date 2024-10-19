@@ -1,5 +1,6 @@
 body {
-    background-image: url('pic5.jpg');
+    background-color: #0f0b32;
+    background-color: linear-gradient(to top right, #0f0b32, #ffffff);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -10,6 +11,7 @@ body {
     margin: auto;
     background: white;
     padding: 20px;
+    margin-top: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
@@ -22,13 +24,14 @@ h1 {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    background-color: #ffffffdb;
 }
 
 .student-form input {
     margin: 10px 0;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #3c4046;
+    border-radius: 8px;
 }
 
 
@@ -37,7 +40,7 @@ h1 {
     background-color: #0f0b32;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 18px;
 }

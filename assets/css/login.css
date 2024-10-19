@@ -8,17 +8,19 @@
 }
 
 body {
-    background-image: url('../img/pic5.jpg');
+    /*background-image: url('../img/pic5.jpg');*/
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-color: #0f0b32;
+    background-color: linear-gradient(to top right, #0f0b32, #ffffff);
 }
 
 .login-form {
     position: relative;
     height: 520px;
     width: 400px;
-    background-color: rgba(255, 255, 255, 0.13);
+    background-color: rgba(255, 255, 255, 0.788);
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
@@ -39,7 +41,7 @@ body {
 }
 
 .title-login {
-    font-size: 32px;
+    font-size: 35px;
     font-weight: 500;
     line-height: 42px;
     text-align: center;
@@ -60,7 +62,7 @@ body {
     width: 100%;
     background-color: #ffffff12;
     border-radius: 10px;
-    border: 2px solid #d8d7db;
+    border: 2px solid #ffffff;
     padding: 0 10px;
     margin-top: 8px;
     font-size: 14px;
@@ -85,8 +87,8 @@ body {
     display: inline-block; /* Make the link behave like a block element */
     text-align: center;    /* Center the text inside the link */
     width: 80%;         
-    background-color: #ffffff;
-    color: #0f0b32;
+    background-color: #0f0b32;
+    color: #ffffff;
     padding: 15px 0;
     font-size: 18px;
     font-weight: 600;
@@ -99,8 +101,8 @@ body {
 }
 
 .login-button:hover {
-    background-color: #0f0b32;
-    color: white; 
+    background-color: #ffffff;
+    color: #0f0b32; 
     text-decoration: none;
 }
 
@@ -114,7 +116,7 @@ body {
 
 .logo-login {
     position: absolute;
-    top: -60px;
+    top: -70px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
