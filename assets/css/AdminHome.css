@@ -1,0 +1,344 @@
+body {
+    padding-top: 125px;
+    user-select: none;
+}
+
+.custom-bg-black {
+    background-color: black !important;
+}
+
+.header {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.Welcome {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 120px;
+}
+
+.project-name::after {
+    content: "";
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 80px;
+    color: #0f0b32;
+    border-right: 2px solid #0f0b32;
+    white-space: nowrap;
+    animation: typing 4s forwards infinite;
+}
+
+.welcome-paragraph {
+    margin-top: 100px;
+    font-size: 30px;
+    margin-bottom: 100px;
+}
+
+/* Stats Section */
+.stats-section {
+    margin: 50px 0;
+    background-color: #f9fafb;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.stats-section h3 {
+    font-size: 36px;
+    color: #0f0b32;
+}
+
+.stats-section p {
+    font-size: 20px;
+    color: #6e6e6e;
+}
+
+/* Admin Services Section */
+.services-section {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 40px 20px;
+    background-color: #f9fafb;
+}
+
+.services-title {
+    font-family: Arial, sans-serif;
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #6e6e6e;
+}
+
+.services-title .bold-text {
+    font-weight: bold;
+    color: #0f0b32;
+}
+
+.services-title .regular-text {
+    font-size: 22px;
+    color: #6e6e6e;
+}
+
+.services-blocks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+}
+
+.service-block {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    user-select: none;
+}
+
+.service-block:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.service-block h3 {
+    font-size: 24px;
+    margin: 20px 0;
+    color: #0f0b32;
+}
+
+.service-block p {
+    font-size: 18px;
+    color: #6e6e6e;
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+/* Footer Section */
+.footer-spacing {
+    height: 100px;
+}
+
+footer {
+    padding: 40px 0;
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer ul li {
+    margin-bottom: 10px;
+}
+
+footer ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+footer ul li a:hover {
+    text-decoration: underline;
+}
+
+footer .logo_footer {
+    width: 120px;
+}
+
+/* Stats Section Icons */
+.stat-icon {
+    width: 50px; /* Adjust the width as necessary */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 10px; /* Space between the image and text */
+}
+
+/* Responsive adjustments for stats icons */
+@media (max-width: 576px) {
+    .stat-icon {
+        width: 60px; /* Smaller size for mobile devices */
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding-top: 100px;
+    }
+
+    .Welcome {
+        font-size: 50px;
+    }
+
+    .project-name::after {
+        font-size: 40px;
+    }
+
+    .welcome-paragraph {
+        font-size: 18px;
+        margin-bottom: 50px;
+    }
+
+    .stats-section h3 {
+        font-size: 24px;
+    }
+
+    .stats-section p {
+        font-size: 16px;
+    }
+
+    .services-title {
+        font-size: 28px;
+    }
+
+    .services-title .regular-text {
+        font-size: 16px;
+    }
+
+    .services-blocks {
+        display: block;
+    }
+
+    .service-block {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .service-block h3 {
+        font-size: 20px;
+    }
+
+    .service-block p {
+        font-size: 16px;
+    }
+
+    .footer-spacing {
+        height: 50px;
+    }
+}
+
+/* Medium devices (576px to 768px) */
+@media (min-width: 576px) and (max-width: 768px) {
+    .Welcome {
+        font-size: 70px;
+    }
+
+    .project-name::after {
+        font-size: 60px;
+    }
+
+    .welcome-paragraph {
+        font-size: 24px;
+    }
+
+    .stats-section h3 {
+        font-size: 30px;
+    }
+
+    .stats-section p {
+        font-size: 18px;
+    }
+
+    .services-title {
+        font-size: 30px;
+    }
+
+    .services-title .regular-text {
+        font-size: 18px;
+    }
+
+    .services-blocks {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-block {
+        width: 90%;
+    }
+}
+
+/* Large devices (768px to 992px) */
+@media (min-width: 768px) and (max-width: 992px) {
+    .Welcome {
+        font-size: 90px;
+    }
+
+    .project-name::after {
+        font-size: 70px;
+    }
+
+    .welcome-paragraph {
+        font-size: 26px;
+    }
+
+    .stats-section h3 {
+        font-size: 32px;
+    }
+
+    .stats-section p {
+        font-size: 18px;
+    }
+
+    .services-title {
+        font-size: 32px;
+    }
+
+    .services-title .regular-text {
+        font-size: 20px;
+    }
+
+    .services-block {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .service-block {
+        width: 40%;
+    }
+}
+
+/* Extra-large devices (992px and up) */
+@media (min-width: 992px) {
+    .Welcome {
+        font-size: 120px;
+    }
+
+    .project-name::after {
+        font-size: 80px;
+    }
+
+    .welcome-paragraph {
+        font-size: 30px;
+    }
+
+    .stats-section h3 {
+        font-size: 36px;
+    }
+
+    .stats-section p {
+        font-size: 20px;
+    }
+
+    .services-title {
+        font-size: 36px;
+    }
+
+    .services-title .regular-text {
+        font-size: 22px;
+    }
+
+    .services-block {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .service-block {
+        width: 250px;
+    }
+}

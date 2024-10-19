@@ -145,6 +145,63 @@ body{
     font-family: Arial, sans-serif;
 }
 
+/* Styles for View All News Button in Bottom Right */
+.btn-view-all-news {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: rgb(17, 3, 48);
+    padding: 0 10px;
+    font-size: 26px;
+    border: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.3s, transform 0.3s ease-in-out;
+}
+
+/* Underline animation */
+.btn-view-all-news::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: rgb(17, 3, 48); /* Same as text color */
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Hover effects */
+.btn-view-all-news:hover {
+    color: #0f0b32;
+}
+
+.btn-view-all-news:hover::after {
+    width: 100%; /* Expands underline to full width */
+}
+
+/* Arrow Styling */
+.arrow {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.btn-view-all-news:hover .arrow {
+    transform: translateX(10px); /* Fleche (arrow) scales to the right */
+}
+
+/* Ensuring the button stays within the News Section */
+.News-Home {
+    position: relative;
+    padding-bottom: 70px;
+}
+
+
 .btn-primary {
     background-color: #0f0b32;
     color: white;

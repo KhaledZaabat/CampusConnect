@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Admin Dashboard</title> <!-- Static title for the Admin Dashboard -->
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
+    <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
+    <link rel="stylesheet" href="assets/css/AdminHome.css"> <!-- custom css for admins -->
+
+    <!-- font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+</head>
+
+<header>
+    <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
+        <div class="container">
+            <a class="navbar-brand-logo" href="#">
+                <img class ="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
+            </a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Manage Students</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Manage News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Manage Services</a></li>
+                </ul>
+            </div>
+            <div class="dropdown text-end">
+                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="Profile Image" width="32" height="32" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<body>
+    <main class="page">
+        <div class="container mt-5">
+            <!-- Header Section -->
+            <div class="header">
+                <p>
+                    <span class="Welcome">Admin Dashboard of</span><br>
+                    <span class="project-name" id="animated-text"></span> <!-- ID for the animation -->
+                </p>
+                <p class="welcome-paragraph">Manage students, organize services, and streamline operations for a better campus experience.</p>
+            </div>
+
+           <!-- Stats Section -->
+<div class="stats-section">
+    <div class="row text-center">
+        <div class="col-lg-4 col-md-6 mb-4">
+            <img src="assets/img/person-check.svg" alt="Students in Dorms" class="stat-icon">
+            <h3>900+</h3>
+            <p>Students in Dorms</p>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <img src="assets/img/image.png" alt="Beds Available" class="stat-icon" style="width: 70px;">
+            <h3>150+</h3>
+            <p>Beds Available</p>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <img src="assets/img/bed-solid (1).svg" alt="Beds Occupied" class="stat-icon">
+            <h3>750+</h3>
+            <p>Beds Occupied</p>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <img src="assets/img/maintenance-icon-12.png" alt="Active Maintenance Requests" class="stat-icon">
+            <h3>5</h3>
+            <p>Active Maintenance Requests</p>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <img src="assets/img/rooms.png" alt="Room Availability" class="stat-icon">
+            <h3>85%</h3>
+            <p>Room Availability</p>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <img src="assets/img/satisfaction.png" alt="Average Satisfaction" class="stat-icon">
+            <h3>4.5</h3>
+            <p>Average Satisfaction</p>
+        </div>
+    </div>
+</div>
+
+            <!-- Admin Management Section -->
+            <div class="services-section">
+                <div class="services-title">
+                    <span class="bold-text">Admin Dashboard.</span>
+                    <span class="regular-text">Streamline operations and enhance campus life.</span>
+                </div>
+
+                <div class="services-blocks">
+                    <div class="service-block">
+                        <img src="assets/img/users-solid.svg" alt="Manage Students Icon" class="service-icon">
+                        <h3>Manage Users</h3>
+                        <p>Oversee Users registrations, accommodations, and profiles.</p>
+                    </div>
+
+                    <div class="service-block">
+                        <img src="assets/img/utensils-solid (1).svg" alt="Manage Menu Icon" class="service-icon">
+                        <h3>Manage Canteen Menu</h3>
+                        <p>Update and organize daily canteen menus for the students.</p>
+                    </div>
+
+                    <div class="service-block">
+                        <img src="assets/img/newspaper-solid.svg" alt="Manage News Icon" class="service-icon">
+                        <h3>Manage News</h3>
+                        <p>Create and publish campus news and announcements.</p>
+                    </div>
+
+                    <div class="service-block">
+                        <img src="assets/img/screwdriver-wrench-solid (2).svg" alt="Manage Services Icon" class="service-icon">
+                        <h3>Manage Other Services</h3>
+                        <p>Oversee maintenance requests, housing services, and more.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="footer-spacing"></div> <!-- Spacing before the footer -->
+</body>
+
+<footer class="page-footer custom-bg-black">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div>
+            <ul class="list-unstyled">
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contribute on GitHub</a></li>
+            </ul>
+        </div>
+        <div>
+            <img class="logo_footer" src="assets/img/logo.png" alt="Brand Logo">
+        </div>
+    </div>
+    <div class="text-center custom-bg-black p-1">
+        <p>©ENSIA. All Rights Reserved.</p>
+    </div>
+</footer>
+
+</html>
