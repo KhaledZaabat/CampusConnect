@@ -1,19 +1,9 @@
-body {
-    background-color: #0f0b32;
-    background-color: linear-gradient(to top right, #0f0b32, #ffffff);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+body{
+    padding-top:125px;
 }
 
-.container {
-    max-width: 800px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.custom-bg-black {
+    background-color: black !important; /* Ensure it's purely black */
 }
 
 h1 {
