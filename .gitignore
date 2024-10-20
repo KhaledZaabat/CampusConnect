@@ -1,3 +1,5 @@
 /blade_views
 /.vscode
 .hintrc
+index.php
+/components

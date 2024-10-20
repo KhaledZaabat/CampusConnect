@@ -16,7 +16,7 @@
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
-            <a class="navbar-brand-logo" href="#">
+            <a class="col-3 navbar-brand-logo" href="#">
                 <img class ="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
             </a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
@@ -40,7 +40,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="dropdown text-end">
+            <div class="dropdown col-3 text-center">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
@@ -58,52 +58,197 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h3>Create Post</h3>
+                <h3>Create a new listing:</h3>
                 <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="title" placeholder="Title" required>
+                        <label for="title">Title</label> 
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
                     </div>
                     <div class="form-group mt-2">
-                        <textarea rows="3" class="form-control" name="description" placeholder="Description" required></textarea>
+                        <label for="description">Description</label> 
+                        <textarea rows="3" class="form-control" id="description" name="description" placeholder="Description" required></textarea>
                     </div>
                     <div class="form-group mt-2">
-                        <input type="file" class="form-control-file" name="image" accept="image/*">
+                        <label for="image">Upload Image:</label>
+                        <br>
+                        <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
                     </div>
+                    <div class="form-group mt-2">
+                        <label>Type of Listing</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="listingType" id="missing" value="missing" required>
+                            <label class="form-check-label" for="missing">
+                                Missing
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="listingType" id="found" value="found" required>
+                            <label class="form-check-label" for="found">
+                                Found
+                            </label>
+                        </div>
                     <div class="form-group mt-2 mb-4">
                         <button type="submit" class="btn btn-primary">Create</button>
                     </div>
+
                 </form>
+            </div>            
+        </div>
+    </div>
+    
+
+<!-- Posts Section -->
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-3 offset-md-10">
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-filter"></i>filter
+                </a>
+
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                    <li><a class="dropdown-item" href="#!">Missing Listings</a></li>
+                    <li><a class="dropdown-item" href="#!">Found Listings</a></li>
+                </ul>
             </div>
         </div>
     </div>
-
-    <!-- Posts Section -->
-    <div class="container">
-        <div class="row mt-n5">
-            <div class="col-md-6 col-lg-4 mt-5">
-                <div class="blog-grid">
-                    <div class="blog-grid-img position-relative">
-                        <img alt="img" src="https://www.bootdey.com/image/480x480/00FFFF/000000">
+    <div class="row mt-n5">
+        <!-- Blog Post 1 -->
+        <div class="col-md-6 col-lg-4 mt-5">
+            <div class="blog-grid">
+                <div class="blog-grid-img position-relative">
+                    <img alt="img" src="assets/listings_img/unknown.webp" class="listing-img img-fluid">
+                </div>
+                <div class="blog-grid-text p-4">
+                    <h3 class="h5 mb-3">
+                        <a href="#!">مفتاح في قاعة المطالعة</a>
+                    </h3>
+                    <p class="display-30"></p>
+                    <div class="meta meta-style2">
+                        <ul>
+                            <li><a href="#!"><i class="fas fa-calendar-alt"></i> 10 Jul, 2022</a></li>
+                            <li><a href="#!"><i class="fas fa-user"></i> User</a></li>
+                            <li><a href="#!"><i class="fas fa-comments"></i> 1</a></li> <!-- Number of comments -->
+                        </ul>
                     </div>
-                    <div class="blog-grid-text p-4">
-                        <h3 class="h5 mb-3"><a href="#!">Business tool for your customer</a></h3>
-                        <p class="display-30">Exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-                        <div class="meta meta-style2">
-                            <ul>
-                                <li><a href="#!"><i class="fas fa-calendar-alt"></i> 10 Jul, 2022</a></li>
-                                <li><a href="#!"><i class="fas fa-user"></i> User</a></li>
-                                <li><a href="#!"><i class="fas fa-comments"></i> 38</a></li>
-                            </ul>
+                    <!-- Comment Section -->
+                    <div class="comment-section mt-4">
+                        <form class="nav nav-item w-100 position-relative">
+                            <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
+                            <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
+                                <i class="fa-regular fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <!-- Other Comments -->
+                    <div class="mt-4">
+                        <div class="bg-light p-3 rounded mb-2">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-1"><a href="#!">cherif tbz</a></h6>
+                                <small class="ms-2">10/20/2024 at 11pm</small>
+                            </div>
+                            <p class="small mb-0">لقيتو</p>
+                        </div>
+                        <div class="bg-light p-3 rounded mb-2">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-1"><a href="#!">cherif tbz</a></h6>
+                                <small class="ms-2">10/20/2024 at 11pm</small>
+                            </div>
+                            <p class="small mb-0">لقيتو</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Additional cards can be added here similarly -->
         </div>
+
+        <!-- Blog Post 2 -->
+        <div class="col-md-6 col-lg-4 mt-5">
+            <div class="blog-grid">
+                <div class="blog-grid-img position-relative">
+                    <img alt="img" src="assets/listings_img/unknown.webp" class="listing-img img-fluid">
+                </div>
+                <div class="blog-grid-text p-4">
+                    <h3 class="h5 mb-3"><a href="#!">مفتاح في القاعة</a></h3>
+                    <p class="display-30">لقينا مفتاح في قاعة المطالعة الي يحوس عليه يلقاه عند عماد</p>
+                    <div class="meta meta-style2">
+                        <ul>
+                            <li><a href="#!"><i class="fas fa-calendar-alt"></i> 10 Jul, 2022</a></li>
+                            <li><a href="#!"><i class="fas fa-user"></i> User</a></li>
+                            <li><a href="#!"><i class="fas fa-comments"></i> 1</a></li>
+                        </ul>
+                    </div>
+                    <!-- Comment Section -->
+                    <div class="comment-section mt-4">
+                        <form class="nav nav-item w-100 position-relative">
+                            <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
+                            <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
+                                <i class="fa-regular fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <!-- Other Comments -->
+                    <div class="mt-4">
+                        <div class="bg-light p-3 rounded mb-2">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-1"><a href="#!">cherif tbz</a></h6>
+                                <small class="ms-2">10/20/2024 at 11pm</small>
+                            </div>
+                            <p class="small mb-0">لقيتو</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Post 3 -->
+        <div class="col-md-6 col-lg-4 mt-5">
+            <div class="blog-grid">
+                <div class="blog-grid-img position-relative">
+                    <img alt="img" src="assets/listings_img/unknown.webp" class="listing-img img-fluid">
+                </div>
+                <div class="blog-grid-text p-4">
+                    <h3 class="h5 mb-3"><a href="#!">A key was found</a></h3>
+                    <p class="display-30">A key</p>
+                    <div class="meta meta-style2">
+                        <ul>
+                            <li><a href="#!"><i class="fas fa-calendar-alt"></i> 10 Jul, 2022</a></li>
+                            <li><a href="#!"><i class="fas fa-user"></i> User</a></li>
+                            <li><a href="#!"><i class="fas fa-comments"></i> 1</a></li>
+                        </ul>
+                    </div>
+                    <!-- Comment Section -->
+                    <div class="comment-section mt-4">
+                        <form class="nav nav-item w-100 position-relative">
+                            <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
+                            <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
+                                <i class="fa-regular fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <!-- Other Comments -->
+                    <div class="mt-4">
+                        <div class="bg-light p-3 rounded mb-2">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-1"><a href="#!">cherif tbz</a></h6>
+                                <small class="ms-2">10/20/2024 at 11pm</small>
+                            </div>
+                            <p class="small mb-0">لقيتو</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- You can add more posts below in a similar format -->
     </div>
+</div>
+
+
 </main>
 
-<footer class="page-footer custom-bg-black ">
+<footer class="page-footer custom-bg-black mt-6">
     <div class="container d-flex justify-content-between align-items-center">
         <div>
             <ul class="list-unstyled">

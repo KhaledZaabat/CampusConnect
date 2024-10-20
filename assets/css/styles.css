@@ -351,3 +351,7 @@ body{
 .logo_footer{
     height: 160px;
 }
+.listing-img {
+    height: 480px;
+    width: 480px;
+}
