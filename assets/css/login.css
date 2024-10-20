@@ -8,13 +8,14 @@
 }
 
 body {
-    /*background-image: url('../img/pic5.jpg');*/
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    height: 100vh; /* Ensure the body is 100% of the viewport height */
+    margin: 0; /* Remove default margin */
+    background-size: cover; /* Ensure the gradient covers the entire element */
+    background-repeat: no-repeat; /* Prevent repeating */
+    background-attachment: fixed; /* Keep the background fixed while scrolling */
     background-color: #0f0b32;
-    background-color: linear-gradient(to top right, #0f0b32, #ffffff);
 }
+
 
 .login-form {
     position: relative;
