@@ -36,7 +36,7 @@ h1 {
 .student-form input {
     margin: 10px 0;
     padding: 10px;
-    border: 1px solid #3c4046;
+    border: 1px solid #ccc;
     border-radius: 8px;
 }
 
@@ -44,6 +44,14 @@ h1 {
     display: inline-block;
     padding: 5px;
     position: relative;
+}
+
+input, select, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    transition: border-color 0.3s ease; 
 }
 
 .student-form button {

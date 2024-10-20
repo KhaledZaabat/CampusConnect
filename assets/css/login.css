@@ -63,7 +63,7 @@ body {
     width: 100%;
     background-color: #ffffff12;
     border-radius: 10px;
-    border: 2px solid gray;
+    border: 1px solid #ccc;
     padding: 0 10px;
     margin-top: 8px;
     font-size: 14px;
