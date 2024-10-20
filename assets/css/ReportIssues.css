@@ -23,8 +23,7 @@ body {
     color: #0f0b32;
     padding: 20px;
     border-radius: 8px;
-    width: 80%; /* Set the width to 80% */
-    max-width: 600px; /* Limit max width for larger screens */
+    width: 60%; /* Set the width to 80% */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: auto; /* Center the form horizontally */
     margin-top: 20px; /* Add some space above the form */
