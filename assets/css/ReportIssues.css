@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    padding-top: 125px; /* Ensures form is below the navbar */
+    background-color: #0f0b32;
+    color: white;
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+}
+
+.custom-bg-black {
+    background-color: black !important; /* Ensure it's purely black */
+}
+
+.Form-container {
+    background-color: white;
+    color: #0f0b32;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%; /* Set the width to 80% */
+    max-width: 600px; /* Limit max width for larger screens */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: auto; /* Center the form horizontally */
+    margin-top: 20px; /* Add some space above the form */
+    flex-grow: 1; /* Allow the form container to take up available space */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    transition: border-color 0.3s ease; /* Smooth transition for focus effect */
+}
+
+input[type="file"] {
+    padding: 0;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #0f0b32; /* Change border color on focus to dark blue */
+    outline: none; /* Remove the default outline */
+}
+
+textarea {
+    resize: none;
+}
+
+button {
+    padding: 10px;
+    background-color: #0f0b32;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2e2a5b;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.checkbox input {
+    margin-right: 10px;
+}
+
+.logo_img {
+    height: 70px;
+    width: 70px;
+}
+
+.logo_footer {
+    height: 160px;
+}
+
+.listing-img {
+    height: 480px;
+}
+
+footer {
+    margin-top: 50px; /* Push footer to the bottom */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .Form-container {
+        width: 90%; /* Make it wider on smaller screens */
+        padding: 15px; /* Adjust padding */
+    }
+
+    h1 {
+        font-size: 24px; /* Adjust font size */
+    }
+}
