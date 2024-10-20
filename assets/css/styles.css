@@ -2,6 +2,27 @@ body{
     padding-top:125px;
 }
 
+.nav-link {
+    text-decoration: none;
+    color: #000;
+    position: relative;
+    padding-bottom: 5px; /* Space between text and underline */
+    background-image: linear-gradient(to right, #001226 0%, #001226 100%);
+    background-size: 0% 2px; /* Initially, the underline is hidden */
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s ease; /* Smooth transition */
+}
+
+.nav-link:hover {
+    background-size: 100% 2px; /* Underline grows from left to right */
+}
+
+.nav-link.active {
+    font-weight: bold; /* Bold for active link */
+    background-size: 100% 2px; /* Keep underline for active link */
+}
+
 .custom-bg-black {
     background-color: black !important; /* Ensure it's purely black */
 }

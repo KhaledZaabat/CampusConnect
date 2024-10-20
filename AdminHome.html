@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-bs-theme="light" lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Admin Home</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- Bootstrap -->
-    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- Fonts -->
-    <link rel="stylesheet" href="assets/css/styles.css"> <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/AdminHome.css"> <!-- Lost & Found Custom CSS -->
+    <title>Admin Dashboard</title> <!-- Static title for the Admin Dashboard -->
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
+    <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
+    <link rel="stylesheet" href="assets/css/AdminHome.css"> <!-- custom css for admins -->
+
+    <!-- font awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
-<body>
 
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
@@ -29,14 +31,19 @@
                     <li class="nav-item"><a class="nav-link" href="/">News</a></li>
                     <li class="nav-item"><a class="nav-link" href="/">Canteen Schedule</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage Services</a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <li class="dropdown-header">Maintenance Services</li>
-                            <li><a class="dropdown-item" href="/maintenance/report">Report Issues</a></li>
-                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
-                            <li class="dropdown-header">Housing Services</li>
-                            <li><a class="dropdown-item" href="/housing/book">Book Rooms</a></li>
-                            <li><a class="dropdown-item" href="/housing/change">Change Rooms</a></li>
+                            <li class="dropdown-header">Maintenance </li>
+                            <li><a class="dropdown-item" href="/maintenance/report">Student Issues</a></li>
+                            <li><a class="dropdown-item" href="lostfound.html">Lost & Found Page</a></li>
+                            <li class="dropdown-header">Housing</li>
+                            <li><a class="dropdown-item" href="/housing/book"> Rooms Requests</a></li>
+                            <li class="dropdown-header">Users</li>
+                            <li><a class="dropdown-item" href=""> Manage Students</a></li>
+                            <li><a class="dropdown-item" href=""> Manage Employees</a></li>
+
+
+
                         </ul>
                     </li>
                 </ul>
@@ -104,39 +111,46 @@
 </div>
 
             <!-- Admin Management Section -->
-            <div class="services-section">
-                <div class="services-title">
-                    <span class="bold-text">Admin Dashboard.</span>
-                    <span class="regular-text">Streamline operations and enhance campus life.</span>
+            <div class="services-blocks">
+                <div class="service-block">
+                    <img src="assets/img/users-solid.svg" alt="Manage Students Icon" class="service-icon">
+                    <h3>Manage Users</h3>
+                    <p>Oversee Users registrations, accommodations, and profiles.</p>
+                    <div class="card-btn-container">
+                        <a href=""><div class="card-btn">Manage Students</div></a>
+                        <a href=""><div class="card-btn">Manage Employees</div></a>
+                    </div>
                 </div>
-
-                <div class="services-blocks">
-                    <div class="service-block">
-                        <img src="assets/img/users-solid.svg" alt="Manage Students Icon" class="service-icon">
-                        <h3>Manage Users</h3>
-                        <p>Oversee Users registrations, accommodations, and profiles.</p>
+            
+                <div class="service-block">
+                    <img src="assets/img/utensils-solid (1).svg" alt="Manage Menu Icon" class="service-icon">
+                    <h3>Manage Canteen Menu</h3>
+                    <p>Update and organize daily canteen menus for the students.</p>
+                    <div class="card-btn-container">
+                        <a href=""><div class="card-btn">Manage Menu</div></a>
                     </div>
-
-                    <div class="service-block">
-                        <img src="assets/img/utensils-solid (1).svg" alt="Manage Menu Icon" class="service-icon">
-                        <h3>Manage Canteen Menu</h3>
-                        <p>Update and organize daily canteen menus for the students.</p>
+                </div>
+            
+                <div class="service-block">
+                    <img src="assets/img/newspaper-solid.svg" alt="Manage News Icon" class="service-icon">
+                    <h3>Manage News</h3>
+                    <p>Create and publish campus news and announcements.</p>
+                    <div class="card-btn-container">
+                        <a href=""><div class="card-btn">Update News</div></a>
                     </div>
-
-                    <div class="service-block">
-                        <img src="assets/img/newspaper-solid.svg" alt="Manage News Icon" class="service-icon">
-                        <h3>Manage News</h3>
-                        <p>Create and publish campus news and announcements.</p>
-                    </div>
-
-                    <div class="service-block">
-                        <img src="assets/img/screwdriver-wrench-solid (2).svg" alt="Manage Services Icon" class="service-icon">
-                        <h3>Manage Other Services</h3>
-                        <p>Oversee maintenance requests, housing services, and more.</p>
+                </div>
+            
+                <div class="service-block">
+                    <img src="assets/img/screwdriver-wrench-solid (2).svg" alt="Manage Services Icon" class="service-icon">
+                    <h3>Manage Other Services</h3>
+                    <p>Oversee maintenance requests, housing services, and more.</p>
+                    <div class="card-btn-container">
+                        <a href=""><div class="card-btn">Manage Rooms</div></a>
+                        <a href=""><div class="card-btn">Students Issues</div></a>
                     </div>
                 </div>
             </div>
-        </div>
+            
     </main>
 
     <div class="footer-spacing"></div> <!-- Spacing before the footer -->

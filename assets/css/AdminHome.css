@@ -67,6 +67,9 @@ body {
     color: #6e6e6e;
 }
 
+
+
+
 .services-title .bold-text {
     font-weight: bold;
     color: #0f0b32;
@@ -77,13 +80,6 @@ body {
     color: #6e6e6e;
 }
 
-.services-blocks {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 30px;
-}
-
 .service-block {
     background-color: #ffffff;
     border-radius: 15px;
@@ -91,8 +87,15 @@ body {
     width: 250px;
     text-align: center;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     user-select: none;
+    position: relative;
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    height: 400px; /* Set a fixed height for consistent card sizes */
+    overflow: hidden; /* Prevent overflow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
 }
 
 .service-block:hover {
@@ -100,15 +103,47 @@ body {
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-.service-block h3 {
-    font-size: 24px;
-    margin: 20px 0;
-    color: #0f0b32;
+.service-block:hover .card-btn{
+opacity: 1;
+}
+.service-block h3,
+.service-block p ,
+.service-block img{
+    transition: filter 0.7s ease; /* Smooth filter transition */
 }
 
-.service-block p {
-    font-size: 18px;
-    color: #6e6e6e;
+.service-block:hover h3,
+.service-block:hover p ,
+.service-block:hover img{
+    filter: blur(3px); /* Apply blur effect on hover */
+}
+
+.card-btn-container {
+    position: absolute; /* Position buttons absolutely */
+    bottom: 35%; /* Distance from the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 10px; /* Space between buttons */
+    width: 80%;
+}
+
+.card-btn {
+    background-color: #0f0b32; /* Button background color */
+    color: #ffffff; /* Text color */
+    padding: 10px 20px; /* Button padding */
+    border-radius: 5px; /* Button border radius */
+    transition: background-color 0.3s ease, transform 0.3s ease,opacity 0.5s; /* Smooth transition */
+    text-decoration: none; /* No text decoration */
+    opacity: 0;  
+}
+a{
+    text-decoration: none;
+}
+.card-btn:hover {
+    background-color: rgba(15, 11, 50, 0.8); /* Darken on hover */
+    transform: translateY(-3px); /* Lift button on hover */
 }
 
 .service-icon {
@@ -116,6 +151,7 @@ body {
     height: 80px;
     margin-bottom: 20px;
 }
+
 
 /* Footer Section */
 .footer-spacing {
