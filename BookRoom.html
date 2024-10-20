@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Book Room</title> <!-- Static title for the Home page -->
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
+    <link rel="stylesheet" href="assets/css/Rooms.css"> <!-- custom css -->
+    <link rel="stylesheet" href="assets/css/ReportIssues.css"> <!-- custom css -->
+    <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
+
+
+
+
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <!-- font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+</head>
+
+<header>
+    <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
+        <div class="container">
+            <a class="col-3 navbar-brand-logo" href="#">
+                <img class ="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
+            </a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Canteen Schedule</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li class="dropdown-header">Maintenance Services</li>
+                            <li><a class="dropdown-item" href="/maintenance/report">Report Issues</a></li>
+                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
+                            <li class="dropdown-header">Housing Services</li>
+                            <li><a class="dropdown-item" href="/housing/book">Book Rooms</a></li>
+                            <li><a class="dropdown-item" href="/housing/change">Change Rooms</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="dropdown col-3 text-center">
+                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+
+
+<body>
+
+    <div class="available-rooms">
+        <h2>Available Rooms</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Dorm Block</th>
+                    <th>Floor</th>
+                    <th>Room Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A</td>
+                    <td>R</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>A</td>
+                    <td>1</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>B</td>
+                    <td>2</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td>3</td>
+                    <td>20</td>
+                </tr>
+                <!-- Add more available rooms as needed -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="Form-container">
+        <h1>Book a Room</h1>
+        <form action="#" method="post">
+            <!-- Dorm Block Preference -->
+            <label for="dorm-block">Dorm Block Preference</label>
+            <select id="dorm-block" name="dorm-block" required>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+            </select>
+
+            <!-- Floor Selection -->
+            <label for="floor">Floor</label>
+            <select id="floor" name="floor" required>
+                <option value="R">R</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <!-- Room Number -->
+            <label for="room-number">Room Number</label>
+            <input type="number" id="room-number" name="room-number" min="1" max="40" required>
+
+            <!-- Reason for Booking -->
+            <label for="reason">Reason for Booking</label>
+            <select id="reason" name="reason" required>
+                <option value="1st-year">1st Year Student</option>
+                <option value="another-dorm">Came from Another Dorm</option>
+                <option value="special-duration">Just to Use the Dorms for Special Duration</option>
+            </select>
+
+            <!-- Special Requirements -->
+            <label for="special-requirements">Special Requirements (if any)</label>
+            <textarea id="special-requirements" name="special-requirements" rows="4"></textarea>
+
+            <!-- Confirmation Checkbox -->
+            <label class="checkbox">
+                <input type="checkbox" name="confirm" required>
+                I confirm that the information provided is correct.
+            </label>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    
+    
+</body>
+
+
+
+
+
+
+
+<footer class="page-footer custom-bg-black">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div>
+            <ul class="list-unstyled">
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contribute on GitHub</a></li>
+            </ul>
+        </div>
+        <div>
+            <img class="logo_footer" src="assets/img/logo.png" alt="Brand Logo">
+        </div>
+    </div>
+    <div class="text-center custom-bg-black p-1">
+        <p>©ENSIA. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</html>
