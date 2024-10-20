@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- Fonts -->
     <link rel="stylesheet" href="assets/css/styles.css"> <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/crudadmin.css">
-    <link rel="stylesheet" href="assets/css/lostfound.css"> <!-- Lost & Found Custom CSS -->
-    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <!-- font awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
@@ -17,7 +16,7 @@
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
-            <a class="navbar-brand-logo" href="#">
+            <a class="col-3 navbar-brand-logo" href="#">
                 <img class ="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
             </a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
@@ -34,6 +33,7 @@
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
                             <li class="dropdown-header">Maintenance Services</li>
                             <li><a class="dropdown-item" href="/maintenance/report">Report Issues</a></li>
+                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
                             <li class="dropdown-header">Housing Services</li>
                             <li><a class="dropdown-item" href="/housing/book">Book Rooms</a></li>
                             <li><a class="dropdown-item" href="/housing/change">Change Rooms</a></li>
@@ -41,9 +41,9 @@
                     </li>
                 </ul>
             </div>
-            <div class="dropdown text-end">
+            <div class="dropdown col-3 text-center">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="Profile Image" width="32" height="32" class="rounded-circle">
+                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu text-small">
                     <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -57,7 +57,7 @@
 
 <body>
     
-    <div class="container">
+    <div class="container2">
         <h1>Admin Management</h1>
         <form action="#" method="post" class="student-form" enctype="multipart/form-data">
             <input type="file" accept="image/*" name="studentImage" >
