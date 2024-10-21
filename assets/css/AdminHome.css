@@ -67,9 +67,6 @@ body {
     color: #6e6e6e;
 }
 
-
-
-
 .services-title .bold-text {
     font-weight: bold;
     color: #0f0b32;
@@ -156,13 +153,6 @@ a{
 /* Footer Section */
 .footer-spacing {
     height: 100px;
-}
-
-footer {
-    padding: 40px 0;
-    background-color: #333;
-    color: #fff;
-    font-size: 14px;
 }
 
 footer ul {

@@ -8,7 +8,6 @@
 body {
     padding-top: 125px; /* Ensures form is below the navbar */
     background-color: #0f0b32;
-    color: white;
     display: flex;
     flex-direction: column; /* Stack content vertically */
     min-height: 100vh; /* Ensure body takes full viewport height */

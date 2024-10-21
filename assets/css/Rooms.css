@@ -8,10 +8,8 @@
 body {
     padding-top: 125px; /* Ensures the form is below the navbar */
     background-color: #0f0b32;
-    color: white;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
 .Form-container {
@@ -54,7 +52,7 @@ textarea {
     resize: none;
 }
 
-button {
+.submit {
     padding: 10px;
     background-color: #0f0b32;
     color: white;
@@ -64,7 +62,7 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+.submit:hover {
     background-color: #2e2a5b;
 }
 
