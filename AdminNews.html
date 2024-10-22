@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>NewsAdmin</title> <!-- Static title for the Home page -->
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
+    <link rel="stylesheet" href="assets/css/Rooms.css"> <!-- custom css -->
+    <link rel="stylesheet" href="assets/css/ReportIssues.css"> <!-- custom css -->
+    <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
+    <link rel="stylesheet" href="assets/css/AdminNews.css"> <!-- custom css -->
+
+
+
+
+
+
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <!-- font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+</head>
+<header>
+    <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
+        <div class="container">
+            <a class="col-3 navbar-brand-logo" href="#">
+                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo">
+            </a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Canteen Schedule</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li class="dropdown-header">Maintenance Services</li>
+                            <li><a class="dropdown-item" href="/maintenance/report">Report Issues</a></li>
+                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
+                            <li class="dropdown-header">Housing Services</li>
+                            <li><a class="dropdown-item" href="/housing/book">Book Rooms</a></li>
+                            <li><a class="dropdown-item" href="/housing/change">Change Rooms</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="dropdown col-3 text-center">
+                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<body>
+
+
+
+    <div class="news-header">
+        <h1>News</h1>
+        <div class="News-header-content">Stay Connected With The Lastest Happeneings and essentail updates across the
+            university . </div>
+    </div>
+
+    <div class="news-container">
+        <!-- News Item 1 -->
+        <div class="news-item">
+            <h3><a href="#">Recruitment announcement – Assistant Professors (MA) September 2024</a></h3>
+            <div class="date">September 26, 2024</div>
+            <div class="description">
+                The National School of Artificial Intelligence is organizing a recruitment competition for the position
+                of...
+            </div>
+
+            <div>
+                <a href="#" class="Edit"><i class="fas fa-edit"></i></a>
+                <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
+            </div>
+        </div>
+
+        <!-- News Item 2 -->
+        <div class="news-item">
+            <h3><a href="#">Upcoming AI Conference in December 2024</a></h3>
+            <div class="date">October 10, 2024</div>
+            <div class="description">
+                Join us for the latest discussions on advancements in artificial intelligence, hosted by industry
+                leaders.
+            </div>
+
+            <div>
+                <a href="#" class="Edit"><i class="fas fa-edit"></i></a>
+                <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
+            </div>
+        </div>
+
+        <!-- News Item 3 -->
+        <div class="news-item">
+            <h3><a href="#">New AI Research Lab Opening in 2025</a></h3>
+            <div class="date">October 15, 2024</div>
+            <div class="description">
+                A state-of-the-art research facility dedicated to AI innovations will be opening next year, pushing the
+                boundaries of tech.
+            </div>
+
+            <div class="edit-delete">
+                <a href="#" class="Edit"><i class="fas fa-edit"></i></a>
+                <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="btn btn-primary btn-lg fixed-button">Add a New</a>
+</body>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+</html>
