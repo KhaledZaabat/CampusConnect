@@ -55,7 +55,7 @@ td:nth-child(3) {
     grid-template-areas: "bt-1 bt-2 bt-3" "bt-4 bt-5 bt-6";
     position: sticky;
     bottom: 20px;
-    right: 20px;
+    left: 20px;
     perspective: 800;
     padding: 0;
     width: 100px;
