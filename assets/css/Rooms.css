@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
 
@@ -22,6 +21,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: auto; 
     margin-top: 20px; 
+    margin-bottom: 20px;
     flex-grow: 1; 
 }
 

@@ -1,15 +1,13 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #0f0b32;
-    margin: 0;
-    padding: 20px;
-    padding-top: 125px;
 }
 
 h1 {
     font-family: Roboto, sans-serif;
     text-align: center;
     color: #ffffff;
+    margin: 30px;
 }
 
 table {
@@ -195,27 +193,5 @@ button::after {
     border: none;
     border-radius: 10px; /* Match the new border radius */
     transition: all 0.3s ease-in-out;
-    z-index: 2;
-}
-
-@keyframes shake {
-    0% {
-        left: 45%;
-    }
-
-    25% {
-        left: 54%;
-    }
-
-    50% {
-        left: 48%;
-    }
-
-    75% {
-        left: 52%;
-    }
-
-    100% {
-        left: 50%;
-    }
+    z-index: 1;
 }
