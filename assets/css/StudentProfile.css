@@ -1,0 +1,112 @@
+/* Outer background */
+body {
+    background-color: #0f0b32;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Center the profile card */
+.profile-container {
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    min-height: 50%;
+}
+
+/* Profile card styling */
+.profile-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+    width: 100%;
+}
+
+.profile-card h2 {
+    color: #0f0b32;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form styling */
+.profile-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #0f0b32;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+}
+
+.form-group input:read-only {
+    background-color: #f0f0f0;
+    color: #666;
+}
+
+/* Profile image */
+.profile-image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.profile-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    max-width: 100%;
+}
+
+/* Room photo */
+.room-photo {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.room-photo img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Footer positioning */
+.footer-spacing {
+    height: 50px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .profile-card {
+        padding: 20px;
+    }
+
+    .form-group input {
+        font-size: 14px;
+    }
+}
