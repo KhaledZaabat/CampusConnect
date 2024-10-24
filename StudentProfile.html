@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
-<<head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>CRUD User</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- Bootstrap -->
-    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- Fonts -->
-    <link rel="stylesheet" href="assets/css/styles.css"> <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/crudadmin.css">
+    <title>Student Profile</title> <!-- Static title for the Home page -->
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
+    <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
     <link rel="icon" href="assets/img/logo.png" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/StudentProfile.css">
 </head>
 
 <header>
@@ -51,7 +56,7 @@
                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="UserProfile.html">Profile</a></li>
+                    <li><a class="dropdown-item" href="StudentProfile.html">Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">Sign out</a></li>
                 </ul>
@@ -61,68 +66,43 @@
 </header>
 
 <body>
-    
-    <div class="container2">
-        <h1>Admin Management</h1>
-        <form action="#" method="post" class="student-form" enctype="multipart/form-data">
-            <input type="file" accept="image/*" name="studentImage" >
-            <input type="text" placeholder="User ID" name="UserID" required>
-            <input type="text" placeholder="First Name" name="firstName" required>
-            <input type="text" placeholder="Last Name" name="lastName" required>
-            <input type="email" placeholder="Email" name="email" >
-            <input type="tel" placeholder="Phone Number" name="phone" required>
-            <label for="role"></label>
-                <select id="role" name="role">
-                    <option value="" disabled selected hidden>Role</option>
-                    <option value="Maintenance">Maintenance</option>
-                    <option value="Housing">Housing</option>
-                    <option value="Chef">Chef</option>
-                </select>
-            <button type="submit">Add User</button>
-        </form>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>User ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Role</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td>1</td>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john.doe@example.com</td>
-                    <td>1234567890</td>
-                    <td>Maintenance</td>
-                    <td>
-                        <a href="#" class="Edit"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td>2</td>
-                    <td>Jane</td>
-                    <td>Smith</td>
-                    <td>jane.smith@example.com</td>
-                    <td>0987654321</td>
-                    <td>Chef</td>
-                    <td>
-                        <a href="#" class="Edit"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="profile-container">
+        <div class="profile-card">
+            <h2>Student Profile</h2>
+
+            <!-- Profile Picture -->
+            <div class="profile-image">
+                <img src="/assets/img/pic5.jpg" alt="Profile Image">
+            </div>
+
+            <form class="profile-form">
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" value="John" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" value="Doe" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="student-id">Student ID</label>
+                    <input type="text" id="student-id" value="123456" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value="johndoe@email.com" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" value="+1234567890" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="room-number">Room Number</label>
+                    <input type="text" id="room-number" value="101A" readonly>
+                </div>
+            </form>
+
+        </div>
     </div>
 
     <div class="footer-spacing"></div> <!-- Spacing before the footer -->
@@ -150,7 +130,7 @@
                 <div class="icon"><i class="fab fa-github"></i></div>
                 <span>Github</span>
             </div>
-            
+
             <div class="button">
                 <div class="icon"><i class="fab fa-instagram"></i></div>
                 <span>Instagram</span>
@@ -160,13 +140,13 @@
         <div class="footer-image">
             <img src="assets/img/logo.png" alt="Footer Image" />
         </div>
-
     </div>
-    
+
     <div class="text-center custom-bg-black p-1">
         <p>©ENSIA. All Rights Reserved.</p>
     </div>
 </footer>
 
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
 </html>
