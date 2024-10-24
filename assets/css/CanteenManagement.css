@@ -195,5 +195,5 @@ td:nth-child(3) {
     border: none;
     border-radius: 10px; /* Match the new border radius */
     transition: all 0.3s ease-in-out;
-    z-index: 2;
+    z-index: 1;
 }
