@@ -1,6 +1,9 @@
 body{
     padding-top:125px;
 }
+:lang(ar) {
+    font-family: "Tajawal", sans-serif;
+}
 
 .nav-link {
     text-decoration: none;
