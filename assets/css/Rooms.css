@@ -16,7 +16,7 @@ body {
     color: #0f0b32;
     padding: 20px;
     border-radius: 8px;
-    width: 60%; 
+    width: 80%; 
     max-width: 600px; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: auto; 
@@ -51,7 +51,10 @@ input, select, textarea {
 textarea {
     resize: none;
 }
-
+input:focus, select:focus, textarea:focus {
+    border-color: #0f0b32; /* Change border color on focus to dark blue */
+    outline: none; /* Remove the default outline */
+}
 .submit {
     padding: 10px;
     background-color: #0f0b32;
@@ -72,7 +75,7 @@ textarea {
     color: #0f0b32;
     padding: 15px;
     border-radius: 8px;
-    width: 60%;
+    width: 80%;
     max-width: 600px;
 }
 
@@ -96,4 +99,6 @@ th {
 tr:nth-child(even) {
     background-color: #f2f2f2; /* Zebra striping for table rows */
 }
+
+
 

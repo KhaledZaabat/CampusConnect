@@ -4,30 +4,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>News</title> <!-- Static title for the Home page -->
+    <title>Student Profile</title> <!-- Static title for the Home page -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
-    <link rel="stylesheet" href="assets/css/Rooms.css"> <!-- custom css -->
-    <link rel="stylesheet" href="assets/css/ReportIssues.css"> <!-- custom css -->
     <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
-    <link rel="stylesheet" href="assets/css/News.css">
-
-
-
     <link rel="icon" href="assets/img/logo.png" type="image/png">
-    <!-- font awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/StudentProfile.css">
 </head>
 
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
             <a class="col-3 navbar-brand-logo" href="#">
-                <img class ="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
+                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo">
             </a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
@@ -35,29 +30,38 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active"><a class="nav-link" href="home.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Canteen.html">Canteen Schedule</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AdminHome.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Manage Services</a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <li class="dropdown-header">Maintenance Services</li>
-                            <li><a class="dropdown-item" href="ReportIssues.html">Report Issues</a></li>
-                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
-                            <li class="dropdown-header">Housing Services</li>
-                            <li><a class="dropdown-item" href="BookRoom.html">Book Rooms</a></li>
-                            <li><a class="dropdown-item" href="changeRoom.html">Change Rooms</a></li>
+                            <li class="dropdown-header">Maintenance </li>
+                            <li><a class="dropdown-item" href="/maintenance/report">Student Issues</a></li>
+                            <li><a class="dropdown-item" href="#">Lost & Found Page</a></li>
+                            <li class="dropdown-header">Housing</li>
+                            <li><a class="dropdown-item" href="#"> Rooms Requests</a></li>
+                            <li class="dropdown-header">Users</li>
+                            <li><a class="dropdown-item" href="crudstud.html"> Manage Students</a></li>
+                            <li><a class="dropdown-item" href="crudadmin.html"> Manage Employees</a></li>
+
+
+
                         </ul>
                     </li>
                 </ul>
             </div>
             <div class="dropdown col-3 text-center">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu text-small">
                     <li><a class="dropdown-item" href="StudentProfile.html">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                     <li><a class="dropdown-item" href="#">Sign out</a></li>
                 </ul>
             </div>
@@ -66,44 +70,46 @@
 </header>
 
 <body>
+    <div class="profile-container">
+        <div class="profile-card">
+            <h2>Student Profile</h2>
 
-    <div class="news-header">
-        <h1>News</h1>
-        <div class="News-header-content">Stay Connected With The Lastest Happeneings and essentail updates across the
-            university . </div>
+            <!-- Profile Picture -->
+            <div class="profile-image">
+                <img src="./assets/img/test.jpg" alt="Profile Image">
+            </div>
+
+            <form class="profile-form">
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" value="John" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" value="Doe" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="student-id">Student ID</label>
+                    <input type="text" id="student-id" value="123456" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value="johndoe@email.com" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" value="+1234567890" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="room-number">Room Number</label>
+                    <input type="text" id="room-number" value="101A" readonly>
+                </div>
+            </form>
+
+        </div>
     </div>
 
-    <div class="news-container">
-        <!-- News Item 1 -->
-        <div class="news-item">
-            <h3><a href="#">Recruitment announcement – Assistant Professors (MA) September 2024</a></h3>
-            <div class="date">September 26, 2024</div>
-            <div class="description">
-                The National School of Artificial Intelligence is organizing a recruitment competition for the position
-                of...
-            </div>
-        </div>
-
-        <!-- News Item 2 -->
-        <div class="news-item">
-            <h3><a href="#">Upcoming AI Conference in December 2024</a></h3>
-            <div class="date">October 10, 2024</div>
-            <div class="description">
-                Join us for the latest discussions on advancements in artificial intelligence, hosted by industry
-                leaders.
-            </div>
-        </div>
-
-        <!-- News Item 3 -->
-        <div class="news-item">
-            <h3><a href="#">New AI Research Lab Opening in 2025</a></h3>
-            <div class="date">October 15, 2024</div>
-            <div class="description">
-                A state-of-the-art research facility dedicated to AI innovations will be opening next year, pushing the
-                boundaries of tech.
-            </div>
-        </div>
-    </div>
+    <div class="footer-spacing"></div> <!-- Spacing before the footer -->
 </body>
 
 <footer class="page-footer custom-bg-black">
@@ -128,7 +134,7 @@
                 <div class="icon"><i class="fab fa-github"></i></div>
                 <span>Github</span>
             </div>
-            
+
             <div class="button">
                 <div class="icon"><i class="fab fa-instagram"></i></div>
                 <span>Instagram</span>
@@ -138,9 +144,8 @@
         <div class="footer-image">
             <img src="assets/img/logo.png" alt="Footer Image" />
         </div>
-
     </div>
-    
+
     <div class="text-center custom-bg-black p-1">
         <p>©ENSIA. All Rights Reserved.</p>
     </div>
