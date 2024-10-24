@@ -346,7 +346,7 @@ body{
     }
 
     .project-name::after {
-        font-size: 45px;
+        font-size: 40px;
     }
 
     .welcome-paragraph {
@@ -487,6 +487,30 @@ body{
 .wrapper .button .icon i {
     font-size: 25px;
     line-height: 60px;
+}
+
+@media screen and (max-width: 700px) {
+    .footer-image {
+        display: block;
+
+    }
+    
+    .footer-image img {
+        max-width: 100px; /* Adjust size as needed */
+        max-height: 100px;
+        margin: 15px 0;
+    }
+    .wrapper .button:hover {
+        width: 60px;
+    }
+    .wrapper .button:hover span {
+        display: none; /* Show text on hover */
+    }
+    .test{
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 
