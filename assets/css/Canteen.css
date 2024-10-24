@@ -13,7 +13,7 @@ h1 {
 
 }
 
-table {
+.canteenTable {
     width: 80%;
     margin: 0 auto;
     border-collapse: collapse;
@@ -21,32 +21,39 @@ table {
     margin-bottom: 40px;
 }
 
-th, td {
+.canteenTable th, td {
     padding: 12px;
     text-align: center;
     border: 1px solid #ccc;
     vertical-align: middle;
 }
 
-th {
+.canteenTable th {
     background-color: #3dab82;
     color: white;
     text-align: center;
 }
 
-tr:nth-child(even) {
+.canteenTable tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-tr:hover {
+.canteenTable tr:hover {
     background-color: #e2e2e2;
 }
 
-td {
+.canteenTable td {
     text-align: center;
 }
 
-td:nth-child(3) {
+.canteenTable td:nth-child(3) {
     text-align: center;
     padding-left: 20px;
+}
+
+@media screen and (max-width: 700px) {
+    .canteenTable {
+        width: 100%; /* Make the table take full width */
+        font-size: 14px; /* Slightly reduce font size for better readability */
+    }
 }
