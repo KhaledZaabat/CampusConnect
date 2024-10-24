@@ -381,9 +381,9 @@ body{
     width: 480px;
 }
 
-
-
-
+.noUnderLine {
+    text-decoration: none;
+}
 
 .wrapper {
     display: flex;
@@ -411,7 +411,7 @@ body{
     overflow: hidden;
     height: 60px;
     width: 60px;
-    float: left;
+    /* float: left; */
     margin: 0 5px;
     background: rgb(255, 255, 255);
     border-radius: 50px;
