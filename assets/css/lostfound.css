@@ -167,8 +167,8 @@ a, a:active, a:focus {
 
 .pagination ul {
     display: inline-block;
-    *display: inline;
-    *zoom: 1;
+    display: inline;
+    zoom: 1;
     margin: 0 auto;
     padding: 0
 }
@@ -222,4 +222,11 @@ a, a:active, a:focus {
 
 .mt-6, .my-6 {
     margin-top: 3.5rem;
+}
+
+.container{
+    margin-bottom: 15px;
+}
+.comments:hover{
+color: #2f71c2;
 }

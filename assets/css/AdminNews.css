@@ -20,7 +20,7 @@ body {
 }
 
 .news-header h1 {
-    color: #d9e6f2;
+    color: #0f0b32;
     text-align: left;
 }
 
@@ -31,7 +31,7 @@ body {
 .news-container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     grid-template-areas: "new-title" "new-date" "new-descreption" "edit-delete";
     gap: 20px;
     padding: 20px;
@@ -48,7 +48,7 @@ body {
 
     background-color: #d9e6f2;
     padding: 20px;
-    width: 50%;
+    width: 70%;
     /* Adjust the width as needed */
     color: #0f0b32;
     border-radius: 5px;
@@ -131,11 +131,11 @@ edit-delete-container {
 }
 
 .fixed-button {
-    position: fixed;
-    bottom: 25px;
-
-    right: 40px;
-
-    z-index: 1000;
+    position: sticky;
+    z-index: 1;
+    left: 20px;
+    bottom: 20px;
+    font-size: 15px;
+    max-width: 130px;
 
 }
