@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home</title> <!-- Static title for the Home page -->
+    <title>Student Profile</title> <!-- Static title for the Home page -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
     <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
-
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
             <a class="col-3 navbar-brand-logo" href="#">
-                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo">
+                <img class ="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
             </a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
@@ -30,34 +30,34 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/">Canteen Schedule</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AdminHome.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage Services</a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <li class="dropdown-header">Maintenance Services</li>
-                            <li><a class="dropdown-item" href="/maintenance/report">Report Issues</a></li>
-                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
+                            <li class="dropdown-header">Maintenance </li>
+                            <li><a class="dropdown-item" href="/maintenance/report">Student Issues</a></li>
+                            <li><a class="dropdown-item" href="#">Lost & Found Page</a></li>
+                            <li class="dropdown-header">Housing</li>
+                            <li><a class="dropdown-item" href="#"> Rooms Requests</a></li>
+                            <li class="dropdown-header">Users</li>
+                            <li><a class="dropdown-item" href="crudstud.html"> Manage Students</a></li>
+                            <li><a class="dropdown-item" href="crudadmin.html"> Manage Employees</a></li>
 
-                            <li class="dropdown-header">Housing Services</li>
-                            <li><a class="dropdown-item" href="/housing/book">Book Rooms</a></li>
-                            <li><a class="dropdown-item" href="/housing/change">Change Rooms</a></li>
+
+
                         </ul>
                     </li>
                 </ul>
             </div>
             <div class="dropdown col-3 text-center">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                    <li><a class="dropdown-item" href="StudentProfile.html">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">Sign out</a></li>
                 </ul>
             </div>
@@ -72,32 +72,32 @@
 
             <!-- Profile Picture -->
             <div class="profile-image">
-                <img src=".\1-intro-photo-final.jpg" alt="Profile Image">
+                <img src="/assets/img/pic5.jpg" alt="Profile Image">
             </div>
 
             <form class="profile-form">
                 <div class="form-group">
-                    <label for="first-name">First Name:</label>
+                    <label for="first-name">First Name</label>
                     <input type="text" id="first-name" value="John" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="last-name">Last Name:</label>
+                    <label for="last-name">Last Name</label>
                     <input type="text" id="last-name" value="Doe" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="student-id">Student ID:</label>
+                    <label for="student-id">Student ID</label>
                     <input type="text" id="student-id" value="123456" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email:</label>
+                    <label for="email">Email</label>
                     <input type="email" id="email" value="johndoe@email.com" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="phone">Phone Number:</label>
+                    <label for="phone">Phone Number</label>
                     <input type="tel" id="phone" value="+1234567890" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="room-number">Room Number:</label>
+                    <label for="room-number">Room Number</label>
                     <input type="text" id="room-number" value="101A" readonly>
                 </div>
             </form>
