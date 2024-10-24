@@ -100,13 +100,30 @@ body {
     height: 50px;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-    .profile-card {
-        padding: 20px;
-    }
 
-    .form-group input {
-        font-size: 14px;
+
+@media (max-width: 1200px) {
+    .profile-container {
+        margin-top: 12%;
+    }
+}
+
+@media (max-width: 992px) {
+    .profile-container {
+        margin-top: 17%;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .profile-container {
+        margin-top: 22%;
+    }
+}
+
+
+@media (max-width: 500px) {
+    .profile-container {
+        margin-top: 27%;
     }
 }
