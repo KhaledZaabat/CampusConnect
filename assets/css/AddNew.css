@@ -15,6 +15,7 @@ body {
     padding: 25px;
     border-radius: 8px;
     width: 60%;
+    max-width: 500px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin: 20px; /* Adds space around the form */
 }
