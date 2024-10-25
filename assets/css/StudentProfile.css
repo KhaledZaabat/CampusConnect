@@ -80,6 +80,10 @@ body {
     max-width: 100%;
 }
 
+input:focus{
+    outline: none;
+    border: 2px solid #0f0b32;
+}
 /* Room photo */
 .room-photo {
     display: flex;

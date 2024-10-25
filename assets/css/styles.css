@@ -198,6 +198,9 @@ body{
     transition: width 0.3s ease-in-out;
 }
 
+footer{
+    bottom: 0;
+}
 /* Hover effects */
 .btn-view-all-news:hover {
     color: #0f0b32;
