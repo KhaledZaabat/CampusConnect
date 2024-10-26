@@ -306,7 +306,7 @@ footer{
     background-color: #ffffff;
     border-radius: 15px;
     padding: 30px;
-    width: 250px;
+    max-width: 250px;
     height: 300px;
     text-align: center;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
@@ -354,6 +354,29 @@ footer{
 
     .project-name::after {
         font-size: 40px;
+    }
+
+    .welcome-paragraph {
+        font-size: 18px;
+    }
+
+    .news-cards, .services-blocks {
+        align-items: center;
+    }
+
+    .card, .service-block {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+    .Welcome {
+        font-size: 40px;
+    }
+
+    .project-name::after {
+        font-size: 30px;
     }
 
     .welcome-paragraph {
