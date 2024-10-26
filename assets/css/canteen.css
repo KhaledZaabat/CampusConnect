@@ -103,8 +103,9 @@ h1 {
     }
 }
 
-/* input {
-    border: none;
+input[type="text"] {
+    /* border: none; */
+    border-radius: 10px;
     background: none;
     color: inherit;
     font: inherit;
@@ -112,8 +113,21 @@ h1 {
     margin: 0;
     outline: none;
     text-align: center;
-} */
+    width: 100%; /* Make input take full width of cell */
+    box-sizing: border-box;
+}
 
-input {
-    text-align: center;
+/* Adjust padding and font-size of input fields on smaller screens */
+@media screen and (max-width: 500px) {
+    input[type="text"] {
+        font-size: 12px;
+        padding: 4px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    input[type="text"] {
+        font-size: 10px;
+        padding: 2px;
+    }
 }
