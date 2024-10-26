@@ -36,7 +36,13 @@ body {
         display: block;
         width: 100%;
     }
-
+    tr {
+        font-size: x-small;
+        margin-top: 30px;
+        padding: 15px;
+        border-radius: 10px; /* Optional: round the corners */
+        background-color: rgb(98, 96, 126); /* Optional: subtle background color */
+    }
     table tr {
         margin-bottom: 15px;
     }
