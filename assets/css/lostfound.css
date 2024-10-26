@@ -225,10 +225,6 @@ label {
     font-weight: bold;
 }
 
-/* Radio button group */
-.form-check-input {
-    margin-right: 10px;
-}
 
 .form-check-label {
     margin-right: 30px;
@@ -283,4 +279,33 @@ label {
     .post {
         max-width: 90%; /* Set to 90% on smaller screens */
     }
+}
+
+.border-visible {
+    border: 1px solid #4A628A; /* Use any of the root colors, or specify another */
+}
+.icon-blue {
+    color:#0f0b32; /* Replace with a specific blue color or a CSS variable */
+}
+.text-field {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.text-field:focus {
+    color: #212529; /* Reset text color */
+    background-color: #fff; /* Reset background color */
+    border-color: #0f0b32 !important; /* Custom border color */
+    outline: none !important; /* Remove default outline */
+    box-shadow: none !important; /* Reset any box shadow */
 }
