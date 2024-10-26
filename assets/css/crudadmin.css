@@ -211,6 +211,7 @@ td a i {
 /* Styling for the upload section */
 .custom-file-upload {
     display: flex;
+    margin-top: 10px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
