@@ -94,9 +94,6 @@ textarea {
     transition: all 0.3s ease-in-out;
 }
 
-.btn-publish:hover{
-   letter-spacing: 1px;
-}
 
 /* Responsive adjustments */
 @media (max-width: 830px) { /* Tablet and smaller */
