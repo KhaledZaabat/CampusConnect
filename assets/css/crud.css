@@ -102,11 +102,10 @@ th {
 }
 
 /* Responsive table: */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
     .container {
         padding: 10px;
     }
-
     table {
         display: block;
         width: 100%;
@@ -256,4 +255,43 @@ td a i {
     .post {
         max-width: 90%; /* Set to 90% on smaller screens */
     }
+}
+
+.tableinput {
+    border: none;
+    /* border-radius: 10px; */
+    background: none;
+    color: inherit;
+    font: inherit;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    text-align: center;
+    width: 100%; /* Make input take full width of cell */
+    box-sizing: border-box;
+}
+
+/* Adjust padding and font-size of input fields on smaller screens */
+@media screen and (max-width: 500px) {
+    .tableinput {
+        font-size: 12px;
+        padding: 4px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .tableinput {
+        font-size: 10px;
+        padding: 2px;
+    }
+}
+
+.emailinput {
+    width: 220px;
+}
+.roleinput {
+    width: 80px
+}
+.name {
+    width: 130px
 }
