@@ -3,7 +3,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    padding-top: 125px; /* Ensures content starts below the navbar */
+    padding-top: 125px;
 }
 
 .container2 {
@@ -15,7 +15,6 @@ body {
     margin-bottom: 40px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
 }
 
 .container3 {
@@ -27,12 +26,10 @@ body {
     margin-bottom: 40px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
 }
 
-/* Footer-specific class */
 .custom-bg-black {
-    background-color: black !important;
+    background-color: black !important; /* Ensure it's purely black */
 }
 
 h1 {
@@ -53,9 +50,23 @@ h1 {
     border-radius: 8px;
 }
 
+.student-form label  {
+    display: inline-block;
+    padding: 5px;
+    position: relative;
+}
+
+input, select, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    transition: border-color 0.3s ease; 
+}
 
 .student-form button {
     padding: 10px;
+    margin-top: 20px;
     background-color: #0f0b32;
     color: white;
     border: none;
@@ -91,11 +102,10 @@ th {
 }
 
 /* Responsive table: */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
     .container {
         padding: 10px;
     }
-
     table {
         display: block;
         width: 100%;
@@ -200,6 +210,7 @@ td a i {
 /* Styling for the upload section */
 .custom-file-upload {
     display: flex;
+    margin-top: 10px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -244,4 +255,43 @@ td a i {
     .post {
         max-width: 90%; /* Set to 90% on smaller screens */
     }
+}
+
+.tableinput {
+    border: none;
+    /* border-radius: 10px; */
+    background: none;
+    color: inherit;
+    font: inherit;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    text-align: center;
+    width: 100%; /* Make input take full width of cell */
+    box-sizing: border-box;
+}
+
+/* Adjust padding and font-size of input fields on smaller screens */
+@media screen and (max-width: 500px) {
+    .tableinput {
+        font-size: 12px;
+        padding: 4px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .tableinput {
+        font-size: 10px;
+        padding: 2px;
+    }
+}
+
+.emailinput {
+    width: 220px;
+}
+.roleinput {
+    width: 80px
+}
+.name {
+    width: 130px
 }
