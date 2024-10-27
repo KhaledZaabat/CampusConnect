@@ -166,8 +166,14 @@ a, a:active, a:focus {
 .container{
     margin-bottom: 15px;
 }
+
+.comments {
+    color:#0f0b32 !important;
+    transition: color 0.2s ease !important;
+
+}
 .comments:hover{
-color: #2f71c2;
+    color: #2f71c2 !important;
 }
 
 .Edit {
@@ -300,12 +306,4 @@ label {
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.text-field:focus {
-    color: #212529; /* Reset text color */
-    background-color: #fff; /* Reset background color */
-    border-color: #0f0b32 !important; /* Custom border color */
-    outline: none !important; /* Remove default outline */
-    box-shadow: none !important; /* Reset any box shadow */
 }

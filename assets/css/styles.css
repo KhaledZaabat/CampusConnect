@@ -58,12 +58,20 @@ footer{
     text-decoration: none;
 }
 
-button{
-    background-color: #0f0b32;
+button {
+    padding: 10px;
+    background-color: #0f0b32; 
+    color: white ;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer ;
+    transition: background-color 0.3s ease ;
 }
-button:hover{
+
+button:hover {
     background-color: #2e2a5b;
 }
+
 .wrapper {
     display: flex;
     justify-content: center; /* 1fr for buttons, auto for the image */
@@ -197,7 +205,14 @@ button:hover{
     }
 }
 
-
-
-
-
+/*every input area must have the same focus animation*/
+input:focus,
+textarea:focus,
+select:focus,
+[contenteditable="true"]:focus {
+    color: #212529;
+    background-color: #fff; 
+    border-color: #0f0b32 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}

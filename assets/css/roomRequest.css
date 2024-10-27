@@ -4,14 +4,6 @@ body {
     background-size: cover;
 }
 
-.navbar {
-    background-color: #343a40;
-}
-
-.navbar .navbar-brand {
-    color: #ffffff;
-}
-
 /* Table Container */
 .table-container {
     max-width: 80%;
@@ -89,10 +81,12 @@ body {
 @media (hover: hover) {
     .btn-approve:hover {
         background-color: #218838;
+        color: #0f0b32;
     }
 
     .btn-reject:hover {
         background-color: #c82333;
+        color: #0f0b32;
     }
 }
 
@@ -113,4 +107,8 @@ body {
     font-size: 14px;
 }
 
-
+.custom-head th {
+    background-color: #4a6fa5;
+    color: white;
+    text-align: center;
+}

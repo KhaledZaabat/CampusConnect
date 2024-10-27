@@ -64,25 +64,10 @@ input, select, textarea {
     transition: border-color 0.3s ease; 
 }
 
+
 .student-form button {
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #0f0b32;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
+    margin-top: 20px; /* Keep margin for the student form buttons */
 }
-
-.student-form button:hover {
-    background-color: #e6e6e6;
-    color: #0f0b32;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
-    font-size: 18px;
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
