@@ -20,7 +20,7 @@ body {
 }
 
 .news-header h1 {
-    color: #0f0b32;
+    color: white;
     text-align: left;
 }
 
@@ -132,10 +132,64 @@ edit-delete-container {
 
 .fixed-button {
     position: sticky;
+    /* fixed to viewport */
     z-index: 1;
     left: 20px;
     bottom: 20px;
-    font-size: 15px;
-    max-width: 130px;
+    font-size: 24px;
+    width: 60px;
+    /* consistent size for circle */
+    margin-left: 3%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    /* perfect circle */
+    background-color: #007bff;
+    /* primary color */
+    color: white;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    /* slight shadow */
+}
 
+.fixed-button:hover {
+    background-color: #0056b3;
+    /* darker shade on hover */
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .fixed-button {
+        font-size: 20px;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 720px) {
+    .fixed-button {
+        font-size: 18px;
+        width: 45px;
+        height: 45px;
+        left: 15px;
+        bottom: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .fixed-button {
+        font-size: 16px;
+        width: 40px;
+        height: 40px;
+        left: 10px;
+        bottom: 10px;
+    }
+}
+
+@media (max-width:576px) {
+    .news-header {
+        margin-top: 80px;
+    }
 }

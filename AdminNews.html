@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
     <link rel="stylesheet" href="assets/css/AdminNews.css"> <!-- custom css -->
 
+
+
+
+
+
     <link rel="icon" href="assets/img/logo.png" type="image/png">
     <!-- font awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -24,7 +29,7 @@
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
             <a class="col-3 navbar-brand-logo" href="#">
-                <img class ="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
+                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo">
             </a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
@@ -32,34 +37,33 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="AdminHome.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Canteen Schedule</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage Services</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Services</a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <li class="dropdown-header">Maintenance </li>
-                            <li><a class="dropdown-item" href="/maintenance/report">Student Issues</a></li>
-                            <li><a class="dropdown-item" href="#">Lost & Found Page</a></li>
-                            <li class="dropdown-header">Housing</li>
-                            <li><a class="dropdown-item" href="#"> Rooms Requests</a></li>
-                            <li class="dropdown-header">Users</li>
-                            <li><a class="dropdown-item" href="crudstud.html"> Manage Students</a></li>
-                            <li><a class="dropdown-item" href="crudadmin.html"> Manage Employees</a></li>
-
-
-
+                            <li class="dropdown-header">Maintenance Services</li>
+                            <li><a class="dropdown-item" href="/maintenance/report">Report Issues</a></li>
+                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
+                            <li class="dropdown-header">Housing Services</li>
+                            <li><a class="dropdown-item" href="/housing/book">Book Rooms</a></li>
+                            <li><a class="dropdown-item" href="/housing/change">Change Rooms</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
             <div class="dropdown col-3 text-center">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="UserProfile.html">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                     <li><a class="dropdown-item" href="#">Sign out</a></li>
                 </ul>
             </div>
@@ -118,15 +122,15 @@
                 boundaries of tech.
             </div>
 
-            <div class="edit-delete">
+            <div class="edit-delete-container">
                 <a href="#" class="Edit"><i class="fas fa-edit"></i></a>
                 <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
             </div>
         </div>
-        <a href="#" class="btn btn-primary btn-lg fixed-button">Add a New</a>
-
     </div>
+    <a href="#" class="btn btn-primary btn-lg fixed-button">+</a>
 </body>
+
 <footer class="page-footer custom-bg-black">
     <div class="test">
         <div class="wrapper">
@@ -149,7 +153,7 @@
                 <div class="icon"><i class="fab fa-github"></i></div>
                 <span>Github</span>
             </div>
-            
+
             <div class="button">
                 <div class="icon"><i class="fab fa-instagram"></i></div>
                 <span>Instagram</span>
@@ -161,7 +165,7 @@
         </div>
 
     </div>
-    
+
     <div class="text-center custom-bg-black p-1">
         <p>©ENSIA. All Rights Reserved.</p>
     </div>

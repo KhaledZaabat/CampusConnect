@@ -20,7 +20,7 @@ body {
 }
 
 .news-header h1 {
-    color: #d9e6f2;
+    color: white;
     text-align: left;
 }
 
@@ -85,4 +85,10 @@ body {
 
 .news-item .description {
     font-size: 1em;
+}
+
+@media (max-width:576px) {
+    .news-header {
+        margin-top: 80px;
+    }
 }

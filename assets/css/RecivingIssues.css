@@ -1,0 +1,85 @@
+/* Button Styles */
+body {
+background-color: #0f0b32;
+    font-family: Arial, Helvetica, sans-serif !important;
+
+}
+.text-center{
+    margin-top: 1.75%;
+    color: white;
+}
+.Issues-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Enable snap scrolling */
+    gap: 2%; /* Use a percentage for the gap */
+    padding: 0 2%; /* Add some padding for aesthetics */
+}
+
+.card {
+    flex: 0 0 30%; /* Set card width to 30% for responsiveness */
+    scroll-snap-align: start; /* Align cards when scrolling */
+    min-width: 280px; /* Optional: Set a minimum width for smaller screens */
+}
+
+.img-fluid {
+    max-width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 8px;
+}
+.btn-done,
+.btn-pending,
+.btn-declined {
+    padding: 2% 4%; /* Reduced padding for a smaller size */
+    font-weight: 600;
+    font-size: 0.65rem; /* Smaller text size */
+    border-radius: 8px; /* Slightly less rounded corners */
+    border: 1px solid transparent; /* Add border for better appearance */
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+    color: #fff;
+    cursor: pointer;
+    flex: 1; /* Allow buttons to grow equally */
+    margin: 0 1%; /* Reduced margin for closer spacing */
+}
+
+/* Specific button colors */
+.btn-done {
+    background-color: #28a745; /* Green */
+}
+
+.btn-pending {
+    background-color: #ffc107; /* Yellow */
+}
+
+.btn-declined {
+    background-color: #dc3545; /* Red */
+}
+
+/* Hover and active effects for all buttons */
+.btn-done:hover,
+.btn-pending:hover,
+.btn-declined:hover {
+    transform: translateY(-2px); /* Slight lift effect */
+    opacity: 0.9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+    background-color: #0f0b32 !important;
+    color: #ddd !important;
+}
+
+.btn-done:active,
+.btn-pending:active,
+.btn-declined:active {
+    transform: translateY(0); /* Reset on click */
+    opacity: 1;
+    box-shadow: none; /* Remove shadow on click */
+}
+
+/* Button Container Adjustments */
+.card .d-flex {
+    display: flex; /* Ensure buttons are displayed as flex items */
+    justify-content: space-between; /* Space out buttons evenly */
+    margin-top: 1rem; /* Add some space above the buttons */
+}
