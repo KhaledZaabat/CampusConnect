@@ -2,25 +2,21 @@
 <html data-bs-theme="light" lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>News</title> <!-- Static title for the Home page -->
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
-    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
-    <link rel="stylesheet" href="assets/css/Rooms.css"> <!-- custom css -->
-    <link rel="stylesheet" href="assets/css/ReportIssues.css"> <!-- custom css -->
-    <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
-    <link rel="stylesheet" href="assets/css/News.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Admin - Room Change Requests</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="assets/css/styles.css"> <!-- Custom CSS -->
+        <link rel="stylesheet" href="assets/css/roomRequest.css">
+        <!-- Custom CSS -->
+        <link rel="icon" href="assets/img/logo.png" type="image/png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 
-
-
-    <link rel="icon" href="assets/img/logo.png" type="image/png">
-    <!-- font awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
 
 <header>
@@ -64,46 +60,54 @@
         </div>
     </nav>
 </header>
-
+    
 <body>
+        <!-- Room Change Requests -->
+        <div class="table-container">
+            <h2>Room Change Requests</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr class="custom-head"> 
+                        <th>Student Name</th>
+                        <th>Current Room</th>
+                        <th>Requested Room</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Student Name">John Doe</td>
+                        <td data-label="Current Room">A-R-5</td>
+                        <td data-label="Requested Room">B-2-15</td>
+                        <td data-label="Reason">Roommate issues</td>
+                        <td data-label="Status">Pending</td>
+                        <td class="text-center">
+                            <button
+                                class="btn btn-sm btn-approve">Approve</button>
+                            <button
+                                class="btn btn-sm btn-reject">Reject</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-label="Student Name">Jane Smith</td>
+                        <td data-label="Current Room">A-1-10</td>
+                        <td data-label="Requested Room">C-3-20</td>
+                        <td data-label="Reason">Need more privacy</td>
+                        <td data-label="Status">Pending</td>
+                        <td class="text-center">
+                            <button
+                                class="btn btn-sm btn-approve">Approve</button>
+                            <button
+                                class="btn btn-sm btn-reject">Reject</button>
+                        </td>
+                    </tr>
+                </tbody>
 
-    <div class="news-header">
-        <h1>News</h1>
-        <div class="News-header-content">Stay Connected With The Lastest Happeneings and essentail updates across the
-            university . </div>
-    </div>
-
-    <div class="news-container">
-        <!-- News Item 1 -->
-        <div class="news-item">
-            <h3><a href="#">Recruitment announcement – Assistant Professors (MA) September 2024</a></h3>
-            <div class="date">September 26, 2024</div>
-            <div class="description">
-                The National School of Artificial Intelligence is organizing a recruitment competition for the position
-                of...
-            </div>
+            </table>
         </div>
 
-        <!-- News Item 2 -->
-        <div class="news-item">
-            <h3><a href="#">Upcoming AI Conference in December 2024</a></h3>
-            <div class="date">October 10, 2024</div>
-            <div class="description">
-                Join us for the latest discussions on advancements in artificial intelligence, hosted by industry
-                leaders.
-            </div>
-        </div>
-
-        <!-- News Item 3 -->
-        <div class="news-item">
-            <h3><a href="#">New AI Research Lab Opening in 2025</a></h3>
-            <div class="date">October 15, 2024</div>
-            <div class="description">
-                A state-of-the-art research facility dedicated to AI innovations will be opening next year, pushing the
-                boundaries of tech.
-            </div>
-        </div>
-    </div>
 </body>
 
 <footer class="page-footer custom-bg-black">
@@ -145,7 +149,6 @@
         <p>©ENSIA. All Rights Reserved.</p>
     </div>
 </footer>
-
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 </html>

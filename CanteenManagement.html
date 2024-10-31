@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
     <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="assets/css/CanteenManagement.css">
+    <link rel="stylesheet" href="assets/css/canteen.css">
     <link rel="icon" href="assets/img/logo.png" type="image/png">
     <!-- font awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -17,57 +17,54 @@
 </head>
 
 <header>
-    <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
-        <div class="container">
-            <a class="col-3 navbar-brand-logo" href="#">
-                <img class ="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
-            </a>
-            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
-                <span class="visually-hidden">Toggle navigation</span>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="AdminHome.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage Services</a>
-                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <li class="dropdown-header">Maintenance </li>
-                            <li><a class="dropdown-item" href="/maintenance/report">Student Issues</a></li>
-                            <li><a class="dropdown-item" href="#">Lost & Found Page</a></li>
-                            <li class="dropdown-header">Housing</li>
-                            <li><a class="dropdown-item" href="#"> Rooms Requests</a></li>
-                            <li class="dropdown-header">Users</li>
-                            <li><a class="dropdown-item" href="crudstud.html"> Manage Students</a></li>
-                            <li><a class="dropdown-item" href="crudadmin.html"> Manage Employees</a></li>
-
-
-
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="dropdown col-3 text-center">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                </a>
-                <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="UserProfile.html">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+  <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
+      <div class="container">
+          <a class="col-3 navbar-brand-logo" href="#">
+              <img class ="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
+          </a>
+          <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+              <span class="visually-hidden">Toggle navigation</span>
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navcol-1">
+              <ul class="navbar-nav mx-auto">
+                  <li class="nav-item"><a class="nav-link" href="AdminHome.html">Home</a></li>
+                  <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
+                  <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage Services</a>
+                      <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                          <li class="dropdown-header">Maintenance </li>
+                          <li><a class="dropdown-item" href="/maintenance/report">Student Issues</a></li>
+                          <li><a class="dropdown-item" href="lostfound.html">Lost & Found Page</a></li>
+                          <li class="dropdown-header">Housing</li>
+                          <li><a class="dropdown-item" href="roomRequests.html"> Rooms Requests</a></li>
+                          <li class="dropdown-header">Users</li>
+                          <li><a class="dropdown-item" href="crudstud.html"> Manage Students</a></li>
+                          <li><a class="dropdown-item" href="crudadmin.html"> Manage Employees</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </div>
+          <div class="dropdown col-3 text-center">
+              <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+              </a>
+              <ul class="dropdown-menu text-small">
+                  <li><a class="dropdown-item" href="UserProfile.html">Profile</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Sign out</a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
 </header>
 
 <body>
 
     <h1>Canteen Schedule</h1>
 
-    <table>
+    <table class="canteenTable">
         <thead>
             <tr>
                 <th>Day</th>
@@ -77,306 +74,305 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Sunday -->
             <tr>
-                <!--1 day-->
-                <td rowspan="3">Sunday</td>
-                <td>Breakfast</td>
-                <td>
-                    Milk <br>
-                    Croissant
-                </td>
-                <td>
-                    1 Cup <br>
-                    1 Piece
-                </td>
+              <td rowspan="3">Sunday</td>
+              <td>Breakfast</td>
+              <td>
+                <input type="text" value="Milk" disabled> <br>
+                <input type="text" value="Croissant" disabled>
+              </td>
+              <td>
+                <input type="text" value="1 Cup" disabled> <br>
+                <input type="text" value="1 Piece" disabled>
+              </td>
             </tr>
             <tr>
-                <td>Lunch</td>
-                <td>
-                    Bread <br>
-                    عدس <br>
-                    Eggs <br>
-                    Salad (Tomate Carrot ...) <br>
-                    Juice
-                </td>
-                <td>
-                    One piece <br>
-                    100g <br>
-                    Two pieces <br>
-                    150g <br>
-                    One piece
-                </td>
+              <td>Lunch</td>
+              <td>
+                <input type="text" value="Bread" disabled> <br>
+                <input type="text" value="عدس" disabled> <br>
+                <input type="text" value="Eggs" disabled> <br>
+                <input type="text" value="Salad (Tomato Carrot ...)" disabled> <br>
+                <input type="text" value="Juice" disabled>
+              </td>
+              <td>
+                <input type="text" value="One piece" disabled> <br>
+                <input type="text" value="100g" disabled> <br>
+                <input type="text" value="Two pieces" disabled> <br>
+                <input type="text" value="150g" disabled> <br>
+                <input type="text" value="One piece" disabled>
+              </td>
             </tr>
             <tr>
-                <td>Dinner</td>
-                <td>
-                    Bread <br>
-                    Soup <br>
-                    مثوم <br>
-                    
-                </td>
-                <td>
-                    200g <br>
-                    50g <br>
-                    1 piece
-                </td>
+              <td>Dinner</td>
+              <td>
+                <input type="text" value="Bread" disabled> <br>
+                <input type="text" value="Soup" disabled> <br>
+                <input type="text" value="مثوم" disabled>
+              </td>
+              <td>
+                <input type="text" value="200g" disabled> <br>
+                <input type="text" value="50g" disabled> <br>
+                <input type="text" value="1 piece" disabled>
+              </td>
+            </tr>
+        
+            <!-- Monday -->
+            <tr>
+              <td rowspan="3">Monday</td>
+              <td>Breakfast</td>
+              <td>
+                <input type="text" value="Omelette" disabled> <br>
+                <input type="text" value="Toast" disabled> <br>
+                <input type="text" value="Juice" disabled>
+              </td>
+              <td>
+                <input type="text" value="100g" disabled> <br>
+                <input type="text" value="2 pieces" disabled> <br>
+                <input type="text" value="200ml" disabled>
+              </td>
             </tr>
             <tr>
-                <!--2 day-->
-                <td rowspan="3">Monday</td>
-                <td>Breakfast</td>
-                <td>
-                    Omelette <br>
-                    Toast <br>
-                    Juice
-                </td>
-                <td>
-                    100g <br>
-                    2 pieces <br>
-                    200ml
-                </td>
+              <td>Lunch</td>
+              <td>
+                <input type="text" value="Beef Stew" disabled> <br>
+                <input type="text" value="Mashed Potatoes" disabled>
+              </td>
+              <td>
+                <input type="text" value="200g" disabled> <br>
+                <input type="text" value="150g" disabled>
+              </td>
             </tr>
             <tr>
-                <td>Lunch</td>
-                <td>
-                    Beef Stew <br>
-                    Mashed Potatoes
-                </td>
-                <td>
-                    200g <br>
-                    150g
-                </td>
+              <td>Dinner</td>
+              <td>
+                <input type="text" value="Vegetable Soup" disabled> <br>
+                <input type="text" value="Bread" disabled>
+              </td>
+              <td>
+                <input type="text" value="1 bowl" disabled> <br>
+                <input type="text" value="1 piece" disabled>
+              </td>
+            </tr>
+        
+            <!-- Tuesday -->
+            <tr>
+              <td rowspan="3">Tuesday</td>
+              <td>Breakfast</td>
+              <td>
+                <input type="text" value="Bread" disabled> <br>
+                <input type="text" value="Cheese" disabled> <br>
+                <input type="text" value="Jam" disabled> <br>
+                <input type="text" value="Milk" disabled>
+              </td>
+              <td>
+                <input type="text" value="1 piece" disabled> <br>
+                <input type="text" value="50g" disabled> <br>
+                <input type="text" value="1 serving" disabled> <br>
+                <input type="text" value="200ml" disabled>
+              </td>
             </tr>
             <tr>
-                <td>Dinner</td>
-                <td>
-                    Vegetable Soup <br>
-                    Bread
-                </td>
-                <td>
-                    1 bowl <br>
-                    1 piece
-                </td>
+              <td>Lunch</td>
+              <td>
+                <input type="text" value="Grilled Chicken" disabled> <br>
+                <input type="text" value="Rice" disabled> <br>
+                <input type="text" value="Salad" disabled>
+              </td>
+              <td>
+                <input type="text" value="150g" disabled> <br>
+                <input type="text" value="100g" disabled> <br>
+                <input type="text" value="1 bowl" disabled>
+              </td>
             </tr>
             <tr>
-                <!--3 day-->
-                <td rowspan="3">Tuesday</td>
-                <td>Breakfast</td>
-                <td>
-                    Bread <br>
-                    Cheese <br>
-                    Jam <br>
-                    Milk
-                </td>
-                <td>
-                    1 piece <br>
-                    50g <br>
-                    1 serving <br>
-                    200ml
-                </td>
+              <td>Dinner</td>
+              <td>
+                <input type="text" value="Spaghetti" disabled> <br>
+                <input type="text" value="Tomato Sauce" disabled> <br>
+                <input type="text" value="Bread" disabled>
+              </td>
+              <td>
+                <input type="text" value="200g" disabled> <br>
+                <input type="text" value="50g" disabled> <br>
+                <input type="text" value="1 piece" disabled>
+              </td>
+            </tr>
+        
+            <!-- Wednesday -->
+            <tr>
+              <td rowspan="3">Wednesday</td>
+              <td>Breakfast</td>
+              <td>
+                <input type="text" value="Omelette" disabled> <br>
+                <input type="text" value="Toast" disabled> <br>
+                <input type="text" value="Juice" disabled>
+              </td>
+              <td>
+                <input type="text" value="100g" disabled> <br>
+                <input type="text" value="2 pieces" disabled> <br>
+                <input type="text" value="200ml" disabled>
+              </td>
             </tr>
             <tr>
-                <td>Lunch</td>
-                <td>
-                    Grilled Chicken <br>
-                    Rice <br>
-                    Salad
-                </td>
-                <td>
-                    150g <br>
-                    100g <br>
-                    1 bowl
-                </td>
+              <td>Lunch</td>
+              <td>
+                <input type="text" value="Beef Stew" disabled> <br>
+                <input type="text" value="Mashed Potatoes" disabled>
+              </td>
+              <td>
+                <input type="text" value="200g" disabled> <br>
+                <input type="text" value="150g" disabled>
+              </td>
             </tr>
             <tr>
-                <td>Dinner</td>
-                <td>
-                    Spaghetti <br>
-                    Tomato Sauce <br>
-                    Bread
-                </td>
-                <td>
-                    200g <br>
-                    50g <br>
-                    1 piece
-                </td>
+              <td>Dinner</td>
+              <td>
+                <input type="text" value="Vegetable Soup" disabled> <br>
+                <input type="text" value="Bread" disabled>
+              </td>
+              <td>
+                <input type="text" value="1 bowl" disabled> <br>
+                <input type="text" value="1 piece" disabled>
+              </td>
+            </tr>
+        
+            <!-- Thursday -->
+            <tr>
+              <td rowspan="3">Thursday</td>
+              <td>Breakfast</td>
+              <td>
+                <input type="text" value="Bread" disabled> <br>
+                <input type="text" value="Cheese" disabled> <br>
+                <input type="text" value="Jam" disabled> <br>
+                <input type="text" value="Milk" disabled>
+              </td>
+              <td>
+                <input type="text" value="1 piece" disabled> <br>
+                <input type="text" value="50g" disabled> <br>
+                <input type="text" value="1 serving" disabled> <br>
+                <input type="text" value="200ml" disabled>
+              </td>
             </tr>
             <tr>
-                <!--2 day-->
-                <td rowspan="3">Wednesday</td>
-                <td>Breakfast</td>
-                <td>
-                    Omelette <br>
-                    Toast <br>
-                    Juice
-                </td>
-                <td>
-                    100g <br>
-                    2 pieces <br>
-                    200ml
-                </td>
+              <td>Lunch</td>
+              <td>
+                <input type="text" value="Grilled Chicken" disabled> <br>
+                <input type="text" value="Rice" disabled> <br>
+                <input type="text" value="Salad" disabled>
+              </td>
+              <td>
+                <input type="text" value="150g" disabled> <br>
+                <input type="text" value="100g" disabled> <br>
+                <input type="text" value="1 bowl" disabled>
+              </td>
             </tr>
             <tr>
-                <td>Lunch</td>
-                <td>
-                    Beef Stew <br>
-                    Mashed Potatoes
-                </td>
-                <td>
-                    200g <br>
-                    150g
-                </td>
+              <td>Dinner</td>
+              <td>
+                <input type="text" value="Spaghetti" disabled> <br>
+                <input type="text" value="Tomato Sauce" disabled> <br>
+                <input type="text" value="Bread" disabled>
+              </td>
+              <td>
+                <input type="text" value="200g" disabled> <br>
+                <input type="text" value="50g" disabled> <br>
+                <input type="text" value="1 piece" disabled>
+              </td>
             </tr>
-            <tr>
-                <td>Dinner</td>
-                <td>
-                    Vegetable Soup <br>
-                    Bread
-                </td>
-                <td>
-                    1 bowl <br>
-                    1 piece
-                </td>
-            </tr>
-            <tr>
-                <!--5 day-->
-                    <td rowspan="3">Thursday</td>
-                    <td>Breakfast</td>
-                    <td>
-                        Bread <br>
-                        Cheese <br>
-                        Jam <br>
-                        Milk
-                    </td>
-                    <td>
-                        1 piece <br>
-                        50g <br>
-                        1 serving <br>
-                        200ml
-                    </td>
-                </tr>
-                <tr>
-                    <td>Lunch</td>
-                    <td>
-                        Grilled Chicken <br>
-                        Rice <br>
-                        Salad
-                    </td>
-                    <td>
-                        150g <br>
-                        100g <br>
-                        1 bowl
-                    </td>
-                </tr>
-                <tr>
-                    <td>Dinner</td>
-                    <td>
-                        Spaghetti <br>
-                        Tomato Sauce <br>
-                        Bread
-                    </td>
-                    <td>
-                        200g <br>
-                        50g <br>
-                        1 piece
-                    </td>
-                </tr>
-                <tr>
                     <!--6 day-->
+                    <tr>
                         <td rowspan="3">Friday</td>
                         <td>Breakfast</td>
                         <td>
-                            Bread <br>
-                            Cheese <br>
-                            Jam <br>
-                            Milk
+                          <input type="text" value="Bread" disabled> <br>
+                          <input type="text" value="Cheese" disabled> <br>
+                          <input type="text" value="Jam" disabled> <br>
+                          <input type="text" value="Milk" disabled>
                         </td>
                         <td>
-                            1 piece <br>
-                            50g <br>
-                            1 serving <br>
-                            200ml
+                          <input type="text" value="1 piece" disabled> <br>
+                          <input type="text" value="50g" disabled> <br>
+                          <input type="text" value="1 serving" disabled> <br>
+                          <input type="text" value="200ml" disabled>
                         </td>
-                    </tr>
-                    <tr>
+                      </tr>
+                      <tr>
                         <td>Lunch</td>
                         <td>
-                            Grilled Chicken <br>
-                            Rice <br>
-                            Salad
+                          <input type="text" value="Grilled Chicken" disabled> <br>
+                          <input type="text" value="Rice" disabled> <br>
+                          <input type="text" value="Salad" disabled>
                         </td>
                         <td>
-                            150g <br>
-                            100g <br>
-                            1 bowl
+                          <input type="text" value="150g" disabled> <br>
+                          <input type="text" value="100g" disabled> <br>
+                          <input type="text" value="1 bowl" disabled>
                         </td>
-                    </tr>
-                    <tr>
+                      </tr>
+                      <tr>
                         <td>Dinner</td>
                         <td>
-                            Spaghetti <br>
-                            Tomato Sauce <br>
-                            Bread
+                          <input type="text" value="Spaghetti" disabled> <br>
+                          <input type="text" value="Tomato Sauce" disabled> <br>
+                          <input type="text" value="Bread" disabled>
                         </td>
                         <td>
-                            200g <br>
-                            50g <br>
-                            1 piece
+                          <input type="text" value="200g" disabled> <br>
+                          <input type="text" value="50g" disabled> <br>
+                          <input type="text" value="1 piece" disabled>
                         </td>
-                    </tr>
-                    <tr>
-                        <!--7 day-->
+                      </tr>
+                  
+                      <!-- Saturday -->
+                      <tr>
                         <td rowspan="3">Saturday</td>
                         <td>Breakfast</td>
                         <td>
-                            Bread <br>
-                            Cheese <br>
-                            Jam <br>
-                            Milk
+                          <input type="text" value="Bread" disabled> <br>
+                          <input type="text" value="Cheese" disabled> <br>
+                          <input type="text" value="Jam" disabled> <br>
+                          <input type="text" value="Milk" disabled>
                         </td>
                         <td>
-                            1 piece <br>
-                            50g <br>
-                            1 serving <br>
-                            200ml
+                          <input type="text" value="1 piece" disabled> <br>
+                          <input type="text" value="50g" disabled> <br>
+                          <input type="text" value="1 serving" disabled> <br>
+                          <input type="text" value="200ml" disabled>
                         </td>
-                    </tr>
-                    <tr>
+                      </tr>
+                      <tr>
                         <td>Lunch</td>
                         <td>
-                            Grilled Chicken <br>
-                            Rice <br>                                Salad
+                          <input type="text" value="Grilled Chicken" disabled> <br>
+                          <input type="text" value="Rice" disabled> <br>
+                          <input type="text" value="Salad" disabled>
                         </td>
                         <td>
-                            150g <br>
-                            100g <br>
-                            1 bowl
+                          <input type="text" value="150g" disabled> <br>
+                          <input type="text" value="100g" disabled> <br>
+                          <input type="text" value="1 bowl" disabled>
                         </td>
-                    </tr>
-                    <tr>
+                      </tr>
+                      <tr>
                         <td>Dinner</td>
                         <td>
-                            Spaghetti <br>
-                            Tomato Sauce <br>
-                            Bread
+                          <input type="text" value="Spaghetti" disabled> <br>
+                          <input type="text" value="Tomato Sauce" disabled> <br>
+                          <input type="text" value="Bread" disabled>
                         </td>
                         <td>
-                            200g <br>
-                            50g <br>
-                            1 piece
+                          <input type="text" value="200g" disabled> <br>
+                          <input type="text" value="50g" disabled> <br>
+                          <input type="text" value="1 piece" disabled>
                         </td>
-                    </tr>
+                      </tr>
         </tbody>
     </table>
 
     <div class="edit-button">
-        <div class="hover bt-1"></div>
-        <div class="hover bt-2"></div>
-        <div class="hover bt-3"></div>
-        <div class="hover bt-4"></div>
-        <div class="hover bt-5"></div>
-        <div class="hover bt-6"></div>
-        <button class="edit"></button>
+        <button class="edit">Edit</button>
     </div>
 
 </body>

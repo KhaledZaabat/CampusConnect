@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
 }
 
 body {
@@ -51,10 +50,7 @@ input, select, textarea {
 textarea {
     resize: none;
 }
-input:focus, select:focus, textarea:focus {
-    border-color: #0f0b32; /* Change border color on focus to dark blue */
-    outline: none; /* Remove the default outline */
-}
+
 .submit {
     padding: 10px;
     background-color: #0f0b32;

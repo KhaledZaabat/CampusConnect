@@ -16,6 +16,24 @@ body {
     background-color: #0f0b32;
 }
 
+.password-icon {
+    position: absolute;
+    right: 10px;
+    bottom: 15px;
+    color: #0f0b32;
+    cursor: pointer;
+    font-size: 16px; /* Adjust size as needed */
+}
+
+.password-container{
+    position: relative;
+}
+.input-login {
+    width: 100%;
+    padding-right: 40px; /* Adds space for the icon */
+}
+
+
 
 .login-form {
     position: relative;
@@ -72,16 +90,12 @@ body {
 }
 
 .input-login:focus {
-    border-color: black;
+    border-color: #565454;
     outline: none;
 }
 
 .input-login::placeholder {
-    color: #0f0b32;
-}
-
-.input-login:focus::placeholder {
-    color: transparent; /* Hide placeholder on focus */
+    color: #565454;
 }
 
 .login-button {
@@ -102,7 +116,7 @@ body {
 }
 
 .login-button:hover {
-    background-color: #ffffff;
+    background-color: #ccc;
     color: #0f0b32; 
     text-decoration: none;
 }
@@ -128,4 +142,16 @@ body {
 .logo-login img {
     width: 100px;
     height: auto;
+}
+
+.show-password {
+    margin-top: 12px;
+    font-size: 14px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.show-password input {
+    margin-left: 8px;
 }

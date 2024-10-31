@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
     <link rel="stylesheet" href="assets/css/ReportIssues.css"> <!-- custom css -->
+    <link rel="stylesheet" href="assets/css/lostfound.css"> <!-- custom css -->
+
     <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
     <link rel="icon" href="assets/img/logo.png" type="image/png">
     <!-- font awesome-->
@@ -26,7 +28,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
                     <li class="nav-item"><a class="nav-link" href="Canteen.html">Canteen Schedule</a></li>
                     <li class="nav-item dropdown">
@@ -60,30 +62,8 @@
     <div class="Form-container">
         <h1>Campus Problem Declaration Form</h1>
         <form action="#" method="post" enctype="multipart/form-data">
+
            
-
-            <!-- Dorm Block, Etage, Room -->
-            <label for="dorm-block">Dorm Block</label>
-            <select id="dorm-block" name="dorm-block" required>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="E">E</option>
-            </select>
-
-            <label for="etage">Floor</label>
-            <select id="etage" name="etage" required>
-                <option value="R">R</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-
-            <label for="room-number">Room Number</label>
-            <input type="number" id="room-number" name="room-number" min="1" max="40" required>
 
             <!-- Problem Details -->
             <label for="problem-type">Problem Type</label>
@@ -110,9 +90,25 @@
             </select>
 
             <!-- File Upload -->
-            <label for="file-upload">Upload Photos or Documents (optional)</label>
-            <input type="file" id="file-upload" name="file-upload" accept="image/*, .pdf">
-
+             <label for="Media">Add an image (Optional)</label>
+            <div class="form-group mt-2">
+                <label for="file" class="custom-file-upload">
+                    <div class="icon" id="upload-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" fill="#007bff"></path>
+                        </svg>
+                    </div>
+                    <div class="text" id="upload-text">
+                        <span>Click to upload image</span>
+                    </div>
+                    <input id="file" type="file" name="image" accept="image/*" onchange="previewImage(event)">
+                </label>
+                <!--not displayed until the user uploads a -->
+                <div id="image-preview" style="display: none; margin-top: 10px;">
+                    <img id="preview-img" src="" alt="Image Preview" style="max-width: 100px; max-height: 100px;">
+                    <p>Image uploaded!</p>
+                </div>
+            </div>
             <!-- Reported Before -->
             <label for="reported-before">Has this been reported before?</label>
             <select id="reported-before" name="reported-before">

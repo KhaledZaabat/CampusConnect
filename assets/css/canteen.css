@@ -1,0 +1,132 @@
+body {
+    background-color: #0f0b32;
+    margin: 0;
+    padding-top: 125px;
+}
+
+h1 {
+    font-family: Roboto, sans-serif;
+    text-align: center;
+    color: #ffffff;
+    margin: 30px;
+
+}
+
+.canteenTable {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: white;
+    margin-bottom: 40px;
+}
+
+.canteenTable th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+}
+
+.canteenTable th {
+    background-color: #4a6fa5; 
+    color: white;
+    text-align: center;
+}
+
+.canteenTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.canteenTable tr:hover {
+    background-color: #e2e2e2;
+}
+
+.canteenTable td {
+    text-align: center;
+}
+
+.canteenTable td:nth-child(3) {
+    text-align: center;
+    padding-left: 20px;
+}
+
+.edit-button {
+    display: grid;
+    position: sticky;
+    bottom: 20px;
+    left: 20px;
+    padding: 35px;
+    width: 150px; 
+    height: 50px;
+    perspective: 800;
+    transition: all 0.3s ease-in-out;
+}
+
+.edit {
+    position: absolute;
+    padding: 12.5px 35px;
+    width: auto;
+    height: auto;
+    background-color: #3d8aab;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    transition: all 0.5s ease-in-out;
+}
+
+.edit:hover {
+    background-color: #3d8aab;
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 700px) {
+    .canteenTable {
+        width: 100%; 
+        font-size: 14px; 
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .canteenTable {
+        width: 100%; 
+        font-size: 12px; 
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .canteenTable {
+        width: 100%; 
+        font-size: 10px; 
+    }
+}
+
+input[type="text"] {
+    /* border: none; */
+    border-radius: 10px;
+    background: none;
+    color: inherit;
+    font: inherit;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    text-align: center;
+    width: 100%; /* Make input take full width of cell */
+    box-sizing: border-box;
+}
+
+/* Adjust padding and font-size of input fields on smaller screens */
+@media screen and (max-width: 500px) {
+    input[type="text"] {
+        font-size: 12px;
+        padding: 4px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    input[type="text"] {
+        font-size: 10px;
+        padding: 2px;
+    }
+}

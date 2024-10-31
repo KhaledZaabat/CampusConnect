@@ -1,6 +1,9 @@
 body{
     padding-top:125px;
 }
+:lang(ar) {
+    font-family: "Tajawal", sans-serif;
+}
 
 .nav-link {
     text-decoration: none;
@@ -28,342 +31,11 @@ body{
 }
 
 /* General styles */
-.header {
-    margin-top: 100px;
-    text-align: center;
-}
-
-.Welcome {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 120px;
-}
-
-@keyframes typing {
-    0%  { content: ""; }
-    2%  { content: "C"; }
-    4%  { content: "CA"; }
-    6%  { content: "CAM"; }
-    8%  { content: "CAMP"; }
-    10%  { content: "CAMPU"; }
-    12%  { content: "CAMPUS"; }
-    14%  { content: "CAMPUS C"; }
-    16%  { content: "CAMPUS CO"; }
-    18%  { content: "CAMPUS CON"; }
-    20%  { content: "CAMPUS CONN"; }
-    22%  { content: "CAMPUS CONNE"; }
-    24%  { content: "CAMPUS CONNEC"; }
-    26%  { content: "CAMPUS CONNECT"; }
-    63%  { content: "CAMPUS CONNECT"; }
-    65%  { content: "CAMPUS CONNEC"; }
-    67%  { content: "CAMPUS CONNE"; }
-    69%  { content: "CAMPUS CONN"; }
-    71%  { content: "CAMPUS CON"; }
-    73%  { content: "CAMPUS CO"; }
-    75%  { content: "CAMPUS C"; }
-    77%  { content: "CAMPUS"; }
-    79%  { content: "CAMPU"; }
-    81%  { content: "CAMP"; }
-    83%  { content: "CAM"; }
-    85%  { content: "CA"; }
-    87%  { content: "C"; }
-    88%  { content: ""; }
-    100% { content: ""; }
-}
-
-.project-name::after {
-    content: "";
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 80px;
-    color: #0f0b32;
-    border-right: 2px solid #0f0b32; /* Cursor effect */
-    white-space: nowrap;
-    animation: typing 4s forwards infinite;
-}
-
-.welcome-paragraph {
-    margin-top: 100px;
-    font-size: 30px;
-    margin-bottom: 100px;
-}
-
-/* Card styles */
-.News-Home {
-    padding: 50px 0;
-    background-color: #f9fafb;
-}
-
-.latest-news {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.latest-news .bold-text {
-    font-family: Arial, sans-serif;
-    font-size: 36px;
-    font-weight: bold;
-    color: #0f0b32;
-}
-
-.latest-news .regular-text {
-    font-family: Arial, sans-serif;
-    font-size: 22px;
-    color: #6e6e6e;
-}
-
-.news-cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.card {
-    width: 300px;
-    margin: 20px;
-    background-color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    transition: transform 0.3s ease-in-out;
-    overflow: hidden;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
-.card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.card-date {
-    display: block;
-    font-size: 14px;
-    color: #a0a0a0; /* Light gray */
-    margin-bottom: 10px;
-    font-family: Arial, sans-serif;
-}
-
-.card-body {
-    padding: 20px;
-    text-align: center;
-}
-
-.card-title {
-    font-size: 20px;
-    color: #0f0b32;
-    margin-bottom: 15px;
-    font-family: Arial, sans-serif;
-}
-
-.card-text {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 20px;
-    font-family: Arial, sans-serif;
-}
-
-/* Styles for View All News Button in Bottom Right */
-.btn-view-all-news {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    color: rgb(17, 3, 48);
-    padding: 0 10px;
-    font-size: 26px;
-    border: none;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    border-radius: 5px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    transition: background-color 0.3s, transform 0.3s ease-in-out;
-}
-
-/* Underline animation */
-.btn-view-all-news::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background-color: rgb(17, 3, 48); /* Same as text color */
-    left: 0;
+footer{
     bottom: 0;
-    transition: width 0.3s ease-in-out;
 }
-
 /* Hover effects */
-.btn-view-all-news:hover {
-    color: #0f0b32;
-}
 
-.btn-view-all-news:hover::after {
-    width: 100%; /* Expands underline to full width */
-}
-
-/* Arrow Styling */
-.arrow {
-    display: inline-block;
-    margin-left: 10px;
-    font-size: 20px;
-    transition: transform 0.3s ease-in-out;
-}
-
-.btn-view-all-news:hover .arrow {
-    transform: translateX(10px); /* Fleche (arrow) scales to the right */
-}
-
-/* Ensuring the button stays within the News Section */
-.News-Home {
-    position: relative;
-    padding-bottom: 70px;
-}
-
-
-.btn-primary {
-    background-color: #0f0b32;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 14px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.btn-primary:hover {
-    background-color: #333;
-}
-
-
-.bold-text {
-    font-weight: bold;
-    color: #000000; /* Black or dark gray for the bold text */
-}
-
-.regular-text {
-    font-weight: 400;
-    color: #6e6e6e; /* Lighter gray for the regular text */
-}
-
-
-
-.btn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.btn:hover {
-    background-color: #0056b3;
-}
-
-.services-section {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    padding: 40px 20px;
-    background-color: #f9fafb;
-}
-
-.services-title {
-    font-family: Arial, sans-serif;
-    font-size: 36px;
-    text-align: center;
-    margin-bottom: 40px;
-    color: #6e6e6e;
-}
-
-.services-title .bold-text {
-    font-weight: bold;
-    color: #0f0b32;
-}
-
-.services-title .regular-text {
-    font-size: 22px;
-    color: #6e6e6e;
-}
-
-.services-blocks {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 30px;
-    margin: 20px , 0;
-}
-
-.noUnderLine .service-block {
-    background-color: #ffffff;
-    border-radius: 15px;
-    padding: 30px;
-    width: 250px;
-    height: 300px;
-    text-align: center;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    user-select: none;
-}
-
-.service-block:hover {
-    transform: translateY(-10px);
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
-}
-
-.service-icon {
-    width: 50px;
-    margin-bottom: 20px;
-}
-
-.service-block h3 {
-    font-size: 22px;
-    margin-bottom: 15px;
-    color: #0f0b32;
-}
-
-.service-block p {
-    font-size: 16px;
-    color: #6e6e6e;
-}
-
-
-/* Media Queries for Responsiveness */
-@media (max-width: 1024px) {
-    .news-cards, .services-blocks {
-        justify-content: center;
-    }
-    
-    .card, .service-block {
-        max-width: 45%;
-    }
-}
-
-@media (max-width: 768px) {
-    .Welcome {
-        font-size: 50px;
-    }
-
-    .project-name::after {
-        font-size: 40px;
-    }
-
-    .welcome-paragraph {
-        font-size: 18px;
-    }
-
-    .news-cards, .services-blocks {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .card, .service-block {
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
-}
 
 .logo_img {
     height: 70px;
@@ -378,9 +50,27 @@ body{
     width: 480px;
 }
 
+.submit:hover {
+    background-color: #2e2a5b;
+}
 
+.noUnderLine {
+    text-decoration: none;
+}
 
+button {
+    padding: 10px;
+    background-color: #0f0b32; 
+    color: white ;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer ;
+    transition: background-color 0.3s ease ;
+}
 
+button:hover {
+    background-color: #2e2a5b;
+}
 
 .wrapper {
     display: flex;
@@ -408,7 +98,7 @@ body{
     overflow: hidden;
     height: 60px;
     width: 60px;
-    float: left;
+    /* float: left; */
     margin: 0 5px;
     background: rgb(255, 255, 255);
     border-radius: 50px;
@@ -489,9 +179,7 @@ body{
     font-size: 25px;
     line-height: 60px;
 }
-.noUnderLine {
-    text-decoration: none;
-}
+
 @media screen and (max-width: 700px) {
     .footer-image {
         display: block;
@@ -507,16 +195,24 @@ body{
         width: 60px;
     }
     .wrapper .button:hover span {
-        display: none; /* Show text on hover */
+        display: none; /* do not Show text on hover */
     }
     .test{
         margin-bottom: 20px;
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
 }
 
-
-
-
-
+/*every input area must have the same focus animation*/
+input:focus,
+textarea:focus,
+select:focus,
+[contenteditable="true"]:focus {
+    color: #212529;
+    background-color: #fff; 
+    border-color: #0f0b32 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}

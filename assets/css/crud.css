@@ -7,6 +7,17 @@ body {
 }
 
 .container2 {
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container3 {
     max-width: 1000px;
     margin: auto;
     background: white;
@@ -15,7 +26,6 @@ body {
     margin-bottom: 40px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
 }
 
 .custom-bg-black {
@@ -54,25 +64,10 @@ input, select, textarea {
     transition: border-color 0.3s ease; 
 }
 
+
 .student-form button {
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #0f0b32;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
+    margin-top: 20px; /* Keep margin for the student form buttons */
 }
-
-.student-form button:hover {
-    background-color: #e6e6e6;
-    color: #0f0b32;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
-    font-size: 18px;
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -92,11 +87,10 @@ th {
 }
 
 /* Responsive table: */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
     .container {
         padding: 10px;
     }
-
     table {
         display: block;
         width: 100%;
@@ -196,4 +190,93 @@ td a.Delete:hover {
 td a i {
     padding: 5px;
     cursor: pointer;
+}
+
+/* Styling for the upload section */
+.custom-file-upload {
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #007bff;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #f8f9fa;
+    text-align: center;
+    width: 100%; /* Set to 100% to match form width */
+}
+
+.custom-file-upload:hover {
+    background-color: #e2e6ea;
+}
+
+.custom-file-upload .icon svg {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+    fill: #007bff;
+}
+
+.custom-file-upload .text span {
+    font-size: 16px;
+    color: #007bff;
+    font-weight: 600;
+}
+
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+#image-preview img {
+    border: 2px solid #007bff;
+    border-radius: 8px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .post {
+        max-width: 90%; /* Set to 90% on smaller screens */
+    }
+}
+
+.tableinput {
+    border: none;
+    /* border-radius: 10px; */
+    background: none;
+    color: inherit;
+    font: inherit;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    text-align: center;
+    width: 100%; /* Make input take full width of cell */
+    box-sizing: border-box;
+}
+
+/* Adjust padding and font-size of input fields on smaller screens */
+@media screen and (max-width: 500px) {
+    .tableinput {
+        font-size: 12px;
+        padding: 4px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .tableinput {
+        font-size: 10px;
+        padding: 2px;
+    }
+}
+
+.emailinput {
+    width: 220px;
+}
+.roleinput {
+    width: 80px
+}
+.name {
+    width: 130px
 }
