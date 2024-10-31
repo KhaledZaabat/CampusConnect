@@ -45,7 +45,7 @@ h1 {
     text-align: center;
 }
 
-.canteenTable td:nth-child(3) {
+.canteenTable td:nth-child(odd) {
     text-align: center;
     padding-left: 20px;
 }
@@ -78,7 +78,7 @@ h1 {
 
 .edit:hover {
     background-color: #3d8aab;
-    transform: scale(1.1);
+    transform: scale(1.1); 
 }
 
 @media screen and (max-width: 700px) {
