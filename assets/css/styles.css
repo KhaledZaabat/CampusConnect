@@ -216,3 +216,9 @@ select:focus,
     outline: none !important;
     box-shadow: none !important;
 }
+
+@media (max-width: 992px) {
+    .dropdown.col-3.text-center {
+        display: none;
+    }
+}

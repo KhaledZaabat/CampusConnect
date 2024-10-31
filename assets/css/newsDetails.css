@@ -1,0 +1,32 @@
+.news-header {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    background-color: #4a6fa5;
+    height: 40%;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    /* Box shadow for the header */
+}
+.news-header {
+    padding: 20px; 
+}
+
+.news-title {
+    font-weight: 250;
+    font-size: 2.5rem; /* Customize the font size */
+    color: white;
+}
+
+.news-header-date{
+    font-size: 1rem;
+    color: white; 
+}
+
+.news-desc{
+    word-break: break-word;
+    color: #0f0b32;
+    font-size: 1.4rem;
+    line-height: 1.8;
+}

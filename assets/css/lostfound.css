@@ -287,6 +287,15 @@ label {
     }
 }
 
+.create-btn {
+    width: 20%;
+}
+
+@media screen and (max-width: 1242px) {
+    .create-btn {
+        width: 100%; /* Full width for smaller screens */
+    }
+}
 .border-visible {
     border: 1px solid #4A628A; /* Use any of the root colors, or specify another */
 }
