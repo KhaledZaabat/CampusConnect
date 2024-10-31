@@ -89,7 +89,7 @@ button:hover {
 .footer-image img {
     max-width: 150px; /* Adjust size as needed */
     max-height: 150px;
-    margin-left: 0;
+    margin-right: 15px;
 }
 
 /* Social media button styles */
@@ -215,4 +215,10 @@ select:focus,
     border-color: #0f0b32 !important;
     outline: none !important;
     box-shadow: none !important;
+}
+
+@media (max-width: 992px) {
+    .dropdown.col-3.text-center {
+        display: none;
+    }
 }
