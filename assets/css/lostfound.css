@@ -198,6 +198,17 @@ a, a:active, a:focus {
     color: #000000;
     transform: scale(1.2);
 }
+
+.col-2 .Edit {
+    font-size: 13px; /* Smaller size */
+}
+
+/* Style for Delete icon inside col-2 */
+.col-2 .Delete {
+    font-size: 13px; /* Smaller size */
+}
+
+
 body {
     background-color: #0f0b32;
 }
