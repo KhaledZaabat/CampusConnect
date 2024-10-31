@@ -36,7 +36,6 @@ body {
 
 
 .login-form {
-    position: relative;
     height: 520px;
     width: 400px;
     background-color: rgba(255, 255, 255);
@@ -61,14 +60,12 @@ body {
 
 .title-login {
     font-size: 35px;
-    font-weight: 500;
     line-height: 42px;
     text-align: center;
     color: #0f0b32;
 }
 
-.login-username-label,
-.login-password-label {
+.login-username-label, .login-password-label {
     display: block;
     margin-top: 30px;
     font-size: 16px;
@@ -82,7 +79,7 @@ body {
     background-color: #ffffff12;
     border-radius: 10px;
     border: 1px solid #ccc;
-    padding: 0 10px;
+    padding: 0 20px;
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
@@ -99,14 +96,13 @@ body {
 }
 
 .login-button {
-    display: inline-block; /* Make the link behave like a block element */
     text-align: center;    /* Center the text inside the link */
     width: 80%;         
     background-color: #0f0b32;
     color: #ffffff;
     padding: 15px 0;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 600px;
     border-radius: 15px;
     cursor: pointer;
     text-decoration: none; 
@@ -116,7 +112,7 @@ body {
 }
 
 .login-button:hover {
-    background-color: #ccc;
+    background-color: #e4e3e3;
     color: #0f0b32; 
     text-decoration: none;
 }
