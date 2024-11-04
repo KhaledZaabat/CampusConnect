@@ -37,9 +37,9 @@ h1 {
     background-color: #f2f2f2;
 }
 
-.canteenTable tr:hover {
+/* .canteenTable tr:hover {
     background-color: #e2e2e2;
-}
+} */
 
 .canteenTable td {
     text-align: center;
@@ -130,3 +130,7 @@ input[type="text"] {
         padding: 2px;
     }
 }
+
+/* .canteenTable tr:hover td:not(:first-child) {
+    background-color: #e2e2e2;
+} */
