@@ -291,13 +291,13 @@ opacity: 1;
 }
 .filter h3,
 .filter p ,
-.filter img{
+.filter i{
     transition: filter 0.7s ease; /* Smooth filter transition */
 }
 
 .filter:hover h3,
 .filter:hover p ,
-.filter:hover img{
+.filter:hover i{
     filter: blur(3px); /* Apply blur effect on hover */
 }
 
@@ -330,15 +330,15 @@ a{
 }
 
 .service-icon {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 20px;
+    font-size: 50px;
+    color: #0f0b32;
+    margin-bottom: 30px;
 }
 
 /* Stats Section Icons */
 .stat-icon {
-    width: 50px; /* Adjust the width as necessary */
-    height: auto; /* Maintain aspect ratio */
+    font-size: 35px;
+    color: #0f0b32;
     margin-bottom: 10px; /* Space between the image and text */
 }
 @media (max-width: 576px) {
@@ -393,7 +393,7 @@ a{
     }
 
     .stat-icon {
-        width: 60px; /* Smaller size for mobile devices */
+        font-size: 20px; /* Smaller size for mobile devices */
     }
 }
 
