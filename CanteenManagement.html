@@ -381,9 +381,7 @@
         </tbody>
     </table>
 
-    <div class="edit-button">
-        <button class="edit">Edit</button>
-    </div>
+    <button class="edit">Edit</button>
 
 </body>
 
@@ -430,5 +428,21 @@
 
 
 
+  
+<script>
+  let editB = document.querySelector(".edit");
+  let inputField = document.querySelectorAll("input[disabled]");
+    
+  editB.addEventListener("click", function() {
+    if (editB.textContent === "Edit") {
+      inputField.forEach(input =>  {input.disabled=false;});
+      editB.textContent = "Confirm";
+    } else {
+      inputField.forEach(input => {input.disabled=true;});
+      editB.textContent = "Edit";
+    }
+  });
+</script>
+  
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </html>
