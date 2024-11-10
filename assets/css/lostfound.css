@@ -199,13 +199,13 @@ a, a:active, a:focus {
     transform: scale(1.2);
 }
 
-.col-2 .Edit {
-    font-size: 13px; /* Smaller size */
+.admin .Edit {
+    font-size: 0.7rem; /* Smaller size */
 }
 
 /* Style for Delete icon inside col-2 */
-.col-2 .Delete {
-    font-size: 13px; /* Smaller size */
+.admin .Delete {
+    font-size: 0.7rem; /* Smaller size */
 }
 
 
@@ -221,6 +221,12 @@ body {
     padding: 20px;
     margin-top: 40px; /* Add spacing from the top of the page */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better visibility */
+}
+.post-c{
+    background-color: #4a6ea524; 
+    border: 2px solid #0f0b320d;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .post{
     max-width: 40%; /* Set a maximum width for a more vertical form */
@@ -292,7 +298,7 @@ label {
     border-radius: 8px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1242px) {
     .post {
         max-width: 90%; /* Set to 90% on smaller screens */
     }
@@ -326,4 +332,9 @@ label {
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.post-card{
+    border: 0.0625rem solid #4a6fa5;
+    border-radius: 0.25rem;
 }

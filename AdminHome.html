@@ -17,8 +17,8 @@
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
-            <a class="col-3 navbar-brand-logo" href="#">
-                <img class ="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
+            <a class="navbar-brand-logo" href="#">
+                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
             </a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
@@ -26,35 +26,42 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="AdminHome.html">Home</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="AdminHome.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
                     <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage Services</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <li class="dropdown-header">Maintenance </li>
-                            <li><a class="dropdown-item" href="/maintenance/report">Student Issues</a></li>
-                            <li><a class="dropdown-item" href="#">Lost & Found Page</a></li>
-                            <li class="dropdown-header">Housing</li>
-                            <li><a class="dropdown-item" href="#"> Rooms Requests</a></li>
+                            <li class="dropdown-header">Maintenance Services</li>
+                            <li><a class="dropdown-item" href="ReceivingIssues.html">Manage Issues</a></li>
+                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
+                            <li class="dropdown-header">Housing Services</li>
+                            <li><a class="dropdown-item" href="#">Book Rooms</a></li>
+                            <li><a class="dropdown-item" href="roomRequests.html">Change Rooms</a></li>
                             <li class="dropdown-header">Users</li>
                             <li><a class="dropdown-item" href="crudstud.html"> Manage Students</a></li>
                             <li><a class="dropdown-item" href="crudadmin.html"> Manage Employees</a></li>
-
-
-
                         </ul>
                     </li>
                 </ul>
-            </div>
-            <div class="dropdown col-3 text-center">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                </a>
-                <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="UserProfile.html">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                <!-- profile section for pc -->
+                <div class="dropdown d-none d-lg-block me-3">
+                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="UserProfile.html">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div>
+                
+
+                <!-- Profile and Sign-out links for smaller screens(phone) -->
+                <ul class="navbar-nav d-lg-none">
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li class="nav-item"><a class="nav-link" href="StudentProfile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
                 </ul>
             </div>
         </div>
@@ -77,36 +84,37 @@
 <div class="stats-section">
     <div class="row text-center">
         <div class="col-lg-4 col-md-6 mb-4">
-            <img src="assets/img/person-check.svg" alt="Students in Dorms" class="stat-icon">
+            <i class="fas fa-user-check stat-icon"></i>
             <h3>900+</h3>
             <p>Students in Dorms</p>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
-            <img src="assets/img/image.png" alt="Beds Available" class="stat-icon" style="width: 70px;">
+            <i class="far fa-bed stat-icon"></i>
             <h3>150+</h3>
             <p>Beds Available</p>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
-            <img src="assets/img/bed-solid (1).svg" alt="Beds Occupied" class="stat-icon">
+            <i class="fas fa-bed stat-icon"></i>
             <h3>750+</h3>
             <p>Beds Occupied</p>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
-            <img src="assets/img/maintenance-icon-12.png" alt="Active Maintenance Requests" class="stat-icon">
+            <i class="fas fa-tools stat-icon"></i>
             <h3>5</h3>
             <p>Active Maintenance Requests</p>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
-            <img src="assets/img/rooms.png" alt="Room Availability" class="stat-icon">
+            <i class="fas fa-door-open stat-icon"></i>
             <h3>85%</h3>
             <p>Room Availability</p>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
-            <img src="assets/img/satisfaction.png" alt="Average Satisfaction" class="stat-icon">
+            <i class="fas fa-thumbs-up stat-icon"></i>
             <h3>4.5</h3>
             <p>Average Satisfaction</p>
         </div>
     </div>
+    
 </div>
 
             <!-- Admin Management Section -->
@@ -117,7 +125,7 @@
                 </div>
                <div class="services-blocks">
                 <div class="service-block filter">
-                    <img src="assets/img/users-solid.svg" alt="Manage Students Icon" class="service-icon">
+                    <i class="fas fa-users service-icon"></i>
                     <h3>Manage Users</h3>
                     <p>Oversee Users registrations, accommodations, and profiles.</p>
                     <div class="card-btn-container">
@@ -125,34 +133,35 @@
                         <a href="crudadmin.html"><div class="card-btn">Manage Employees</div></a>
                     </div>
                 </div>
-            
+                
                 <div class="service-block filter">
-                    <img src="assets/img/utensils-solid (1).svg" alt="Manage Menu Icon" class="service-icon">
+                    <i class="fas fa-utensils service-icon"></i>
                     <h3>Manage Canteen Menu</h3>
                     <p>Update and organize daily canteen menus for the students.</p>
                     <div class="card-btn-container">
                         <a href="CanteenManagement.html"><div class="card-btn">Manage Menu</div></a>
                     </div>
                 </div>
-            
+                
                 <div class="service-block filter">
-                    <img src="assets/img/newspaper-solid.svg" alt="Manage News Icon" class="service-icon">
+                    <i class="fas fa-newspaper service-icon"></i>
                     <h3>Manage News</h3>
                     <p>Create and publish campus news and announcements.</p>
                     <div class="card-btn-container">
                         <a href="AdminNews.html"><div class="card-btn">Update News</div></a>
                     </div>
                 </div>
-            
+                
                 <div class="service-block filter">
-                    <img src="assets/img/screwdriver-wrench-solid (2).svg" alt="Manage Services Icon" class="service-icon">
+                    <i class="fas fa-screwdriver-wrench service-icon"></i>
                     <h3>Manage Other Services</h3>
                     <p>Oversee maintenance requests, housing services, and more.</p>
                     <div class="card-btn-container">
-                        <a href=""><div class="card-btn">Manage Rooms</div></a>
-                        <a href=""><div class="card-btn">Students Issues</div></a>
+                        <a href="changeRoom.html"><div class="card-btn">Manage Rooms</div></a>
+                        <a href="ReceivingIssues.html"><div class="card-btn">Students Issues</div></a>
                     </div>
                 </div>
+                
                </div>
             </div>
             
