@@ -1,6 +1,6 @@
 ---
 #### Project Name: CampusConnect
-![logo - Copy](https://github.com/user-attachments/assets/6ed6127a-20e8-40d3-8dbe-f789c9b38a9e)
+<img src="https://github.com/user-attachments/assets/a6bfb18d-9931-4879-bae3-d6153618311f" alt="logo" width="300"/>
 
 #### Description:
 CampusConnect is a web-based system developed to help students living in university accommodations to interact with various services. The system provides access and a view of the most valued services, which include accommodation management, maintenance reporting, enrollment in activities, and access to documents. Admin will be able to operate and manage the system by viewing student data, news, and the status of services. The system will be in both English and Arabic to serve a diverse number of students.
