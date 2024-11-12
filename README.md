@@ -96,6 +96,7 @@ Provide a user-friendly interface in Arabic and English.
 - **Layout**: Design and implement the layout (Nav bar + About Us section).
 - **Receiving Room Request**: Handle requests for room changes and bookings.
 - **Lost & Found Page**: Manage lost and found items, including comments functionality.
+- **news details page**
 
 #### Cherif:
 - **Student Home Page**: Display news and available services for students.
