@@ -4,25 +4,32 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Student Profile</title> <!-- Static title for the Home page -->
+    <title>Student Profile</title>
+ 
+
+
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Canteen</title> <!-- Static title for the Home page -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
     <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
-    <link rel="icon" href="assets/img/logo.png" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/css/StudentProfile.css">
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <!-- font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
 
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
-            <a class="col-3 navbar-brand-logo" href="#">
-                <img class ="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
+            <a class="navbar-brand-logo" href="#">
+                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
             </a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
@@ -45,15 +52,25 @@
                         </ul>
                     </li>
                 </ul>
-            </div>
-            <div class="dropdown col-3 text-center">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                </a>
-                <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="StudentProfile.html">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+
+                <!-- profile section for pc -->
+                <div class="dropdown d-none d-lg-block me-3">
+                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="StudentProfile.html">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div>
+                
+
+                <!-- Profile and Sign-out links for smaller screens(phone) -->
+                <ul class="navbar-nav d-lg-none">
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li class="nav-item"><a class="nav-link" href="StudentProfile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
                 </ul>
             </div>
         </div>
@@ -61,46 +78,58 @@
 </header>
 
 <body>
-    <div class="profile-container">
-        <div class="profile-card">
-            <h2>Student Profile</h2>
-
-            <!-- Profile Picture -->
-            <div class="profile-image">
-                <img src="./assets/img/test.jpg" alt="Profile Image">
+    <div class="container-xl px-4 mt-4">
+        <hr class="mt-0 mb-4">
+        <div class="row">
+            <div class="col-xl-4">
+                <!-- Profile picture card-->
+                <div class="card mb-4 mb-xl-0">
+                    <div class="card-header">Profile Picture</div>
+                    <div class="card-body text-center">
+                        <img class="img-account-profile rounded-circle mb-2" src="assets/img/test.jpg" alt="Profile Image">
+                    </div>
+                </div>
             </div>
-
-            <form class="profile-form">
-                <div class="form-group">
-                    <label for="first-name">First Name</label>
-                    <input type="text" id="first-name" value="John" readonly>
+            <div class="col-xl-8">
+                <!-- Account details card-->
+                <div class="card mb-4">
+                    <div class="card-header">Account Details</div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputFirstName">First Name</label>
+                                <input class="form-control" id="inputFirstName" type="text" value="John" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputLastName">Last Name</label>
+                                <input class="form-control" id="inputLastName" type="text" value="Doe" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputStudentID">Student ID</label>
+                                <input class="form-control" id="inputStudentID" type="text" value="123456" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputEmail">Email</label>
+                                <input class="form-control" id="inputEmail" type="email" value="johndoe@email.com" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputPhone">Phone Number</label>
+                                <input class="form-control" id="inputPhone" type="tel" value="+1234567890" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputRoomNumber">Room Number</label>
+                                <input class="form-control" id="inputRoomNumber" type="text" value="101A" readonly>
+                            </div>
+                       
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name" value="Doe" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="student-id">Student ID</label>
-                    <input type="text" id="student-id" value="123456" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" value="johndoe@email.com" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" value="+1234567890" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="room-number">Room Number</label>
-                    <input type="text" id="room-number" value="101A" readonly>
-                </div>
-            </form>
-
+            </div>
         </div>
     </div>
 
     <div class="footer-spacing"></div> <!-- Spacing before the footer -->
+
 </body>
 
 <footer class="page-footer custom-bg-black">
@@ -125,7 +154,7 @@
                 <div class="icon"><i class="fab fa-github"></i></div>
                 <span>Github</span>
             </div>
-
+            
             <div class="button">
                 <div class="icon"><i class="fab fa-instagram"></i></div>
                 <span>Instagram</span>
@@ -135,13 +164,17 @@
         <div class="footer-image">
             <img src="assets/img/logo.png" alt="Footer Image" />
         </div>
-    </div>
 
+    </div>
+    
     <div class="text-center custom-bg-black p-1">
         <p>©ENSIA. All Rights Reserved.</p>
     </div>
 </footer>
 
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
+
+
+
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </html>
