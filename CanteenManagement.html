@@ -12,7 +12,7 @@
     <link rel="icon" href="assets/img/logo.png" type="image/png">
     <!-- font awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
 
@@ -428,20 +428,45 @@
 
 
 
-  
-<script>
+ <script> 
   let editB = document.querySelector(".edit");
-  let inputField = document.querySelectorAll("input[disabled]");
-    
+  let inputFields = document.querySelectorAll("input[disabled]");
+  
+  // Store the initial values of the inputs
+  let initialValues = Array.from(inputFields).map(input => input.value);
+  
   editB.addEventListener("click", function() {
     if (editB.textContent === "Edit") {
-      inputField.forEach(input =>  {input.disabled=false;});
+      // Enable all input fields
+      inputFields.forEach(input => { input.disabled = false; });
       editB.textContent = "Confirm";
-    } else {
-      inputField.forEach(input => {input.disabled=true;});
-      editB.textContent = "Edit";
+    } else if (editB.textContent === "Confirm") {
+      // Show SweetAlert confirmation dialog
+      Swal.fire({
+        title: "Do you want to save the changes?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `Don't save`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Save changes, disable inputs, and update button text to "Edit"
+          inputFields.forEach(input => { input.disabled = true; });
+          Swal.fire("Saved!", "", "success");
+          editB.textContent = "Edit";
+        } else if (result.isDenied) {
+          // Reset changes, disable inputs, and update button text to "Edit"
+          inputFields.forEach((input, index) => {
+            input.value = initialValues[index]; // Reset to initial values
+            input.disabled = true; // Disable inputs again
+          });
+          Swal.fire("Changes are not saved", "", "info");
+          editB.textContent = "Edit";
+        }
+      });
     }
   });
+  
 </script>
   
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
