@@ -286,6 +286,28 @@ body {
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
 }
 
+.content {
+    opacity: 0;
+    transition: opacity 1s ease-in-out , transform 0.3s ease-in-out;
+}
+
+.content.visible {
+    opacity: 1;
+}
+
+.stat-icon {
+    font-size: 3rem;
+    color: #3c8dbc;
+}
+
+.stat-counter {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: bold;
+    transition: all 1.5s ease-in-out;
+}
+
+
 .service-block:hover .card-btn{
 opacity: 1;
 }
