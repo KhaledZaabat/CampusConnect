@@ -148,6 +148,12 @@ th {
 }
 
 /* Action buttons smaller size */
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Align buttons to left and right */
+    width: 100%;
+}
+
 button.Edit {
     color: #007bff;
     font-size: 18px;
@@ -175,13 +181,6 @@ button.Delete:hover {
     color: #000000;
     transform: scale(1.2);
 }
-
-
-/* Optional: Adjust spacing and layout of icons */
-/* td a i {
-    padding: 5px;
-    cursor: pointer;
-} */
 
 /* Styling for the upload section */
 .custom-file-upload {
@@ -270,6 +269,9 @@ button.Delete:hover {
 }
 .name {
     width: 130px
+}
+.phone {
+    width:70px;
 }
 
 .roleinput {
