@@ -278,3 +278,61 @@ button.Delete:hover {
     appearance: none; /* Standard */
     background-image: none; /* Remove the arrow */
 }
+
+/* Position search container to the top right */
+.search-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.search-icon {
+    background-color:#0f0b32;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.search-bar {
+    display: none;
+    width: 0;
+    transition: width 0.3s ease;
+    padding: 5px;
+    font-size: 10px;
+}
+
+.search-bar.active {
+    display: inline-block;
+    width: 200px; 
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.pagination button {
+    margin: 0 5px;
+    background-color: #0f0b32;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 20px;
+    margin: 0 10px;
+    color: #0f0b32;
+}
