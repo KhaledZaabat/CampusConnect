@@ -1,129 +1,47 @@
-/* Outer background */
+/* Add any necessary custom styles for the integrated Bootstrap template */
+
 body {
     background-color: #0f0b32;
+    color: #69707a;
     font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
 }
 
-/* Center the profile card */
+.img-account-profile {
+    height: 10rem;
+}
+
 .profile-container {
-    margin-top: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
     height: auto;
-    min-height: 50%;
+    margin-top: 10%;
 }
 
-/* Profile card styling */
-.profile-card {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 80%;
-    width: 100%;
+.card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
 }
 
-.profile-card h2 {
-    color: #0f0b32;
-    margin-bottom: 20px;
-    text-align: center;
+.card .card-header {
+    font-weight: 500;
+    padding: 1rem 1.35rem;
+    background-color: rgba(33, 40, 50, 0.03);
+    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
 }
 
-/* Form styling */
-.profile-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    font-size: 14px;
-    color: #0f0b32;
-    margin-bottom: 5px;
+.form-control {
     display: block;
-}
-
-.form-group input {
     width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    cursor: not-allowed;
+    padding: 0.875rem 1.125rem;
+    font-size: 0.875rem;
+    line-height: 1;
+    color: #69707a;
+    background-color: #fff;
+    border: 1px solid #c5ccd6;
+    border-radius: 0.35rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.form-group input:read-only {
-    background-color: #f0f0f0;
-    color: #666;
-}
-
-/* Profile image */
-.profile-image {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.profile-image img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    max-width: 100%;
-}
-
-/* Room photo */
-.room-photo {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.room-photo img {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 10px;
-    object-fit: cover;
-}
-
-/* Footer positioning */
 .footer-spacing {
     height: 50px;
-}
-
-
-
-@media (max-width: 1200px) {
-    .profile-container {
-        margin-top: 12%;
-    }
-}
-
-@media (max-width: 992px) {
-    .profile-container {
-        margin-top: 17%;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .profile-container {
-        margin-top: 22%;
-    }
-}
-
-
-@media (max-width: 500px) {
-    .profile-container {
-        margin-top: 27%;
-    }
 }
