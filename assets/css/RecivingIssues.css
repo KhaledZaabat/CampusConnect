@@ -105,9 +105,9 @@ body, html {
 }
 .card .img-fluid {
     width: 100%;
-    max-width: 350px;
+    max-width: 320px;
     height: 200px;
-    object-fit: contain; /* Fit entire image without cropping */
+    object-fit: contain; 
     border: 2px solid #ddd;
     padding: 5px;
     border-radius: 8px;
