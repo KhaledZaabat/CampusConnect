@@ -164,15 +164,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 mediaElement = document.createElement('img');
                 mediaElement.src = mediaUrl;
                 mediaElement.alt = file.name;
-                mediaElement.style.maxWidth = '100%';
+                mediaElement.style.maxWidth = '70%';
                 mediaElement.style.height = 'auto';
-                mediaElement.style.display = 'block'; // Centers the image
+                mediaElement.style.display = 'block';
+                mediaElement.style.margin = '10px auto'; // Centers the image
             } else if (file.type.startsWith('video/')) {
                 mediaElement = document.createElement('video');
                 mediaElement.controls = true;
-                mediaElement.style.maxWidth = '100%';
+                mediaElement.style.maxWidth = '70%';
                 mediaElement.style.height = 'auto';
                 mediaElement.style.display = 'block'; // Centers the video
+                mediaElement.style.margin = '10px auto'; // Centers the image
+
 
                 const source = document.createElement('source');
                 source.src = mediaUrl;
