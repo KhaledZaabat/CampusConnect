@@ -74,52 +74,42 @@
 </header>
     
 <body>
-        <!-- Room Change Requests -->
-        <div class="table-container">
-            <h2>Room Change Requests</h2>
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr class="custom-head"> 
-                        <th>Student Name</th>
-                        <th>Current Room</th>
-                        <th>Requested Room</th>
-                        <th>Reason</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-label="Student Name">John Doe</td>
-                        <td data-label="Current Room">A-R-5</td>
-                        <td data-label="Requested Room">B-2-15</td>
-                        <td data-label="Reason">Roommate issues</td>
-                        <td data-label="Status">Pending</td>
-                        <td class="text-center">
-                            <button
-                                class="btn btn-sm btn-approve">Approve</button>
-                            <button
-                                class="btn btn-sm btn-reject">Reject</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Student Name">Jane Smith</td>
-                        <td data-label="Current Room">A-1-10</td>
-                        <td data-label="Requested Room">C-3-20</td>
-                        <td data-label="Reason">Need more privacy</td>
-                        <td data-label="Status">Pending</td>
-                        <td class="text-center">
-                            <button
-                                class="btn btn-sm btn-approve">Approve</button>
-                            <button
-                                class="btn btn-sm btn-reject">Reject</button>
-                        </td>
-                    </tr>
-                </tbody>
-
-            </table>
+    <!-- Room Change Requests -->
+    <div class="table-container">
+        <div class="dropdown mb-3">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter by Status
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                <li><a class="dropdown-item" data-filter="Pending" href="#">Pending</a></li>
+                <li><a class="dropdown-item" data-filter="Approved" href="#">Approved</a></li>
+                <li><a class="dropdown-item" data-filter="Rejected" href="#">Rejected</a></li>
+                <li><a class="dropdown-item" data-filter="All" href="#">All</a></li>
+            </ul>
         </div>
+        
+        <h2>Room Change Requests</h2>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="custom-head"> 
+                    <th>Student Name</th>
+                    <th>Current Room</th>
+                    <th>Requested Room</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="requestTableBody">
+                <!-- Dynamic content will be injected here -->
+            </tbody>
+        </table>
 
+        <!-- Pagination -->
+        <div id="pagination" class="d-flex justify-content-center mt-3">
+            <!-- Pagination buttons will be dynamically added here -->
+        </div>
+    </div>
 </body>
 
 <footer class="page-footer custom-bg-black">
@@ -162,5 +152,7 @@
     </div>
 </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/roomsrequests.js"></script>
+
 
 </html>
