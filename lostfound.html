@@ -74,11 +74,11 @@
                 <form>
                     <div class="form-group">
                         <label for="title">Title</label> 
-                        <input type="text" class="text-field" id="title" name="title" placeholder="Title" required>
+                        <input id="i_title" type="text" class="text-field" id="title" name="title" placeholder="Title" required>
                     </div>
                     <div class="form-group mt-2">
                         <label for="description">Description</label> 
-                        <textarea rows="3" class="text-field" id="description" name="description" placeholder="Description" required></textarea>
+                        <textarea id="i_description" rows="3" class="text-field" id="description" name="description" placeholder="Description" required></textarea>
                     </div>
                     <div class="form-group mt-2">
                         <label for="file" class="custom-file-upload">
@@ -90,7 +90,7 @@
                             <div class="text" id="upload-text">
                                 <span>Click to upload image</span>
                             </div>
-                            <input id="file" type="file" name="image" accept="image/*" onchange="previewImage(event)">
+                            <input id="file" type="file" name="image" accept="image/*" onchange="previewImage(event)" required>
                         </label>
                         <!--not displayed until the user uploads a -->
                         <div id="image-preview" style="display: none; margin-top: 10px;">
@@ -102,20 +102,20 @@
                     <div class="form-group mt-2">
                         <label>Type of Listing</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="listingType" id="missing" value="missing" required>
+                            <input id="missing" class="form-check-input" type="radio" name="listingType" value="missing" required>
                             <label class="form-check-label" for="missing">
                                 Missing
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="listingType" id="found" value="found" required>
+                            <input id="found" class="form-check-input" type="radio" name="listingType" value="found" required>
                             <label class="form-check-label" for="found">
                                 Found
                             </label>
                         </div>
                     </div>
                     <div class="form-group mt-2 mb-4">
-                        <button class="create-btn" type="submit">Create</button>
+                        <button id="submit_btn" class="create-btn" type="submit">Create</button>
                     </div>
                 </form>
             </div>            
@@ -141,15 +141,15 @@
             </div>
         </div>
     </div>
-    <div class="row mt-n5">
+    <div id="blog_posts" class="row mt-n5">
         <!-- Blog Post 1 -->
         <div class="col-md-6 col-lg-4 mt-5">
             <div class="post-c blog-grid">
                 <div class="blog-grid-img position-relative">
-                    <img alt="img" src="https://media.discordapp.net/attachments/1030743355635798056/1298930456380837909/20241024_094435.jpg?ex=671d5501&is=671c0381&hm=297e056f63e2bc2efac37c4b29e94107b5686893f54d17151224eaa135ff74f2&=&format=webp&width=502&height=670" class="listing-img img-fluid">
+                    <img alt="img" src="assets/img/IMG.webp" class="listing-img img-fluid">
                 </div>
                 <div class="blog-grid-text p-4">
-                    <h3 class="h5 mb-3">
+                    <h3 class="h5 mb-3"> 
                         مفتاح في قاعة المطالعة
                     </h3>
                     <p class="display-30"></p>
@@ -194,11 +194,11 @@
         <div class="col-md-6 col-lg-4 mt-5">
             <div class="post-c blog-grid">
                 <div class="blog-grid-img position-relative">
-                    <img alt="img" src="https://media.discordapp.net/attachments/1030743355635798056/1298930456380837909/20241024_094435.jpg?ex=671d5501&is=671c0381&hm=297e056f63e2bc2efac37c4b29e94107b5686893f54d17151224eaa135ff74f2&=&format=webp&width=502&height=670" class="listing-img img-fluid">
+                    <img alt="img" src="assets/img/IMG.webp" class="listing-img img-fluid">
                 </div>
                 <div class="blog-grid-text p-4">
                     <div class="row">
-                    <h3 class="h5 col-8 mb-3">مفتاح في القاعة</h3>
+                    <h3 class="h5 col-8 mb-3">مفتاح في القاعة</h3> <!--title of the post-->
                     <div class="col-4 text-end">
                         <!--those are for the ADMIN and the owner of the post (backend) not now-->
                         <a href="#" class="Edit me-2"><i class="fas fa-edit"></i></a>
@@ -249,7 +249,7 @@
         <div class="col-md-6 col-lg-4 mt-5">
             <div class="post-c blog-grid">
                 <div class="blog-grid-img position-relative">
-                    <img alt="img" src="https://media.discordapp.net/attachments/1030743355635798056/1298930456380837909/20241024_094435.jpg?ex=671d5501&is=671c0381&hm=297e056f63e2bc2efac37c4b29e94107b5686893f54d17151224eaa135ff74f2&=&format=webp&width=502&height=670" class="listing-img img-fluid">
+                    <img alt="img" src="assets/img/IMG.webp" class="listing-img img-fluid">
                 </div>
                 <div class="blog-grid-text p-4">
                     <h3 class="h5 mb-3">A key was found</h3>
@@ -286,6 +286,7 @@
 
         <!-- You can add more posts below in a similar format -->
     </div>
+    <div id="pagination" class="pagination"></div>
 </div>
 
 
@@ -335,5 +336,7 @@
 
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/uploadImage.js"></script>
+<script src="assets/js/lostfound.js"></script>
+
 </body>
 </html>
