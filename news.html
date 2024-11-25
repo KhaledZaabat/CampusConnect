@@ -82,40 +82,22 @@
         <div class="News-header-content">Stay Connected With The Lastest Happeneings and essentail updates across the
             university . </div>
     </div>
-
-    <div class="news-container">
-        <!-- News Item 1 -->
-        <div class="news-item">
-            <h3><a href="newsDetails.html">Recruitment announcement – Assistant Professors (MA) September 2024</a></h3>
-            <div class="date">September 26, 2024</div>
-            <div class="description">
-                The National School of Artificial Intelligence is organizing a recruitment competition for the position
-                of...
-            </div>
-        </div>
-
-        <!-- News Item 2 -->
-        <div class="news-item">
-            <h3><a href="newsDetails.html">Upcoming AI Conference in December 2024</a></h3>
-            <div class="date">October 10, 2024</div>
-            <div class="description">
-                Join us for the latest discussions on advancements in artificial intelligence, hosted by industry
-                leaders.
-            </div>
-        </div>
-
-        <!-- News Item 3 -->
-        <div class="news-item">
-            <h3><a href="newsDetails.html">New AI Research Lab Opening in 2025</a></h3>
-            <div class="date">October 15, 2024</div>
-            <div class="description">
-                A state-of-the-art research facility dedicated to AI innovations will be opening next year, pushing the
-                boundaries of tech.
-            </div>
+    <div class="container mt-4">
+        <div class="search-container">
+            <input type="text" id="search-input" class="search-input" placeholder="Search news...">
+            <button id="search-button" class="search-button">Search</button>
         </div>
     </div>
-</body>
 
+    <div id="news-container" class="news-container"></div>
+   
+    
+    </div>
+    <!-- Pagination Controls -->
+<div id="pagination-controls" class="text-center mt-4">
+    <!-- Pagination buttons will be dynamically inserted here -->
+</div>
+</body>
 <footer class="page-footer custom-bg-black">
     <div class="test">
         <div class="wrapper">
@@ -156,6 +138,8 @@
     </div>
 </footer>
 
+<script src="assets/js/NewsJs.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
 
 </html>

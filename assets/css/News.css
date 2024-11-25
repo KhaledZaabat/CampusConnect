@@ -1,7 +1,10 @@
 body {
     background-color: #0f0b32;
-    margin: 0;
-    padding: 0;
+    margin: 0; 
+    padding: 0; 
+    min-height: 100vh;
+    position: relative; 
+    overflow-x: hidden; 
 }
 
 .news-header {
@@ -15,7 +18,6 @@ body {
     row-gap: 7px;
     padding: 50px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    /* Box shadow for the header */
 }
 
 .news-header h1 {
@@ -31,27 +33,21 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, 1fr);
-    grid-template-areas: "new-title" "new-date" "new-descreption";
     gap: 20px;
     padding: 20px;
     background-color: #0f0b32;
     justify-content: center;
-    /* Centers items horizontally */
     align-items: center;
-    /* Centers items vertically */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    /* Box shadow for the container */
 }
 
 .news-item {
     background-color: #d9e6f2;
     padding: 20px;
     width: 67%;
-    /* Adjust the width as needed */
     color: #0f0b32;
     border-radius: 5px;
     margin: 0 auto;
-    /* Ensures the news item is centered */
 }
 
 .news-item h3 {
@@ -85,83 +81,146 @@ body {
 .news-item .description {
     font-size: 1em;
 }
+
+.edit-delete-container {
+    margin-top: 10px;
+    text-align: right;
+}
+
 .Edit {
-    color: #007bff !important;
-    /* Blue color for the Edit button */
-    font-size: 18px;
+    color: #007bff;
+    font-size: 16px;
+    cursor: pointer;
     transition: transform 0.3s, color 0.3s;
     padding: 5px;
 }
 
 .Delete {
-    color: #dc3545 !important;
-
-    font-size: 18px;
+    color: #dc3545;
+    font-size: 16px;
+    cursor: pointer;
     transition: transform 0.3s, color 0.3s;
     padding: 5px;
 }
 
-/* Add hover styles */
 .Edit:hover {
-    color: #0f0b32 !important;
-    /* Darker shade of blue on hover */
+
+    color: #0056b3;
 }
 
 .Delete:hover {
-    color: #0f0b32 !important;
-
-}
-
-edit-delete-container {
-    grid-area: edit-delete;
-}
-
-.Delete,
-.Edit {
-    justify-self: end;
-    text-align: right;
-    display: inline-block;
-    cursor: pointer;
-    margin-top: 5px;
-    padding: 5px;
-
+    color: #a71d2a;
 }
 
 .fixed-button {
     position: sticky;
-    /* fixed to viewport */
-    z-index: 1;
+    z-index: 1000;
     left: 15px;
     bottom: 15px;
     font-size: 35px;
     width: 60px;
-    /* consistent size for circle */
- 
     height: 60px;
     display: flex;
+    text-decoration: none;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    /* perfect circle */
     background-color: #007bff;
-    /* primary color */
     color: white;
     text-align: center;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    /* slight shadow */
+    cursor: pointer;
+}
+
+.fixed-button:hover {
+    background-color: #0056b3;
+}
+
+#pagination-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+#pagination-controls button {
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#pagination-controls button:hover {
+    background-color: #0056b3;
+}
+
+#pagination-controls .btn-primary {
+    background-color: #0056b3;
+    color: white;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.search-input {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 200px;
+    outline: none;
+    margin-right: 5px;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.search-button {
+    padding: 7px 15px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+.search-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 @media (max-width: 1200px) {
-    .news-item{
-        width:90%
+    .news-item {
+        width: 90%;
     }
 }
+
 @media (max-width: 900px) {
-    .news-item{
-        width:90%
+    .news-item {
+        width: 90%;
     }
+
     .fixed-button {
-        
         width: 50px;
         height: 50px;
         left: 5px;
@@ -169,20 +228,16 @@ edit-delete-container {
 }
 
 @media (max-width: 720px) {
-
     .fixed-button {
-        
         width: 45px;
         height: 45px;
         left: 15px;
         bottom: 15px;
-       
     }
 }
 
 @media (max-width: 576px) {
     .fixed-button {
-     
         width: 40px;
         height: 40px;
         left: 10px;
@@ -190,7 +245,7 @@ edit-delete-container {
     }
 }
 
-@media (max-width:576px) {
+@media (max-width: 576px) {
     .news-header {
         margin-top: 80px;
     }
