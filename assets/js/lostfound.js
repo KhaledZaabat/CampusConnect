@@ -1,12 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const submissions = [];
+    const posts = [];
     const submit_btn = document.getElementById("submit_btn");
     const postsPerPage = 3; // Number of posts per page
     let currentPage = 1; // Track the current page
+    let activeFilter = "All"; // Track the active filter
+
+    // Event listener for dropdown filter
+    document.querySelectorAll(".filter").forEach((filter) => {
+        filter.addEventListener("click", (event) => {
+            event.preventDefault();
+            const selectedFilter = event.target.textContent.trim();
+            if (selectedFilter === "Missing Listings") {
+                activeFilter = "Missing";
+            } else if (selectedFilter === "Found Listings") {
+                activeFilter = "Found";
+            } else {
+                activeFilter = "All";
+            }
+            renderPosts(1); // Re-render posts based on the selected filter
+        });
+    });
+    
 
     submit_btn.addEventListener('click', (event) => {
         event.preventDefault();
-
+    
         // Get input values
         const title = document.getElementById("i_title");
         const description = document.getElementById("i_description");
@@ -14,13 +32,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const Found = document.getElementById("found");
         const Missing = document.getElementById("missing");
         const imageFile = imgInput.files[0];
-        const imageUrl = imageFile ? URL.createObjectURL(imageFile) : null;
-
+        const imageUrl = imageFile ? URL.createObjectURL(imageFile) : "assets/img/no-img.png";
+    
         // Validate required fields
         if (!title.value || !description.value) {
             alert("Please fill in all required fields.");
             return;
         }
+    
+        // Validate title length
+        if (title.value.length > 80) {
+            alert("Title is too long!");
+            return;
+        }
+    
+        // Validate description length
+        if (description.value.length > 400) {
+            alert("Description is too long!");
+            return;
+        }
+    
+        // Check if a radio button (Missing or Found) is selected
+        if (!Found.checked && !Missing.checked) {
+            alert("Please select the type of listing.");
+            return;
+        }
+    
 
         // Create new submission object
         const newSubmission = {
@@ -29,10 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
             image: imageUrl,
             listingType: Found.checked ? "Found" : "Missing",
             comments: [], // Initialize with an empty comments array
-            currentCommentPage: 1 // Add pagination state for comments
+            user: "me",
+            currentCommentPage: 1,
         };
 
-        submissions.push(newSubmission);
+        posts.push(newSubmission);
 
         // Reset the form fields
         title.value = "";
@@ -45,39 +83,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderPosts(page) {
         const postsContainer = document.getElementById("blog_posts");
+
+        // Filter posts based on activeFilter
+        const filteredPosts = activeFilter === "All" ? posts : posts.filter(post => post.listingType === activeFilter);
+
         const startIndex = (page - 1) * postsPerPage;
         const endIndex = startIndex + postsPerPage;
-        const postsToDisplay = submissions.slice(startIndex, endIndex);
-    
+        const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
+
         postsContainer.innerHTML = ""; // Clear container before rendering
-    
-        // Check if there are no posts to display
+
         if (postsToDisplay.length === 0) {
             postsContainer.innerHTML = `
                 <div class="no-posts-message text-center py-5">
                     <h3>No posts to display</h3>
-                    <div class="row">
-                        <p>It seems there are no posts available at the moment. Please check back later!</p>
-                        <img src="https://www.exploreworld.com/_next/image?url=%2Fimages%2Fno-data.gif&w=1080&q=75" alt="No Data"> 
-                    </div>
+                    <p>It seems there are no posts available at the moment. Please check back later!</p>
+                    <img src="https://www.exploreworld.com/_next/image?url=%2Fimages%2Fno-data.gif&w=1080&q=75" alt="No Data"> 
                 </div>
             `;
-            renderPagination(); // Still render pagination (optional)
-            return; // Exit function early
+            return;
         }
-    
-        // Render posts if available
-        postsToDisplay.forEach(submission => renderPost(submission));
-        renderPagination();
+
+        postsToDisplay.forEach((submission) => renderPost(submission));
+
+        renderPaginationGeneral({
+            containerId: "pagination",
+            currentPage: page,
+            totalItems: filteredPosts.length,
+            itemsPerPage: postsPerPage,
+            onPageChange: (newPage) => {
+                currentPage = newPage;
+                renderPosts(currentPage);
+            }
+        });
     }
-    
 
     function renderPost(submissionData) {
         const postsContainer = document.getElementById("blog_posts");
-    
+
         const postElement = document.createElement("div");
         postElement.className = "col-md-6 col-lg-4 mt-5";
-    
+
         const postContent = `
         <div class="post-c blog-grid">
             <div class="blog-grid-img position-relative">
@@ -114,28 +160,28 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
         `;
-    
+
         postElement.innerHTML = postContent;
         postsContainer.appendChild(postElement);
-    
+
         const commentSection = postElement.querySelector('.comment-section');
         const commentsToggle = postElement.querySelector('.comments-toggle');
         const commentForm = postElement.querySelector('.comment-form');
         const commentsContainer = postElement.querySelector('.comments-container');
         const commentsPagination = postElement.querySelector('.comments-pagination');
-    
+
         // Toggle comments section visibility
         commentsToggle.addEventListener('click', () => {
             commentSection.style.display = commentSection.style.display === 'none' ? 'block' : 'none';
             loadComments(submissionData, commentsContainer, commentsPagination);
         });
-    
+
         // Add comment form functionality
         commentForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const textarea = commentForm.querySelector('textarea');
             const commentText = textarea.value.trim();
-    
+
             if (commentText) {
                 const newComment = {
                     username: 'User',
@@ -148,90 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadComments(submissionData, commentsContainer, commentsPagination);
             }
         });
-    }
-    
-
-    function loadComments(submissionData, commentsContainer, commentsPagination) {
-        const commentsPerPage = 2; // Display 2 comments per page
-        const startIndex = (submissionData.currentCommentPage - 1) * commentsPerPage;
-        const endIndex = startIndex + commentsPerPage;
-        const commentsToDisplay = submissionData.comments.slice(startIndex, endIndex);
-
-        commentsContainer.innerHTML = commentsToDisplay.map(comment => `
-            <div class="border-visible bg-light p-3 rounded mb-2">
-                <div class="d-flex justify-content-between">
-                    <h6 class="mb-1"><a href="#!">${comment.username}</a></h6>
-                    <small class="ms-2">${comment.date}</small>
-                </div>
-                <p class="small mb-0">${comment.commentText}</p>
-            </div>
-        `).join('');
-
-        // Render comment pagination
-        commentsPagination.innerHTML = '';
-        const totalCommentPages = Math.ceil(submissionData.comments.length / commentsPerPage);
-
-        if (submissionData.currentCommentPage > 1) {
-            const prevButton = document.createElement('button');
-            prevButton.className = 'btn btn-sm btn-secondary me-1';
-            prevButton.innerText = 'Previous';
-            prevButton.addEventListener('click', () => {
-                submissionData.currentCommentPage--;
-                loadComments(submissionData, commentsContainer, commentsPagination);
-            });
-            commentsPagination.appendChild(prevButton);
-        }
-
-        if (submissionData.currentCommentPage < totalCommentPages) {
-            const nextButton = document.createElement('button');
-            nextButton.className = 'btn btn-sm btn-secondary';
-            nextButton.innerText = 'Next';
-            nextButton.addEventListener('click', () => {
-                submissionData.currentCommentPage++;
-                loadComments(submissionData, commentsContainer, commentsPagination);
-            });
-            commentsPagination.appendChild(nextButton);
-        }
-    }
-
-    function renderPagination() {
-        const paginationContainer = document.getElementById("pagination");
-        paginationContainer.innerHTML = "";
-
-        const totalPages = Math.ceil(submissions.length / postsPerPage);
-
-        // Create previous button
-        const prevButton = document.createElement("button");
-        prevButton.className = "btn btn-secondary";
-        prevButton.innerText = "Previous";
-        prevButton.disabled = currentPage === 1;
-        prevButton.addEventListener("click", () => {
-            currentPage--;
-            renderPosts(currentPage);
-        });
-        paginationContainer.appendChild(prevButton);
-
-        for (let i = 1; i <= totalPages; i++) {
-            const pageButton = document.createElement("button");
-            pageButton.className = "btn btn-secondary mx-1";
-            pageButton.innerText = i;
-            pageButton.disabled = i === currentPage;
-            pageButton.addEventListener("click", () => {
-                currentPage = i;
-                renderPosts(currentPage);
-            });
-            paginationContainer.appendChild(pageButton);
-        }
-
-        const nextButton = document.createElement("button");
-        nextButton.className = "btn btn-secondary";
-        nextButton.innerText = "Next";
-        nextButton.disabled = currentPage === totalPages;
-        nextButton.addEventListener("click", () => {
-            currentPage++;
-            renderPosts(currentPage);
-        });
-        paginationContainer.appendChild(nextButton);
     }
 
     renderPosts(currentPage);
