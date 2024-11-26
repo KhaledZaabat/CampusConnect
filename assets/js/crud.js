@@ -180,3 +180,159 @@ document.getElementById("nextpage").addEventListener("click", function() {
 
 // Initialize pagination
 displayPage(currentPage);
+
+// Function to update floor options based on selected bloc
+function updateFloorOptions() {
+    let blocInput = document.querySelector('select[name="bloc"]');
+    let floorInput = document.querySelector('select[name="floor"]');
+    
+    let floorOptions = floorInput.querySelectorAll('option');
+    
+    // Remove the 5th floor option if bloc is C, D, or E
+    if (blocInput.value === 'C' || blocInput.value === 'D' || blocInput.value === 'E') {
+        // Hide the 5th floor option
+        floorOptions.forEach(option => {
+            if (option.value === '5') {
+                option.style.display = 'none';
+            }
+        });
+    } else {
+        // Show the 5th floor option for other blocs
+        floorOptions.forEach(option => {
+            if (option.value === '5') {
+                option.style.display = 'block';
+            }
+        });
+    }
+}
+
+// Initialize the floor options when the page loads
+window.addEventListener('DOMContentLoaded', function() {
+    updateFloorOptions(); // Update based on initial selection
+
+    // Listen for changes in the bloc selection
+    document.querySelector('select[name="bloc"]').addEventListener('change', updateFloorOptions);
+});
+
+// General function to show error message for a given input
+function showError(input, message) {
+    let errorElement = document.createElement('span');
+    errorElement.classList.add('error-message');
+    errorElement.style.color = 'red';
+    errorElement.textContent = message;
+
+    // Check if there's already an error message
+    if (!input.parentElement.querySelector('.error-message')) {
+        input.parentElement.appendChild(errorElement);
+    }
+    input.style.borderColor = 'red'; // Highlight input with red border
+}
+
+// Reset error message and border style
+function resetError(input) {
+    let errorElement = input.parentElement.querySelector('.error-message');
+    if (errorElement) {
+        errorElement.remove();
+    }
+    input.style.borderColor = ''; // Reset border color
+}
+
+// Validate the Student ID
+function validateStudentID(input) {
+    let value = input.value.trim();
+    let pattern = /^\d{9}/; // Student ID should be at least 9 digits
+    if (!pattern.test(value)) {
+        showError(input, "Student ID must be at least 9 digits.");
+        return false;
+    }
+    resetError(input);
+    return true;
+}
+
+// Validate text input (First Name and Last Name)
+function validateTextInput(input, minLength) {
+    let value = input.value.trim();
+    if (value.length < minLength) {
+        showError(input, `${input.placeholder} must be at least ${minLength} characters.`);
+        return false;
+    }
+    resetError(input);
+    return true;
+}
+
+// Validate Email
+function validateEmail(input) {
+    let value = input.value.trim();
+    let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (value && !pattern.test(value)) {
+        showError(input, "Please enter a valid email address.");
+        return false;
+    }
+    resetError(input);
+    return true;
+}
+
+// Validate Phone Number
+function validatePhone(input) {
+    let value = input.value.trim();
+    let pattern = /^\d{10}$/; // Phone number should be exactly 10 digits
+    if (value && !pattern.test(value)) {
+        showError(input, "Phone number must be exactly 10 digits.");
+        return false;
+    }
+    resetError(input);
+    return true;
+}
+
+// Validate the Form before submission
+function validateForm(event) {
+    let isValid = true;
+
+    // Validate Student ID
+    let studentIdInput = document.querySelector('input[name="StudentID"]');
+    if (!validateStudentID(studentIdInput)) {
+        isValid = false;
+    }
+
+    // Validate user ID
+    let userId = document.querySelector('input[name="userID"]');
+    if (!validateStudentID(userId)) {
+        isValid = false;
+    }
+
+    // Validate First Name (at least 2 characters)
+    let firstNameInput = document.querySelector('input[name="firstName"]');
+    if (!validateTextInput(firstNameInput, 2)) {
+        isValid = false;
+    }
+
+    // Validate Last Name (at least 2 characters)
+    let lastNameInput = document.querySelector('input[name="lastName"]');
+    if (!validateTextInput(lastNameInput, 2)) {
+        isValid = false;
+    }
+
+    // Validate Email
+    let emailInput = document.querySelector('input[name="email"]');
+    if (!validateEmail(emailInput)) {
+        isValid = false;
+    }
+
+    // Validate Phone Number (exactly 10 digits)
+    let phoneInput = document.querySelector('input[name="phone"]');
+    if (!validatePhone(phoneInput)) {
+        isValid = false;
+    }
+
+    // Prevent form submission if validation fails
+    return isValid;
+}
+
+// Attach the validation function to the form submission
+let form = document.querySelector('.student-form');
+form.addEventListener('submit', function(event) {
+    // Prevent form submission only if validation fails
+    if (!validateForm(event)) {
+        event.preventDefault(); // Prevent form submission
+    }
+});

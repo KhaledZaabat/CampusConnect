@@ -338,3 +338,23 @@ button.Delete:hover {
     margin: 0 10px;
     color: #0f0b32;
 }
+
+.room-group {
+    display: flex;
+    align-items: center; /* Vertically center the items */
+    gap: 20px; /* Space between each element */
+}
+
+.room-group select,
+.room-group input {
+    padding: 8px 12px; /* Add some padding for better spacing */
+    font-size: 14px; /* Set font size */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.room-group select:focus,
+.room-group input:focus {
+    border-color: #007bff; /* Highlight the border on focus */
+    outline: none; /* Remove the default outline */
+}
