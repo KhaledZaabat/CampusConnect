@@ -51,7 +51,7 @@ body {
 }
 
 .news-item h3 {
-    color: #0f0b32;
+    color: #0f0b32 !important;
     margin: 0;
     font-size: 1.5em;
     position: relative;
@@ -69,7 +69,7 @@ body {
 
 .news-item a {
     text-decoration: none;
-    color: #0f0b32;
+    color: #0f0b32 !important;
 }
 
 .news-item .date {
