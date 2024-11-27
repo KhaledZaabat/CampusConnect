@@ -148,6 +148,12 @@ th {
 }
 
 /* Action buttons smaller size */
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Align buttons to left and right */
+    width: 100%;
+}
+
 button.Edit {
     color: #007bff;
     font-size: 18px;
@@ -175,13 +181,6 @@ button.Delete:hover {
     color: #000000;
     transform: scale(1.2);
 }
-
-
-/* Optional: Adjust spacing and layout of icons */
-/* td a i {
-    padding: 5px;
-    cursor: pointer;
-} */
 
 /* Styling for the upload section */
 .custom-file-upload {
@@ -271,10 +270,91 @@ button.Delete:hover {
 .name {
     width: 130px
 }
+.phone {
+    width:70px;
+}
 
 .roleinput {
     -webkit-appearance: none; /* Safari and Chrome */
     -moz-appearance: none; /* Firefox */
     appearance: none; /* Standard */
     background-image: none; /* Remove the arrow */
+}
+
+/* Position search container to the top right */
+.search-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.search-icon {
+    background-color:#0f0b32;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.search-bar {
+    display: none;
+    width: 0;
+    transition: width 0.3s ease;
+    padding: 5px;
+    font-size: 10px;
+}
+
+.search-bar.active {
+    display: inline-block;
+    width: 200px; 
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.pagination button {
+    margin: 0 5px;
+    background-color: #0f0b32;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 20px;
+    margin: 0 10px;
+    color: #0f0b32;
+}
+
+.room-group {
+    display: flex;
+    align-items: center; /* Vertically center the items */
+    gap: 20px; /* Space between each element */
+}
+
+.room-group select,
+.room-group input {
+    padding: 8px 12px; /* Add some padding for better spacing */
+    font-size: 14px; /* Set font size */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.room-group select:focus,
+.room-group input:focus {
+    border-color: #007bff; /* Highlight the border on focus */
+    outline: none; /* Remove the default outline */
 }

@@ -72,18 +72,19 @@
     
     <div class="container2">
         <h1>Employee Management</h1>
-        <form action="#" method="post" class="student-form" enctype="multipart/form-data">
-            <input type="text" placeholder="User ID" name="UserID" required>
-            <input type="text" placeholder="First Name" name="firstName" required>
-            <input type="text" placeholder="Last Name" name="lastName" required>
-            <input type="email" placeholder="Email" name="email" >
-            <input type="tel" placeholder="Phone Number" name="phone" required>
+        <form action="#" method="post" class="student-form , admin-form" id="admin" enctype="multipart/form-data">
+            <input type="text" placeholder="User ID" name="UserID" id="ID">
+            <input type="text" placeholder="First Name" name="firstName" >
+            <input type="text" placeholder="Last Name" name="lastName" >
+            <input type="text" placeholder="Email" name="email" >
+            <input type="tel" placeholder="Phone Number" name="phone" >
             <label for="role"></label>
                 <select id="role" name="role">
                     <option value="" disabled selected hidden>Role</option>
                     <option value="Maintenance">Maintenance</option>
                     <option value="Housing">Housing</option>
                     <option value="Chef">Chef</option>
+                    <option value="Admin">Admin</option>
                 </select>
                 <div class="form-group mt-2">
                     <label for="file" class="custom-file-upload">
@@ -103,12 +104,16 @@
                         <p>Image uploaded!</p>
                     </div>
                 </div>
-            <button type="submit">Add User</button>
+            <button type="submit" class="btn_submit" id="admin">Add User</button>
         </form>
     </div>
         
     <div class="container3">
         <h1>Employees</h1>
+        <div class="search-container">
+            <button type="button" class="search-icon"><i class="fas fa-search"></i></button>
+            <input type="text" class="search-bar" placeholder="Search by role or last name">
+        </div>
         <table>
             <thead>
                 <tr>
@@ -122,33 +127,36 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="admin-table-body">
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
                     <td><input type="text" class="tableinput" value="1" disabled></td>
                     <td><input type="text" class="tableinput name" value="Elhadi" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Bachir" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="Bachir" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="elhadi.bachir@ensia.edu.dz" disabled></td>
-                    <td><input type="text" class="tableinput" value="1234567890" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
                     <td>
                         <select class="tableinput roleinput" disabled>
                             <option value="Maintenance">Maintenance</option>
                             <option value="Housing" selected>Housing</option>
                             <option value="Chef">Chef</option>
+                            <option value ="admin">Admin</option>
                         </select>
                     </td>
                     <td>
-                        <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                    </td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
                 </tr>
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
                     <td><input type="text" class="tableinput" value="2" disabled></td>
                     <td><input type="text" class="tableinput name" value="mohamed elhadi" disabled></td>
-                    <td><input type="text" class="tableinput name" value="taieb ezraimmi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="taieb ezraimmi" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput" value="0987654321" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
                     <td>
                         <select class="tableinput roleinput" disabled>
                             <option value="Maintenance" selected>Maintenance</option>
@@ -157,12 +165,441 @@
                         </select>
                     </td>
                     <td>
-                        <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                    </td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
                 </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput name" value="Elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="Bachir" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="elhadi.bachir@ensia.edu.dz" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Housing" selected>Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput name" value="mohamed elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="taieb ezraimmi" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance" selected>Maintenance</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput name" value="Elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="Bachir" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="elhadi.bachir@ensia.edu.dz" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Housing" selected>Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput name" value="mohamed elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="taieb ezraimmi" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance" selected>Maintenance</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput name" value="Elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="Bachir" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="elhadi.bachir@ensia.edu.dz" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Housing" selected>Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput name" value="mohamed elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="taieb ezraimmi" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance" selected>Maintenance</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput name" value="Elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="Bachir" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="elhadi.bachir@ensia.edu.dz" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Housing" selected>Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput name" value="mohamed elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="taieb ezraimmi" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance" selected>Maintenance</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput name" value="Elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="Bachir" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="elhadi.bachir@ensia.edu.dz" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Housing" selected>Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput name" value="mohamed elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="taieb ezraimmi" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance" selected>Maintenance</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput name" value="Elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="Bachir" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="elhadi.bachir@ensia.edu.dz" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Housing" selected>Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput name" value="mohamed elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="taieb ezraimmi" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance" selected>Maintenance</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput name" value="Elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="Bachir" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="elhadi.bachir@ensia.edu.dz" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Housing" selected>Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput name" value="mohamed elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="taieb ezraimmi" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance" selected>Maintenance</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput name" value="Elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="Bachir" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="elhadi.bachir@ensia.edu.dz" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Housing" selected>Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput name" value="mohamed elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="taieb ezraimmi" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance" selected>Maintenance</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput name" value="Elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="Bachir" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="elhadi.bachir@ensia.edu.dz" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Housing" selected>Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput name" value="mohamed elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="taieb ezraimmi" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance" selected>Maintenance</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput name" value="Elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="Bachir" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="elhadi.bachir@ensia.edu.dz" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Housing" selected>Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
+                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput name" value="mohamed elhadi" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="taieb ezraimmi" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
+                    <td>
+                        <select class="tableinput roleinput" disabled>
+                            <option value="Maintenance" selected>Maintenance</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td> 
+                </tr>
+
             </tbody>            
         </table>
+        <!-- Pagination -->
+        <div class="pagination">
+            <button id="prevpage" disabled><i class="fas fa-arrow-left"></i></button>
+            <span id="page-num">1</span>
+            <button id="nextpage"><i class="fas fa-arrow-right"></i></button>
+        </div>
     </div>
 
     <div class="footer-spacing"></div> <!-- Spacing before the footer -->
@@ -208,7 +645,7 @@
     </div>
 </footer>
 
-<script src="assets/js/crudadmin.js"></script>
+<script src="assets/js/crud.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/uploadImage.js"></script>
+<script src="assets/js/helperFunctions.js"></script>
 </html>

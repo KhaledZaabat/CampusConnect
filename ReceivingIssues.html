@@ -21,6 +21,7 @@
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+        
 </head>
 
 <header>
@@ -78,124 +79,23 @@
 </header>
 
 <body>
-    <h1 class="text-center">Received Issue Reports</h1>
-    <div class="Issues-container mt-5">
-   
-        <div class="card mt-4">
-            <div class="card-body">
-                <h5 class="card-title">Issue Details</h5>
-    
-                <!-- Issue Information -->
-                <div class="text-start">
-                <p><strong>Dorm Number:</strong>C4 23</p>
-                <p><strong>Problem Type:</strong> Maintenance Issue</p>
-                <p><strong>Description:</strong> Short description provided by the user.</p>
-                <p><strong>Urgency Level:</strong> High</p>
-                <p><strong>Previously Reported:</strong> Yes</p>
-                <div class="mb-3">
-                    <h6>Attached Photo:</h6>
-                    <img src="assets/img/smaller-Upper-School_Sonner-Payne_Boys-Dorm_Band-Hall_M4196394-scaled.webp" alt="Issue photo" class="img-fluid rounded">
-                </div>
+    <main>
+        <div class="container mt-5">
+            <h1 class="text-center">Received Issue Reports</h1>
+            <div class="mb-3 text-end">
+                <button class="btn btn-filter" onclick="filterIssues('approved')">Show Approved</button>
+                <button class="btn btn-filter" onclick="filterIssues('declined')">Show Declined</button>
+                <button class="btn btn-filter" onclick="filterIssues('pending')">Show Pending</button>
             </div>
-                <!-- Image Display -->
-
-    
-                <!-- Buttons -->
-                <div class="d-flex justify-content-end">
-                    <button class="btn btn-done me-2">Mark as Done</button>
-                    <button class="btn btn-pending me-2">Pending</button>
-                    <button class="btn btn-declined">Decline</button>
-                </div>
+            <div class="issues-container mt-3" id="issues-container">
+                <!-- Cards will be dynamically generated here -->
             </div>
         </div>
-       
-        <div class="card mt-4">
-            <div class="card-body">
-                <h5 class="card-title">Issue Details</h5>
-    
-                <div class="text-start">
-                    <p><strong>Dorm Number:</strong>C4 23</p>
-                    <p><strong>Problem Type:</strong> Maintenance Issue</p>
-                    <p><strong>Description:</strong> Short description provided by the user.</p>
-                    <p><strong>Urgency Level:</strong> High</p>
-                    <p><strong>Previously Reported:</strong> Yes</p>
-                    <div class="mb-3">
-                        <h6>Attached Photo:</h6>
-                        <img src="assets/img/smaller-Upper-School_Sonner-Payne_Boys-Dorm_Band-Hall_M4196394-scaled.webp" alt="Issue photo" class="img-fluid rounded">
-                    </div>
-                </div>
-    
-                <!-- Buttons -->
-                <div class="d-flex justify-content-end">
-                    <button class="btn btn-done me-2">Mark as Done</button>
-                    <button class="btn btn-pending me-2">Pending</button>
-                    <button class="btn btn-declined">Decline</button>
-                </div>
-            </div>
-        </div>
-    
-    <div class="card mt-4">
-        <div class="card-body">
-            <h5 class="card-title">Issue Details</h5>
-
-            <div class="text-start">
-            <p><strong>Dorm Number:</strong> A5 2</p>
-            <p><strong>Problem Type:</strong> Maintenance Issue</p>
-            <p><strong>Description:</strong> Short description provided by the user.</p>
-            <p><strong>Urgency Level:</strong> medium</p>
-            <p><strong>Previously Reported:</strong> Yes</p>
-
-            <!-- Image Display -->
-            <div class="mb-3">
-                <h6>Attached Photo:</h6>
-                <img src="assets/img/smaller-Upper-School_Sonner-Payne_Boys-Dorm_Band-Hall_M4196394-scaled.webp" alt="Issue photo" class="img-fluid rounded">
-            </div>
-        </div>
-            <!-- Buttons -->
-            <div class="d-flex justify-content-end">
-                <button class="btn btn-done me-2">Mark as Done</button>
-                <button class="btn btn-pending me-2">Pending</button>
-                <button class="btn btn-declined">Decline</button>
-            </div>
-        </div>
-    </div>
-    <div class="card mt-4">
-        <div class="card-body">
-            <h5 class="card-title">Issue Details</h5>
-
-            <!-- Issue Information -->
-          
-            <div class="text-start">
-                <p><strong>Dorm Number:</strong> A5 2</p>
-                <p><strong>Problem Type:</strong> Maintenance Issue</p>
-                <p><strong>Description:</strong> Short description provided by the user.</p>
-                <p><strong>Urgency Level:</strong> medium</p>
-                <p><strong>Previously Reported:</strong> Yes</p>
-    
-                <!-- Image Display -->
-                <div class="mb-3">
-                    <h6>Attached Photo:</h6>
-                    <img src="assets/img/None Photo.jpg" alt="Issue photo" class="img-fluid rounded">
-                </div>
-            </div>
-
-            <!-- Buttons -->
-            <div class="d-flex justify-content-end">
-                <button class="btn btn-done me-2">Mark as Done</button>
-                <button class="btn btn-pending me-2">Pending</button>
-                <button class="btn btn-declined">Decline</button>
-            </div>
-        </div>
-    </div>
-    </div>
-
-
-  
-
-    
+    </main>
 
     <div class="footer-spacing"></div> <!-- Spacing before the footer -->
 </body>
+
 
 <footer class="page-footer custom-bg-black">
     <div class="test">
@@ -219,7 +119,7 @@
                 <div class="icon"><i class="fab fa-github"></i></div>
                 <span>Github</span>
             </div>
-
+            
             <div class="button">
                 <div class="icon"><i class="fab fa-instagram"></i></div>
                 <span>Instagram</span>
@@ -231,7 +131,7 @@
         </div>
 
     </div>
-
+    
     <div class="text-center custom-bg-black p-1">
         <p>©ENSIA. All Rights Reserved.</p>
     </div>
@@ -242,5 +142,6 @@
 
 
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/RevivingIssues.js"></script>
 
 </html>
