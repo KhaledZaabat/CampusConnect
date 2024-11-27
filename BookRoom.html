@@ -73,11 +73,12 @@
         <h2>Available Rooms</h2>
         <input type="text" class="search-input form-control" id="search" placeholder="Search for rooms...">
         <table class="table">
-                <tr>
-                    <th>Dorm Block</th>
-                    <th>Floor</th>
-                    <th>Room Number</th>
-                </tr>
+            <tr>
+                <th data-column="block" class="sortable">Dorm Block <span class="sort-icon">⇅</span></th>
+                <th data-column="floor" class="sortable">Floor <span class="sort-icon">⇅</span></th>
+                <th data-column="number" class="sortable">Room Number <span class="sort-icon">⇅</span></th>
+            </tr>
+            
             <tbody id="room-table-body">
                
                 <tr>

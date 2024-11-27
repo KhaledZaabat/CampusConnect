@@ -57,4 +57,32 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initial check
     checkVisibility();
     checkCounters();
+
+        const maxLength = 100; // Maximum characters allowed in the card text
+    
+        // Select all card text elements
+        const cardTexts = document.querySelectorAll(".card-text");
+    
+        cardTexts.forEach(cardText => {
+            // Function to truncate text and add ellipsis
+            const truncateText = (text, maxLength) => {
+                return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+            };
+    
+            // Initially truncate the text
+            cardText.textContent = truncateText(cardText.textContent, maxLength);
+    
+            // Monitor for text changes in case of inspection/modification
+            const observer = new MutationObserver(() => {
+                cardText.textContent = truncateText(cardText.textContent, maxLength);
+            });
+    
+            // Observe the card text for changes
+            observer.observe(cardText, {
+                characterData: true,
+                subtree: true,
+                childList: true
+            });
+        });
+    
 });
