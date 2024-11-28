@@ -225,31 +225,6 @@ document.addEventListener('DOMContentLoaded', function () {
         isContentChanged = true;
     });
 
-    // Function to show SweetAlert before page unload
-    function showUnloadAlert(event) {
-        if (isContentChanged && !isConfirmed) {
-            event.preventDefault();
-            event.returnValue = '';
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You have unsaved changes. Do you really want to leave?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, leave',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    isConfirmed = true;
-                    window.removeEventListener('beforeunload', showUnloadAlert);
-                    window.location.reload();
-                }
-            });
-            return '';
-        }
-    }
-
     window.addEventListener('beforeunload', showUnloadAlert);
 
     // Close modals when clicking outside of them
@@ -437,6 +412,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (newsTitle.value.trim() === '') {
             newsTitle.classList.add('input-error');
             titleError.style.display = 'block';
+            newsTitle.style.border = '1px solid red';
             isValid = false;
         } else {
             newsTitle.classList.remove('input-error');
@@ -447,6 +423,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (newsContent.textContent.trim() === '' || newsContent.textContent.trim() === 'Type your content here...') {
             newsContent.classList.add('input-error');
             contentError.style.display = 'block';
+            newsContent.style.border = '1px solid red';
             isValid = false;
         } else {
             newsContent.classList.remove('input-error');
