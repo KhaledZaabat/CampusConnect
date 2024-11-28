@@ -81,11 +81,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function filterRooms(searchTerm) {
         return rooms.filter(room => {
-            const text = room.textContent.toLowerCase();
-            return text.includes(searchTerm);
+            const block = room.children[0].textContent.trim(); // Get block value
+            const floor = room.children[1].textContent.trim(); // Get floor value
+            const number = room.children[2].textContent.trim(); // Get room number
+    
+            // Create a string representation of the room
+            const roomString = `${block}${floor}${number}`.toLowerCase();
+            
+            return roomString.includes(searchTerm); // Check if search term is in the room string
         });
     }
-
+    
+    // Event listener for the search input
+    function searchRooms() {
+        const searchTerm = searchInput.value.toLowerCase(); // Convert search input to lowercase
+        filteredRooms = filterRooms(searchTerm); // Filter rows based on search
+        currentPage = 1; // Reset to the first page
+        renderTable(); // Render the filtered table
+    }
+    
+    // Attach the event listener
+    searchInput.addEventListener('input', searchRooms);
+    
     function renderTable() {
         const start = (currentPage - 1) * rowsPerPage;
         const end = start + rowsPerPage;
@@ -103,13 +120,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.getElementById('prev').disabled = currentPage === 1;
         document.getElementById('next').disabled = currentPage === numPages;
-    }
-
-    function searchRooms() {
-        const searchTerm = searchInput.value.toLowerCase();
-        filteredRooms = filterRooms(searchTerm);
-        currentPage = 1;
-        renderTable();
     }
 
     // Sorting functionality
