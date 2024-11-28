@@ -72,13 +72,30 @@
     
     <div class="container2">
         <h1>Student Management</h1>
-        <form action="#" method="post" class="student-form" enctype="multipart/form-data">
-            <input type="text" placeholder="Studetn ID" name="StudentID" required>
-            <input type="text" placeholder="First Name" name="firstName" required>
-            <input type="text" placeholder="Last Name" name="lastName" required>
-            <input type="email" placeholder="Email" name="email" required>
-            <input type="tel" placeholder="Phone Number" name="phone" required>
-            <input type="text" placeholder="Room Number (D3 33)" name="room" required>
+        <form action="#" method="post" class="student-form" id="student" enctype="multipart/form-data">
+            <input type="text" placeholder="Studetn ID" name="StudentID" id="ID">
+            <input type="text" placeholder="First Name" name="firstName" >
+            <input type="text" placeholder="Last Name" name="lastName" >
+            <input type="text" placeholder="Email" name="email" >
+            <input type="tel" placeholder="Phone Number" name="phone" >
+            <div class="room-group">
+                <select name="bloc">
+                    <option value="A" selected>Bloc A</option>
+                    <option value="B">Bloc B</option>
+                    <option value="C">Bloc C</option>
+                    <option value="D">Bloc D</option>
+                    <option value="E">Bloc E</option>
+                </select>
+                <select name="floor">
+                    <option value="R">R</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <input type="number" name="room" placeholder="Room Number" min="1" max="100">
+            </div>            
             <div class="form-group mt-2">
                 <label for="file" class="custom-file-upload">
                     <div class="icon" id="upload-icon">
@@ -97,7 +114,7 @@
                     <p>Image uploaded!</p>
                 </div>
             </div>
-            <button type="submit">Add Student</button>
+            <button type="submit" class="btn_submit" id="student">Add Student</button>
         </form>
     </div>
         
@@ -120,7 +137,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="student-table-body">
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
                     <td><input type="text" class="tableinput" value="1" disabled></td>

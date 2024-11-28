@@ -113,7 +113,30 @@ th, td {
 th {
     background-color: #0f0b32;
     color: white;
+    cursor: pointer;
 }
+
+.sortable {
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.sort-icon {
+    font-size: 12px;
+    margin-left: 5px;
+    color: gray;
+}
+
+.sortable.sorted-asc {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.sortable.sorted-asc .sort-icon {
+    color: green;
+}
+
 
 tr:nth-child(even) {
     background-color: #f2f2f2;

@@ -1,114 +1,177 @@
-/* Button Styles */
+/* General Body and Background */
 body {
     background-color: #0f0b32;
-    /* font-family: Arial, Helvetica, sans-serif !important; */
-
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
 }
-.text-center{
-    margin-top: 1.75%;
+
+.text-center {
+    margin-top: 1.5rem;
     color: white;
 }
-.Issues-container {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    scrollbar-width: none;     /* Firefox */
-    gap: 2%; /* Use a percentage for the gap */
-    padding: 0 2%; /* Add some padding for aesthetics */
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 0.5rem; /* Further reduced padding on left and right */
 }
-.Issues-container {
-    overflow-x: auto;
+
+/* Title */
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Filter Buttons */
+.btn-filter {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 0.5rem;
+}
+
+.btn-filter:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.btn-filter:active {
+    transform: translateY(0);
+}
+
+/* Issues Container */
+.issues-container {
+    display: flex;
+    flex-wrap: nowrap; /* Keep all items in a single row */
+    gap: 3.3%; /* Adjusted gap between cards */
+    overflow-x: auto; /* Horizontal scroll if there are more than 3 cards */
+    padding: 1rem 0; /* Adjusted padding */
+    margin-top: 1rem;
+}
+
+.issues-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+}
+
+.issues-container {
     scrollbar-width: none; /* Firefox */
 }
 
-.Issues-container::-webkit-scrollbar {
-    display: none; /* WebKit browsers (Chrome, Safari) */
-}
-body, html {
-    overflow-x: hidden;
-}
+/* Individual Cards */
 .card {
-    flex: 0 0 30%; /* Set card width to 30% for responsiveness */
-    scroll-snap-align: start; /* Align cards when scrolling */
-    min-width: 280px; /* Optional: Set a minimum width for smaller screens */
-}
-
-.img-fluid {
-    max-width: 100%; /* Make the image responsive */
-    height: auto; /* Maintain aspect ratio */
-    border: 1px solid #ddd;
-    padding: 5px;
-    border-radius: 8px;
-}
-.btn-done,
-.btn-pending,
-.btn-declined {
-    padding: 2% 4%; /* Reduced padding for a smaller size */
-    font-weight: 600;
-    font-size: 0.65rem; /* Smaller text size */
-    border-radius: 8px; /* Slightly less rounded corners */
-    border: 1px solid transparent; /* Add border for better appearance */
-    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
-    color: #fff;
-    cursor: pointer;
-    flex: 1; /* Allow buttons to grow equally */
-    margin: 0 1%; /* Reduced margin for closer spacing */
-}
-
-/* Specific button colors */
-.btn-done {
-    background-color: #28a745; /* Green */
-}
-
-.btn-pending {
-    background-color: #ffc107; /* Yellow */
-}
-
-.btn-declined {
-    background-color: #dc3545; /* Red */
-}
-.card {
-    flex: 0 0 30%; /* Set card width to 30% for responsiveness */
-    scroll-snap-align: start; /* Align cards when scrolling */
-    min-width: 280px; /* Optional: Set a minimum width for smaller screens */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    background-color: #fff;
+    color: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%; /* Default full width */
+    max-width: 30%; /* Restrict maximum width to 30% */
+    flex: 0 0 30%; /* 30% width for each card */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-3%); /* Lift card on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
-}
-/* Hover and active effects for all buttons */
-.btn-done:hover,
-.btn-pending:hover,
-.btn-declined:hover {
-    transform: translateY(-2px); /* Slight lift effect */
-    opacity: 0.9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
-    background-color: #0f0b32 !important;
-    color: #ddd !important;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-.btn-done:active,
-.btn-pending:active,
-.btn-declined:active {
-    transform: translateY(0); /* Reset on click */
-    opacity: 1;
-    box-shadow: none; /* Remove shadow on click */
+.card .card-body {
+    padding: 1rem;
 }
 
-/* Button Container Adjustments */
-.card .d-flex {
-    display: flex; /* Ensure buttons are displayed as flex items */
-    justify-content: space-between; /* Space out buttons evenly */
-    margin-top: 1rem; /* Add some space above the buttons */
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
 }
-.card .img-fluid {
+
+.card img {
     width: 100%;
-    max-width: 350px;
-    height: 200px;
-    object-fit: contain; /* Fit entire image without cropping */
-    border: 2px solid #ddd;
-    padding: 5px;
+    height: auto;
     border-radius: 8px;
+    object-fit: contain;
+    border: 2px solid #ddd;
+}
+
+/* Action Buttons */
+.btn-done,
+.btn-declined {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #fff;
+}
+
+.btn-done {
+    background-color: #28a745;
+}
+
+.btn-done:hover {
+    background-color: #218838;
+}
+
+.btn-declined {
+    background-color: #dc3545;
+}
+
+.btn-declined:hover {
+    background-color: #c82333;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Align Photo and Content in Same Line */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-body img {
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .card {
+        flex: 0 0 100%; /* Full-width cards on medium screens */
+        max-width: 100%; /* Ensure cards take up the full width */
+        margin-bottom: 1rem; /* Add space between cards */
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 0 0 100%; /* Full-width cards on small screens */
+        max-width: 100%; /* Ensure cards take up the full width */
+        margin-bottom: 1.5rem; /* Slightly larger space for small screens */
+    }
+
+    .issues-container {
+        display: block; /* Stack cards vertically */
+    }
 }
