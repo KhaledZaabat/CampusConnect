@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Create new submission object
         const newSubmission = {
-            title: title.value,
-            description: description.value,
+            title: title.value.trim(),
+            description: description.value.trim(),
             image: imageUrl,
             listingType: Found.checked ? "Found" : "Missing",
             comments: [], // Initialize with an empty comments array
@@ -120,10 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderPost(submissionData) {
         const postsContainer = document.getElementById("blog_posts");
-
+    
         const postElement = document.createElement("div");
         postElement.className = "col-md-6 col-lg-4 mt-5";
-
+    
         const postContent = `
         <div class="post-c blog-grid">
             <div class="blog-grid-img position-relative">
@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 <p class="display-30">${submissionData.description}</p>
+                <div id="b-post"></div>
                 <div class="meta meta-style2">
                     <ul>
                         <li><i class="fas fa-calendar-alt icon-blue"></i> 10 Jul, 2022</li>
@@ -160,28 +161,141 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
         `;
-
+    
         postElement.innerHTML = postContent;
         postsContainer.appendChild(postElement);
-
+        const editButton = postElement.querySelector('.Edit');
+        const deleteButton = postElement.querySelector('.Delete');
+        
+        // Edit functionality
+        editButton.addEventListener('click', (e) => {
+            e.preventDefault();
+        
+            // Make the title and description editable
+            const postTitle = postElement.querySelector("h3");
+            const postDescription = postElement.querySelector("p.display-30");
+        
+            // Store the original content in case the user cancels editing
+            const originalTitle = submissionData.title;
+            const originalDescription = submissionData.description;
+        
+            // Replace the title and description with input fields
+            postTitle.innerHTML = `<input type="text" class="form-control" value="${originalTitle}">`;
+            postDescription.innerHTML = `<textarea class="form-control">${originalDescription}</textarea>`;
+        
+            const buttonContainer = document.createElement("div");
+            buttonContainer.className = "row mt-2"; // Bootstrap row with margin-top for spacing
+        
+            // Create Save button
+            const saveButtonCol = document.createElement("div");
+            saveButtonCol.className = "col-auto"; // Bootstrap column with auto width
+            const saveButton = document.createElement("button");
+            saveButton.className = "save-button";
+            saveButton.textContent = "Save";
+            saveButtonCol.appendChild(saveButton);
+        
+            // Create Cancel button
+            const cancelButtonCol = document.createElement("div");
+            cancelButtonCol.className = "col-auto"; // Bootstrap column with auto width
+            const cancelButton = document.createElement("button");
+            cancelButton.className = "cancel-button";
+            cancelButton.textContent = "Cancel";
+            cancelButtonCol.appendChild(cancelButton);
+        
+            // Append columns to the container
+            buttonContainer.appendChild(saveButtonCol);
+            buttonContainer.appendChild(cancelButtonCol);
+            document.getElementById("b-post").appendChild(buttonContainer);
+            // Append the button container after the description
+        
+            // Add functionality to the save button
+            saveButton.addEventListener("click", () => {
+                const updatedTitle = postTitle.querySelector("input").value.trim();
+                const updatedDescription = postDescription.querySelector("textarea").value.trim();
+        
+                if (!updatedTitle || !updatedDescription) {
+                    Swal.fire({
+                        title: "Error",
+                        text: "Both title and description are required!",
+                        icon: "error",
+                    });
+                    return;
+                }
+        
+                // Update the post data and re-render
+                submissionData.title = updatedTitle;
+                submissionData.description = updatedDescription;
+                renderPosts(currentPage);
+            });
+        
+            // Add functionality to the cancel button
+            cancelButton.addEventListener("click", () => {
+                // Revert the content to original values
+                postTitle.innerHTML = originalTitle;
+                postDescription.innerHTML = originalDescription;
+                buttonContainer.remove(); // Remove the Save and Cancel buttons
+            });
+        
+            // Optional SweetAlert to inform the user they are editing
+        });
+        
+        
+        // Delete functionality
+        deleteButton.addEventListener('click', (e) => {
+            e.preventDefault();
+        
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Do you want to delete this post? This action cannot be undone!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, keep it",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const postIndex = posts.indexOf(submissionData);
+                    if (postIndex !== -1) {
+                        posts.splice(postIndex, 1); // Remove the post from the array
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "The post has been deleted.",
+                            icon: "success",
+                        });
+                        renderPosts(currentPage); // Re-render posts to reflect changes
+                    }
+                }
+            });
+        });
+        
+        // Comments toggle
         const commentSection = postElement.querySelector('.comment-section');
         const commentsToggle = postElement.querySelector('.comments-toggle');
         const commentForm = postElement.querySelector('.comment-form');
         const commentsContainer = postElement.querySelector('.comments-container');
         const commentsPagination = postElement.querySelector('.comments-pagination');
-
-        // Toggle comments section visibility
+    
         commentsToggle.addEventListener('click', () => {
             commentSection.style.display = commentSection.style.display === 'none' ? 'block' : 'none';
             loadComments(submissionData, commentsContainer, commentsPagination);
         });
-
+    
         // Add comment form functionality
         commentForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const textarea = commentForm.querySelector('textarea');
             const commentText = textarea.value.trim();
-
+            
+            // Check if the comment length is greater than 100 characters
+            if (commentText.length > 100) {
+                Swal.fire({
+                    title: "Error",
+                    text: "Comment must be 100 characters or less!",
+                    icon: "error",
+                });
+                return;
+            }
+        
+            // If comment length is valid, proceed to add the comment
             if (commentText) {
                 const newComment = {
                     username: 'User',
@@ -194,7 +308,128 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadComments(submissionData, commentsContainer, commentsPagination);
             }
         });
+        
     }
+    
+    function loadComments(submissionData, commentsContainer, commentsPagination) {
+        const commentsPerPage = 2; // Display 2 comments per page
+        
+        // Sort comments in descending order by date
+        submissionData.comments.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+        const startIndex = (submissionData.currentCommentPage - 1) * commentsPerPage;
+        const endIndex = startIndex + commentsPerPage;
+        const commentsToDisplay = submissionData.comments.slice(startIndex, endIndex);
+    
+        // Render the comments
+        commentsContainer.innerHTML = commentsToDisplay.map((comment, index) => `
+            <div class="border-visible bg-light p-3 rounded mb-2">
+                <div class="d-flex justify-content-between">
+                    <h6 class="mb-1"><a href="#!">${comment.username}</a></h6>
+                    <small class="ms-2">${comment.date}</small>
+                </div>
+                <div class="row">
+                <p class="small col-8 mb-0 comment-text display-30">${comment.commentText}</p>
+                    <div class="comment-actions col-4 text-end">
+                        <a href="#" class="edit-comment Edit cm me-2"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="delete-comment Delete cm sm"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        `).join('');
+    
+        // Attach event listeners for each comment's edit and delete icons
+        commentsContainer.querySelectorAll('.edit-comment').forEach((editIcon, index) => {
+            editIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                const commentText = commentsToDisplay[index].commentText;
+                const commentParagraph = commentsContainer.querySelectorAll('.comment-text')[index];
+    
+                // Replace comment text with an editable input
+                commentParagraph.innerHTML = `
+                    <textarea class="form-control">${commentText}</textarea>
+                `;
+    
+                // Change the Edit icon to a Save icon
+                const saveIcon = document.createElement('i');
+                saveIcon.className = "fas fa-save save save-comment text-success cm ms-2";
+                saveIcon.style.cursor = "pointer";
+                saveIcon.title = "Save";
+                commentParagraph.parentElement.querySelector('.comment-actions').appendChild(saveIcon);
+    
+                // Hide the original Edit icon
+                editIcon.style.display = 'none';
+    
+                // Add save functionality
+                saveIcon.addEventListener('click', () => {
+                    const updatedComment = commentParagraph.querySelector('textarea').value.trim();
+                    
+                    if (updatedComment) {
+                        // Update the comment in the data array
+                        submissionData.comments[index].commentText = updatedComment;
+                        submissionData.comments[index].date = new Date().toLocaleString(); // Update the date
+                        loadComments(submissionData, commentsContainer, commentsPagination); // Re-render comments
+                    } else {
+                        Swal.fire({
+                            title: "Error",
+                            text: "Comment cannot be empty!",
+                            icon: "error",
+                        });
+                    }
+                });
+            });
+        });
+    
+        // Attach event listeners for each comment's delete icon
+        commentsContainer.querySelectorAll('.delete-comment').forEach((deleteIcon, index) => {
+            deleteIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Do you really want to delete this comment?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "Cancel",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Remove the comment from the data array
+                        submissionData.comments.splice(index, 1);
+                        loadComments(submissionData, commentsContainer, commentsPagination); // Re-render comments
+                    }
+                });
+            });
+        });
+    
+        // Render comment pagination
+        commentsPagination.innerHTML = '';
+        const totalCommentPages = Math.ceil(submissionData.comments.length / commentsPerPage);
+    
+        if (submissionData.currentCommentPage > 1) {
+            const prevButton = document.createElement('button');
+            prevButton.className = 'btn btn-sm btn-secondary me-1';
+            prevButton.innerText = 'Previous';
+            prevButton.addEventListener('click', () => {
+                submissionData.currentCommentPage--;
+                loadComments(submissionData, commentsContainer, commentsPagination);
+            });
+            commentsPagination.appendChild(prevButton);
+        }
+    
+        if (submissionData.currentCommentPage < totalCommentPages) {
+            const nextButton = document.createElement('button');
+            nextButton.className = 'btn btn-sm btn-secondary';
+            nextButton.innerText = 'Next';
+            nextButton.addEventListener('click', () => {
+                submissionData.currentCommentPage++;
+                loadComments(submissionData, commentsContainer, commentsPagination);
+            });
+            commentsPagination.appendChild(nextButton);
+        }
+    }
+    
+    
 
     renderPosts(currentPage);
 });
