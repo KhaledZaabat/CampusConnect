@@ -88,43 +88,67 @@
             <tr>
               <td rowspan="3">Sunday</td>
               <td>Breakfast</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Milk" disabled> <br>
                 <input type="text" value="Croissant" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="1 Cup" disabled> <br>
                 <input type="text" value="1 Piece" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
             <tr>
               <td>Lunch</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Bread" disabled> <br>
                 <input type="text" value="عدس" disabled> <br>
                 <input type="text" value="Eggs" disabled> <br>
                 <input type="text" value="Salad (Tomato Carrot ...)" disabled> <br>
                 <input type="text" value="Juice" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="One piece" disabled> <br>
                 <input type="text" value="100g" disabled> <br>
                 <input type="text" value="Two pieces" disabled> <br>
                 <input type="text" value="150g" disabled> <br>
                 <input type="text" value="One piece" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
             <tr>
               <td>Dinner</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Bread" disabled> <br>
                 <input type="text" value="Soup" disabled> <br>
                 <input type="text" value="مثوم" disabled>
-              </td>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
+              </td class="input-container">
               <td>
                 <input type="text" value="200g" disabled> <br>
                 <input type="text" value="50g" disabled> <br>
                 <input type="text" value="1 piece" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
         
@@ -132,37 +156,61 @@
             <tr>
               <td rowspan="3">Monday</td>
               <td>Breakfast</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Omelette" disabled> <br>
                 <input type="text" value="Toast" disabled> <br>
                 <input type="text" value="Juice" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="100g" disabled> <br>
                 <input type="text" value="2 pieces" disabled> <br>
                 <input type="text" value="200ml" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
             <tr>
               <td>Lunch</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Beef Stew" disabled> <br>
                 <input type="text" value="Mashed Potatoes" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="200g" disabled> <br>
                 <input type="text" value="150g" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
             <tr>
               <td>Dinner</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Vegetable Soup" disabled> <br>
                 <input type="text" value="Bread" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="1 bowl" disabled> <br>
                 <input type="text" value="1 piece" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
         
@@ -170,43 +218,67 @@
             <tr>
               <td rowspan="3">Tuesday</td>
               <td>Breakfast</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Bread" disabled> <br>
                 <input type="text" value="Cheese" disabled> <br>
                 <input type="text" value="Jam" disabled> <br>
                 <input type="text" value="Milk" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="1 piece" disabled> <br>
                 <input type="text" value="50g" disabled> <br>
                 <input type="text" value="1 serving" disabled> <br>
                 <input type="text" value="200ml" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
             <tr>
               <td>Lunch</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Grilled Chicken" disabled> <br>
                 <input type="text" value="Rice" disabled> <br>
                 <input type="text" value="Salad" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="150g" disabled> <br>
                 <input type="text" value="100g" disabled> <br>
                 <input type="text" value="1 bowl" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
             <tr>
               <td>Dinner</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Spaghetti" disabled> <br>
                 <input type="text" value="Tomato Sauce" disabled> <br>
                 <input type="text" value="Bread" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="200g" disabled> <br>
                 <input type="text" value="50g" disabled> <br>
                 <input type="text" value="1 piece" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
         
@@ -214,37 +286,61 @@
             <tr>
               <td rowspan="3">Wednesday</td>
               <td>Breakfast</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Omelette" disabled> <br>
                 <input type="text" value="Toast" disabled> <br>
                 <input type="text" value="Juice" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="100g" disabled> <br>
                 <input type="text" value="2 pieces" disabled> <br>
                 <input type="text" value="200ml" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
             <tr>
               <td>Lunch</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Beef Stew" disabled> <br>
                 <input type="text" value="Mashed Potatoes" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="200g" disabled> <br>
                 <input type="text" value="150g" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
             <tr>
               <td>Dinner</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Vegetable Soup" disabled> <br>
                 <input type="text" value="Bread" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="1 bowl" disabled> <br>
                 <input type="text" value="1 piece" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
         
@@ -252,86 +348,134 @@
             <tr>
               <td rowspan="3">Thursday</td>
               <td>Breakfast</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Bread" disabled> <br>
                 <input type="text" value="Cheese" disabled> <br>
                 <input type="text" value="Jam" disabled> <br>
                 <input type="text" value="Milk" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="1 piece" disabled> <br>
                 <input type="text" value="50g" disabled> <br>
                 <input type="text" value="1 serving" disabled> <br>
                 <input type="text" value="200ml" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
             <tr>
               <td>Lunch</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Grilled Chicken" disabled> <br>
                 <input type="text" value="Rice" disabled> <br>
                 <input type="text" value="Salad" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="150g" disabled> <br>
                 <input type="text" value="100g" disabled> <br>
                 <input type="text" value="1 bowl" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
             <tr>
               <td>Dinner</td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="Spaghetti" disabled> <br>
                 <input type="text" value="Tomato Sauce" disabled> <br>
                 <input type="text" value="Bread" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
-              <td>
+              <td class="input-container">
                 <input type="text" value="200g" disabled> <br>
                 <input type="text" value="50g" disabled> <br>
                 <input type="text" value="1 piece" disabled>
+                <div class="button-container">
+                  <button type="button" class="add"><i class="fas fa-add"></i></button>
+                  <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+              </div>
               </td>
             </tr>
                     <!--6 day-->
                     <tr>
                         <td rowspan="3">Friday</td>
                         <td>Breakfast</td>
-                        <td>
+                        <td class="input-container">
                           <input type="text" value="Bread" disabled> <br>
                           <input type="text" value="Cheese" disabled> <br>
                           <input type="text" value="Jam" disabled> <br>
                           <input type="text" value="Milk" disabled>
+                          <div class="button-container">
+                            <button type="button" class="add"><i class="fas fa-add"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                         </td>
-                        <td>
+                        <td class="input-container">
                           <input type="text" value="1 piece" disabled> <br>
                           <input type="text" value="50g" disabled> <br>
                           <input type="text" value="1 serving" disabled> <br>
                           <input type="text" value="200ml" disabled>
+                          <div class="button-container">
+                            <button type="button" class="add"><i class="fas fa-add"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                         </td>
                       </tr>
                       <tr>
                         <td>Lunch</td>
-                        <td>
+                        <td class="input-container">
                           <input type="text" value="Grilled Chicken" disabled> <br>
                           <input type="text" value="Rice" disabled> <br>
                           <input type="text" value="Salad" disabled>
+                          <div class="button-container">
+                            <button type="button" class="add"><i class="fas fa-add"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                         </td>
-                        <td>
+                        <td class="input-container">
                           <input type="text" value="150g" disabled> <br>
                           <input type="text" value="100g" disabled> <br>
                           <input type="text" value="1 bowl" disabled>
+                          <div class="button-container">
+                            <button type="button" class="add"><i class="fas fa-add"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                         </td>
                       </tr>
                       <tr>
                         <td>Dinner</td>
-                        <td>
+                        <td class="input-container">
                           <input type="text" value="Spaghetti" disabled> <br>
                           <input type="text" value="Tomato Sauce" disabled> <br>
                           <input type="text" value="Bread" disabled>
+                          <div class="button-container">
+                            <button type="button" class="add"><i class="fas fa-add"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                         </td>
-                        <td>
+                        <td class="input-container">
                           <input type="text" value="200g" disabled> <br>
                           <input type="text" value="50g" disabled> <br>
                           <input type="text" value="1 piece" disabled>
+                          <div class="button-container">
+                            <button type="button" class="add"><i class="fas fa-add"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                         </td>
                       </tr>
                   
@@ -339,43 +483,67 @@
                       <tr>
                         <td rowspan="3">Saturday</td>
                         <td>Breakfast</td>
-                        <td>
+                        <td class="input-container">
                           <input type="text" value="Bread" disabled> <br>
                           <input type="text" value="Cheese" disabled> <br>
                           <input type="text" value="Jam" disabled> <br>
                           <input type="text" value="Milk" disabled>
+                          <div class="button-container">
+                            <button type="button" class="add"><i class="fas fa-add"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                         </td>
-                        <td>
+                        <td class="input-container">
                           <input type="text" value="1 piece" disabled> <br>
                           <input type="text" value="50g" disabled> <br>
                           <input type="text" value="1 serving" disabled> <br>
                           <input type="text" value="200ml" disabled>
+                          <div class="button-container">
+                            <button type="button" class="add"><i class="fas fa-add"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                         </td>
                       </tr>
                       <tr>
                         <td>Lunch</td>
-                        <td>
+                        <td class="input-container">
                           <input type="text" value="Grilled Chicken" disabled> <br>
                           <input type="text" value="Rice" disabled> <br>
                           <input type="text" value="Salad" disabled>
+                          <div class="button-container">
+                            <button type="button" class="add"><i class="fas fa-add"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                         </td>
-                        <td>
+                        <td class="input-container">
                           <input type="text" value="150g" disabled> <br>
                           <input type="text" value="100g" disabled> <br>
                           <input type="text" value="1 bowl" disabled>
+                          <div class="button-container">
+                            <button type="button" class="add"><i class="fas fa-add"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                         </td>
                       </tr>
                       <tr>
                         <td>Dinner</td>
-                        <td>
+                        <td class="input-container">
                           <input type="text" value="Spaghetti" disabled> <br>
                           <input type="text" value="Tomato Sauce" disabled> <br>
                           <input type="text" value="Bread" disabled>
+                          <div class="button-container">
+                            <button type="button" class="add"><i class="fas fa-add"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                         </td>
-                        <td>
+                        <td class="input-container">
                           <input type="text" value="200g" disabled> <br>
                           <input type="text" value="50g" disabled> <br>
                           <input type="text" value="1 piece" disabled>
+                          <div class="button-container">
+                            <button type="button" class="add"><i class="fas fa-add"></i></button>
+                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                         </td>
                       </tr>
         </tbody>
@@ -428,46 +596,7 @@
 
 
 
- <script> 
-  let editB = document.querySelector(".edit");
-  let inputFields = document.querySelectorAll("input[disabled]");
-  
-  // Store the initial values of the inputs
-  let initialValues = Array.from(inputFields).map(input => input.value);
-  
-  editB.addEventListener("click", function() {
-    if (editB.textContent === "Edit") {
-      // Enable all input fields
-      inputFields.forEach(input => { input.disabled = false; });
-      editB.textContent = "Confirm";
-    } else if (editB.textContent === "Confirm") {
-      // Show SweetAlert confirmation dialog
-      Swal.fire({
-        title: "Do you want to save the changes?",
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: "Save",
-        denyButtonText: `Don't save`
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Save changes, disable inputs, and update button text to "Edit"
-          inputFields.forEach(input => { input.disabled = true; });
-          Swal.fire("Saved!", "", "success");
-          editB.textContent = "Edit";
-        } else if (result.isDenied) {
-          // Reset changes, disable inputs, and update button text to "Edit"
-          inputFields.forEach((input, index) => {
-            input.value = initialValues[index]; // Reset to initial values
-            input.disabled = true; // Disable inputs again
-          });
-          Swal.fire("Changes are not saved", "", "info");
-          editB.textContent = "Edit";
-        }
-      });
-    }
-  });
-  
-</script>
+ <script src="assets/js/canteen.js"></script>
   
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </html>

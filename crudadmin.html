@@ -130,7 +130,7 @@
             <tbody id="admin-table-body">
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput idinput" value="2332151212" disabled></td>
                     <td><input type="text" class="tableinput name" value="Elhadi" disabled></td>
                     <td><input type="text" class="tableinput name Lname" value="Bachir" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="elhadi.bachir@ensia.edu.dz" disabled></td>
