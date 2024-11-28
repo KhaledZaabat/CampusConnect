@@ -126,28 +126,30 @@ document.addEventListener('DOMContentLoaded', () => {
     
         const postContent = `
         <div data-post-index="${posts.indexOf(submissionData)}" class="post-c blog-grid">
-            <div class="blog-grid-img position-relative">
-                <img alt="img" src="${submissionData.image}" class="listing-img img-fluid">
-            </div>
-            <div class="blog-grid-text p-4">
-                <div class="row">
-                    <h3 class="h5 col-8 mb-3">${submissionData.title}</h3>
-                    <div class="col-4 text-end">
-                        <a href="#" class="Edit me-2"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
+            <div id="post">
+                <div class="blog-grid-img position-relative">
+                    <img alt="img" src="${submissionData.image}" class="listing-img img-fluid">
+                </div>
+                <div class="blog-grid-text p-4">
+                    <div class="row">
+                        <h3 class="h5 col-8 mb-3">${submissionData.title}</h3>
+                        <div class="col-4 text-end">
+                            <a href="#" class="Edit me-2"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
+                        </div>
                     </div>
-                </div>
-                <p class="display-30">${submissionData.description}</p>
-                <div id="b-post"></div>
-                <div class="meta meta-style2">
-                    <ul>
-                        <li><i class="fas fa-calendar-alt icon-blue"></i> 10 Jul, 2022</li>
-                        <li><a href="#!"><i class="fas fa-user icon-blue"></i> User</a></li>  
-                        <li data-post-index="${posts.indexOf(submissionData)}" class="comments-toggle" ><i class="fas fa-comments icon-blue"></i> ${submissionData.comments.length}</li>
-                    </ul>
+                    <p class="display-30">${submissionData.description}</p>
+                    <div id="b-post"></div>
+                    <div class="meta meta-style2">
+                        <ul>
+                            <li><i class="fas fa-calendar-alt icon-blue"></i> 10 Jul, 2022</li>
+                            <li><a href="#!"><i class="fas fa-user icon-blue"></i> User</a></li>  
+                            <li data-post-index="${posts.indexOf(submissionData)}" class="comments-toggle" ><i class="fas fa-comments icon-blue"></i> ${submissionData.comments.length}</li>
+                        </ul>
 
 
-                </div>
+                    </div>
+                <div>
                 <!-- Hidden Comment Section -->
                 <div data-post-index="${posts.indexOf(submissionData)}" class="comment-section mt-4" style="display: none;">
                     <form class="nav nav-item w-100 position-relative comment-form">
