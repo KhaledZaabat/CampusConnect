@@ -125,29 +125,33 @@ document.addEventListener('DOMContentLoaded', () => {
         postElement.className = "col-md-6 col-lg-4 mt-5";
     
         const postContent = `
-        <div class="post-c blog-grid">
-            <div class="blog-grid-img position-relative">
-                <img alt="img" src="${submissionData.image}" class="listing-img img-fluid">
-            </div>
-            <div class="blog-grid-text p-4">
-                <div class="row">
-                    <h3 class="h5 col-8 mb-3">${submissionData.title}</h3>
-                    <div class="col-4 text-end">
-                        <a href="#" class="Edit me-2"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
+        <div data-post-index="${posts.indexOf(submissionData)}" class="post-c blog-grid">
+            <div id="post">
+                <div class="blog-grid-img position-relative">
+                    <img alt="img" src="${submissionData.image}" class="listing-img img-fluid">
+                </div>
+                <div class="blog-grid-text p-4">
+                    <div class="row">
+                        <h3 class="h5 col-8 mb-3">${submissionData.title}</h3>
+                        <div class="col-4 text-end">
+                            <a href="#" class="Edit me-2"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
+                        </div>
                     </div>
-                </div>
-                <p class="display-30">${submissionData.description}</p>
-                <div id="b-post"></div>
-                <div class="meta meta-style2">
-                    <ul>
-                        <li><i class="fas fa-calendar-alt icon-blue"></i> 10 Jul, 2022</li>
-                        <li><a href="#!"><i class="fas fa-user icon-blue"></i> User</a></li>  
-                        <li class="comments-toggle"><i class="fas fa-comments icon-blue"></i> ${submissionData.comments.length}</li>
-                    </ul>
-                </div>
+                    <p class="display-30">${submissionData.description}</p>
+                    <div id="b-post"></div>
+                    <div class="meta meta-style2">
+                        <ul>
+                            <li><i class="fas fa-calendar-alt icon-blue"></i> 10 Jul, 2022</li>
+                            <li><a href="#!"><i class="fas fa-user icon-blue"></i> User</a></li>  
+                            <li data-post-index="${posts.indexOf(submissionData)}" class="comments-toggle" ><i class="fas fa-comments icon-blue"></i> ${submissionData.comments.length}</li>
+                        </ul>
+
+
+                    </div>
+                <div>
                 <!-- Hidden Comment Section -->
-                <div class="comment-section mt-4" style="display: none;">
+                <div data-post-index="${posts.indexOf(submissionData)}" class="comment-section mt-4" style="display: none;">
                     <form class="nav nav-item w-100 position-relative comment-form">
                         <textarea data-autoresize class="text-field pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
                         <button class="comments bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
@@ -155,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </button>
                     </form>
                     <!-- Comments Section -->
-                    <div class="comments-container mt-3"></div>
+                    <div data-post-index="${posts.indexOf(submissionData)}" class="comments-container mt-3"></div>
                     <div class="comments-pagination"></div>
                 </div>
             </div>
@@ -276,8 +280,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
         commentsToggle.addEventListener('click', () => {
             commentSection.style.display = commentSection.style.display === 'none' ? 'block' : 'none';
-            loadComments(submissionData, commentsContainer, commentsPagination);
+            loadComments(submissionData, commentsContainer, commentsPagination, posts.indexOf(submissionData));
         });
+        
     
         // Add comment form functionality
         commentForm.addEventListener('submit', (e) => {
@@ -305,15 +310,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 submissionData.comments.push(newComment);
                 textarea.value = "";
                 submissionData.currentCommentPage = 1; // Reset to page 1 after a new comment
-                loadComments(submissionData, commentsContainer, commentsPagination);
+                loadComments(submissionData, commentsContainer, commentsPagination, commentsContainer.dataset.postIndex);
+
             }
         });
         
+        
     }
     
-    function loadComments(submissionData, commentsContainer, commentsPagination) {
+    function loadComments(submissionData, commentsContainer, commentsPagination, postIndex) {
         const commentsPerPage = 2; // Display 2 comments per page
-        
+    
+        // Update the comment length in the UI for the correct post
+        const commentsToggle = document.querySelector(`.comments-toggle[data-post-index="${postIndex}"]`);
+        if (commentsToggle) {
+            commentsToggle.innerHTML = `<i class="fas fa-comments icon-blue"></i> ${submissionData.comments.length}`;
+        }
+    
         // Sort comments in descending order by date
         submissionData.comments.sort((a, b) => new Date(b.date) - new Date(a.date));
     
@@ -323,27 +336,57 @@ document.addEventListener('DOMContentLoaded', () => {
     
         // Render the comments
         commentsContainer.innerHTML = commentsToDisplay.map((comment, index) => `
-            <div class="border-visible bg-light p-3 rounded mb-2">
-                <div class="d-flex justify-content-between">
-                    <h6 class="mb-1"><a href="#!">${comment.username}</a></h6>
-                    <small class="ms-2">${comment.date}</small>
-                </div>
-                <div class="row">
-                <p class="small col-8 mb-0 comment-text display-30">${comment.commentText}</p>
-                    <div class="comment-actions col-4 text-end">
-                        <a href="#" class="edit-comment Edit cm me-2"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="delete-comment Delete cm sm"><i class="fas fa-trash-alt"></i></a>
-                    </div>
-                </div>
-
+        <div class="border-visible bg-light p-3 rounded mb-2" data-comment-index="${startIndex + index}">
+            <div class="d-flex justify-content-between">
+                <h6 class="mb-1"><a href="#!">${comment.username}</a></h6>
+                <small class="ms-2">${comment.date}</small>
             </div>
+            <div class="row">
+                <p class="small col-8 mb-0 comment-text display-30">${comment.commentText}</p>
+                <div class="comment-actions col-4 text-end">
+                    <a href="#" class="edit-comment Edit cm me-2"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="delete-comment Delete cm sm"><i class="fas fa-trash-alt"></i></a>
+                </div>
+            </div>
+        </div>
         `).join('');
     
-        // Attach event listeners for each comment's edit and delete icons
+        // Attach event listeners for edit and delete icons
+        attachCommentListeners(submissionData, commentsContainer, commentsPagination, postIndex);
+    
+        // Render pagination
+        commentsPagination.innerHTML = '';
+        const totalCommentPages = Math.ceil(submissionData.comments.length / commentsPerPage);
+    
+        if (submissionData.currentCommentPage > 1) {
+            const prevButton = document.createElement('button');
+            prevButton.className = 'btn btn-sm btn-secondary me-1';
+            prevButton.innerText = 'Previous';
+            prevButton.addEventListener('click', () => {
+                submissionData.currentCommentPage--;
+                loadComments(submissionData, commentsContainer, commentsPagination, postIndex);
+            });
+            commentsPagination.appendChild(prevButton);
+        }
+    
+        if (submissionData.currentCommentPage < totalCommentPages) {
+            const nextButton = document.createElement('button');
+            nextButton.className = 'btn btn-sm btn-secondary';
+            nextButton.innerText = 'Next';
+            nextButton.addEventListener('click', () => {
+                submissionData.currentCommentPage++;
+                loadComments(submissionData, commentsContainer, commentsPagination, postIndex);
+            });
+            commentsPagination.appendChild(nextButton);
+        }
+    }
+    
+    function attachCommentListeners(submissionData, commentsContainer, commentsPagination, postIndex) {
+        // Add edit and delete functionality for comments
         commentsContainer.querySelectorAll('.edit-comment').forEach((editIcon, index) => {
             editIcon.addEventListener('click', (e) => {
                 e.preventDefault();
-                const commentText = commentsToDisplay[index].commentText;
+                const commentText = submissionData.comments[index].commentText;
                 const commentParagraph = commentsContainer.querySelectorAll('.comment-text')[index];
     
                 // Replace comment text with an editable input
@@ -364,12 +407,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Add save functionality
                 saveIcon.addEventListener('click', () => {
                     const updatedComment = commentParagraph.querySelector('textarea').value.trim();
-                    
+    
                     if (updatedComment) {
                         // Update the comment in the data array
                         submissionData.comments[index].commentText = updatedComment;
                         submissionData.comments[index].date = new Date().toLocaleString(); // Update the date
-                        loadComments(submissionData, commentsContainer, commentsPagination); // Re-render comments
+                        loadComments(submissionData, commentsContainer, commentsPagination, postIndex); // Re-render comments
                     } else {
                         Swal.fire({
                             title: "Error",
@@ -381,7 +424,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     
-        // Attach event listeners for each comment's delete icon
         commentsContainer.querySelectorAll('.delete-comment').forEach((deleteIcon, index) => {
             deleteIcon.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -396,38 +438,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (result.isConfirmed) {
                         // Remove the comment from the data array
                         submissionData.comments.splice(index, 1);
-                        loadComments(submissionData, commentsContainer, commentsPagination); // Re-render comments
+                        loadComments(submissionData, commentsContainer, commentsPagination, postIndex); // Re-render comments
                     }
                 });
             });
         });
-    
-        // Render comment pagination
-        commentsPagination.innerHTML = '';
-        const totalCommentPages = Math.ceil(submissionData.comments.length / commentsPerPage);
-    
-        if (submissionData.currentCommentPage > 1) {
-            const prevButton = document.createElement('button');
-            prevButton.className = 'btn btn-sm btn-secondary me-1';
-            prevButton.innerText = 'Previous';
-            prevButton.addEventListener('click', () => {
-                submissionData.currentCommentPage--;
-                loadComments(submissionData, commentsContainer, commentsPagination);
-            });
-            commentsPagination.appendChild(prevButton);
-        }
-    
-        if (submissionData.currentCommentPage < totalCommentPages) {
-            const nextButton = document.createElement('button');
-            nextButton.className = 'btn btn-sm btn-secondary';
-            nextButton.innerText = 'Next';
-            nextButton.addEventListener('click', () => {
-                submissionData.currentCommentPage++;
-                loadComments(submissionData, commentsContainer, commentsPagination);
-            });
-            commentsPagination.appendChild(nextButton);
-        }
     }
+    
     
     
 
