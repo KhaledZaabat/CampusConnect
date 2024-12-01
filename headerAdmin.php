@@ -29,21 +29,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active"><a class="nav-link" href="AdminHome.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="AdminHome.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AdminNews.php">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CanteenManagement.php">Canteen Schedule</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
                             <li class="dropdown-header">Maintenance Services</li>
-                            <li><a class="dropdown-item" href="ReceivingIssues.html">Manage Issues</a></li>
-                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
+                            <li><a class="dropdown-item" href="ReceivingIssues.php">Manage Issues</a></li>
+                            <li><a class="dropdown-item" href="lostfound.php">Lost&Found items</a></li>
                             <li class="dropdown-header">Housing Services</li>
                             <li><a class="dropdown-item" href="#">Book Rooms</a></li>
-                            <li><a class="dropdown-item" href="roomRequests.html">Change Rooms</a></li>
+                            <li><a class="dropdown-item" href="roomRequests.php">Change Rooms</a></li>
                             <li class="dropdown-header">Users</li>
-                            <li><a class="dropdown-item" href="crudstud.html"> Manage Students</a></li>
-                            <li><a class="dropdown-item" href="crudadmin.html"> Manage Employees</a></li>
+                            <li><a class="dropdown-item" href="crudstud.php"> Manage Students</a></li>
+                            <li><a class="dropdown-item" href="crudadmin.php"> Manage Employees</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -52,14 +52,14 @@
                         <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="UserProfile.html">Profile</a></li>
+                        <li><a class="dropdown-item" href="UserProfile.php">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Sign out</a></li>
                     </ul>
                 </div>
                 <ul class="navbar-nav d-lg-none">
                     <li><hr class="dropdown-divider my-1"></li>
-                    <li class="nav-item"><a class="nav-link" href="StudentProfile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="StudentProfile.php">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
                 </ul>
             </div>

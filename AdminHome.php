@@ -129,8 +129,8 @@
                         <h3>Manage Users</h3>
                         <p>Oversee Users registrations, accommodations, and profiles.</p>
                         <div class="card-btn-container">
-                            <a href="crudstud.html"><div class="card-btn">Manage Students</div></a>
-                            <a href="crudadmin.html"><div class="card-btn">Manage Employees</div></a>
+                            <a href="crudstud.php"><div class="card-btn">Manage Students</div></a>
+                            <a href="crudadmin.php"><div class="card-btn">Manage Employees</div></a>
                         </div>
                     </div>
                     
@@ -139,7 +139,7 @@
                         <h3>Manage Canteen Menu</h3>
                         <p>Update and organize daily canteen menus for the students.</p>
                         <div class="card-btn-container">
-                            <a href="CanteenManagement.html"><div class="card-btn">Manage Menu</div></a>
+                            <a href="CanteenManagement.php"><div class="card-btn">Manage Menu</div></a>
                         </div>
                     </div>
                     
@@ -148,7 +148,7 @@
                         <h3>Manage News</h3>
                         <p>Create and publish campus news and announcements.</p>
                         <div class="card-btn-container">
-                            <a href="AdminNews.html"><div class="card-btn">Update News</div></a>
+                            <a href="AdminNews.php"><div class="card-btn">Update News</div></a>
                         </div>
                     </div>
                     
@@ -157,8 +157,8 @@
                         <h3>Manage Other Services</h3>
                         <p>Oversee maintenance requests, housing services, and more.</p>
                         <div class="card-btn-container">
-                            <a href="changeRoom.html"><div class="card-btn">Manage Rooms</div></a>
-                            <a href="ReceivingIssues.html"><div class="card-btn">Students Issues</div></a>
+                            <a href="changeRoom.php"><div class="card-btn">Manage Rooms</div></a>
+                            <a href="ReceivingIssues.php"><div class="card-btn">Students Issues</div></a>
                         </div>
                     </div>
                 </div>

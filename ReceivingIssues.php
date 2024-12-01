@@ -70,7 +70,7 @@
                 <!-- Profile and Sign-out links for smaller screens(phone) -->
                 <ul class="navbar-nav d-lg-none">
                     <li><hr class="dropdown-divider my-1"></li>
-                    <li class="nav-item"><a class="nav-link" href="UserProfile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="UserProfile.php">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
                 </ul>
             </div>
