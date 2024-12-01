@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Get all the nav items
-    const navItems = document.querySelectorAll(".nav-item");
+    const navItems = document.querySelectorAll(".nav-item","dropdown-toggle");
+    navItems.forEach(nav => nav.classList.remove("active"));
 
     // load the active nav item from LocalStorage
     const activeNavIndex = localStorage.getItem("activeNav");
