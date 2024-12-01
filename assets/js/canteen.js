@@ -1,10 +1,8 @@
 let editB = document.querySelector(".edit");
-  let inputFields = document.querySelectorAll("input[disabled]");
-  
-  // Store the initial values of the inputs
-  let initialValues = Array.from(inputFields).map(input => input.value);
-  
   editB.addEventListener("click", function() {
+    let inputFields = document.querySelectorAll("input");
+    // Store the initial values of the inputs
+    let initialValues = Array.from(inputFields).map(input => input.value);
     if (editB.textContent === "Edit") {
       // Enable all input fields
       inputFields.forEach(input => { input.disabled = false; });
@@ -13,7 +11,7 @@ let editB = document.querySelector(".edit");
       // Show SweetAlert confirmation dialog
       Swal.fire({
         title: "Do you want to save the changes?",
-        showDenyButton: true,
+        showDenyButton: false,
         showCancelButton: true,
         confirmButtonText: "Save",
         denyButtonText: `Don't save`

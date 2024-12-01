@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
 
-
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
@@ -54,24 +53,23 @@
                         <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="UserProfile.html">Profile</a></li>
+                        <li><a class="dropdown-item" href="StudentProfile.html">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Sign out</a></li>
                     </ul>
                 </div>
                 
-
+  
                 <!-- Profile and Sign-out links for smaller screens(phone) -->
                 <ul class="navbar-nav d-lg-none">
                     <li><hr class="dropdown-divider my-1"></li>
-                    <li class="nav-item"><a class="nav-link" href="StudentProfile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="UserProfile.html">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-</header>
-
+  </header>
 
 <body>
     <div class="form-new">
@@ -135,11 +133,8 @@
             
         </div>
     </div>
+
 </body>
-
-
-
-
 
 <footer class="page-footer custom-bg-black">
     <div class="test">
@@ -180,7 +175,5 @@
         <p>©ENSIA. All Rights Reserved.</p>
     </div>
 </footer>
-
-
 
 </html>

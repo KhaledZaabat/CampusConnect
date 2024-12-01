@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Managing Issues</title> <!-- Static title for the Home page -->
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
-    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
-    <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
-    <link rel="stylesheet" href="assets/css/RecivingIssues.css"> <!-- custom css -->
+    <title>News Details</title> <!-- Static title for the News Details page -->
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- Fonts -->
+    <link rel="stylesheet" href="assets/css/styles.css"> <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/NewsDetails.css"> <!-- Custom CSS for News Details -->
+
     <link rel="icon" href="assets/img/logo.png" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- font awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
-        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
-
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
@@ -36,24 +25,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active"><a class="nav-link" href="AdminHome.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Canteen.html">Canteen Schedule</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
                             <li class="dropdown-header">Maintenance Services</li>
-                            <li><a class="dropdown-item" href="ReceivingIssues.html">Manage Issues</a></li>
+                            <li><a class="dropdown-item" href="ReportIssues.html">Report Issues</a></li>
                             <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
                             <li class="dropdown-header">Housing Services</li>
-                            <li><a class="dropdown-item" href="#">Book Rooms</a></li>
-                            <li><a class="dropdown-item" href="roomRequests.html">Change Rooms</a></li>
-                            <li class="dropdown-header">Users</li>
-                            <li><a class="dropdown-item" href="crudstud.html"> Manage Students</a></li>
-                            <li><a class="dropdown-item" href="crudadmin.html"> Manage Employees</a></li>
+                            <li><a class="dropdown-item" href="BookRoom.html">Book Rooms</a></li>
+                            <li><a class="dropdown-item" href="changeRoom.html">Change Rooms</a></li>
                         </ul>
                     </li>
                 </ul>
+
                 <!-- profile section for pc -->
                 <div class="dropdown d-none d-lg-block me-3">
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,7 +57,7 @@
                 <!-- Profile and Sign-out links for smaller screens(phone) -->
                 <ul class="navbar-nav d-lg-none">
                     <li><hr class="dropdown-divider my-1"></li>
-                    <li class="nav-item"><a class="nav-link" href="UserProfile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="StudentProfile.html">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
                 </ul>
             </div>
@@ -79,23 +66,21 @@
 </header>
 
 <body>
-    <main>
-        <div class="container mt-5">
-            <h1 class="text-center">Received Issue Reports</h1>
-            <div class="mb-3 text-end">
-                <button class="btn btn-filter" onclick="filterIssues('approved')">Show Approved</button>
-                <button class="btn btn-filter" onclick="filterIssues('declined')">Show Declined</button>
-                <button class="btn btn-filter" onclick="filterIssues('pending')">Show Pending</button>
-            </div>
-            <div class="issues-container mt-3" id="issues-container">
-                <!-- Cards will be dynamically generated here -->
-            </div>
+    <header class="news-header text-center">
+        <h1 class="news-title">Recruitment announcement – Assistant Professors (MA) September 2024</h1>
+        <div class="news-header-date">
+            09, September 2002
         </div>
-    </main>
+    </header>
+    <div class="container mt-4"> <!-- Adjust margin here -->
+        <p class="news-desc text-start">
+            The National School of Artificial Intelligence is organizing a recruitment competition for the position of Assistant Professor, in the specialties listed in the table below, for the year 2024.
+            Applications must be submitted online through the PROGRES September September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September 
+        </p>
+    </div>
 
-    <div class="footer-spacing"></div> <!-- Spacing before the footer -->
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
-
 
 <footer class="page-footer custom-bg-black">
     <div class="test">
@@ -136,12 +121,5 @@
         <p>©ENSIA. All Rights Reserved.</p>
     </div>
 </footer>
-
-
-
-
-
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/RevivingIssues.js"></script>
 
-</html>

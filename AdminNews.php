@@ -20,7 +20,6 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
-
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
@@ -63,7 +62,7 @@
                     </ul>
                 </div>
                 
-
+  
                 <!-- Profile and Sign-out links for smaller screens(phone) -->
                 <ul class="navbar-nav d-lg-none">
                     <li><hr class="dropdown-divider my-1"></li>
@@ -73,10 +72,10 @@
             </div>
         </div>
     </nav>
-</header>
-
+  </header>
 
 <body>
+
     <div class="news-header">
         <h1>News</h1>
         <div class="News-header-content">
@@ -94,11 +93,8 @@
     <div id="news-container" class="news-container"></div>
 
     <div id="pagination-controls" class="pagination-controls"></div>
-    <a href="AddNews.html" class="fixed-button">+</a>
+    <a href="AddNews.php" class="fixed-button">+</a>
 </body>
-
-
-
 <footer class="page-footer custom-bg-black">
     <div class="test">
         <div class="wrapper">
@@ -138,7 +134,6 @@
         <p>©ENSIA. All Rights Reserved.</p>
     </div>
 </footer>
-
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/NewsAdmin.js"></script>
 </html>

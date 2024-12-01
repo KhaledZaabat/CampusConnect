@@ -15,56 +15,61 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
 
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
-            <div class="container">
-                <a class="navbar-brand-logo" href="#">
-                    <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
-                </a>
-                <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
-                    <span class="visually-hidden">Toggle navigation</span>
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navcol-1">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item active"><a class="nav-link" href="AdminHome.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
-                        <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
-                            <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                                <li class="dropdown-header">Maintenance Services</li>
-                                <li><a class="dropdown-item" href="ReceivingIssues.html">Manage Issues</a></li>
-                                <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
-                                <li class="dropdown-header">Housing Services</li>
-                                <li><a class="dropdown-item" href="#">Book Rooms</a></li>
-                                <li><a class="dropdown-item" href="roomRequests.html">Change Rooms</a></li>
-                                <li class="dropdown-header">Users</li>
-                                <li><a class="dropdown-item" href="crudstud.html"> Manage Students</a></li>
-                                <li><a class="dropdown-item" href="crudadmin.html"> Manage Employees</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="dropdown d-none d-lg-block me-3">
-                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="UserProfile.html">Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+<header>
+    <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
+        <div class="container">
+            <a class="navbar-brand-logo" href="#">
+                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
+            </a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item active"><a class="nav-link" href="AdminHome.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-item nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li class="dropdown-header">Maintenance Services</li>
+                            <li><a class="dropdown-item" href="ReceivingIssues.html">Manage Issues</a></li>
+                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
+                            <li class="dropdown-header">Housing Services</li>
+                            <li><a class="dropdown-item" href="#">Book Rooms</a></li>
+                            <li><a class="dropdown-item" href="roomRequests.html">Change Rooms</a></li>
+                            <li class="dropdown-header">Users</li>
+                            <li><a class="dropdown-item" href="crudstud.html"> Manage Students</a></li>
+                            <li><a class="dropdown-item" href="crudadmin.html"> Manage Employees</a></li>
                         </ul>
-                    </div>
-                    <ul class="navbar-nav d-lg-none">
-                        <li><hr class="dropdown-divider my-1"></li>
-                        <li class="nav-item"><a class="nav-link" href="StudentProfile.html">Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
+                    </li>
+                </ul>
+                <!-- profile section for pc -->
+                <div class="dropdown d-none d-lg-block me-3">
+                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="StudentProfile.html">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
                     </ul>
                 </div>
+                
+  
+                <!-- Profile and Sign-out links for smaller screens(phone) -->
+                <ul class="navbar-nav d-lg-none">
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li class="nav-item"><a class="nav-link" href="UserProfile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
+                </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+  </header>
+
+<body>
 
     <main class="page">
         <div class="container mt-5">
@@ -124,8 +129,8 @@
                         <h3>Manage Users</h3>
                         <p>Oversee Users registrations, accommodations, and profiles.</p>
                         <div class="card-btn-container">
-                            <a href="crudstud.html"><div class="card-btn">Manage Students</div></a>
-                            <a href="crudadmin.html"><div class="card-btn">Manage Employees</div></a>
+                            <a href="crudstud.php"><div class="card-btn">Manage Students</div></a>
+                            <a href="crudadmin.php"><div class="card-btn">Manage Employees</div></a>
                         </div>
                     </div>
                     
@@ -134,7 +139,7 @@
                         <h3>Manage Canteen Menu</h3>
                         <p>Update and organize daily canteen menus for the students.</p>
                         <div class="card-btn-container">
-                            <a href="CanteenManagement.html"><div class="card-btn">Manage Menu</div></a>
+                            <a href="CanteenManagement.php"><div class="card-btn">Manage Menu</div></a>
                         </div>
                     </div>
                     
@@ -143,7 +148,7 @@
                         <h3>Manage News</h3>
                         <p>Create and publish campus news and announcements.</p>
                         <div class="card-btn-container">
-                            <a href="AdminNews.html"><div class="card-btn">Update News</div></a>
+                            <a href="AdminNews.php"><div class="card-btn">Update News</div></a>
                         </div>
                     </div>
                     
@@ -152,8 +157,8 @@
                         <h3>Manage Other Services</h3>
                         <p>Oversee maintenance requests, housing services, and more.</p>
                         <div class="card-btn-container">
-                            <a href="changeRoom.html"><div class="card-btn">Manage Rooms</div></a>
-                            <a href="ReceivingIssues.html"><div class="card-btn">Students Issues</div></a>
+                            <a href="changeRoom.php"><div class="card-btn">Manage Rooms</div></a>
+                            <a href="ReceivingIssues.php"><div class="card-btn">Students Issues</div></a>
                         </div>
                     </div>
                 </div>
@@ -163,6 +168,8 @@
     </main>
 
     <div class="footer-spacing"></div> <!-- Spacing before the footer -->
+
+
 </body>
 
 <footer class="page-footer custom-bg-black">

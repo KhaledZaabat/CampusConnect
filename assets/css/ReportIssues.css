@@ -1,5 +1,5 @@
 body {
-    padding-top: 125px; /* Ensures form is below the navbar */
+    /* padding-top: 125px;  */
     background-color: #0f0b32;
     display: flex;
     flex-direction: column; /* Stack content vertically */
