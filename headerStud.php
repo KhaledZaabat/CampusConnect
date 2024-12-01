@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home</title> <!-- Static title for the Home page -->
+    <title><?php echo "Home"; ?></title> <!-- Dynamic title -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
     <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
@@ -27,18 +27,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Canteen.html">Canteen Schedule</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.php">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Canteen.php">Canteen Schedule</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
                             <li class="dropdown-header">Maintenance Services</li>
-                            <li><a class="dropdown-item" href="ReportIssues.html">Report Issues</a></li>
-                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
+                            <li><a class="dropdown-item" href="ReportIssues.php">Report Issues</a></li>
+                            <li><a class="dropdown-item" href="lostfound.php">Lost&Found items</a></li>
                             <li class="dropdown-header">Housing Services</li>
-                            <li><a class="dropdown-item" href="BookRoom.html">Book Rooms</a></li>
-                            <li><a class="dropdown-item" href="changeRoom.html">Change Rooms</a></li>
+                            <li><a class="dropdown-item" href="BookRoom.php">Book Rooms</a></li>
+                            <li><a class="dropdown-item" href="changeRoom.php">Change Rooms</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -49,7 +49,7 @@
                         <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="StudentProfile.html">Profile</a></li>
+                        <li><a class="dropdown-item" href="StudentProfile.php">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Sign out</a></li>
                     </ul>
@@ -59,64 +59,13 @@
                 <!-- Profile and Sign-out links for smaller screens(phone) -->
                 <ul class="navbar-nav d-lg-none">
                     <li><hr class="dropdown-divider my-1"></li>
-                    <li class="nav-item"><a class="nav-link" href="StudentProfile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="StudentProfile.php">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-
-<body>
-    
-    <!-- Additional content -->
-
-    <div class="footer-spacing"></div> <!-- Spacing before the footer -->
-</body>
-
-<footer class="page-footer custom-bg-black">
-    <div class="test">
-        <div class="wrapper">
-            <div class="button">
-                <div class="icon"><i class="fab fa-facebook-f"></i></div>
-                <span>Facebook</span>
-            </div>
-
-            <div class="button">
-                <div class="icon"><i class="fab fa-twitter"></i></div>
-                <span>Twitter</span>
-            </div>
-
-            <div class="button">
-                <div class="icon"><i class="fab fa-youtube"></i></div>
-                <span>Youtube</span>
-            </div>
-
-            <div class="button">
-                <div class="icon"><i class="fab fa-github"></i></div>
-                <span>Github</span>
-            </div>
-            
-            <div class="button">
-                <div class="icon"><i class="fab fa-instagram"></i></div>
-                <span>Instagram</span>
-            </div>
-        </div>
-
-        <div class="footer-image">
-            <img src="assets/img/logo.png" alt="Footer Image" />
-        </div>
-
-    </div>
-    
-    <div class="text-center custom-bg-black p-1">
-        <p>©ENSIA. All Rights Reserved.</p>
-    </div>
-</footer>
-
-
-
-
 
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </html>
