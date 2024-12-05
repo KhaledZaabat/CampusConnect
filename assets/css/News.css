@@ -6,7 +6,9 @@ body {
     position: relative; 
     overflow-x: hidden; 
 }
-
+#search-button{
+    display: none;
+}
 .news-header {
     background-color: #4a6fa5;
     display: grid;
@@ -174,7 +176,7 @@ body {
 }
 
 .search-input {
-    padding: 8px 12px;
+    padding: 10px 14px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 20px;
@@ -182,6 +184,8 @@ body {
     outline: none;
     margin-right: 5px;
     transition: all 0.3s ease;
+    margin-left: -4.5%;
+
 }
 
 .search-input:focus {
