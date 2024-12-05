@@ -21,14 +21,14 @@
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
-        
+
 </head>
 
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
             <a class="navbar-brand-logo" href="#">
-                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
+                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo">
             </a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
@@ -40,7 +40,8 @@
                     <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
                     <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Services</a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
                             <li class="dropdown-header">Maintenance Services</li>
                             <li><a class="dropdown-item" href="ReceivingIssues.html">Manage Issues</a></li>
@@ -56,20 +57,25 @@
                 </ul>
                 <!-- profile section for pc -->
                 <div class="dropdown d-none d-lg-block me-3">
-                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="StudentProfile.html">Profile</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a class="dropdown-item" href="#">Sign out</a></li>
                     </ul>
                 </div>
-                
+
 
                 <!-- Profile and Sign-out links for smaller screens(phone) -->
                 <ul class="navbar-nav d-lg-none">
-                    <li><hr class="dropdown-divider my-1"></li>
+                    <li>
+                        <hr class="dropdown-divider my-1">
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="UserProfile.php">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
                 </ul>
@@ -119,7 +125,7 @@
                 <div class="icon"><i class="fab fa-github"></i></div>
                 <span>Github</span>
             </div>
-            
+
             <div class="button">
                 <div class="icon"><i class="fab fa-instagram"></i></div>
                 <span>Instagram</span>
@@ -131,7 +137,7 @@
         </div>
 
     </div>
-    
+
     <div class="text-center custom-bg-black p-1">
         <p>©ENSIA. All Rights Reserved.</p>
     </div>
@@ -143,5 +149,12 @@
 
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/RevivingIssues.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
 </html>

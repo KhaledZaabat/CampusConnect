@@ -10,7 +10,6 @@ function previewImage(event) {
     
     // Update the image source for preview
     previewImg.src = URL.createObjectURL(event.target.files[0]);
-    
     // Optionally hide the upload icon and text after the image is uploaded
     uploadIcon.style.display = 'none';
     uploadText.innerHTML = 'Image selected!';
