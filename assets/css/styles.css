@@ -21,10 +21,10 @@ body{
     background-size: 100% 2px; /* Underline grows from left to right */
 }
 
-.nav-link.active {
-    font-weight: bold; /* Bold for active link */
+.nav-item.active .nav-link {
     background-size: 100% 2px; /* Keep underline for active link */
 }
+
 
 .custom-bg-black {
     background-color: black !important; /* Ensure it's purely black */

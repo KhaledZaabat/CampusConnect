@@ -1,7 +1,5 @@
 body {
     background-color: #0f0b32;
-    margin: 0;
-    padding-top: 125px;
 }
 
 h1 {
@@ -125,3 +123,35 @@ input[type="text"] {
 /* .canteenTable tr:hover td:not(:first-child) {
     background-color: #e2e2e2;
 } */
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Align buttons to left and right */
+}
+
+button.add {
+    color:#3d8aab;
+    font-size: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+    padding: 5px 10px;
+}
+button.add:hover {
+    color: #0f0b32;
+    transform: scale(1.2);
+}
+
+button.Delete {
+    color: #dc3545;
+    font-size: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+}
+button.Delete:hover {
+    color: #000000;
+    transform: scale(1.2);
+}

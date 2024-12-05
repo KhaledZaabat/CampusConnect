@@ -73,11 +73,12 @@
         <h2>Available Rooms</h2>
         <input type="text" class="search-input form-control" id="search" placeholder="Search for rooms...">
         <table class="table">
-                <tr>
-                    <th>Dorm Block</th>
-                    <th>Floor</th>
-                    <th>Room Number</th>
-                </tr>
+            <tr>
+                <th data-column="block" class="sortable">Dorm Block <span class="sort-icon">⇅</span></th>
+                <th data-column="floor" class="sortable">Floor <span class="sort-icon">⇅</span></th>
+                <th data-column="number" class="sortable">Room Number <span class="sort-icon">⇅</span></th>
+            </tr>
+            
             <tbody id="room-table-body">
                
                 <tr>
@@ -222,13 +223,11 @@
         </div>
     </div>
     
-
-
+    
     <div class="Form-container">
-        <h1>Change Room Request Form</h1>
-        <form action="#" method="post" >
-
-            <!-- New Room Preferences -->
+        <h1>Book a Room</h1>
+        <form id="book-room-form" action="#" method="post">
+            <!-- Dorm Block Preference -->
             <label for="dorm-block">Dorm Block Preference</label>
             <select id="dorm-block" name="dorm-block">
                 <option value="A">A</option>
@@ -254,18 +253,25 @@
             <input type="number" id="room-number" name="room-number" min="1" max="40">
             <div id="room-number-error" class="error-message">You must fill in this field.</div>
 
-            <!-- Reason for Change -->
-            <label for="reason">Reason for Change (must be convenient)</label>
-<textarea id="reason" name="reason" rows="4"></textarea>
-<div id="reason-error" class="error-message">You must provide a reason for the change.</div>
+            <!-- Reason for Booking -->
+            <label for="reason">Reason for Booking</label>
+            <select id="reason" name="reason">
+                <option value="1st-year">1st Year Student</option>
+                <option value="another-dorm">Came from Another Dorm</option>
+                <option value="special-duration">Just to Use the Dorms for Special Duration</option>
+            </select>
 
+            <!-- Special Requirements -->
+            <label for="special-requirements">Special Requirements (if any)</label>
+            <textarea id="special-requirements" name="special-requirements" rows="4"></textarea>
 
-            <!-- Confirmation -->
-                <label class="checkbox">
-                    I confirm that the information provided is correct and understand that my request will be reviewed.
-                    <input type="checkbox" name="confirm" id="confirm-checkbox">
-                </label>
-                <div id="checkbox-error" class="error-message">You must confirm that the information provided is correct.</div>
+            <!-- Confirmation Checkbox -->
+            <label class="checkbox">
+                I confirm that the information provided is correct.
+                <input type="checkbox" name="confirm" id="confirm-checkbox">
+            </label>
+            <div id="checkbox-error" class="error-message">You must confirm that the information provided is correct.</div>
+            
 
             <!-- Submit Button -->
             <button class="submit" type="submit">Submit</button>

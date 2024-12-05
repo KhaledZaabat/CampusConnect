@@ -140,7 +140,7 @@
             <tbody id="student-table-body">
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput idinput" value="1" disabled></td>
                     <td><input type="text" class="tableinput name" value="John" disabled></td>
                     <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
@@ -155,7 +155,7 @@
                 </tr>
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput idinput" value="2" disabled></td>
                     <td><input type="text" class="tableinput name" value="Jane" disabled></td>
                     <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
@@ -170,7 +170,7 @@
                 </tr>
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput idinput" value="1" disabled></td>
                     <td><input type="text" class="tableinput name" value="John" disabled></td>
                     <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
@@ -185,7 +185,7 @@
                 </tr>
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput idinput" value="2" disabled></td>
                     <td><input type="text" class="tableinput name" value="Jane" disabled></td>
                     <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
@@ -200,7 +200,7 @@
                 </tr>
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput idinput" value="1" disabled></td>
                     <td><input type="text" class="tableinput name" value="John" disabled></td>
                     <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
@@ -215,7 +215,7 @@
                 </tr>
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput idinput" value="2" disabled></td>
                     <td><input type="text" class="tableinput name" value="Jane" disabled></td>
                     <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
@@ -230,7 +230,7 @@
                 </tr>
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput idinput" value="1" disabled></td>
                     <td><input type="text" class="tableinput name" value="John" disabled></td>
                     <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
@@ -245,7 +245,7 @@
                 </tr>
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="2" disabled></td>
+                    <td><input type="text" class="tableinput idinput" value="2" disabled></td>
                     <td><input type="text" class="tableinput name" value="Jane" disabled></td>
                     <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
@@ -260,7 +260,7 @@
                 </tr>
                 <tr>
                     <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
+                    <td><input type="text" class="tableinput idinput" value="1" disabled></td>
                     <td><input type="text" class="tableinput name" value="John" disabled></td>
                     <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>

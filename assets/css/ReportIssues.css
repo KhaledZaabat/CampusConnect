@@ -1,5 +1,5 @@
 body {
-    padding-top: 125px; /* Ensures form is below the navbar */
+    /* padding-top: 125px;  */
     background-color: #0f0b32;
     display: flex;
     flex-direction: column; /* Stack content vertically */
@@ -81,6 +81,20 @@ textarea {
 footer {
     margin-top: 50px; /* Push footer to the bottom */
 }
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-bottom: 5px; /* Add some margin below the error */
+    display: none; /* Initially hide error messages */
+}
+
+input.error, select.error, textarea.error {
+    border: 1px solid red; /* Highlight the border in red */
+    outline: none; /* Remove default outline */
+}
+
+ 
 
 /* Responsive Styles */
 @media (max-width: 768px) {

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
     <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
     <link rel="stylesheet" href="assets/css/HOME.css"> <!-- custom css -->
+    <script src="assets/js/navbar.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/Home.js"></script>
 
@@ -30,18 +31,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Canteen.html">Canteen Schedule</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.php">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Canteen.php">Canteen Schedule</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
                             <li class="dropdown-header">Maintenance Services</li>
-                            <li><a class="dropdown-item" href="ReportIssues.html">Report Issues</a></li>
-                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
+                            <li><a class="dropdown-item" href="ReportIssues.php">Report Issues</a></li>
+                            <li><a class="dropdown-item" href="lostfound.php">Lost&Found items</a></li>
                             <li class="dropdown-header">Housing Services</li>
-                            <li><a class="dropdown-item" href="BookRoom.html">Book Rooms</a></li>
-                            <li><a class="dropdown-item" href="changeRoom.html">Change Rooms</a></li>
+                            <li><a class="dropdown-item" href="BookRoom.php">Book Rooms</a></li>
+                            <li><a class="dropdown-item" href="changeRoom.php">Change Rooms</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -52,7 +53,7 @@
                         <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="StudentProfile.html">Profile</a></li>
+                        <li><a class="dropdown-item" href="StudentProfile.php">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Sign out</a></li>
                     </ul>
@@ -62,7 +63,7 @@
                 <!-- Profile and Sign-out links for smaller screens(phone) -->
                 <ul class="navbar-nav d-lg-none">
                     <li><hr class="dropdown-divider my-1"></li>
-                    <li class="nav-item"><a class="nav-link" href="StudentProfile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="StudentProfile.php">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
                 </ul>
             </div>
@@ -96,7 +97,7 @@
                             <span class="card-date">October 12, 2024</span>
                             <h5 class="card-title">News One</h5>
                             <p class="card-text">Get the latest updates on dorm activities, events, and important announcements.</p>
-                            <a href="newsDetails.html" class="btn btn-primary">Learn More</a>
+                            <a href="newsDetails.php" class="btn btn-primary">Learn More</a>
                         </div>
                     </div>
 
@@ -106,7 +107,7 @@
                             <span class="card-date">October 11, 2024</span>
                             <h5 class="card-title">News Two</h5>
                             <p class="card-text">Manage your dorm room services and stay on top of your requests with ease.</p>
-                            <a href="newsDetails.html" class="btn btn-primary">Learn More</a>
+                            <a href="newsDetails.php" class="btn btn-primary">Learn More</a>
                         </div>
                     </div>
 
@@ -116,13 +117,13 @@
                             <span class="card-date">October 10, 2024</span>
                             <h5 class="card-title">News Three</h5>
                             <p class="card-text">Connect with fellow students and stay engaged with dorm life activities.</p>
-                            <a href="newsDetails.html" class="btn btn-primary">Learn More</a>
+                            <a href="newsDetails.php" class="btn btn-primary">Learn More</a>
                         </div>
                     </div>
 
                 </div>
                   <!-- Add a "View All News" button here -->
-                  <a href="news.html" class="btn-view-all-news">
+                  <a href="news.php" class="btn-view-all-news">
                     View All News <span class="arrow">→</span>
                 </a>
             </div>
@@ -135,7 +136,7 @@
                 </div>
                 <div class="services-blocks content">
                     
-                    <a class="noUnderLine" href="BookRoom.html">
+                    <a class="noUnderLine" href="BookRoom.php">
                         <div class="service-block content">
                             <i class="fas fa-bed service-icon"></i>
                             <h3>Room Booking</h3>
@@ -143,7 +144,7 @@
                         </div>
                     </a>
                     
-                    <a class="noUnderLine" href="Canteen.html">
+                    <a class="noUnderLine" href="Canteen.php">
                         <div class="service-block content">
                             <i class="fas fa-utensils service-icon"></i>
                             <h3>Food & Dining</h3>
@@ -151,7 +152,7 @@
                         </div>
                     </a>
                     
-                    <a class="noUnderLine" href="ReportIssues.html">
+                    <a class="noUnderLine" href="ReportIssues.php">
                         <div class="service-block content">
                             <i class="fas fa-tools service-icon"></i>
                             <h3>Maintenance Requests</h3>
@@ -159,7 +160,7 @@
                         </div>
                     </a>
                     
-                    <a class="noUnderLine" href="lostfound.html">
+                    <a class="noUnderLine" href="lostfound.php">
                         <div class="service-block content">
                             <i class="fas fa-search service-icon"></i>
                             <h3>Lost & Found</h3>
@@ -171,6 +172,7 @@
                 </div>
             </div>
         </div>
+
     </main>
 
     <div class="footer-spacing"></div> <!-- Spacing before the footer -->

@@ -78,6 +78,8 @@
             Applications must be submitted online through the PROGRES September September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September  September 
         </p>
     </div>
+
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 <footer class="page-footer custom-bg-black">
@@ -119,6 +121,5 @@
         <p>©ENSIA. All Rights Reserved.</p>
     </div>
 </footer>
-
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 

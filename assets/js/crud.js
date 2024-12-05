@@ -385,7 +385,7 @@ function addRowToTable(formData, type) {
     if (type === 'student') {
         newRow.innerHTML = `
             <td><img src="${formData.image || 'assets/img/default.jpg'}" alt="${formData.firstName}" class="student-img"></td>
-            <td><input type="text" class="tableinput" value="${formData.StudentID}" disabled></td>
+            <td><input type="text" class="tableinput idinput" value="${formData.StudentID}" disabled></td>
             <td><input type="text" class="tableinput name" value="${formData.firstName}" disabled></td>
             <td><input type="text" class="tableinput name Lname" value="${formData.lastName}" disabled></td>
             <td><input type="text" class="tableinput emailinput" value="${formData.email}" disabled></td>
@@ -401,7 +401,7 @@ function addRowToTable(formData, type) {
     } else if (type === 'admin') {
         newRow.innerHTML = `
             <td><img src="${formData.image}" alt="${formData.firstName || ''}" class="student-img"></td>
-            <td><input type="text" class="tableinput" value="${formData.UserID}" disabled></td>
+            <td><input type="text" class="tableinput idinput" value="${formData.UserID}" disabled></td>
             <td><input type="text" class="tableinput name" value="${formData.firstName || ''}" disabled></td>
             <td><input type="text" class="tableinput name Lname" value="${formData.lastName || ''}" disabled></td>
             <td><input type="text" class="tableinput emailinput" value="${formData.email || ''}" disabled></td>

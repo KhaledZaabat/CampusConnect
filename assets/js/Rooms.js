@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     form.addEventListener('submit', function (event) {
         let isValid = true;
-
+        event.preventDefault();
         // Validate room number
         if (roomNumber.value.trim() === '') {
             roomNumber.classList.add('input-error');
@@ -81,11 +81,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function filterRooms(searchTerm) {
         return rooms.filter(room => {
-            const text = room.textContent.toLowerCase();
-            return text.includes(searchTerm);
+            const block = room.children[0].textContent.trim(); // Get block value
+            const floor = room.children[1].textContent.trim(); // Get floor value
+            const number = room.children[2].textContent.trim(); // Get room number
+    
+            // Create a string representation of the room
+            const roomString = `${block}${floor}${number}`.toLowerCase();
+            
+            return roomString.includes(searchTerm); // Check if search term is in the room string
         });
     }
-
+    
+    // Event listener for the search input
+    function searchRooms() {
+        const searchTerm = searchInput.value.toLowerCase(); // Convert search input to lowercase
+        filteredRooms = filterRooms(searchTerm); // Filter rows based on search
+        currentPage = 1; // Reset to the first page
+        renderTable(); // Render the filtered table
+    }
+    
+    // Attach the event listener
+    searchInput.addEventListener('input', searchRooms);
+    
     function renderTable() {
         const start = (currentPage - 1) * rowsPerPage;
         const end = start + rowsPerPage;
@@ -105,9 +122,22 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('next').disabled = currentPage === numPages;
     }
 
-    function searchRooms() {
-        const searchTerm = searchInput.value.toLowerCase();
-        filteredRooms = filterRooms(searchTerm);
+    // Sorting functionality
+    function sortTable(columnIndex, type = 'text') {
+        filteredRooms.sort((a, b) => {
+            const aText = a.cells[columnIndex].textContent.trim();
+            const bText = b.cells[columnIndex].textContent.trim();
+
+            if (type === 'text') {
+                return aText.localeCompare(bText);
+            } else if (type === 'number') {
+                return parseInt(aText, 10) - parseInt(bText, 10);
+            } else if (type === 'custom') {
+                const order = { R: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5 }; // Custom order for floors
+                return order[aText] - order[bText];
+            }
+        });
+
         currentPage = 1;
         renderTable();
     }
@@ -132,4 +162,30 @@ document.addEventListener('DOMContentLoaded', function () {
     searchInput.addEventListener('input', function () {
         searchRooms();
     });
+
+    // Attach sort event to table headers
+    const tableHeaders = document.querySelectorAll('.available-rooms th');
+    tableHeaders[0].addEventListener('click', () => sortTable(0)); // Sort by Block
+    tableHeaders[1].addEventListener('click', () => sortTable(1, 'custom')); // Sort by Floor
+    tableHeaders[2].addEventListener('click', () => sortTable(2, 'number')); // Sort by Room Number
+
+    document.querySelectorAll('.sortable').forEach(header => {
+        header.addEventListener('click', function () {
+            const column = this.getAttribute('data-column');
+            // const sortOrder = this.classList.contains('sorted-asc') ? 'desc' : 'asc';
+    
+            // Remove sorting styles from other headers
+            document.querySelectorAll('.sortable').forEach(h => {
+                h.classList.remove('sorted-asc');
+                h.querySelector('.sort-icon').textContent = '⇅';
+            });
+    
+            // Apply sorting styles to the clicked header
+            this.classList.add( 'sorted-asc');
+            this.querySelector('.sort-icon').textContent =   '↓';
+    
+            sortTable(column, sortOrder);
+        });
+    });
+    
 });

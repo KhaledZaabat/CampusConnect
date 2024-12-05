@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Report Issues</title> <!-- Static title for the Home page -->
+    <title>News</title> <!-- Static title for the Home page -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> <!-- bootstrap -->
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
+    <link rel="stylesheet" href="assets/css/Rooms.css"> <!-- custom css -->
     <link rel="stylesheet" href="assets/css/ReportIssues.css"> <!-- custom css -->
-    <link rel="stylesheet" href="assets/css/lostfound.css"> <!-- custom css -->
-
     <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
+    <link rel="stylesheet" href="assets/css/News.css">
+
+    <script src="assets/js/navbar.js"></script>
+
+
     <link rel="icon" href="assets/img/logo.png" type="image/png">
     <!-- font awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
 
 <header>
@@ -28,7 +36,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
                     <li class="nav-item"><a class="nav-link" href="Canteen.html">Canteen Schedule</a></li>
                     <li class="nav-item dropdown">
@@ -69,75 +77,28 @@
 </header>
 
 <body>
-    <div class="Form-container">
-        <h1>Campus Problem Declaration Form</h1>
-        <form action="#" method="post" enctype="multipart/form-data">
 
-           
-
-            <!-- Problem Details -->
-            <label for="problem-type">Problem Type</label>
-            <select id="problem-type" name="problem-type" required>
-                <option value="maintenance">Maintenance Issue</option>
-                <option value="roommate">Roommate Issues</option>
-                <option value="noise">Noise Complaints</option>
-                <option value="internet">Internet Issues</option>
-                <option value="cleanliness">Cleanliness/Sanitation</option>
-                <option value="security">Security/Safety Concern</option>
-                <option value="other">Other</option>
-            </select>
-
-            <!-- Problem Description -->
-            <label for="problem-description">Short Description</label>
-            <textarea id="problem-description" name="problem-description" rows="4" required></textarea>
-
-            <!-- Urgency Level -->
-            <label for="urgency">Urgency Level</label>
-            <select id="urgency" name="urgency" required>
-                <option value="low">Low (Can wait a few days)</option>
-                <option value="medium">Medium (Needs to be addressed soon)</option>
-                <option value="high">High (Requires immediate attention)</option>
-            </select>
-
-            <!-- File Upload -->
-             <label for="Media">Add an image (Optional)</label>
-            <div class="form-group mt-2">
-                <label for="file" class="custom-file-upload">
-                    <div class="icon" id="upload-icon">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" fill="#007bff"></path>
-                        </svg>
-                    </div>
-                    <div class="text" id="upload-text">
-                        <span>Click to upload image</span>
-                    </div>
-                    <input id="file" type="file" name="image" accept="image/*" onchange="previewImage(event)">
-                </label>
-                <!--not displayed until the user uploads a -->
-                <div id="image-preview" style="display: none; margin-top: 10px;">
-                    <img id="preview-img" src="" alt="Image Preview" style="max-width: 100px; max-height: 100px;">
-                    <p>Image uploaded!</p>
-                </div>
-            </div>
-            <!-- Reported Before -->
-            <label for="reported-before">Has this been reported before?</label>
-            <select id="reported-before" name="reported-before">
-                <option value="no">No</option>
-                <option value="yes">Yes</option>
-            </select>
-
-            <!-- Confirmation -->
-            <label class="checkbox">
-                <input type="checkbox" name="confirm" required>
-                I confirm that the above information is correct and understand that dorm management will address my issue as soon as possible.
-            </label>
-
-            <!-- Submit Button -->
-            <button type="submit">Submit</button>
-        </form>
+    <div class="news-header">
+        <h1>News</h1>
+        <div class="News-header-content">Stay Connected With The Lastest Happeneings and essentail updates across the
+            university . </div>
     </div>
-</body>
+    <div class="container mt-4">
+        <div class="search-container">
+            <input type="text" id="search-input" class="search-input" placeholder="Search news...">
+            <button id="search-button" class="search-button">Search</button>
+        </div>
+    </div>
 
+    <div id="news-container" class="news-container"></div>
+   
+    
+    </div>
+    <!-- Pagination Controls -->
+<div id="pagination-controls" class="text-center mt-4">
+    <!-- Pagination buttons will be dynamically inserted here -->
+</div>
+</body>
 <footer class="page-footer custom-bg-black">
     <div class="test">
         <div class="wrapper">
@@ -178,6 +139,8 @@
     </div>
 </footer>
 
-
+<script src="assets/js/NewsJs.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+
 </html>
