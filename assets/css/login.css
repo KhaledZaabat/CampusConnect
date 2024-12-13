@@ -117,6 +117,15 @@ body {
     text-decoration: none;
 }
 
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .login-form {
