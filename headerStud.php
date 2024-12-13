@@ -11,10 +11,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="news.php">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Canteen.php">Canteen Schedule</a></li>
-                    <li class="nav-item dropdown">
+                    <li id="nav-item" class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                    <li id="nav-item" class="nav-item"><a class="nav-link" href="news.php">News</a></li>
+                    <li id="nav-item" class="nav-item"><a class="nav-link" href="Canteen.php">Canteen Schedule</a></li>
+                    <li id="nav-drop" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
                             <li class="dropdown-header">Maintenance Services</li>
