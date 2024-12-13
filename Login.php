@@ -1,3 +1,94 @@
+<?php
+// Database configuration
+$host = 'localhost';
+$dbname = 'campus_connect';
+$username = 'root';
+$password = '';
+
+// Start session
+session_start();
+
+// Initialize error variable
+$error = "";
+
+// Connect to the database
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Function to check role and redirect accordingly
+function checkUserRoleAndRedirect($role) {
+    switch ($role) {
+        case 'admin':
+            header("Location: AdminHome.php");
+            break;
+        case 'chef':
+            header("Location: ManageCanteen.php");
+            break;
+        case 'housing':
+            header("Location: roomRequests.php");
+            break;
+        case 'maintenance':
+            header("Location: ReceivingIssues.php");
+            break;
+    }
+    exit();
+}
+
+// Get form data
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = htmlspecialchars($_POST['username']);
+    $password = $_POST['password'];
+
+    // Check user credentials in 'student' table
+    $sql = "SELECT * FROM student WHERE Id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+        // Verify password
+        if (password_verify($password, $user['Password'])) {
+            $_SESSION['user'] = $user;
+            header("Location: index.php"); // Redirect students to index.php
+            exit();
+        } else {
+            $error = "Invalid password.";
+        }
+    } else {
+        // Check user credentials in 'Employee' table
+        $sql = "SELECT * FROM Employee WHERE Id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 1) {
+            $user = $result->fetch_assoc();
+            // Verify password
+            if (password_verify($password, $user['password'])) {
+                $_SESSION['user'] = $user;
+                checkUserRoleAndRedirect($user['Role']); // Check role and redirect
+            } else {
+                $error = "Invalid password.";
+            }
+        } else {
+            $error = "Invalid user.";
+        }
+    }
+
+    $stmt->close();
+}
+
+$conn->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,23 +98,25 @@
     <title>Campus Connect</title>
     <link rel="icon" href="assets/img/logo.png" type="image/png">
     <link rel="stylesheet" href="assets/css/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body> 
-    <form id="loginForm" class="login-form" onsubmit="return validateForm()">
+<body>
+    <form id="loginForm" class="login-form" method="POST">
         <div class="logo-login">
             <img src="assets/img/logo.png" alt="Campus Connect Logo">
         </div>
         <h3 class="title-login">Campus Connect</h3>
 
         <label for="username" class="login-username-label">Username</label>
-        <input type="text" placeholder="BAC ID (202332151212)" id="username" class="input-login">
+        <input type="text" placeholder="202332151212" name="username" id="username" class="input-login">
+        
+        <?php if (!empty($error)) { ?>
+            <span class="error-message"><?= $error ?></span>
+        <?php } ?>
 
         <div class="password-container">
             <label for="password" class="login-password-label">Password</label>
-            <input type="password" placeholder="BAC Password" id="password" class="input-login">
+            <input type="password" placeholder="Password" name="password" id="password" class="input-login">
             <span class="password-icon">
                 <i class="fas fa-eye-slash"></i>
             </span>
@@ -81,14 +174,10 @@
                 return false; // Invalid input
             }
         }
-
-        // Form validation function (called on form submit)
+        
+        // Form validation function
         function validateForm() {
-            // Call both username and password validation functions
-            if (validateUsername() && validatePassword()) {
-                window.location.href = "index.html";
-            }
-            return false; // If either validation fails
+            return validateUsername() && validatePassword();
         }
     </script>
 </body>
