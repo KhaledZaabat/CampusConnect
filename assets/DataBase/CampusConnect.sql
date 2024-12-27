@@ -100,6 +100,7 @@ CREATE TABLE `employee` (
   `firstName` varchar(100) NOT NULL,
   `lastName` varchar(100) NOT NULL,
   `Email` varchar(255) NOT NULL,
+  'Phone' varchar(50) ,
   `Role` varchar(50) NOT NULL,
   `Password` varchar(255) NOT NULL,
   `img_path` varchar(1000) NOT NULL
