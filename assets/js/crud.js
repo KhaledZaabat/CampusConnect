@@ -112,152 +112,153 @@ window.addEventListener('DOMContentLoaded', function() {
     document.querySelector('select[name="bloc"]').addEventListener('change', updateFloorOptions);
 });
 
-// General function to show error message for a given input
-function showError(input, message) {
-    if (input) {
-        input.style.borderColor = 'red'; // Highlight input with red border
-    }
-}
+// // General function to show error message for a given input
+// function showError(input, message) {
+//     if (input) {
+//         input.style.borderColor = 'red'; // Highlight input with red border
+//     }
+// }
 
-// Reset error message and border style
-function resetError(input) {
-    if (input) {
-        input.style.borderColor = ''; // Reset border color
-    }
-}
+// // Reset error message and border style
+// function resetError(input) {
+//     if (input) {
+//         input.style.borderColor = ''; // Reset border color
+//     }
+// }
 
-// Validate the Student ID
-function validateStudentID(input) {
-    if (!input) {
-        console.error("Student ID input field not found.");
-        return false;
-    }
-    let value = input.value.trim();
-    let pattern = /^\d{9}/; // Student ID should be at least 9 digits
-    if (!pattern.test(value)) {
-        showError(input, "Student ID must be at least 9 digits.");
-        return false;
-    }
-    resetError(input);
-    return true;
-}
+// // Validate the Student ID
+// function validateStudentID(input) {
+//     if (!input) {
+//         console.error("Student ID input field not found.");
+//         return false;
+//     }
+//     let value = input.value.trim();
+//     let pattern = /^\d{9}/; // Student ID should be at least 9 digits
+//     if (!pattern.test(value)) {
+//         showError(input, "Student ID must be at least 9 digits.");
+//         return false;
+//     }
+//     resetError(input);
+//     return true;
+// }
 
-// Validate text input (First Name and Last Name)
-function validateTextInput(input, minLength) {
-    if (!input) {
-        console.error(`Input field for ${minLength} characters not found.`);
-        return false;
-    }
-    let value = input.value.trim();
-    if (value.length < minLength) {
-        showError(input, `${input.placeholder} must be at least ${minLength} characters.`);
-        return false;
-    }
-    resetError(input);
-    return true;
-}
+// // Validate text input (First Name and Last Name)
+// function validateTextInput(input, minLength) {
+//     if (!input) {
+//         console.error(`Input field for ${minLength} characters not found.`);
+//         return false;
+//     }
+//     let value = input.value.trim();
+//     if (value.length < minLength) {
+//         showError(input, `${input.placeholder} must be at least ${minLength} characters.`);
+//         return false;
+//     }
+//     resetError(input);
+//     return true;
+// }
 
-// Validate Email
-function validateEmail(input) {
-    if (!input) {
-        console.error("Email input field not found.");
-        return false;
-    }
-    let value = input.value.trim();
-    let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (value && !pattern.test(value)) {
-        showError(input, "Please enter a valid email address.");
-        return false;
-    }
-    resetError(input);
-    return true;
-}
+// // Validate Email
+// function validateEmail(input) {
+//     if (!input) {
+//         console.error("Email input field not found.");
+//         return false;
+//     }
+//     let value = input.value.trim();
+//     let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+//     if (value && !pattern.test(value)) {
+//         showError(input, "Please enter a valid email address.");
+//         return false;
+//     }
+//     resetError(input);
+//     return true;
+// }
 
-// Validate Phone Number
-function validatePhone(input) {
-    if (!input) {
-        console.error("Phone input field not found.");
-        return false;
-    }
-    let value = input.value.trim();
-    let pattern = /^\d{10}$/; // Phone number should be exactly 10 digits
-    if (!value) { // Check if the field is empty
-        showError(input, "Phone number is required.");
-        return false;
-    }
-    if (value && !pattern.test(value)) {
-        showError(input, "Phone number must be exactly 10 digits.");
-        return false;
-    }
-    resetError(input);
-    return true;
-}
+// // Validate Phone Number
+// function validatePhone(input) {
+//     if (!input) {
+//         console.error("Phone input field not found.");
+//         return false;
+//     }
+//     let value = input.value.trim();
+//     let pattern = /^\d{10}$/; // Phone number should be exactly 10 digits
+//     if (!value) { // Check if the field is empty
+//         showError(input, "Phone number is required.");
+//         return false;
+//     }
+//     if (value && !pattern.test(value)) {
+//         showError(input, "Phone number must be exactly 10 digits.");
+//         return false;
+//     }
+//     resetError(input);
+//     return true;
+// }
 
-function validateRoom(input) {
-    if(!input) {
-        console.error("Room number not found");
-        return false;
-    }
-    let value=input.value.trim();
-    let pattern = /^\d{1,2}/;
-    if(!value) {
-        showError(input, "Phone number is required.");
-        return false;
-    }
-    if(value && !pattern.test(value)) {
-        showError(input, "Room number must be at most 2 digits.");
-        return false;
-    }
-    resetError(input);
-    return true;
-}
+// function validateRoom(input) {
+//     if(!input) {
+//         console.error("Room number not found");
+//         return false;
+//     }
+//     let value=input.value.trim();
+//     let pattern = /^\d{1,2}/;
+//     if(!value) {
+//         showError(input, "Phone number is required.");
+//         return false;
+//     }
+//     if(value && !pattern.test(value)) {
+//         showError(input, "Room number must be at most 2 digits.");
+//         return false;
+//     }
+//     resetError(input);
+//     return true;
+// }
 
-// Validate the Form before submission
-function validateForm(event,type) {
-    let isValid = true;
+// // Validate the Form before submission
+// function validateForm(event,type) {
+//     let isValid = true;
 
-    // Validate Student ID
-    let studentIdInput = document.querySelector('#ID')
-    if(!validateStudentID(studentIdInput)) {
-        isValid=false;
-    }
+//     // Validate Student ID
+//     let studentIdInput = document.querySelector('#ID')
+//     if(!validateStudentID(studentIdInput)) {
+//         isValid=false;
+//     }
 
-    // Validate First Name (at least 2 characters)
-    let firstNameInput = document.querySelector('input[name="firstName"]');
-    if (!validateTextInput(firstNameInput, 2)) {
-        isValid = false;
-    }
+//     // Validate First Name (at least 2 characters)
+//     let firstNameInput = document.querySelector('input[name="firstName"]');
+//     if (!validateTextInput(firstNameInput, 2)) {
+//         isValid = false;
+//     }
 
-    // Validate Last Name (at least 2 characters)
-    let lastNameInput = document.querySelector('input[name="lastName"]');
-    if (!validateTextInput(lastNameInput, 2)) {
-        isValid = false;
-    }
+//     // Validate Last Name (at least 2 characters)
+//     let lastNameInput = document.querySelector('input[name="lastName"]');
+//     if (!validateTextInput(lastNameInput, 2)) {
+//         isValid = false;
+//     }
 
-    // Validate Email
-    let emailInput = document.querySelector('input[name="email"]');
-    if (!validateEmail(emailInput)) {
-        isValid = false;
-    }
+//     // Validate Email
+//     let emailInput = document.querySelector('input[name="email"]');
+//     if (!validateEmail(emailInput)) {
+//         isValid = false;
+//     }
 
-    // Validate Phone Number (exactly 10 digits)
-    let phoneInput = document.querySelector('input[name="phone"]');
-    if (!validatePhone(phoneInput)) {
-        isValid = false;
-    }
+//     // Validate Phone Number (exactly 10 digits)
+//     let phoneInput = document.querySelector('input[name="phone"]');
+//     if (!validatePhone(phoneInput)) {
+//         isValid = false;
+//     }
 
-    if(type==='student') {
-        //validate room number
-        let roomN=document.querySelector('input[name="room"]');
-        if(!validateRoom(roomN)) {
-            isValid=false;
-        }
-    }
+//     if(type==='student') {
+//         //validate room number
+//         let roomN=document.querySelector('input[name="room"]');
+//         if(!validateRoom(roomN)) {
+//             isValid=false;
+//         }
+//     }
 
-    // Prevent form submission if validation fails
-    const clickedButton = event.submitter; // Use event.submitter to identify the clicked button
-    if (clickedButton && clickedButton.classList.contains('btn_submit') && !isValid) {
-        event.preventDefault(); // Prevent form submission
-    }
-    return isValid;
-}});
+//     // Prevent form submission if validation fails
+//     const clickedButton = event.submitter; // Use event.submitter to identify the clicked button
+//     if (clickedButton && clickedButton.classList.contains('btn_submit') && !isValid) {
+//         event.preventDefault(); // Prevent form submission
+//     }
+//     return isValid;
+// }
+});

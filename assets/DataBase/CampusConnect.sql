@@ -329,15 +329,16 @@ CREATE TABLE `news` (
 
 CREATE TABLE `room` (
   `Id` int(11) NOT NULL,
+  'blockid' int(11) NOT NULL,
   `FloorID` int(11) NOT NULL,
-  `RoomNumber` int(11) NOT NULL
+  `RoomNumber` int(11) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`Id`, `FloorID`, `RoomNumber`) VALUES
+INSERT INTO `room` (`Id`,'blockid', `FloorID`, `RoomNumber`) VALUES
 (1, 1, 1),
 (2, 1, 2),
 (3, 1, 3),
@@ -824,6 +825,7 @@ CREATE TABLE `student` (
   `lastName` varchar(100) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
+  'phone' varchar(50) NOT NULL,
   `roomId` int(11) DEFAULT NULL,
   `img_path` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

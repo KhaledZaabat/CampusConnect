@@ -68,9 +68,6 @@ if (isset($_GET['edit_id'])) {
 $employees = $conn->query("SELECT Id, firstName, lastName, Email, Role, phone, img_path FROM employee");
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 <head>
@@ -85,6 +82,22 @@ $employees = $conn->query("SELECT Id, firstName, lastName, Email, Role, phone, i
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/crud.css">
+    <style>
+        .delete {
+    color: #dc3545;
+    font-size: 13px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.delete:hover {
+    color: #000000;
+    transform: scale(1.2);
+    background: none ;
+}
+    </style>
 </head>
 
 <body>
@@ -99,19 +112,19 @@ $employees = $conn->query("SELECT Id, firstName, lastName, Email, Role, phone, i
         </div>
     <?php endif; ?>
 
-    <form action="#" method="post" class="student-form admin-form" enctype="multipart/form-data">
+    <form action="" method="post" class="student-form admin-form" enctype="multipart/form-data">
         <input type="text" placeholder="User ID" name="UserID" id="ID">
         <input type="text" placeholder="First Name" name="firstName">
         <input type="text" placeholder="Last Name" name="lastName">
         <input type="text" placeholder="Email" name="email">
-        <input type="tel" placeholder="Phone Number" name="phone">
+        <input type="tel" placeholder="Phone Number (0xxx...)" name="phone">
         <label for="role"></label>
         <select id="role" name="role">
-            <option value="" disabled selected hidden>Role</option>
+            <label for="role">Role</label>
             <option value="Maintenance">Maintenance</option>
             <option value="Housing">Housing</option>
             <option value="Chef">Chef</option>
-            <option value="Admin">Admin</option>
+            <option value="Admin" selected>Admin</option>
         </select>
         <div class="form-group mt-2">
             <label for="file" class="custom-file-upload">
@@ -140,7 +153,6 @@ $employees = $conn->query("SELECT Id, firstName, lastName, Email, Role, phone, i
             icon: "success",
             confirmButtonText: "OK"
         }).then(function() {
-            // Optionally clear input fields if necessary
             document.querySelector('form').reset();
         });
     <?php endif; ?>
@@ -170,7 +182,7 @@ $employees = $conn->query("SELECT Id, firstName, lastName, Email, Role, phone, i
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
-                <th>Phone Number</th>
+                <th>Phone</th>
                 <th>Role</th>
                 <th></th>
             </tr>
@@ -198,7 +210,7 @@ $employees = $conn->query("SELECT Id, firstName, lastName, Email, Role, phone, i
                         <a href="editEmployee.php?userId=<?php echo htmlspecialchars($row['Id']); ?>" class="btn edit"><i class="fas fa-edit"></i></a>
                         <form action="deleteEmployee.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this employee?')">
                             <input type="hidden" name="userId" value="<?php echo $row['Id']; ?>">
-                            <button type="submit" id="deleteButton" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                            <button type="submit" id="deleteButton" class="delete"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </div>
                 </td>
@@ -208,12 +220,17 @@ $employees = $conn->query("SELECT Id, firstName, lastName, Email, Role, phone, i
         <tr><td colspan="8">No employees found.</td></tr>
     <?php endif; ?>
 </tbody>
-
     </table>
+    <!-- Pagination -->
+    <div class="pagination">
+        <button id="prevpage" disabled><i class="fas fa-arrow-left"></i></button>
+        <span id="page-num">1</span>
+        <button id="nextpage"><i class="fas fa-arrow-right"></i></button>
+    </div>
 </div>
 <?php include 'footer.php'; ?>
 <!-- Scripts -->
-<script src="assets/js/crud.js"></script>
+<!-- <script src="assets/js/crud.js"></script> -->
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/helperFunctions.js"></script>
 </body>
