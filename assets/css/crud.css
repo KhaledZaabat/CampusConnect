@@ -1,9 +1,5 @@
 body {
     background-color: #0f0b32;
-    /* background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    padding-top: 125px; */
 }
 
 .container2 {
@@ -66,7 +62,7 @@ input, select, textarea {
 
 
 .student-form button {
-    margin-top: 20px; /* Keep margin for the student form buttons */
+    margin-top: 20px; 
 }
 table {
     width: 100%;
@@ -154,21 +150,22 @@ th {
     width: 100%;
 }
 
-button.Edit {
-    color: #007bff;
+a.edit {
+    color: #007bff; /* Set color to blue */
     font-size: 18px;
     background: none;
     border: none;
     cursor: pointer;
+    text-decoration: none; /* Remove underline */
     transition: transform 0.3s, color 0.3s;
 }
 
-button.Edit:hover {
-    color: #0f0b32;
-    transform: scale(1.2);
+a.edit:hover {
+    color: #000000; /* Change color on hover */
+    transform: scale(1.2); /* Zoom effect on hover */
 }
 
-button.Delete {
+.delete {
     color: #dc3545;
     font-size: 18px;
     background: none;
@@ -177,10 +174,11 @@ button.Delete {
     transition: transform 0.3s, color 0.3s;
 }
 
-button.Delete:hover {
+.delete:hover {
     color: #000000;
     transform: scale(1.2);
 }
+
 
 /* Styling for the upload section */
 .custom-file-upload {
@@ -271,7 +269,7 @@ button.Delete:hover {
     width: 130px
 }
 .phone {
-    width:70px;
+    width:72px;
 }
 .idinput {
     width:80px;
@@ -361,3 +359,12 @@ button.Delete:hover {
     border-color: #007bff; /* Highlight the border on focus */
     outline: none; /* Remove the default outline */
 }
+
+.btn_second{
+    padding: 0px;
+    border-radius: 10px;
+    border: none;
+    margin: 0px;
+}
+
+
