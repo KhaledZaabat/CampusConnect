@@ -1,3 +1,26 @@
+<?php
+// Database connection
+require 'db_connection.php';
+
+// Fetch the last 3 news items sorted by date in descending order
+$sql = "SELECT * FROM news ORDER BY Date DESC LIMIT 3";
+$result = $conn->query($sql);
+
+// Check if there are any news items
+$news_items = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $news_items[] = $row; // Store each row into the $news_items array
+    }
+} else {
+    $news_items = null; // Set to null to handle the "no news" case in the HTML
+}
+
+$conn->close();
+?>
+
+
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 <head>
@@ -35,49 +58,50 @@
 
             <!-- News Section -->
             <div class="News-Home content">
-                <div class="services-title">
-                    <span class="bold-text">The Latest.</span>
-                    <span class="regular-text">Take a look at what's new.</span>
-                </div>
+    <div class="services-title">
+        <span class="bold-text">The Latest.</span>
+        <span class="regular-text">Take a look at what's new.</span>
+    </div>
 
-                <div class="news-cards content">
-                    <div class="card content">
-                        <img src="assets/img/logo.png" class="card-img-top" alt="Brand Logo">
-                        <div class="card-body">
-                            <span class="card-date">October 12, 2024</span>
-                            <h5 class="card-title">News One</h5>
-                            <p class="card-text">Get the latest updates on dorm activities, events, and important announcements.</p>
-                            <a href="newsDetails.php" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
+    <div class="news-cards content">
+        <?php if ($news_items): ?>
+            <?php foreach ($news_items as $news): ?>
+                <div class="card content">
+                <div class="card-body">
+    <span class="card-date"><?php echo date("F j, Y", strtotime($news['Date'])); ?></span>
+    <h5 class="card-title"><?php echo htmlspecialchars($news["title"]); ?></h5>
+    <p class="card-text">
+        <?php 
+        $content = $news['content']; 
+        // Check if the content starts with an HTML tag like <img> or <table>
+        if (preg_match('/^\s*<(img|table)[^>]*>/i', $content)) {
+            // Content starts with <img> or <table>; display a placeholder text
+            echo "Content includes a media or table, click 'Learn More' to view.";
+        } else {
+            // Strip HTML tags and truncate plain text
+            $plain_text = strip_tags($content);
+            echo strlen($plain_text) > 100 
+                ? substr($plain_text, 0, 100) . '...' 
+                : $plain_text;
+        }
+        ?>
+    </p>
+    <a href="newsDetails.php?id=<?php echo htmlspecialchars($news['Id']); ?>" class="btn btn-primary">Learn More</a>
+</div>
 
-                    <div class="card content">
-                        <img src="assets/img/logo.png" class="card-img-top" alt="Brand Logo">
-                        <div class="card-body">
-                            <span class="card-date">October 11, 2024</span>
-                            <h5 class="card-title">News Two</h5>
-                            <p class="card-text">Manage your dorm room services and stay on top of your requests with ease.</p>
-                            <a href="newsDetails.php" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-
-                    <div class="card content">
-                        <img src="assets/img/pic5.jpg" class="card-img-top" alt="News Image">
-                        <div class="card-body">
-                            <span class="card-date">October 10, 2024</span>
-                            <h5 class="card-title">News Three</h5>
-                            <p class="card-text">Connect with fellow students and stay engaged with dorm life activities.</p>
-                            <a href="newsDetails.php" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
 
                 </div>
-                  <!-- Add a "View All News" button here -->
-                  <a href="news.php" class="btn-view-all-news">
-                    View All News <span class="arrow">→</span>
-                </a>
-            </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No news available at the moment.</p>
+        <?php endif; ?>
+    </div>
 
+    <!-- Add a "View All News" button here -->
+    <a href="news.php" class="btn-view-all-news">
+        View All News <span class="arrow">→</span>
+    </a>
+</div>
             <!-- Services Section -->
             <div class="services-section content">
                 <div class="services-title content">
