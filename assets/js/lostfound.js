@@ -5,6 +5,47 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1; // Track the current page
     let activeFilter = "All"; // Track the active filter
 
+
+
+    function fetch_posts() {
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'posts.php', true);
+        
+        xhr.onreadystatechange = function() {
+            console.log('readyState:', xhr.readyState); // Log the readyState
+            console.log('status:', xhr.status); // Log the status (this may cause a warning if readyState is not 4)
+        
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log("Server response:", xhr.responseText); // Log the server response
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                        console.log("parsed data:", data);
+                        posts.push(...data);
+    
+                        console.log("posts:", posts);
+                        console.log(Array.isArray(posts)); // Should log true if posts is an array
+                        renderPosts(currentPage);
+                    } catch (e) {
+                        console.error("Parsing error:", e.message);
+                    }
+                } else {
+                    console.error('Error:', xhr.statusText);
+                }
+            }
+        };
+        
+        
+        xhr.send();
+    }
+
+    fetch_posts();
+    
+
+
+
+
     // Event listener for dropdown filter
     document.querySelectorAll(".filter").forEach((filter) => {
         filter.addEventListener("click", (event) => {
@@ -90,10 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const startIndex = (page - 1) * postsPerPage;
         const endIndex = startIndex + postsPerPage;
         const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
-
         postsContainer.innerHTML = ""; // Clear container before rendering
 
-        if (postsToDisplay.length === 0) {
+        if (postsToDisplay && postsToDisplay.length === 0) {
             postsContainer.innerHTML = `
                 <div class="no-posts-message text-center py-5">
                     <h3>No posts to display</h3>
@@ -123,28 +163,29 @@ document.addEventListener('DOMContentLoaded', () => {
     
         const postElement = document.createElement("div");
         postElement.className = "col-md-6 col-lg-4 mt-5";
-    
+        const imageDataUrl = submissionData.img ? `data:image/jpeg;base64,${submissionData.img}` : 'assets/listings_img/no-img.png';
         const postContent = `
-        <div data-post-index="${posts.indexOf(submissionData)}" class="post-c blog-grid">
+        <div data-post-index="${submissionData.Id}" class="post-c blog-grid">
             <div id="post">
                 <div class="blog-grid-img position-relative">
-                    <img alt="img" src="${submissionData.image}" class="listing-img img-fluid">
+                    <img alt="img" src="${imageDataUrl}" class="listing-img img-fluid">
+
                 </div>
                 <div class="blog-grid-text p-4">
                     <div class="row">
-                        <h3 class="h5 col-8 mb-3">${submissionData.title}</h3>
+                        <h3 class="h5 col-8 mb-3">${submissionData.Title}</h3>
                         <div class="col-4 text-end">
                             <a href="#" class="Edit me-2"><i class="fas fa-edit"></i></a>
                             <a href="#" class="Delete"><i class="fas fa-trash-alt"></i></a>
                         </div>
                     </div>
-                    <p class="display-30">${submissionData.description}</p>
-                    <div id="b-post"></div>
+                    <p class="display-30">${submissionData.Content}</p>
+                    <div class="row mt-2" id="${submissionData.Id}-post">
+                    </div>
                     <div class="meta meta-style2">
                         <ul>
-                            <li><i class="fas fa-calendar-alt icon-blue"></i> 10 Jul, 2022</li>
-                            <li><a href="#!"><i class="fas fa-user icon-blue"></i> User</a></li>  
-                            <li data-post-index="${posts.indexOf(submissionData)}" class="comments-toggle" ><i class="fas fa-comments icon-blue"></i> ${submissionData.comments.length}</li>
+                            <li><i class="fas fa-calendar-alt icon-blue"></i>${submissionData.Datetime}</li>
+                            <li><a href="#!"><i class="fas fa-user icon-blue"></i> ${submissionData.FirstName}</a></li>  
                         </ul>
 
 
@@ -170,78 +211,128 @@ document.addEventListener('DOMContentLoaded', () => {
         postsContainer.appendChild(postElement);
         const editButton = postElement.querySelector('.Edit');
         const deleteButton = postElement.querySelector('.Delete');
-        
+        var isEditOpen = false;
         // Edit functionality
         editButton.addEventListener('click', (e) => {
             e.preventDefault();
         
-            // Make the title and description editable
             const postTitle = postElement.querySelector("h3");
             const postDescription = postElement.querySelector("p.display-30");
+            const buttonContainer = document.getElementById(`${submissionData.Id}-post`);
         
-            // Store the original content in case the user cancels editing
-            const originalTitle = submissionData.title;
-            const originalDescription = submissionData.description;
+            if (!isEditOpen) {
+                // Enter edit mode
+                isEditOpen = true;
         
-            // Replace the title and description with input fields
-            postTitle.innerHTML = `<input type="text" class="form-control" value="${originalTitle}">`;
-            postDescription.innerHTML = `<textarea class="form-control">${originalDescription}</textarea>`;
+                // Store the original content in case the user cancels editing
+                const originalTitle = submissionData.Title;
+                const originalDescription = submissionData.Content;
         
-            const buttonContainer = document.createElement("div");
-            buttonContainer.className = "row mt-2"; // Bootstrap row with margin-top for spacing
+                // Replace the title and description with input fields
+                postTitle.innerHTML = `<input type="text" class="form-control" value="${originalTitle}">`;
+                postDescription.innerHTML = `<textarea class="form-control">${originalDescription}</textarea>`;
         
-            // Create Save button
-            const saveButtonCol = document.createElement("div");
-            saveButtonCol.className = "col-auto"; // Bootstrap column with auto width
-            const saveButton = document.createElement("button");
-            saveButton.className = "save-button";
-            saveButton.textContent = "Save";
-            saveButtonCol.appendChild(saveButton);
+                buttonContainer.innerHTML = "";
         
-            // Create Cancel button
-            const cancelButtonCol = document.createElement("div");
-            cancelButtonCol.className = "col-auto"; // Bootstrap column with auto width
-            const cancelButton = document.createElement("button");
-            cancelButton.className = "cancel-button";
-            cancelButton.textContent = "Cancel";
-            cancelButtonCol.appendChild(cancelButton);
+                // Create Save button
+                const saveButtonCol = document.createElement("div");
+                saveButtonCol.className = "col-auto"; // Bootstrap column with auto width
+                const saveButton = document.createElement("button");
+                saveButton.className = "save-button";
+                saveButton.textContent = "Save";
+                saveButtonCol.appendChild(saveButton);
         
-            // Append columns to the container
-            buttonContainer.appendChild(saveButtonCol);
-            buttonContainer.appendChild(cancelButtonCol);
-            document.getElementById("b-post").appendChild(buttonContainer);
-            // Append the button container after the description
+                // Create Cancel button
+                const cancelButtonCol = document.createElement("div");
+                cancelButtonCol.className = "col-auto"; // Bootstrap column with auto width
+                const cancelButton = document.createElement("button");
+                cancelButton.className = "cancel-button";
+                cancelButton.textContent = "Cancel";
+                cancelButtonCol.appendChild(cancelButton);
         
-            // Add functionality to the save button
-            saveButton.addEventListener("click", () => {
-                const updatedTitle = postTitle.querySelector("input").value.trim();
-                const updatedDescription = postDescription.querySelector("textarea").value.trim();
+                // Append columns to the container
+                buttonContainer.appendChild(saveButtonCol);
+                buttonContainer.appendChild(cancelButtonCol);
         
-                if (!updatedTitle || !updatedDescription) {
-                    Swal.fire({
-                        title: "Error",
-                        text: "Both title and description are required!",
-                        icon: "error",
-                    });
-                    return;
-                }
+                // Add functionality to the save button
+                saveButton.addEventListener("click", () => {
+                    const updatedTitle = postTitle.querySelector("input").value.trim();
+                    const updatedDescription = postDescription.querySelector("textarea").value.trim();
         
-                // Update the post data and re-render
-                submissionData.title = updatedTitle;
-                submissionData.description = updatedDescription;
-                renderPosts(currentPage);
-            });
+                    if (!updatedTitle || !updatedDescription) {
+                        Swal.fire({
+                            title: "Error",
+                            text: "Both title and description are required!",
+                            icon: "error",
+                        });
+                        return;
+                    }
+
+                    // Update the post data and re-render
+                    var updateXhr = new XMLHttpRequest();
+                    updateXhr.open('POST', 'update_post.php', true);
+                    updateXhr.setRequestHeader('Content-Type', 'application/json');
+                
+                    updateXhr.onreadystatechange = function() {
+                        if (updateXhr.readyState === 4) {
+                            if (updateXhr.status === 200) {
+                                var result = JSON.parse(updateXhr.responseText);
+                                if (result.success) {
+                                    // Update the post data and re-render
+                                    submissionData.Title = updatedTitle;
+                                    submissionData.Content = updatedDescription;
+                                    renderPosts(currentPage);
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: result.message,
+                                        icon: "success",
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: "Error",
+                                        text: result.message,
+                                        icon: "error",
+                                    });
+                                }
+                                isEditOpen = false; // Exit edit mode
+                            } else {
+                                Swal.fire({
+                                    title: "Error",
+                                    text: "Failed to update post. Please try again later.",
+                                    icon: "error",
+                                });
+                            }
+                        }
+                    };
+                
+                    var updatedPost = {
+                        Id: submissionData.Id,
+                        Title: updatedTitle,
+                        Content: updatedDescription
+                    };
+                
+                    updateXhr.send(JSON.stringify(updatedPost));
+                });
         
-            // Add functionality to the cancel button
-            cancelButton.addEventListener("click", () => {
-                // Revert the content to original values
-                postTitle.innerHTML = originalTitle;
-                postDescription.innerHTML = originalDescription;
-                buttonContainer.remove(); // Remove the Save and Cancel buttons
-            });
+                // Add functionality to the cancel button
+                cancelButton.addEventListener("click", () => {
+                    // Revert the content to original values
+                    postTitle.innerHTML = originalTitle;
+                    postDescription.innerHTML = originalDescription;
+                    buttonContainer.innerHTML = ""; // Remove the Save and Cancel buttons
+                    isEditOpen = false; // Exit edit mode
+                });
+            } else {
+                // Exit edit mode (revert changes if Save wasn't clicked)
+                isEditOpen = false;
         
-            // Optional SweetAlert to inform the user they are editing
+                // Revert to original values (assume `submissionData` is up-to-date if changes were saved)
+                postTitle.innerHTML = submissionData.title;
+                postDescription.innerHTML = submissionData.description;
+                buttonContainer.innerHTML = ""; // Clear the buttons
+            }
         });
+        
         
         
         // Delete functionality
@@ -272,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         // Comments toggle
-        const commentSection = postElement.querySelector('.comment-section');
+        /*const commentSection = postElement.querySelector('.comment-section');
         const commentsToggle = postElement.querySelector('.comments-toggle');
         const commentForm = postElement.querySelector('.comment-form');
         const commentsContainer = postElement.querySelector('.comments-container');
@@ -313,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadComments(submissionData, commentsContainer, commentsPagination, commentsContainer.dataset.postIndex);
 
             }
-        });
+        });*/
         
         
     }
