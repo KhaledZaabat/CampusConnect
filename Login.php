@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validated']) && $_POST
         if ($result->num_rows === 1) {
             $user = $result->fetch_assoc();
             // Verify password
-            if ($password === $user['Password']) {
+            if (password_verify($password, $user['Password'])) {
                 $_SESSION['user'] = $user; // Store employee in session
                 checkUserRoleAndRedirect($user['Role']); // Check role and redirect
             } else {
