@@ -1,58 +1,78 @@
-
 <?php
-require 'db_connection.php'; // Include your database connection
-$message = ""; // For displaying success messages
-$errors = []; // To hold validation errors
+require 'db_connection.php';
+
+$message = "";
+$errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $studentId = $_SESSION['user']['Id']; // Assume student_id is stored in session
-    $currentPassword = $_POST['currentPassword'];
-    $newPassword = $_POST['newPassword'];
-    $confirmNewPassword = $_POST['confirmNewPassword'];
+    $studentId = $_SESSION['user']['Id'] ?? null; // Check if the session variable exists
+    $currentPassword = $_POST['currentPassword'] ?? '';
+    $newPassword = $_POST['newPassword'] ?? '';
+    $confirmNewPassword = $_POST['confirmNewPassword'] ?? '';
 
-    // Validate current password
+    // Validate session and inputs
+    if (!$studentId) {
+        $errors[] = 'User is not logged in.';
+    }
     if (empty($currentPassword)) {
-        $errors['currentPassword'] = 'Current password is required.';
+        $errors[] = 'Current password is required.';
     }
-
-    // Validate new password length
     if (strlen($newPassword) < 8) {
-        $errors['newPassword'] = 'New password must be at least 8 characters long.';
+        $errors[] = 'New password must be at least 8 characters long.';
     }
-
-    // Validate password confirmation
     if ($newPassword !== $confirmNewPassword) {
-        $errors['confirmNewPassword'] = 'Passwords do not match.';
+        $errors[] = 'Passwords do not match.';
+    }
+    if ($currentPassword === $newPassword) {
+        $errors[] = 'New password cannot be the same as the current password.';
     }
 
-    // Process password change if no errors
     if (empty($errors)) {
-        // Fetch the current hashed password from the database
+        // Fetch the current password from the database
         $query = $conn->prepare("SELECT password FROM student WHERE id = ?");
-        $query->bind_param("s", $studentId);
-        $query->execute();
-        $result = $query->get_result();
-        $user = $result->fetch_assoc();
+        if ($query) {
+            $query->bind_param("s", $studentId);
+            $query->execute();
+            $result = $query->get_result();
+            $user = $result->fetch_assoc();
 
-        if (!$user || !password_verify($currentPassword, $user['password'])) {
-            $errors['currentPassword'] = 'Current password is incorrect.';
-        } else {
-            // Hash the new password
-            $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
-
-            // Update the password in the database
-            $update = $conn->prepare("UPDATE student SET password = ? WHERE id = ?");
-            $update->bind_param("ss", $hashedPassword, $studentId);
-
-            if ($update->execute()) {
-                $message = "Password changed successfully!";
+            if (!$user) {
+                $errors[] = 'User not found in the database.';
+            } elseif (!password_verify($currentPassword, $user['password'])) {
+                $errors[] = 'Current password is incorrect.';
             } else {
-                $errors['general'] = 'Error: Could not update password.';
+                // Update the password
+                $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+                $update = $conn->prepare("UPDATE student SET password = ? WHERE id = ?");
+                if ($update) {
+                    $update->bind_param("ss", $hashedPassword, $studentId);
+                    if ($update->execute()) {
+                        $message = "Password changed successfully!";
+                    } else {
+                        $errors[] = 'Could not update password. Database error: ' . $conn->error;
+                    }
+                } else {
+                    $errors[] = 'Failed to prepare the update query. Error: ' . $conn->error;
+                }
             }
+        } else {
+            $errors[] = 'Failed to prepare the select query. Error: ' . $conn->error;
         }
     }
+
+    // Return JSON response with concatenated errors if any
+    header('Content-Type: application/json');
+    if (!empty($errors)) {
+        echo json_encode(['errors' => implode(' | ', $errors)]);
+    } else {
+        echo json_encode(['message' => $message]);
+    }
+    exit;
 }
+
+
 ?>
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -138,50 +158,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="card mb-4">
                 <div class="card-header">Change Password</div>
                 <div class="card-body">
-                <form id="changePasswordForm" method="POST" action="">
-    <?php if (!empty($message)): ?>
-        <div class="alert alert-success"><?= $message ?></div>
-    <?php endif; ?>
-
-    <?php if (!empty($errors['general'])): ?>
-        <div class="alert alert-danger"><?= $errors['general'] ?></div>
-    <?php endif; ?>
-
-    <div class="mb-3">
-        <label class="small mb-1" for="currentPassword">Current Password</label>
-        <input class="form-control <?= isset($errors['currentPassword']) ? 'is-invalid' : '' ?>" 
-               id="currentPassword" 
-               name="currentPassword" 
-               type="password">
-        <?php if (isset($errors['currentPassword'])): ?>
-            <div class="invalid-feedback"><?= $errors['currentPassword'] ?></div>
-        <?php endif; ?>
-    </div>
-
-    <div class="mb-3">
-        <label class="small mb-1" for="newPassword">New Password</label>
-        <input class="form-control <?= isset($errors['newPassword']) ? 'is-invalid' : '' ?>" 
-               id="newPassword" 
-               name="newPassword" 
-               type="password">
-        <?php if (isset($errors['newPassword'])): ?>
-            <div class="invalid-feedback"><?= $errors['newPassword'] ?></div>
-        <?php endif; ?>
-    </div>
-
-    <div class="mb-3">
-        <label class="small mb-1" for="confirmNewPassword">Confirm New Password</label>
-        <input class="form-control <?= isset($errors['confirmNewPassword']) ? 'is-invalid' : '' ?>" 
-               id="confirmNewPassword" 
-               name="confirmNewPassword" 
-               type="password">
-        <?php if (isset($errors['confirmNewPassword'])): ?>
-            <div class="invalid-feedback"><?= $errors['confirmNewPassword'] ?></div>
-        <?php endif; ?>
-    </div>
-
-    <button class="btn btn-primary" type="submit">Change Password</button>
-</form>
+                    <form id="changePasswordForm" method="POST" action="">
+                        <div id="responseMessage"></div>
+                        
+                        <div class="mb-3">
+                            <label class="small mb-1" for="currentPassword">Current Password</label>
+                            <input class="form-control" id="currentPassword" name="currentPassword" type="password">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="small mb-1" for="newPassword">New Password</label>
+                            <input class="form-control" id="newPassword" name="newPassword" type="password">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="small mb-1" for="confirmNewPassword">Confirm New Password</label>
+                            <input class="form-control" id="confirmNewPassword" name="confirmNewPassword" type="password">
+                        </div>
+                        
+                        <button class="btn btn-primary" type="submit">Change Password</button>
+                    </form>
+                </div>
+            </div>
+        </form>
 
 
                 </div>
@@ -191,6 +190,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
     <script src="assets/js/StudetnProfile.js"></script>
     <?php include 'footer.php' ?>
+
+<script>
+document.getElementById("changePasswordForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const form = this;
+    const formData = new FormData(form);
+    const responseMessage = document.getElementById("responseMessage");
+
+    responseMessage.innerHTML = "";
+
+    fetch("", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.errors) {
+            responseMessage.innerHTML = `<div class="alert alert-danger">${data.errors}</div>`;
+        } else if (data.message) {
+            responseMessage.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+        } else {
+            responseMessage.innerHTML = `<div class="alert alert-danger">Unexpected error occurred.</div>`;
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        responseMessage.innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
+    });
+});
+</script>
+</body>
+</html>
 
 </body>
 

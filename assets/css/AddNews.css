@@ -138,13 +138,6 @@ body {
 }
 
 
-
-.editable-div[contenteditable="true"]:empty:before { 
-    content: attr(data-placeholder);
-    color: #aaa; 
-    pointer-events: none; 
-    display: block; 
-}
 .news-form-container h1 {
     text-align: center;
     color: #0f0b32;

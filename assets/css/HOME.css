@@ -75,11 +75,16 @@ body {
 
 .news-cards {
     display: flex;
+    flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 20px;
 }
-
+.news-container{
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+}
 .card {
     width: 300px;
     margin: 20px;
