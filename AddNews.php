@@ -1,5 +1,5 @@
 <?php
-require 'db_connection.php';
+require 'headerAdmin.php';
 
 $response = [
     'message' => '',
@@ -99,7 +99,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
 <body>
-  <?php include 'headerAdmin.php' ?>
   <div class="form-new">
     <div class="news-form-container">
       <h1>Add News</h1>

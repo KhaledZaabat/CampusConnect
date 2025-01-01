@@ -1,5 +1,5 @@
 <?php
-require 'db_connection.php';
+require 'headerAdmin.php';
 
 // Fetch total students in dorms
 $sql_students = "SELECT COUNT(*) AS total_students FROM student";
@@ -86,7 +86,6 @@ $conn->close();
 
 
 <body>
-    <?php include 'headerAdmin.php' ?>
     <main class="page">
         <div class="container mt-5">
             <div class="header content">
