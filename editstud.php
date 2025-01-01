@@ -53,6 +53,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $floor = $_POST['floor'];
     $room = $_POST['room'];
 
+     // Check if the room is already taken
+     $checkRoomQuery = "SELECT Id FROM student WHERE roomId = (SELECT r.Id FROM room r 
+     JOIN floor f ON r.FloorID = f.Id
+     JOIN block b ON f.BlockID = b.Id
+     WHERE b.blockName = ? AND f.FloorNumber = ? AND r.RoomNumber = ?) 
+     AND Id != ?";  // Exclude current student's ID to allow them to stay in their room
+$checkRoomStmt = $conn->prepare($checkRoomQuery);
+$checkRoomStmt->bind_param("ssss", $bloc, $floor, $room, $userId);
+$checkRoomStmt->execute();
+$roomResult = $checkRoomStmt->get_result();
+
+if ($roomResult->num_rows > 0) {
+// Room is already taken
+echo "<script>
+alert('Room already taken by another student!');
+window.history.back();
+</script>";
+exit;
+}
+
     // Process image upload
     if ($_FILES['image']['error'] === 0) {
         $imgPath = "assets/img/" . basename($_FILES['image']['name']);

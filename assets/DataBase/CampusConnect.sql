@@ -316,9 +316,10 @@ INSERT INTO `mealtype` (`id`, `type`) VALUES
 
 CREATE TABLE `news` (
   `Id` int(11) NOT NULL,
-  `Datetime` datetime DEFAULT current_timestamp(),
+  `Date` datetime DEFAULT current_timestamp(),
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL
+  'File' varchar(255) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -338,7 +339,7 @@ CREATE TABLE `room` (
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`Id`,'blockid', `FloorID`, `RoomNumber`) VALUES
+INSERT INTO `room` (`Id`, `FloorID`, `RoomNumber`) VALUES
 (1, 1, 1),
 (2, 1, 2),
 (3, 1, 3),
@@ -679,26 +680,7 @@ INSERT INTO `room` (`Id`,'blockid', `FloorID`, `RoomNumber`) VALUES
 (338, 17, 18),
 (339, 17, 19),
 (340, 17, 20),
-(341, 18, 1),
-(342, 18, 2),
-(343, 18, 3),
-(344, 18, 4),
-(345, 18, 5),
-(346, 18, 6),
-(347, 18, 7),
-(348, 18, 8),
-(349, 18, 9),
-(350, 18, 10),
-(351, 18, 11),
-(352, 18, 12),
-(353, 18, 13),
-(354, 18, 14),
-(355, 18, 15),
-(356, 18, 16),
-(357, 18, 17),
-(358, 18, 18),
-(359, 18, 19),
-(360, 18, 20),
+
 (361, 19, 1),
 (362, 19, 2),
 (363, 19, 3),
