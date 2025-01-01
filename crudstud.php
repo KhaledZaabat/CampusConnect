@@ -1,5 +1,5 @@
 <?php
-require 'db_connection.php';
+require  'headerAdmin.php';
 
 // Fetch all students and their related details
 $query = "SELECT s.Id, s.firstName, s.lastName, s.Email, s.phone, s.img_path, 
@@ -50,7 +50,6 @@ if (!$result) {
 </head>
 
 <body>
-<?php include 'headerAdmin.php' ?>
 
     <div class="container2">
         <h1>Student Management</h1>

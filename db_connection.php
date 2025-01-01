@@ -5,9 +5,6 @@ $dbname = 'campus_connect';
 $username = 'root';
 $password = '';
 
-// Start session
-session_start();
-
 // Initialize error variable
 $error = "";
 

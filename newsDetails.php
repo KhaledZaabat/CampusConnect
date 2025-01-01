@@ -1,8 +1,8 @@
 <?php
 
 // Get news ID from URL parameter
-if (isset($_GET['Id'])) {
-    $newsId = intval($_GET['Id']); // Prevent SQL injection
+if (isset($_GET['id'])) {
+    $newsId = intval($_GET['id']); // Prevent SQL injection
     // Your code to handle $newsId here
 } else {
     // Handle the case where 'Id' is not set

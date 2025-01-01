@@ -3,7 +3,11 @@
 
 // Database configuration
 require 'db_connection.php';
-
+session_start();
+if (!isset($_SESSION['user']['Id'])) {
+    header("Location: Login.php");  // Redirect to login page if not logged in
+    exit();
+}
 // Assuming student ID is stored in session
 $userid = $_SESSION['user']['Id'] ;
 if ($userid) {
@@ -16,18 +20,12 @@ if ($userid) {
     
     if ($user && isset($user['img_path'])) {
         $imgPath = $user['img_path'];
-        // Check if the file exists
-        if (!$imgPath || !file_exists($imgPath)) {
-            $imgPath = "assets/img/gens.png"; // Default profile image
-        }
     } else {
-        $imgPath = "assets/img/gens.png"; // Default profile image if no image found
+       die("you are student hhhhh"); 
     }
     $stmt->close();
-} else {
-    // Default image if no student ID is available
-    $imgPath = "assets/img/gens.png";
 }
+
 ?>
 
 <header>

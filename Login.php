@@ -1,8 +1,5 @@
 <?php
 require 'db_connection.php';
-
-// Start session
-
 // Function to check role and redirect accordingly
 function checkUserRoleAndRedirect($role) {
     switch ($role) {
@@ -35,10 +32,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validated']) && $_POST
     $result = $stmt->get_result();
 
     if ($result->num_rows === 1) {
+        session_start();
         $user = $result->fetch_assoc();
         // Verify password
         if (password_verify($password, $user['Password'])) {
-            $_SESSION['user'] = $user; // Store user in session
+            $_SESSION['user'] = [
+                'Id' => $user['Id'],
+                'Password' => $password
+            ];
             header("Location: index.php"); // Redirect students to index.php
             exit();
         } else {
@@ -53,10 +54,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validated']) && $_POST
         $result = $stmt->get_result();
 
         if ($result->num_rows === 1) {
+            session_start();
             $user = $result->fetch_assoc();
             // Verify password
             if (password_verify($password, $user['Password'])) {
-                $_SESSION['user'] = $user; // Store employee in session
+                $_SESSION['user'] = [
+                    'Id' => $user['Id'],
+                    'Password' => $password
+                ];
                 checkUserRoleAndRedirect($user['Role']); // Check role and redirect
             } else {
                 $error = "Invalid password.";
