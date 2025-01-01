@@ -1,20 +1,6 @@
 <?php
 // Start session to get the logged-in student ID
-session_start();
-
-// Database configuration
-$host = 'localhost';
-$dbname = 'campus_connect';
-$username = 'root';
-$password = '';
-
-// Connect to the database
-$conn = new mysqli($host, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require 'db_connection.php';
 
 // Assuming student ID is stored in session
 $studentId = $_SESSION['user']['Id'] ;
@@ -41,6 +27,7 @@ if ($studentId) {
     $imgPath = "assets/img/gens.png";
 }
 ?>
+
 
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
