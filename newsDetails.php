@@ -1,8 +1,15 @@
 <?php
-require 'db_connection.php';
 
 // Get news ID from URL parameter
-$newsId = intval($_GET['id']); // Prevent SQL injection
+if (isset($_GET['Id'])) {
+    $newsId = intval($_GET['Id']); // Prevent SQL injection
+    // Your code to handle $newsId here
+} else {
+    // Handle the case where 'Id' is not set
+    echo "Error: Missing or invalid parameter.";
+    exit; // Optional: Stop further execution if necessary
+}
+require 'headerstud.php';
 
 // SQL query to fetch news details by ID
 $sql = "SELECT * FROM news WHERE id = $newsId";
@@ -28,7 +35,6 @@ if ($result->num_rows > 0) {
 
     </head>
     <body>
-    <?php include 'headerStud.php'; ?>
 
     <header class="news-header text-center">
         <h1 class="news-title"><?php echo htmlspecialchars($row["title"]); ?></h1>
@@ -44,7 +50,7 @@ if ($result->num_rows > 0) {
         echo nl2br($row["content"]);
         ?>
     </div>
-</div>
+  </div>
 
     <?php if (!empty($row["FILE"])): ?>
         <div class="file-section">
