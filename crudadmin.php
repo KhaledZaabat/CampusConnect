@@ -230,7 +230,7 @@ $employees = $conn->query("SELECT Id, firstName, lastName, Email, Role, phone, i
 </div>
 <?php include 'footer.php'; ?>
 <!-- Scripts -->
-<!-- <script src="assets/js/crud.js"></script> -->
+<script src="assets/js/crud.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/helperFunctions.js"></script>
 </body>

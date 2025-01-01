@@ -71,7 +71,7 @@ if (!$result) {
             <option value="E">Bloc E</option>
         </select>
         <select name="floor">
-            <option value="R">R</option>
+            <option value="0">R</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -124,7 +124,7 @@ if (!$result) {
                     <td><img src="<?php echo htmlspecialchars($student['img_path']); ?>" alt="Student Image" class="student-img"></td>
                     <td><input type="text" class="tableinput idinput" value="<?php echo htmlspecialchars($student['Id']); ?>" disabled></td>
                     <td><input type="text" class="tableinput name" value="<?php echo htmlspecialchars($student['firstName']); ?>" disabled></td>
-                    <td><input type="text" class="tableinput name" value="<?php echo htmlspecialchars($student['lastName']); ?>" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="<?php echo htmlspecialchars($student['lastName']); ?>" disabled></td>
                     <td><input type="text" class="tableinput emailinput" value="<?php echo htmlspecialchars($student['Email']); ?>" disabled></td>
                     <td><input type="text" class="tableinput phone" value="<?php echo htmlspecialchars($student['phone']); ?>" disabled></td>
                     <td><input type="text" class="tableinput roominput" value="<?php echo htmlspecialchars($student['blockName']) . ' ' . htmlspecialchars($student['FloorNumber']) . ' ' . htmlspecialchars($student['RoomNumber']); ?>" disabled></td>
@@ -154,7 +154,7 @@ if (!$result) {
     <?php include 'footer.php' ?>
 </body>
 
-<!-- <script src="assets/js/crud.js"></script> -->
+<script src="assets/js/crud.js"></script>
 <script src="assets/js/helperFunctions.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </html>

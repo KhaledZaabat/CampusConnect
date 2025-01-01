@@ -19,6 +19,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
     }
 
+        // Check if room is already taken
+        $roomCheckQuery = "SELECT s.Id FROM student s
+        JOIN room r ON s.roomId = r.Id
+        JOIN floor f ON r.FloorID = f.Id
+        JOIN block b ON f.BlockID = b.Id
+        WHERE b.blockName = ? AND f.FloorNumber = ? AND r.RoomNumber = ?";
+
+$roomCheckStmt = $conn->prepare($roomCheckQuery);
+$roomCheckStmt->bind_param("sss", $bloc, $floor, $room);
+$roomCheckStmt->execute();
+$roomCheckResult = $roomCheckStmt->get_result();
+$roomCheckStmt->close();
+
+// If the room is taken, prevent insertion
+if ($roomCheckResult->num_rows > 0) {
+echo "<script>
+ alert('Room is already occupied! Please select a different room.');
+ window.location.href = 'addstud.php';
+</script>";
+exit; // Prevent further code execution
+}
+
     // Retrieve room ID based on selected bloc, floor, and room
     $roomQuery = "SELECT r.Id 
                   FROM room r
