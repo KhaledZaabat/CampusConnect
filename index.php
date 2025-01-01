@@ -1,6 +1,6 @@
 <?php
 // Database connection
-require 'db_connection.php';
+require 'headerStud.php';
 
 // Fetch the last 3 news items sorted by date in descending order
 $sql = "SELECT * FROM news ORDER BY Date DESC LIMIT 3";
@@ -44,7 +44,6 @@ $conn->close();
 
 
 <body>
-<?php include 'headerStud.php' ?>
     <main class="page">
         <div class="container mt-5">
             <!-- Header Section -->

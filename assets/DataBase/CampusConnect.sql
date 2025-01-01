@@ -316,9 +316,10 @@ INSERT INTO `mealtype` (`id`, `type`) VALUES
 
 CREATE TABLE `news` (
   `Id` int(11) NOT NULL,
-  `Datetime` datetime DEFAULT current_timestamp(),
+  `Date` datetime DEFAULT current_timestamp(),
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL
+  'File' varchar(255) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

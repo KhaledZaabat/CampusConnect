@@ -33,11 +33,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($result->num_rows > 0) {
             $errorMessage = "User ID already exists. Please use a different User ID.";
         } else {
-            // Upload image
-            $imgPath = "assets/img/" . basename($_FILES["image"]["name"]);
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $imgPath)) {
+           // File upload validation
+    if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+        echo "<script>alert('Error uploading image.');</script>";
+        exit;
+    }
+
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $fileExtension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+    if (!in_array($fileExtension, $allowedExtensions)) {
+        echo "<script>alert('Invalid file type. Please upload an image.');</script>";
+        exit;
+    }
+
+    $maxFileSize = 2 * 1024 * 1024; // 2MB
+    if ($_FILES['image']['size'] > $maxFileSize) {
+        echo "<script>alert('File size exceeds the limit of 2MB.');</script>";
+        exit;
+    }
+
+    // Directory to store uploaded images
+    $uploadDir = 'uploads/profile_pics/';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+
+    // Generate unique file name and save image
+    $fileName = $userId . '_' . time() . '.' . $fileExtension;
+    $filePath = $uploadDir . $fileName;
+
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $filePath)) {
+        
                 $stmt = $conn->prepare("INSERT INTO employee (Id, firstName, lastName, Email, Role, phone, Password, img_path) VALUES (?, ?, ?, ?, ?, ?, '', ?)");
-                $stmt->bind_param("sssssss", $userId, $firstName, $lastName, $email, $role, $phone, $imgPath);
+                $stmt->bind_param("sssssss", $userId, $firstName, $lastName, $email, $role, $phone, $filePath);
                 
                 if ($stmt->execute()) {
                     $successMessage = "Employee added successfully!";

@@ -1,9 +1,52 @@
+<?php
+// Start session to get the logged-in student ID
+session_start();
+
+// Database configuration
+$host = 'localhost';
+$dbname = 'campus_connect';
+$username = 'root';
+$password = '';
+
+// Connect to the database
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Assuming student ID is stored in session
+$studentId = $_SESSION['user']['Id'] ;
+if ($studentId) {
+    // Fetch the image path based on the student ID
+    $stmt = $conn->prepare("SELECT img_path FROM student WHERE Id = ?");
+    $stmt->bind_param("i", $studentId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc(); // Get associative array
+    
+    if ($user && isset($user['img_path'])) {
+        $imgPath = $user['img_path'];
+        // Check if the file exists
+        if (!$imgPath || !file_exists($imgPath)) {
+            $imgPath = "assets/img/gens.png"; // Default profile image
+        }
+    } else {
+        $imgPath = "assets/img/gens.png"; // Default profile image if no image found
+    }
+    $stmt->close();
+} else {
+    // Default image if no student ID is available
+    $imgPath = "assets/img/gens.png";
+}
+?>
 
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
             <a class="navbar-brand-logo" href="#">
-                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
+                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo">
             </a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
@@ -27,28 +70,26 @@
                     </li>
                 </ul>
 
-                <!-- profile section for pc -->
+                <!-- Profile section for PC -->
                 <div class="dropdown d-none d-lg-block me-3">
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <img src="<?php echo htmlspecialchars($imgPath); ?>" alt="Profile Picture" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="StudentProfile.php">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        <li><a class="dropdown-item" href="logout.php">Sign out</a></li> <!-- Sign out link -->
                     </ul>
                 </div>
-                
 
-                <!-- Profile and Sign-out links for smaller screens(phone) -->
+                <!-- Profile and Sign-out links for smaller screens (phone) -->
                 <ul class="navbar-nav d-lg-none">
                     <li><hr class="dropdown-divider my-1"></li>
                     <li class="nav-item"><a class="nav-link" href="StudentProfile.php">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout.php">Sign out</a></li> <!-- Sign out link -->
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-
 

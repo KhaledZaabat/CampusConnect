@@ -1,3 +1,46 @@
+<?php
+// Start session to get the logged-in student ID
+
+// Database configuration
+$host = 'localhost';
+$dbname = 'campus_connect';
+$username = 'root';
+$password = '';
+
+// Connect to the database
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Assuming student ID is stored in session
+$userid = $_SESSION['user']['Id'] ;
+if ($userid) {
+    // Fetch the image path based on the student ID
+    $stmt = $conn->prepare("SELECT img_path FROM employee WHERE Id = ?");
+    $stmt->bind_param("i", $userid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc(); // Get associative array
+    
+    if ($user && isset($user['img_path'])) {
+        $imgPath = $user['img_path'];
+        // Check if the file exists
+        if (!$imgPath || !file_exists($imgPath)) {
+            $imgPath = "assets/img/gens.png"; // Default profile image
+        }
+    } else {
+        $imgPath = "assets/img/gens.png"; // Default profile image if no image found
+    }
+    $stmt->close();
+} else {
+    // Default image if no student ID is available
+    $imgPath = "assets/img/gens.png";
+}
+?>
+
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
@@ -30,7 +73,7 @@
                 </ul>
                 <div class="dropdown d-none d-lg-block me-3">
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <img src="<?php echo htmlspecialchars($imgPath); ?>" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="UserProfile.php">Profile</a></li>
