@@ -1,13 +1,13 @@
 <?php
 
-session_start();
 if (!isset($_SESSION['user']['Id'])) {
     header("Location: Login.php");  // Redirect to login page if not logged in
     exit();
 }
-$studentId = $_SESSION['user']['Id'] ;
 
-if ($studentId) {
+
+$studentId = $_SESSION['user']['Id'] ;
+if ($studentId && $_SESSION['user']['isStud']===true) {
     require 'db_connection.php';
     // Fetch the image path based on the student ID
     $stmt = $conn->prepare("SELECT img_path FROM student WHERE Id = ?");
@@ -18,15 +18,11 @@ if ($studentId) {
     
     if ($user && isset($user['img_path'])) {
         $imgPath = $user['img_path'];
-        // Check if the file exists
-        if (!$imgPath || !file_exists($imgPath)) {
-            $imgPath = "assets/img/gens.png"; // Default profile image
-        }
-    } else {
-        die("you are employee hhhhh"); 
-    }
+    } 
     $stmt->close();
-} 
+} else {
+    die("you are employee hhhhh"); 
+}
 
 ?>
 

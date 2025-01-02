@@ -1,6 +1,7 @@
 <?php
-require 'db_connection.php';
+session_start();
 
+ require 'headerStud.php' ;
 $message = "";
 $errors = [];
 
@@ -105,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 <body>
-<?php include 'headerStud.php' ?>
+
 
 <div class="container-xl px-4 mt-4">
     <hr class="mt-0 mb-4">

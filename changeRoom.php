@@ -18,7 +18,11 @@
 </head>
 
 <body>
-<?php include 'headerStud.php' ?>
+<?php 
+session_start();
+
+require 'headerStud.php';
+ ?>
     <div class="available-rooms">
         <h2>Available Rooms</h2>
         <input type="text" class="search-input form-control" id="search" placeholder="Search for rooms...">

@@ -1,6 +1,9 @@
 <?php
+session_start();
+if ($_SESSION['user']['Role'] !== 'Admin'){
+  die("just admins can access this page");
+}
 require 'headerAdmin.php';
-
 $response = [
     'message' => '',
     'errors' => []

@@ -1,3 +1,15 @@
+<?php 
+
+session_start();
+if ($_SESSION['user']['isStud'] === true) {
+    require 'headerStud.php';
+} else {
+    require 'headerAdmin.php';
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +28,7 @@
 </head>
 
 <body>
-<?php include 'headerStud.php' ?>
+
 <main class="page">
     <div class="text-start container-form container post">
         <div class="row">

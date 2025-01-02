@@ -1,6 +1,10 @@
 <?php
-require 'headerAdmin.php';
+session_start();
 
+if ($_SESSION['user']['Role'] !== 'Admin'){
+    die("just admins can access this page");
+}
+require 'headerAdmin.php';
 // Variables for success/error messages
 $successMessage = "";
 $errorMessage = "";
@@ -47,11 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    $maxFileSize = 2 * 1024 * 1024; // 2MB
-    if ($_FILES['image']['size'] > $maxFileSize) {
-        echo "<script>alert('File size exceeds the limit of 2MB.');</script>";
-        exit;
-    }
 
     // Directory to store uploaded images
     $uploadDir = 'uploads/profile_pics/';

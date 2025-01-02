@@ -9,7 +9,14 @@ if (isset($_GET['id'])) {
     echo "Error: Missing or invalid parameter.";
     exit; // Optional: Stop further execution if necessary
 }
-require 'headerstud.php';
+require 'db_connection.php';
+session_start();
+
+if ( $_SESSION['user']['isStud'] === true) {
+    require 'headerStud.php';
+} else {
+    require 'headerAdmin.php';
+}
 
 // SQL query to fetch news details by ID
 $sql = "SELECT * FROM news WHERE id = $newsId";

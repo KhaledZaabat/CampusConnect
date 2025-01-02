@@ -1,5 +1,7 @@
 <?php
-require 'db_connection.php';
+session_start();
+require 'headerStud.php';
+
 // Fetch all days
 $query_days = "SELECT * FROM days ORDER BY id";
 $result_days = mysqli_query($conn, $query_days);
@@ -22,7 +24,6 @@ $result_days = mysqli_query($conn, $query_days);
 </head>
 
 <body>
-    <?php include 'headerStud.php' ?>
     <h1>Canteen Schedule</h1>
 
     <table class="canteenTable">

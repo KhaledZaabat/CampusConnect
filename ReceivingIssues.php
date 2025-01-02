@@ -1,3 +1,13 @@
+<?php 
+session_start();
+
+if ($_SESSION['user']['Role'] !== 'Admin' && $_SESSION['user']['Role'] !== 'Maintenance'){
+    die("just admins And Maintenance Employees can access this page");
+}
+require 'headerAdmin.php' ;
+
+?>
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -27,7 +37,7 @@
 
 
 <body>
-<?php include 'headerAdmin.php' ?>
+
 
     <main>
         <div class="container mt-5">

@@ -1,5 +1,11 @@
 <?php
-require 'db_connection.php';
+session_start();
+if ( $_SESSION['user']['Role'] !== 'Admin' && $_SESSION['user']['Role'] !== 'Chef'){
+    die("just admins and Chefs can access this page");
+}
+  require 'headerAdmin.php' ;
+
+
 // Fetch all days
 $query_days = "SELECT * FROM days ORDER BY id";
 $result_days = mysqli_query($conn, $query_days);
@@ -22,7 +28,6 @@ $result_days = mysqli_query($conn, $query_days);
 </head>
 
 <body>
-    <?php include 'headerAdmin.php' ?>
     <h1>Canteen Schedule</h1>
 
     <table class="canteenTable">

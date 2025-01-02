@@ -1,6 +1,9 @@
 <?php
+session_start();
 require 'db_connection.php';
-
+if ($_SESSION['user']['Role'] !== 'Admin'){
+    die("just admins can access this page");
+}
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Capture and sanitize form inputs
     $studentID = htmlspecialchars(trim($_POST['StudentID'])) ?? null;
