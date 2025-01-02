@@ -1,31 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const userId = document.getElementById('page').dataset.userId;
     const posts = [];
     const submit_btn = document.getElementById("submit_btn");
     const postsPerPage = 3; // Number of posts per page
     let currentPage = 1; // Track the current page
     let activeFilter = "All"; // Track the active filter
 
-
-
     function fetch_posts() {
+        posts.length = 0;
         var xhr = new XMLHttpRequest();
 
         xhr.open('GET', 'posts.php', true);
         
         xhr.onreadystatechange = function() {
-            console.log('readyState:', xhr.readyState); // Log the readyState
-            console.log('status:', xhr.status); // Log the status (this may cause a warning if readyState is not 4)
         
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    console.log("Server response:", xhr.responseText); // Log the server response
                     try {
                         var data = JSON.parse(xhr.responseText);
-                        console.log("parsed data:", data);
                         posts.push(...data);
     
                         console.log("posts:", posts);
-                        console.log(Array.isArray(posts)); // Should log true if posts is an array
                         renderPosts(currentPage);
                     } catch (e) {
                         console.error("Parsing error:", e.message);
@@ -63,17 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
 
-    submit_btn.addEventListener('click', (event) => {
+    document.getElementById('submit_btn').addEventListener('click', (event) => {
         event.preventDefault();
     
         // Get input values
         const title = document.getElementById("i_title");
         const description = document.getElementById("i_description");
         const imgInput = document.getElementById("file");
-        const Found = document.getElementById("found");
-        const Missing = document.getElementById("missing");
-        const imageFile = imgInput.files[0];
-        const imageUrl = imageFile ? URL.createObjectURL(imageFile) : "assets/img/no-img.png";
+        const found = document.getElementById("found");
+        const missing = document.getElementById("missing");
+        const imageFile = imgInput.files[0] ? imgInput.files[0] : new File([], "assets/img/no-img.png");
     
         // Validate required fields
         if (!title.value || !description.value) {
@@ -94,34 +88,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     
         // Check if a radio button (Missing or Found) is selected
-        if (!Found.checked && !Missing.checked) {
+        if (!found.checked && !missing.checked) {
             alert("Please select the type of listing.");
             return;
         }
     
-
-        // Create new submission object
-        const newSubmission = {
-            title: title.value.trim(),
-            description: description.value.trim(),
-            image: imageUrl,
-            listingType: Found.checked ? "Found" : "Missing",
-            comments: [], // Initialize with an empty comments array
-            user: "me",
-            currentCommentPage: 1,
+        // Create form data
+        const formData = new FormData();
+        formData.append('title', title.value.trim());
+        formData.append('description', description.value.trim());
+        formData.append('listingType', found.checked ? "Found" : "Missing");
+        formData.append('image', imageFile);
+    
+        // Send form data to the server using XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'posts.php', true);
+    
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText);
+                alert(xhr.responseText); // This can be changed to a sweet alert
+    
+                // Reset the form fields
+                title.value = "";
+                description.value = "";
+                found.checked = false;
+                missing.checked = false;
+                imgInput.value = "";
+                resetImageUpload();
+                fetch_posts();
+            } else {
+                console.error('Error:', xhr.statusText);
+                alert('Failed to submit the post');
+            }
         };
-
-        posts.push(newSubmission);
-
-        // Reset the form fields
-        title.value = "";
-        description.value = "";
-        Found.checked = false;
-        Missing.checked = false;
-        resetImageUpload();
-        renderPosts(currentPage);
+    
+        xhr.onerror = function () {
+            console.error('Request error...');
+            alert('Failed to submit the post');
+        };
+    
+        xhr.send(formData);
     });
-
+    
+    
     function renderPosts(page) {
         const postsContainer = document.getElementById("blog_posts");
 

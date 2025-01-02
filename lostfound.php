@@ -17,12 +17,12 @@
 
 <body>
 <?php include 'headerStud.php' ?>
-<main class="page">
+<main id="page" class="page" data-user-id="<?= $_SESSION['user']['Id'] ?>">
     <div class="text-start container-form container post">
         <div class="row">
             <div class="col">
                 <h3>Create a new listing:</h3>
-                <form>
+                <form id="lostandfound_form" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="title">Title</label> 
                         <input id="i_title" type="text" class="text-field" id="title" name="title" placeholder="Title" required>

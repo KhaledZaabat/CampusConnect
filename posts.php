@@ -17,6 +17,7 @@ if ($method === 'GET') {
                 student s ON p.UserId = s.Id
             LEFT JOIN 
                 employee e ON p.UserId = e.Id
+            ORDER BY p.DateTime DESC;
         ';
         $stmt = $conn->query($sql);
         $posts = $stmt->fetch_all(MYSQLI_ASSOC);
@@ -38,29 +39,47 @@ if ($method === 'GET') {
 
 
 elseif ($method === 'POST') {
-    $data = json_decode(file_get_contents('php://input'), true);
-
-    if ($data && isset($data['title'], $data['description'], $data['image'], $data['type'])) {
-        $title = htmlspecialchars($data['title']);
-        $description = htmlspecialchars($data['description']);
-        $image = htmlspecialchars($data['image']);
-        $type = htmlspecialchars($data['type']);
-        $comments = isset($data['comments']) ? json_encode($data['comments']) : json_encode([]);
-
-        try {
-            $stmt = $pdo->prepare("INSERT INTO posts (title, description, image, type, comments) VALUES (?, ?, ?, ?, ?)");
-            $stmt->execute([$title, $description, $image, $type, $comments]);
-
-            echo json_encode(['success' => true, 'id' => $pdo->lastInsertId()]);
-        } catch (Exception $e) {
-            echo json_encode(['error' => 'Failed to save post: ' . $e->getMessage()]);
+    if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        // Define the temporary directory for storing uploaded images
+        $uploadDir = 'uploads/'; // Ensure this directory is writable by the server
+        $uploadFile = $uploadDir . basename($_FILES['image']['name']);
+    
+        // Move the uploaded file to the temporary directory
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+            // Get the absolute file path of the uploaded image
+            $imagePath = realpath($uploadFile);
+    
+            // Ensure the file exists and is accessible
+            if ($imagePath && file_exists($imagePath)) {
+                $title = htmlspecialchars($_POST['title']);
+                $description = htmlspecialchars($_POST['description']);
+                $type = htmlspecialchars($_POST['listingType']);
+                $userId = $_SESSION['user']['Id'];
+                $datetime = date("Y-m-d H:i:s");
+    
+                // Use LOAD_FILE to insert the image from the server's file system
+                $sql = "INSERT INTO lostandfoundpost (Title, Content, UserId, Datetime, Type, img)
+                        VALUES (?, ?, ?, ?, ?, LOAD_FILE(?))";
+    
+                // Prepare and bind parameters
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("ssssss", $title, $description, $userId, $datetime, $type, $imagePath);
+    
+                // Execute the statement
+                if ($stmt->execute()) {
+                    echo json_encode(['success' => true, 'id' => $conn->insert_id]);
+                } else {
+                    echo json_encode(['error' => 'Failed to save post: ' . $stmt->error]);
+                }
+            } else {
+                echo json_encode(['error' => 'File does not exist or is not accessible.']);
+            }
+        } else {
+            echo json_encode(['error' => 'Failed to move uploaded image.']);
         }
     } else {
-        echo json_encode(['error' => 'Invalid data. Ensure title, description, image, and type are provided.']);
+        echo json_encode(['error' => 'Image upload failed: ' . $_FILES['image']['error']]);
     }
 }
-
-else {
-    echo json_encode(['error' => 'Unsupported request method']);
-}
+$conn->close();
 ?>
