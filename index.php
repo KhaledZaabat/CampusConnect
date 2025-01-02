@@ -1,6 +1,7 @@
 <?php
-// Database connection
+session_start();
 require 'headerStud.php';
+
 
 // Fetch the last 3 news items sorted by date in descending order
 $sql = "SELECT * FROM news ORDER BY Date DESC LIMIT 3";

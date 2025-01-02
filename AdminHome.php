@@ -1,4 +1,8 @@
 <?php
+session_start();
+if ($_SESSION['user']['Role'] !== 'Admin'){
+    die("just admins can access this page");
+}
 require 'headerAdmin.php';
 
 // Fetch total students in dorms

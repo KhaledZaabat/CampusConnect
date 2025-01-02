@@ -1,21 +1,18 @@
 <?php
 require 'db_connection.php';
-
-// Start session
-
 // Function to check role and redirect accordingly
 function checkUserRoleAndRedirect($role) {
     switch ($role) {
         case 'Admin':
             header("Location: AdminHome.php");
             break;
-        case 'chef':
+        case 'Chef':
             header("Location: CanteenManagement.php");
             break;
-        case 'housing':
+        case 'Housing':
             header("Location: roomRequests.php");
             break;
-        case 'maintenance':
+        case 'Maintenance':
             header("Location: ReceivingIssues.php");
             break;
     }
@@ -38,13 +35,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validated']) && $_POST
         $user = $result->fetch_assoc();
         // Verify password
         if (password_verify($password, $user['Password'])) {
-            $_SESSION['user'] = $user; // Store user in session
+            session_start();
+            $_SESSION['user'] = [
+                'Id' => $user['Id'],
+                'Password' => $password,
+                'isStud' => true ,
+                'Role' => null
+
+            ];
             header("Location: index.php"); // Redirect students to index.php
             exit();
         } else {
             $error = "Invalid password.";
         }
-    } else {
+    }
+
         // Check user credentials in 'Employee' table
         $sql = "SELECT * FROM Employee WHERE Id = ?";
         $stmt = $conn->prepare($sql);
@@ -56,18 +61,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['validated']) && $_POST
             $user = $result->fetch_assoc();
             // Verify password
             if (password_verify($password, $user['Password'])) {
-                $_SESSION['user'] = $user; // Store employee in session
-                checkUserRoleAndRedirect($user['Role']); // Check role and redirect
+                session_start();
+
+                $_SESSION['user'] = [
+                    'Id' => $user['Id'],
+                    'Password' => $password,
+                    'isStud' => false,
+                    'Role' => $user['Role']
+                ];
+                 checkUserRoleAndRedirect($user['Role']); 
+            exit();
             } else {
-                $error = "Invalid password.";
+                $error = "Invalid password ";
             }
         } else {
             $error = "Invalid user.";
         }
+        $stmt->close();
+
     }
 
-    $stmt->close();
-}
+
+
 
 $conn->close();
 ?>

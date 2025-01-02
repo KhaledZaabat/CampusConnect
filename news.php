@@ -23,7 +23,12 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<?php include 'headerStud.php' ?>
+<?php 
+session_start();
+
+require 'headerStud.php';
+
+?>
     <div class="news-header">
         <h1>News</h1>
         <div class="News-header-content">Stay Connected With The Lastest Happeneings and essentail updates across the

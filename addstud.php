@@ -1,6 +1,9 @@
 <?php
+session_start();
 require 'db_connection.php';
-
+if ($_SESSION['user']['Role'] !== 'Admin'){
+    die("just admins can access this page");
+}
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Capture and sanitize form inputs
     $studentID = htmlspecialchars(trim($_POST['StudentID'])) ?? null;
@@ -11,7 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $bloc = htmlspecialchars(trim($_POST['bloc']));
     $floor = (int) $_POST['floor'];
     $room = (int) $_POST['room'];
-
+    $password = $firstName . " " . $lastName ;
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
     // File upload validation
     if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
         echo "<script>alert('Error uploading image.');</script>";
@@ -89,10 +93,10 @@ exit; // Prevent further code execution
     $roomId = $roomData['Id'];
 
     // Insert student data into database
-    $insertQuery = "INSERT INTO student (Id, firstName, lastName, Email, phone, roomId, img_path)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $insertQuery = "INSERT INTO student (Id, firstName, lastName, Email, Password, phone, roomId, img_path)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $insertStmt = $conn->prepare($insertQuery);
-    $insertStmt->bind_param("sssssis", $studentID, $firstName, $lastName, $email, $phone, $roomId, $filePath);
+    $insertStmt->bind_param("ssssssis", $studentID, $firstName, $lastName, $email, $hashedPassword, $phone, $roomId, $filePath);
 
     if ($insertStmt->execute()) {
         echo "<script>

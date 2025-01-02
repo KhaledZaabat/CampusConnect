@@ -1,6 +1,10 @@
 <?php
-require 'db_connection.php';
+session_start();
 
+if ($_SESSION['user']['Role'] !== 'Admin'){
+    die("just admins can access this page");
+}
+require 'headerAdmin.php';
 // Fetch all students and their related details
 $query = "SELECT s.Id, s.firstName, s.lastName, s.Email, s.phone, s.img_path, 
           b.blockName, f.FloorNumber, r.RoomNumber 
@@ -50,7 +54,6 @@ if (!$result) {
 </head>
 
 <body>
-<?php include 'headerAdmin.php' ?>
 
     <div class="container2">
         <h1>Student Management</h1>

@@ -1,6 +1,7 @@
-
 <?php
-require 'db_connection.php'; // Include your database connection
+session_start();
+
+require 'headerAdmin.php' ;
 $message = ""; // For displaying success messages
 $errors = []; // To hold validation errors
 
@@ -77,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 <body>
-<?php include 'headerAdmin.php' ?>
+
 
     <div class="container-xl px-4 mt-4">
         <hr class="mt-0 mb-4">

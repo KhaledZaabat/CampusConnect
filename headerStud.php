@@ -1,10 +1,14 @@
 <?php
-// Start session to get the logged-in student ID
-require 'db_connection.php';
 
-// Assuming student ID is stored in session
+if (!isset($_SESSION['user']['Id'])) {
+    header("Location: Login.php");  // Redirect to login page if not logged in
+    exit();
+}
+
+
 $studentId = $_SESSION['user']['Id'] ;
-if ($studentId) {
+if ($studentId && $_SESSION['user']['isStud']===true) {
+    require 'db_connection.php';
     // Fetch the image path based on the student ID
     $stmt = $conn->prepare("SELECT img_path FROM student WHERE Id = ?");
     $stmt->bind_param("i", $studentId);
@@ -14,18 +18,12 @@ if ($studentId) {
     
     if ($user && isset($user['img_path'])) {
         $imgPath = $user['img_path'];
-        // Check if the file exists
-        if (!$imgPath || !file_exists($imgPath)) {
-            $imgPath = "assets/img/gens.png"; // Default profile image
-        }
-    } else {
-        $imgPath = "assets/img/gens.png"; // Default profile image if no image found
-    }
+    } 
     $stmt->close();
 } else {
-    // Default image if no student ID is available
-    $imgPath = "assets/img/gens.png";
+    die("you are employee hhhhh"); 
 }
+
 ?>
 
 

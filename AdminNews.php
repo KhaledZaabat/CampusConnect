@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if ($_SESSION['user']['Role'] !== 'Admin'){
+    die("just admins can access this page");
+}
+require 'headerAdmin.php';
+?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -23,7 +30,7 @@
 
 
 <body>
-    <?php include 'headerAdmin.php' ?>
+   
     <div class="news-header">
         <h1>News</h1>
         <div class="News-header-content">
@@ -41,7 +48,7 @@
     <div id="news-container" class="news-container"></div>
 
     <div id="pagination-controls" class="pagination-controls"></div>
-    <a href="AddNews.html" class="fixed-button">+</a>
+    <a href="AddNews.php" class="fixed-button">+</a>
     <?php include 'footer.php' ?>
 </body>
 

@@ -22,7 +22,14 @@
 
     
 <body>
-<?php include 'headerAdmin.php' ?>
+<?php 
+session_start();
+
+if ($_SESSION['user']['Role'] !== 'Admin' && $_SESSION['user']['Role'] !== 'Housing'){
+    die("just admins And Housing Employees can access this page");
+}
+require 'headerAdmin.php' ;
+?>
 
     <!-- Room Change Requests -->
     <div class="table-container">

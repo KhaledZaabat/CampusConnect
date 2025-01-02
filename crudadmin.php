@@ -1,6 +1,10 @@
 <?php
-require 'db_connection.php';
+session_start();
 
+if ($_SESSION['user']['Role'] !== 'Admin'){
+    die("just admins can access this page");
+}
+require 'headerAdmin.php';
 // Variables for success/error messages
 $successMessage = "";
 $errorMessage = "";
@@ -13,7 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $role = $_POST['role'];
-    
+    $password = $firstName . " " . $lastName ;
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
     if (isset($_POST['update'])) {
         // Update the employee
         $stmt = $conn->prepare("UPDATE employee SET firstName = ?, lastName = ?, Email = ?, phone = ?, Role = ? WHERE Id = ?");
@@ -46,11 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    $maxFileSize = 2 * 1024 * 1024; // 2MB
-    if ($_FILES['image']['size'] > $maxFileSize) {
-        echo "<script>alert('File size exceeds the limit of 2MB.');</script>";
-        exit;
-    }
 
     // Directory to store uploaded images
     $uploadDir = 'uploads/profile_pics/';
@@ -64,8 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (move_uploaded_file($_FILES['image']['tmp_name'], $filePath)) {
         
-                $stmt = $conn->prepare("INSERT INTO employee (Id, firstName, lastName, Email, Role, phone, Password, img_path) VALUES (?, ?, ?, ?, ?, ?, '', ?)");
-                $stmt->bind_param("sssssss", $userId, $firstName, $lastName, $email, $role, $phone, $filePath);
+                $stmt = $conn->prepare("INSERT INTO employee (Id, firstName, lastName, Email, Role, phone, Password, img_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssssss", $userId, $firstName, $lastName, $email, $role, $phone, $hashedPassword , $filePath);
                 
                 if ($stmt->execute()) {
                     $successMessage = "Employee added successfully!";
@@ -129,7 +129,6 @@ $employees = $conn->query("SELECT Id, firstName, lastName, Email, Role, phone, i
 </head>
 
 <body>
-<?php include 'headerAdmin.php'; ?>
 <div class="container2">
     <h1>Employee Management</h1>
     

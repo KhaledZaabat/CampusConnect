@@ -2,7 +2,7 @@
 
 // add_meal.php
 header('Content-Type: application/json');
-require_once 'db_connection.php';
+require 'db_connection.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 $dayId = mysqli_real_escape_string($conn, $data['dayId']);

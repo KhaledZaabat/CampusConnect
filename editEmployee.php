@@ -1,7 +1,12 @@
 <?php
 // Include database connection file
 require 'db_connection.php';
+session_start();
 
+if ( $_SESSION['user']['Role'] !== 'Admin'){
+    die("just admins can access this page");
+}
+require 'headerAdmin.php';
 // Ensure 'userId' parameter is passed via the URL for editing
 if (isset($_GET['userId'])) {
     $userId = $_GET['userId'];

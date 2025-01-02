@@ -24,7 +24,11 @@
     
 
 <body>
-<?php include 'headerStud.php' ?>
+<?php
+session_start();
+
+ require 'headerStud.php';
+?>
     <div class="Form-container">
         <h1>Campus Problem Declaration Form</h1>
         <form id="problem-form" action="#" method="post" enctype="multipart/form-data">

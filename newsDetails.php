@@ -1,15 +1,22 @@
 <?php
 
 // Get news ID from URL parameter
-if (isset($_GET['Id'])) {
-    $newsId = intval($_GET['Id']); // Prevent SQL injection
+if (isset($_GET['id'])) {
+    $newsId = intval($_GET['id']); // Prevent SQL injection
     // Your code to handle $newsId here
 } else {
     // Handle the case where 'Id' is not set
     echo "Error: Missing or invalid parameter.";
     exit; // Optional: Stop further execution if necessary
 }
-require 'headerstud.php';
+require 'db_connection.php';
+session_start();
+
+if ( $_SESSION['user']['isStud'] === true) {
+    require 'headerStud.php';
+} else {
+    require 'headerAdmin.php';
+}
 
 // SQL query to fetch news details by ID
 $sql = "SELECT * FROM news WHERE id = $newsId";
