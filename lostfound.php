@@ -29,7 +29,7 @@ if ($_SESSION['user']['isStud'] === true) {
 
 <body>
 
-<main class="page">
+<main id="page" class="page" data-user-id="<?= $_SESSION['user']['Id'] ?>">
     <div class="text-start container-form container post">
         <div class="row">
             <div class="col">
@@ -122,3 +122,4 @@ if ($_SESSION['user']['isStud'] === true) {
 <?php include 'footer.php' ?>
 </body>
 </html>
+
