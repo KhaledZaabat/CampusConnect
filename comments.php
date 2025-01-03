@@ -32,38 +32,53 @@ if ($method === 'POST') {
         $postId = $data['postId'];
         $content = $data['content'];
         $userId = $data['userId'];
-
+    
         if ($postId && $content && $userId) {
             $stmt = $conn->prepare('INSERT INTO comment (PostId, Content, UserId, Datetime) VALUES (?, ?, ?, NOW())');
             $stmt->bind_param('isi', $postId, $content, $userId);
-
+    
             if ($stmt->execute()) {
-                // Fetch the username (either student or employee)
-                $stmt = $conn->prepare('
-                    SELECT COALESCE(s.FirstName, e.FirstName) as FirstName
-                    FROM student s
-                    LEFT JOIN employee e ON s.Id = e.Id
-                    WHERE s.Id = ? OR e.Id = ?
-                ');
-                $stmt->bind_param('ii', $userId, $userId);
+                $commentId = $conn->insert_id;
+    
+                // Initialize the variable to store the firstName
+                $FirstName = null;
+    
+                // First query: Check in the student table
+                $stmt = $conn->prepare('SELECT firstName FROM student WHERE Id = ?');
+                $stmt->bind_param('s', $userId);
                 $stmt->execute();
-                $stmt->bind_result($username);
-                $stmt->fetch();
-
-                echo json_encode(['success' => true, 'username' => $username]);
+                $stmt->bind_result($FirstName);
+    
+                if (!$stmt->fetch()) {
+                    // If no result found in the student table, check the employee table
+                    $stmt->close();
+                    $stmt = $conn->prepare('SELECT firstName FROM employee WHERE Id = ?');
+                    $stmt->bind_param('s', $userId);
+                    $stmt->execute();
+                    $stmt->bind_result($FirstName);
+                    $stmt->fetch();
+                }
+    
+                $stmt->close(); // Close the statement
+    
+                if ($FirstName) {
+                    echo json_encode(['success' => true, 'username' => $FirstName, 'Id' => $commentId]);
+                } else {
+                    echo json_encode(['success' => true, 'username' => null, 'Id' => $commentId]);
+                }
             } else {
                 echo json_encode(['success' => false, 'message' => 'Failed to create comment.']);
             }
         } else {
             echo json_encode(['success' => false, 'message' => 'Invalid data provided.']);
         }
-    }
+    }    
+    
     elseif (isset($data['action']) && $data['action'] === 'delete') {
         $commentId = $data['commentId'];
         $userId = $data['userId'];
 
         if ($commentId && $userId) {
-            // Check if the user has permission to delete the comment
             $stmt = $conn->prepare('DELETE FROM comment WHERE Id = ? AND UserId = ?');
             $stmt->bind_param('ii', $commentId, $userId);
 
