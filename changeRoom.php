@@ -1,3 +1,25 @@
+<?php 
+    session_start();
+    require 'headerStud.php'; // Assumes the database connection is established in this file
+
+    // Fetch available rooms
+    $sql = "SELECT r.Id, r.RoomNumber, f.FloorNumber, b.blockName
+FROM room r
+JOIN floor f ON r.FloorID = f.Id
+JOIN block b ON f.BlockID = b.Id
+LEFT JOIN student s ON r.Id = s.roomId
+WHERE s.roomId IS NULL;
+";
+
+    $result = $conn->query($sql);
+
+    $rooms = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $rooms[] = $row;
+        }
+    }
+?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 <head>
@@ -14,160 +36,34 @@
     <link rel="icon" href="assets/img/logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
-   
 </head>
 
 <body>
-<?php 
-session_start();
-
-require 'headerStud.php';
- ?>
     <div class="available-rooms">
         <h2>Available Rooms</h2>
         <input type="text" class="search-input form-control" id="search" placeholder="Search for rooms...">
         <table class="table">
-            <tr>
-                <th data-column="block" class="sortable">Dorm Block <span class="sort-icon">⇅</span></th>
-                <th data-column="floor" class="sortable">Floor <span class="sort-icon">⇅</span></th>
-                <th data-column="number" class="sortable">Room Number <span class="sort-icon">⇅</span></th>
-            </tr>
-            
+            <thead>
+                <tr>
+                    <th data-column="block" class="sortable">Dorm Block <span class="sort-icon">⇅</span></th>
+                    <th data-column="floor" class="sortable">Floor <span class="sort-icon">⇅</span></th>
+                    <th data-column="number" class="sortable">Room Number <span class="sort-icon">⇅</span></th>
+                </tr>
+            </thead>
             <tbody id="room-table-body">
-               
-                <tr>
-                    <td>D</td>
-                    <td>4</td>
-                    <td>25</td>
-                </tr>
-                <tr>
-                    <td>E</td>
-                    <td>5</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>1</td>
-                    <td>6</td>
-                </tr>
-                
-                <tr>
-                    <td>C</td>
-                    <td>5</td>
-                    <td>18</td>
-                </tr>
-                
-                <tr>
-                    <td>B</td>
-                    <td>5</td>
-                    <td>14</td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td>2</td>
-                    <td>11</td>
-                </tr>
-                <tr>
-                    <td>C</td>
-                    <td>3</td>
-                    <td>16</td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td>4</td>
-                    <td>21</td>
-                </tr>
-                <tr>
-                    <td>E</td>
-                    <td>5</td>
-                    <td>26</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>2</td>
-                    <td>7</td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td>3</td>
-                    <td>12</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>R</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>1</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td>2</td>
-                    <td>15</td>
-                </tr>
-                <tr>
-                    <td>C</td>
-                    <td>3</td>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <td>C</td>
-                    <td>4</td>
-                    <td>17</td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td>5</td>
-                    <td>22</td>
-                </tr>
-                <tr>
-                    <td>E</td>
-                    <td>6</td>
-                    <td>27</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>3</td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td>4</td>
-                    <td>13</td>
-                </tr>
-                <tr>
-                    <td>C</td>
-                    <td>6</td>
-                    <td>19</td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td>7</td>
-                    <td>24</td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td>6</td>
-                    <td>23</td>
-                </tr>
-                <tr>
-                    <td>E</td>
-                    <td>7</td>
-                    <td>28</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>4</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>E</td>
-                    <td>8</td>
-                    <td>29</td>
-                </tr>
-                
+                <?php if (!empty($rooms)): ?>
+                    <?php foreach ($rooms as $room): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($room['blockName']); ?></td>
+                            <td><?php echo htmlspecialchars($room['FloorNumber']); ?></td>
+                            <td><?php echo htmlspecialchars($room['RoomNumber']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="3">No available rooms.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
         <div class="pagination">
@@ -176,7 +72,6 @@ require 'headerStud.php';
             <button id="next"><i class="fas fa-arrow-right"></i></button>
         </div>
     </div>
-    
 
 
     <div class="Form-container">
