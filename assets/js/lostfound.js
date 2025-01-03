@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const posts = [];
     const submit_btn = document.getElementById("submit_btn");
     const postsPerPage = 3; // Number of posts per page
+    const isAdmin = document.getElementById('page').dataset.isAdmin === "Admin";
     let currentPage = 1; 
     let activeFilter = "All"; 
 
@@ -233,24 +234,35 @@ document.addEventListener('DOMContentLoaded', () => {
         postElement.innerHTML = postContent;
         postsContainer.appendChild(postElement);
         const isPostOwner = (submissionData.UserId === userId);
+        var isEditOpen = false;
+        var editButton= null;
+        var deleteButton= null;
+        const edit_delete = postElement.querySelector('#edit_delete');
 
         if(isPostOwner){
-            var editButton = document.createElement("a");
+            editButton = document.createElement("a");
 
             editButton.innerHTML = `<i class="fas fa-edit"></i>`;
             editButton.href = "#";
             editButton.className = "Edit me-2";
             
-            var deleteButton = document.createElement("a");
+            deleteButton = document.createElement("a");
             deleteButton.innerHTML = `<i class="fas fa-trash-alt"></i>`;
             deleteButton.href = "#";
             deleteButton.className = "Delete";
-            const edit_delete = postElement.querySelector('#edit_delete');
             edit_delete.appendChild(editButton);
             edit_delete.appendChild(deleteButton);
+        }
+
+        else if(isAdmin){
+            deleteButton = document.createElement("a");
+            deleteButton.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+            deleteButton.href = "#";
+            deleteButton.className = "Delete";
+            edit_delete.appendChild(deleteButton);
+        }
         
-            var isEditOpen = false;
-            // Edit functionality
+        if(editButton){
             editButton.addEventListener('click', (e) => {
                 e.preventDefault();
             
@@ -369,8 +381,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     buttonContainer.innerHTML = ""; // Clear the buttons
                 }
             });
-            
-            // Delete functionality
+        }
+        // Delete functionality
+        if(deleteButton){
             deleteButton.addEventListener('click', (e) => {
                 e.preventDefault();
             
@@ -426,8 +439,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
             });
-            
-        }
+        }    
+
 
         const commentSection = postElement.querySelector('.comment-section');
         const commentsToggle = postElement.querySelector(`#comments-toggle-${submissionData.Id}`);
@@ -538,7 +551,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${comment.UserId === userId ? `
                     <a href="#" class="edit-comment Edit cm me-2"><i class="fas fa-edit"></i></a>
                     <a href="#" class="delete-comment Delete cm sm"><i class="fas fa-trash-alt"></i></a>
-                    ` : ''}
+                    ` : ''
+                    }
+                    ${comment.UserId !== userId && isAdmin ?
+                        `<a href="#" class="delete-comment Delete cm sm"><i class="fas fa-trash-alt"></i></a>`
+                        : ''
+                    }
+
                 </div>
             </div>
         </div>
