@@ -469,10 +469,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 if (response.success) {
                                     const newComment = {
                                         FirstName: response.username, 
+                                        Id: response.Id, 
                                         Datetime: new Date().toLocaleString(),
                                         Content :commentText,
                                         UserId: userId
                                     };
+                                    console.log(newComment);
                                     submissionData.comment.push(newComment);
                                     textarea.value = "";
                                     submissionData.currentCommentPage = 1; // Reset to page 1 after a new comment
@@ -485,6 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     });
                                 }
                             } catch (e) {
+                                console.log(response);
                                 console.error("Parsing error:", e.message);
                             }
                         } else {
@@ -679,6 +682,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             commentId: submissionData.comment[index].Id,
                             userId: userId 
                         });
+                        console.log(data);
                         xhr.send(data);
                     }
                 });
