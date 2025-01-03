@@ -49,8 +49,7 @@ if ($studentId && $_SESSION['user']['isStud']===true) {
                             <li><a class="dropdown-item" href="ReportIssues.php">Report Issues</a></li>
                             <li><a class="dropdown-item" href="lostfound.php">Lost&Found items</a></li>
                             <li class="dropdown-header">Housing Services</li>
-                            <li><a class="dropdown-item" href="BookRoom.php">Book Rooms</a></li>
-                            <li><a class="dropdown-item" href="changeRoom.php">Change Rooms</a></li>
+                            <li><a class="dropdown-item" href="BookRoom.php">Book/Change Rooms</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -47,9 +47,8 @@ if ($userid && $_SESSION['user']['isStud'] === false) {
                     <li class="dropdown-header">Maintenance Services</li>
                     <li><a class="dropdown-item" href="ReceivingIssues.php">Manage Issues</a></li>
                     <li><a class="dropdown-item" href="lostfound.php">Lost&Found items</a></li>
-                    <li class="dropdown-header">Housing Services</li>
-                    <li><a class="dropdown-item" href="#">Book Rooms</a></li>
-                    <li><a class="dropdown-item" href="roomRequests.php">Change Rooms</a></li>
+                    <li class="dropdown-header">Housing Services</li>                    
+                    <li><a class="dropdown-item" href="roomRequests.php">Book/Change Rooms</a></li>
                     <li class="dropdown-header">Users</li>
                     <li><a class="dropdown-item" href="crudstud.php">Manage Students</a></li>
                     <li><a class="dropdown-item" href="crudadmin.php">Manage Employees</a></li>
