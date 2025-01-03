@@ -1,187 +1,151 @@
+<?php 
+session_start();
+require 'headerStud.php'; // Assumes the database connection is established in this file
+
+// Fetch available rooms
+$sql = "SELECT r.Id, r.RoomNumber, f.FloorNumber, b.blockName
+        FROM room r
+        JOIN floor f ON r.FloorID = f.Id
+        JOIN block b ON f.BlockID = b.Id
+        LEFT JOIN student s ON r.Id = s.roomId
+        WHERE s.roomId IS NULL";
+
+$result = $conn->query($sql);
+
+$rooms = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $rooms[] = $row;
+    }
+}
+
+// Handle form submission
+$message = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_SESSION['userId'])) {
+        $message = "User not authenticated";
+    } else {
+        try {
+            // Get form data
+            $userId = $_SESSION['userId'];
+            $dormBlock = $_POST['dorm-block'];
+            $floor = $_POST['floor'];
+            $roomNumber = $_POST['room-number'];
+            $reason = $_POST['reason'];
+            $specialRequirements = $_POST['special-requirements'];
+
+            // First, get the roomId based on the selected block, floor, and room number
+            $stmt = $conn->prepare("
+                SELECT r.Id 
+                FROM room r
+                INNER JOIN floor f ON r.FloorID = f.Id
+                INNER JOIN block b ON f.BlockID = b.Id
+                LEFT JOIN student s ON r.Id = s.roomId
+                WHERE b.blockName = ? 
+                AND f.FloorNumber = ? 
+                AND r.RoomNumber = ? 
+                AND s.roomId IS NULL
+            ");
+
+            if (!$stmt) {
+                throw new Exception("Failed to prepare room query: " . $conn->error);
+            }
+
+            $stmt->bind_param("sii", $dormBlock, $floor, $roomNumber);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows === 0) {
+                $message = "Selected room is not available or doesn't exist";
+            } else {
+                $room = $result->fetch_assoc();
+                $roomId = $room['Id'];
+
+                // Check if user already has a pending request
+                $stmt = $conn->prepare("
+                    SELECT id FROM roomrequest 
+                    WHERE userId = ?
+                ");
+                $stmt->bind_param("s", $userId);
+                $stmt->execute();
+
+                if ($stmt->get_result()->num_rows > 0) {
+                    $message = "You already have a pending room request";
+                } else {
+                    // Insert the room request
+                    $stmt = $conn->prepare("
+                        INSERT INTO roomrequest (userId, roomId, reason, description) 
+                        VALUES (?, ?, ?, ?)
+                    ");
+
+                    if (!$stmt) {
+                        throw new Exception("Failed to prepare insert query: " . $conn->error);
+                    }
+
+                    $stmt->bind_param("siss", $userId, $roomId, $reason, $specialRequirements);
+
+                    if ($stmt->execute()) {
+                        $message = "Room booking request submitted successfully!";
+                    } else {
+                        throw new Exception("Failed to submit booking request: " . $stmt->error);
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            $message = "An error occurred while processing your request: " . $e->getMessage();
+        }
+    }
+}
+
+?>
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Book Room</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="assets/css/Rooms.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/Rooms.js"></script>
-
-    <link rel="icon" href="assets/img/logo.png" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
-   
 </head>
-
-
 <body>
-    <?php 
-    session_start();
-    require 'headerStud.php';
-     ?>
+
+    <?php if ($message): ?>
+        <div class="alert alert-info"><?php echo htmlspecialchars($message); ?></div>
+    <?php endif; ?>
+
     <div class="available-rooms">
         <h2>Available Rooms</h2>
         <input type="text" class="search-input form-control" id="search" placeholder="Search for rooms...">
         <table class="table">
-            <tr>
-                <th data-column="block" class="sortable">Dorm Block <span class="sort-icon">⇅</span></th>
-                <th data-column="floor" class="sortable">Floor <span class="sort-icon">⇅</span></th>
-                <th data-column="number" class="sortable">Room Number <span class="sort-icon">⇅</span></th>
-            </tr>
-            
+            <thead>
+                <tr>
+                    <th data-column="block" class="sortable">Dorm Block <span class="sort-icon">⇅</span></th>
+                    <th data-column="floor" class="sortable">Floor <span class="sort-icon">⇅</span></th>
+                    <th data-column="number" class="sortable">Room Number <span class="sort-icon">⇅</span></th>
+                </tr>
+            </thead>
             <tbody id="room-table-body">
-               
-                <tr>
-                    <td>D</td>
-                    <td>4</td>
-                    <td>25</td>
-                </tr>
-                <tr>
-                    <td>E</td>
-                    <td>5</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>1</td>
-                    <td>6</td>
-                </tr>
-                
-                <tr>
-                    <td>C</td>
-                    <td>5</td>
-                    <td>18</td>
-                </tr>
-                
-                <tr>
-                    <td>B</td>
-                    <td>5</td>
-                    <td>14</td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td>2</td>
-                    <td>11</td>
-                </tr>
-                <tr>
-                    <td>C</td>
-                    <td>3</td>
-                    <td>16</td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td>4</td>
-                    <td>21</td>
-                </tr>
-                <tr>
-                    <td>E</td>
-                    <td>5</td>
-                    <td>26</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>2</td>
-                    <td>7</td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td>3</td>
-                    <td>12</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>R</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>1</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td>2</td>
-                    <td>15</td>
-                </tr>
-                <tr>
-                    <td>C</td>
-                    <td>3</td>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <td>C</td>
-                    <td>4</td>
-                    <td>17</td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td>5</td>
-                    <td>22</td>
-                </tr>
-                <tr>
-                    <td>E</td>
-                    <td>6</td>
-                    <td>27</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>3</td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td>4</td>
-                    <td>13</td>
-                </tr>
-                <tr>
-                    <td>C</td>
-                    <td>6</td>
-                    <td>19</td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td>7</td>
-                    <td>24</td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td>6</td>
-                    <td>23</td>
-                </tr>
-                <tr>
-                    <td>E</td>
-                    <td>7</td>
-                    <td>28</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>4</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>E</td>
-                    <td>8</td>
-                    <td>29</td>
-                </tr>
-                
+                <?php if (!empty($rooms)): ?>
+                    <?php foreach ($rooms as $room): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($room['blockName']); ?></td>
+                            <td><?php echo htmlspecialchars($room['FloorNumber']); ?></td>
+                            <td><?php echo htmlspecialchars($room['RoomNumber']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="3">No available rooms.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
-        <div class="pagination">
-            <button id="prev" disabled><i class="fas fa-arrow-left"></i></button>
-            <span id="page-num">1</span>
-            <button id="next"><i class="fas fa-arrow-right"></i></button>
-        </div>
     </div>
-    
-    
+
     <div class="Form-container">
         <h1>Book a Room</h1>
-        <form id="book-room-form" action="#" method="post">
-            <!-- Dorm Block Preference -->
+        <form action="index.php" method="post" id="book-room-form">
             <label for="dorm-block">Dorm Block Preference</label>
             <select id="dorm-block" name="dorm-block">
                 <option value="A">A</option>
@@ -191,7 +155,6 @@
                 <option value="E">E</option>
             </select>
 
-            <!-- Floor Selection -->
             <label for="floor">Floor</label>
             <select id="floor" name="floor">
                 <option value="R">R</option>
@@ -202,43 +165,22 @@
                 <option value="5">5</option>
             </select>
 
-            <!-- Room Number -->
             <label for="room-number">Room Number</label>
             <input type="number" id="room-number" name="room-number" min="1" max="40">
-            <div id="room-number-error" class="error-message">You must fill in this field.</div>
 
-            <!-- Reason for Booking -->
-            <label for="reason">Reason for Booking</label>
-            <select id="reason" name="reason">
-                <option value="1st-year">1st Year Student</option>
-                <option value="another-dorm">Came from Another Dorm</option>
-                <option value="special-duration">Just to Use the Dorms for Special Duration</option>
-            </select>
+            <label for="reason">Reason for Change (must be convenient)</label>
+            <textarea id="reason" name="reason" rows="4"></textarea>
 
-            <!-- Special Requirements -->
-            <label for="special-requirements">Special Requirements (if any)</label>
-            <textarea id="special-requirements" name="special-requirements" rows="4"></textarea>
-
-            <!-- Confirmation Checkbox -->
             <label class="checkbox">
-                I confirm that the information provided is correct.
+                I confirm that the information provided is correct and understand that my request will be reviewed.
                 <input type="checkbox" name="confirm" id="confirm-checkbox">
             </label>
-            <div id="checkbox-error" class="error-message">You must confirm that the information provided is correct.</div>
-            
 
-            <!-- Submit Button -->
             <button class="submit" type="submit">Submit</button>
         </form>
     </div>
+
+    <script src="assets/js/Rooms.js"></script>
     <?php include 'footer.php' ?>
 </body>
-
-
-
-
-
-
-
-
 </html>
