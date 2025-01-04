@@ -29,7 +29,7 @@ if ($_SESSION['user']['isStud'] === true) {
 
 <body>
 
-<main id="page" class="page" data-user-id="<?= $_SESSION['user']['Id'] ?>">
+<main id="page" class="page" data-is-admin="<?= $_SESSION['user']['Role'] ?>" data-user-id="<?= $_SESSION['user']['Id'] ?>">
     <div class="text-start container-form container post">
         <div class="row">
             <div class="col">
