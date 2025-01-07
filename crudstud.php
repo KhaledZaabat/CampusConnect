@@ -5,6 +5,12 @@ if ($_SESSION['user']['Role'] !== 'Admin'){
     die("just admins can access this page");
 }
 require 'headerAdmin.php';
+
+//succeed
+if (isset($_SESSION['success'])) {
+    echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
+    unset($_SESSION['success']); // Remove the message after displaying it
+}
 // Fetch all students and their related details
 $query = "SELECT s.Id, s.firstName, s.lastName, s.Email, s.phone, s.img_path, 
           b.blockName, f.FloorNumber, r.RoomNumber 
@@ -57,6 +63,15 @@ if (!$result) {
 
     <div class="container2">
         <h1>Student Management</h1>
+<?php
+
+if (isset($_SESSION['error'])) {
+    // Display the error message
+    echo '<p style="color: red; font-weight: bold;">' . htmlspecialchars($_SESSION['error']) . '</p>';
+    // Unset the session variable to prevent the message from showing again
+    unset($_SESSION['error']);
+}
+?>
         <form action="addstud.php" method="post" class="student-form" id="student" enctype="multipart/form-data">
     <input type="text" placeholder="Student ID" name="StudentID" id="ID">
     <input type="text" placeholder="First Name" name="firstName">
