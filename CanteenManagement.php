@@ -82,11 +82,11 @@ $result_days = mysqli_query($conn, $query_days);
             ?>
         </tbody>
     </table>
-
     <button class="edit">Edit</button>
+    
     <?php include 'footer.php' ?>
-
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/canteen.js"></script>
+
 </body>
 </html>

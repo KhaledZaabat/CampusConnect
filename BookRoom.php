@@ -102,9 +102,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Book Room</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Rooms.css">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/css/Rooms.css">
 </head>
 <body>
     <?php if ($message): ?>
@@ -116,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <div class="available-rooms">
         <h2>Available Rooms</h2>
         <input type="text" class="search-input form-control" id="search" placeholder="Search for rooms...">
-        <table class="table">
+        <table class="Table">
             <thead>
                 <tr>
                     <th data-column="block" class="sortable">Dorm Block <span class="sort-icon">⇅</span></th>
@@ -140,6 +144,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 <?php endif; ?>
             </tbody>
         </table>
+        <div class="pagination">
+        <button id="prev" disabled><i class="fas fa-arrow-left"></i></button>
+        <span id="page-num">1</span>
+        <button id="next"><i class="fas fa-arrow-right"></i></button>
+    </div>
+</div>
+
     </div>
 
     <div class="Form-container">
@@ -174,14 +185,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
             <label for="reason">Reason</label>
             <textarea id="reason" name="reason" rows="4" required></textarea>
+            <div id="reason-error" class="error-message" style="display: none;"></div>
+
 
             <label for="special-requirements">Special Requirements</label>
             <textarea id="special-requirements" name="special-requirements" rows="4"></textarea>
 
             <label class="checkbox">
-                <input type="checkbox" name="confirm" required>
-                I confirm that the information provided is correct
+                <input type="checkbox" name="confirm" id="confirm-checkbox" required>
+                    I confirm that the information provided is correct
             </label>
+            <div id="checkbox-error" class="error-message" style="display: none;"></div>
 
             <button class="submit" type="submit" name="submit">Submit</button>
         </form>
