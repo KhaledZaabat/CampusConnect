@@ -20,15 +20,20 @@ if ($result && $result->num_rows > 0) {
 }
 
 $message = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room-submit'])) {
     if (!isset($_SESSION['user']['Id'])) {
         $message = "User not authenticated";
     } else {
+        error_log("POST data: " . print_r($_POST, true));
         // Validate required fields
-        if (empty($_POST['dorm-block']) || $_POST['floor'] === '' || 
-        empty($_POST['room-number']) || empty($_POST['reason']) || 
-        empty($_POST['type'])) {
-        $message = "All fields are required";
+        if (empty($_POST['dorm-block']) || 
+            $_POST['floor'] === "" || 
+            empty($_POST['room-number']) || 
+            empty($_POST['reason']) || 
+            empty($_POST['type'])) {
+            
+        
+            $message = "All fields are required";
     } else {
             $userId = $_SESSION['user']['Id'];
             $dormBlock = $_POST['dorm-block'];
@@ -50,6 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 if ($checkStmt->get_result()->num_rows > 0) {
                     throw new Exception("You already have a pending room request");
                 }
+
+                error_log("User ID: " . $userId);
+                error_log("Dorm Block: " . $dormBlock);
+                error_log("Floor: " . $floor);
+                error_log("Room Number: " . $roomNumber);
 
                 // Get room ID
                 $roomStmt = $conn->prepare("
@@ -81,11 +91,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 
                     $specialRequirements = $specialRequirements ?? '';
                     $insertStmt->bind_param("sisss", $userId, $roomId, $reason, $specialRequirements, $type);
-                    $insertStmt->execute();
-
-                $conn->commit();
-                $message = "Room booking request submitted successfully!";
-                
+                    try {
+                        // SQL logic...
+                        $insertStmt->execute();
+                        if ($insertStmt->affected_rows === 0) {
+                            throw new Exception("No rows inserted. Insert statement failed.");
+                        }
+                        $conn->commit();
+                        $message = "Room booking request submitted successfully!";
+                    } catch (Exception $e) {
+                        $conn->rollback();
+                        error_log($e->getMessage()); // Logs to the server's error log
+                        $message = "Error: " . $e->getMessage();
+                    }    
             } catch (Exception $e) {
                 $conn->rollback();
                 $message = $e->getMessage();
@@ -197,8 +215,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             </label>
             <div id="checkbox-error" class="error-message" style="display: none;"></div>
 
-            <button class="submit" type="submit" name="submit">Submit</button>
-        </form>
+            <button class="submit" type="submit" name="room-submit">Submit</button>
+            </form>
     </div>
     <script src="assets/js/Rooms.js"></script>
     <?php include 'footer.php' ?>
