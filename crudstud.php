@@ -1,3 +1,26 @@
+<?php
+session_start();
+
+if ($_SESSION['user']['Role'] !== 'Admin'){
+    die("just admins can access this page");
+}
+require 'headerAdmin.php';
+// Fetch all students and their related details
+$query = "SELECT s.Id, s.firstName, s.lastName, s.Email, s.phone, s.img_path, 
+          b.blockName, f.FloorNumber, r.RoomNumber 
+          FROM student s 
+          LEFT JOIN room r ON s.roomId = r.Id
+          LEFT JOIN floor f ON r.FloorID = f.Id
+          LEFT JOIN block b ON f.BlockID = b.Id";
+          
+$result = $conn->query($query);
+
+// Handle query error
+if (!$result) {
+    die("Error fetching students: " . $conn->error);
+}
+?>
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 <head>
@@ -12,112 +35,73 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .delete {
+            color: #dc3545;
+            font-size: 13px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .delete:hover {
+            color: #000000;
+            transform: scale(1.2);
+            background: none;
+        }
+    </style>
 </head>
 
-<header>
-    <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
-        <div class="container">
-            <a class="navbar-brand-logo" href="#">
-                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
-            </a>
-            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
-                <span class="visually-hidden">Toggle navigation</span>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active"><a class="nav-link" href="AdminHome.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
-                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <li class="dropdown-header">Maintenance Services</li>
-                            <li><a class="dropdown-item" href="ReceivingIssues.html">Manage Issues</a></li>
-                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
-                            <li class="dropdown-header">Housing Services</li>
-                            <li><a class="dropdown-item" href="#">Book Rooms</a></li>
-                            <li><a class="dropdown-item" href="roomRequests.html">Change Rooms</a></li>
-                            <li class="dropdown-header">Users</li>
-                            <li><a class="dropdown-item" href="crudstud.html"> Manage Students</a></li>
-                            <li><a class="dropdown-item" href="crudadmin.html"> Manage Employees</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- profile section for pc -->
-                <div class="dropdown d-none d-lg-block me-3">
-                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="StudentProfile.html">Profile</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
-                    </ul>
-                </div>
-                
-
-                <!-- Profile and Sign-out links for smaller screens(phone) -->
-                <ul class="navbar-nav d-lg-none">
-                    <li><hr class="dropdown-divider my-1"></li>
-                    <li class="nav-item"><a class="nav-link" href="UserProfile.html">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
 <body>
-    
+
     <div class="container2">
         <h1>Student Management</h1>
-        <form action="#" method="post" class="student-form" id="student" enctype="multipart/form-data">
-            <input type="text" placeholder="Studetn ID" name="StudentID" id="ID">
-            <input type="text" placeholder="First Name" name="firstName" >
-            <input type="text" placeholder="Last Name" name="lastName" >
-            <input type="text" placeholder="Email" name="email" >
-            <input type="tel" placeholder="Phone Number" name="phone" >
-            <div class="room-group">
-                <select name="bloc">
-                    <option value="A" selected>Bloc A</option>
-                    <option value="B">Bloc B</option>
-                    <option value="C">Bloc C</option>
-                    <option value="D">Bloc D</option>
-                    <option value="E">Bloc E</option>
-                </select>
-                <select name="floor">
-                    <option value="R">R</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                <input type="number" name="room" placeholder="Room Number" min="1" max="100">
-            </div>            
-            <div class="form-group mt-2">
-                <label for="file" class="custom-file-upload">
-                    <div class="icon" id="upload-icon">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" fill="#007bff"></path>
-                        </svg>
-                    </div>
-                    <div class="text" id="upload-text">
-                        <span>Click to upload image</span>
-                    </div>
-                    <input id="file" type="file" name="image" accept="image/*" onchange="previewImage(event)">
-                </label>
-                <!--not displayed until the user uploads a -->
-                <div id="image-preview" style="display: none; margin-top: 10px;">
-                    <img id="preview-img" src="" alt="Image Preview" style="max-width: 100px; max-height: 100px;">
-                    <p>Image uploaded!</p>
-                </div>
+        <form action="addstud.php" method="post" class="student-form" id="student" enctype="multipart/form-data">
+    <input type="text" placeholder="Student ID" name="StudentID" id="ID">
+    <input type="text" placeholder="First Name" name="firstName">
+    <input type="text" placeholder="Last Name" name="lastName">
+    <input type="text" placeholder="Email" name="email">
+    <input type="tel" placeholder="Phone Number" name="phone">
+    
+    <!-- Room and Floor Selection -->
+    <div class="room-group">
+        <select name="bloc">
+            <option value="A" selected>Bloc A</option>
+            <option value="B">Bloc B</option>
+            <option value="C">Bloc C</option>
+            <option value="D">Bloc D</option>
+            <option value="E">Bloc E</option>
+        </select>
+        <select name="floor">
+            <option value="0">R</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <input type="number" name="room" placeholder="Room Number" min="1" max="100">
+    </div>            
+    <div class="form-group mt-2">
+        <label for="file" class="custom-file-upload">
+            <div class="icon" id="upload-icon">
+                <!-- Icon Content -->
             </div>
-            <button type="submit" class="btn_submit" id="student">Add Student</button>
-        </form>
+            <div class="text" id="upload-text">
+                <span>Click to upload image</span>
+            </div>
+            <input id="file" type="file" name="image" accept="image/*" onchange="previewImage(event)">
+        </label>
+        <div id="image-preview" style="display: none; margin-top: 10px;">
+            <img id="preview-img" src="" alt="Image Preview" style="max-width: 100px; max-height: 100px;">
+            <p>Image uploaded!</p>
+        </div>
     </div>
-        
+    <button type="submit" class="btn_submit" id="student">Add Student</button>
+</form>
+    </div>
+
     <div class="container3">
         <table>
             <h1>Students</h1>
@@ -132,376 +116,35 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Room Number</th>
+                    <th>Phone</th>
+                    <th>Room</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody id="student-table-body">
+                <?php while ($student = $result->fetch_assoc()) : ?>
                 <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput idinput" value="1" disabled></td>
-                    <td><input type="text" class="tableinput name" value="John" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="101" disabled></td>
+                    <td><img src="<?php echo htmlspecialchars($student['img_path']); ?>" alt="Student Image" class="student-img"></td>
+                    <td><input type="text" class="tableinput idinput" value="<?php echo htmlspecialchars($student['Id']); ?>" disabled></td>
+                    <td><input type="text" class="tableinput name" value="<?php echo htmlspecialchars($student['firstName']); ?>" disabled></td>
+                    <td><input type="text" class="tableinput name Lname" value="<?php echo htmlspecialchars($student['lastName']); ?>" disabled></td>
+                    <td><input type="text" class="tableinput emailinput" value="<?php echo htmlspecialchars($student['Email']); ?>" disabled></td>
+                    <td><input type="text" class="tableinput phone" value="<?php echo htmlspecialchars($student['phone']); ?>" disabled></td>
+                    <td><input type="text" class="tableinput roominput" value="<?php echo htmlspecialchars($student['blockName']) . ' ' . htmlspecialchars($student['FloorNumber']) . ' ' . htmlspecialchars($student['RoomNumber']); ?>" disabled></td>
                     <td>
                         <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
+                            <a href="editstud.php?userId=<?php echo htmlspecialchars($student['Id']); ?>" class="btn edit"><i class="fas fa-edit"></i></a>
+                            <form action="deletestud.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this student?')">
+                                <input type="hidden" name="userId" value="<?php echo htmlspecialchars($student['Id']); ?>">
+                                <button type="submit" id="deleteButton" class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </form>
                         </div>
-                    </td> 
+                    </td>
                 </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput idinput" value="2" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Jane" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="102" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput idinput" value="1" disabled></td>
-                    <td><input type="text" class="tableinput name" value="John" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="101" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput idinput" value="2" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Jane" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="102" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput idinput" value="1" disabled></td>
-                    <td><input type="text" class="tableinput name" value="John" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="101" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput idinput" value="2" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Jane" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="102" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput idinput" value="1" disabled></td>
-                    <td><input type="text" class="tableinput name" value="John" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="101" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput idinput" value="2" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Jane" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="102" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput idinput" value="1" disabled></td>
-                    <td><input type="text" class="tableinput name" value="John" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="101" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="2" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Jane" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="102" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
-                    <td><input type="text" class="tableinput name" value="John" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="101" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="2" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Jane" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="102" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
-                    <td><input type="text" class="tableinput name" value="John" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="101" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="2" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Jane" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="102" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
-                    <td><input type="text" class="tableinput name" value="John" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="101" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="2" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Jane" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="102" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
-                    <td><input type="text" class="tableinput name" value="John" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="101" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="2" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Jane" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="102" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
-                    <td><input type="text" class="tableinput name" value="John" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="101" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="2" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Jane" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="102" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
-                    <td><input type="text" class="tableinput name" value="John" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="101" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="2" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Jane" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="102" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="John" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="1" disabled></td>
-                    <td><input type="text" class="tableinput name" value="John" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Doe" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="john.doe@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="1234567890" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="101" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td><img src="assets/img/pic5.jpg" alt="Jane" class="student-img"></td>
-                    <td><input type="text" class="tableinput" value="2" disabled></td>
-                    <td><input type="text" class="tableinput name" value="Jane" disabled></td>
-                    <td><input type="text" class="tableinput name Lname" value="Smith" disabled></td>
-                    <td><input type="text" class="tableinput emailinput" value="jane.smith@example.com" disabled></td>
-                    <td><input type="text" class="tableinput phone" value="0987654321" disabled></td>
-                    <td><input type="text" class="tableinput roominput" value="102" disabled></td>
-                    <td>
-                        <div class="button-container">
-                            <button type="button" class="Edit"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </td> 
-                </tr>
-                
+                <?php endwhile; ?>
             </tbody>
-            
         </table>
+
         <!-- Pagination -->
         <div class="pagination">
             <button id="prevpage" disabled><i class="fas fa-arrow-left"></i></button>
@@ -510,48 +153,9 @@
         </div>
     </div>
 
-    <div class="footer-spacing"></div> <!-- Spacing before the footer -->
+    <div class="footer-spacing"></div>
+    <?php include 'footer.php' ?>
 </body>
-
-<footer class="page-footer custom-bg-black">
-    <div class="test">
-        <div class="wrapper">
-            <div class="button">
-                <div class="icon"><i class="fab fa-facebook-f"></i></div>
-                <span>Facebook</span>
-            </div>
-
-            <div class="button">
-                <div class="icon"><i class="fab fa-twitter"></i></div>
-                <span>Twitter</span>
-            </div>
-
-            <div class="button">
-                <div class="icon"><i class="fab fa-youtube"></i></div>
-                <span>Youtube</span>
-            </div>
-
-            <div class="button">
-                <div class="icon"><i class="fab fa-github"></i></div>
-                <span>Github</span>
-            </div>
-            
-            <div class="button">
-                <div class="icon"><i class="fab fa-instagram"></i></div>
-                <span>Instagram</span>
-            </div>
-        </div>
-
-        <div class="footer-image">
-            <img src="assets/img/logo.png" alt="Footer Image" />
-        </div>
-
-    </div>
-    
-    <div class="text-center custom-bg-black p-1">
-        <p>©ENSIA. All Rights Reserved.</p>
-    </div>
-</footer>
 
 <script src="assets/js/crud.js"></script>
 <script src="assets/js/helperFunctions.js"></script>

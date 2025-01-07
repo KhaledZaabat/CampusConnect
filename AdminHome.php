@@ -1,3 +1,76 @@
+<?php
+session_start();
+if ($_SESSION['user']['Role'] !== 'Admin'){
+    die("just admins can access this page");
+}
+require 'headerAdmin.php';
+
+// Fetch total students in dorms
+$sql_students = "SELECT COUNT(*) AS total_students FROM student";
+$result_students = $conn->query($sql_students);
+
+// Check if the query was successful
+if ($result_students) {
+    $row_students = $result_students->fetch_assoc();
+    // Ensure total_students is an integer
+    $total_students = intval($row_students['total_students']);
+} else {
+    // Handle query failure
+    echo "Error: " . $conn->error;
+}
+
+$active_requests = 5 ;
+
+// Fetch the total number of rooms
+$sql_room_availability = "SELECT COUNT(*) AS total_rooms FROM room";
+$result_room_availability = $conn->query($sql_room_availability);
+$row_room_availability = $result_room_availability->fetch_assoc();
+$total_rooms = intval($row_room_availability['total_rooms']);  // Ensure it's an integer
+
+// Fetch the total number of students where room is not null
+$sql_students_in_rooms = "SELECT COUNT(*) AS students_in_rooms FROM student WHERE roomId IS NOT NULL";
+$result_students_in_rooms = $conn->query($sql_students_in_rooms);
+$row_students_in_rooms = $result_students_in_rooms->fetch_assoc();
+$total_students_in_rooms = intval($row_students_in_rooms['students_in_rooms']);  // Ensure it's an integer
+
+// Calculate the room availability percentage
+$room_availability_percentage = round((($total_rooms - $total_students_in_rooms) / $total_rooms) * 100);  // Ensure the calculation is correct
+
+$sql_room_requests = "SELECT COUNT(*) AS total_room_requests FROM roomrequest";
+$result_room_requests = $conn->query($sql_room_requests);
+
+// Check if the query was successful
+if ($result_room_requests) {
+    $row_room_requests = $result_room_requests->fetch_assoc();
+    $total_room_requests = intval($row_room_requests['total_room_requests']);
+} else {
+    // Handle query failure
+    echo "Error: " . $conn->error;
+}
+
+$sql_issues = "SELECT COUNT(*) AS total_issues FROM issue";
+$result_issues = $conn->query($sql_issues);
+
+// Check if the query was successful
+if ($result_issues) {
+    $row_issues = $result_issues->fetch_assoc();
+    $total_issues = intval($row_issues['total_issues']);
+} else {
+    // Handle query failure
+    echo "Error: " . $conn->error;
+}
+
+$sql_employees = "SELECT COUNT(*) AS total_employees FROM employee";
+$result_employees = $conn->query($sql_employees);
+$row_employees = $result_employees->fetch_assoc();
+$total_employees = $row_employees['total_employees'];
+
+
+$conn->close();
+?>
+
+
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 <head>
@@ -15,62 +88,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
 
-<header>
-    <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
-        <div class="container">
-            <a class="navbar-brand-logo" href="#">
-                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo"> 
-            </a>
-            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
-                <span class="visually-hidden">Toggle navigation</span>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active"><a class="nav-link" href="AdminHome.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
-                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <li class="dropdown-header">Maintenance Services</li>
-                            <li><a class="dropdown-item" href="ReceivingIssues.html">Manage Issues</a></li>
-                            <li><a class="dropdown-item" href="lostfound.html">Lost&Found items</a></li>
-                            <li class="dropdown-header">Housing Services</li>
-                            <li><a class="dropdown-item" href="#">Book Rooms</a></li>
-                            <li><a class="dropdown-item" href="roomRequests.html">Change Rooms</a></li>
-                            <li class="dropdown-header">Users</li>
-                            <li><a class="dropdown-item" href="crudstud.html"> Manage Students</a></li>
-                            <li><a class="dropdown-item" href="crudadmin.html"> Manage Employees</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- profile section for pc -->
-                <div class="dropdown d-none d-lg-block me-3">
-                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="StudentProfile.html">Profile</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
-                    </ul>
-                </div>
-                
-  
-                <!-- Profile and Sign-out links for smaller screens(phone) -->
-                <ul class="navbar-nav d-lg-none">
-                    <li><hr class="dropdown-divider my-1"></li>
-                    <li class="nav-item"><a class="nav-link" href="UserProfile.html">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sign out</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-  </header>
 
 <body>
-
     <main class="page">
         <div class="container mt-5">
             <div class="header content">
@@ -81,41 +100,42 @@
                 <p class="welcome-paragraph">Manage students, organize services, and streamline operations for a better campus experience.</p>
             </div>
 
-            <!-- Stats Section -->
-            <div class="stats-section content">
-                <div class="row text-center">
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <i class="fas fa-user-check stat-icon"></i>
-                        <h3 class="stat-counter" data-target="900">+0</h3>
-                        <p>Students in Dorms</p>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <i class="far fa-bed stat-icon"></i>
-                        <h3 class="stat-counter" data-target="150">+0</h3>
-                        <p>Beds Available</p>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <i class="fas fa-bed stat-icon"></i>
-                        <h3 class="stat-counter" data-target="750">+0</h3>
-                        <p>Beds Occupied</p>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <i class="fas fa-tools stat-icon"></i>
-                        <h3 class="stat-counter" data-target="5">+0</h3>
-                        <p>Active Maintenance Requests</p>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <i class="fas fa-door-open stat-icon"></i>
-                        <h3 class="stat-counter" data-target="85">+0</h3>
-                        <p>Room Availability (%)</p>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <i class="fas fa-thumbs-up stat-icon"></i>
-                        <h3 class="stat-counter" data-target="4.5">0</h3>
-                        <p>Average Satisfaction</p>
-                    </div>
-                </div>
-            </div>
+           <!-- Stats Section -->
+<div class="stats-section content">
+    <div class="row text-center">
+        <!-- First row with 3 columns -->
+        <div class="col-lg-4 col-md-4 mb-4">
+            <i class="fas fa-user-check stat-icon"></i>
+            <h3 class="stat-counter" data-target="<?php echo $total_students; ?>"></h3>
+            <p>Students in Dorms</p>
+        </div>
+        <div class="col-lg-4 col-md-4 mb-4">
+            <i class="fas fa-users stat-icon"></i>
+            <h3 class="stat-counter" data-target="<?php echo $total_employees; ?>"><?php echo $total_employees; ?></h3>
+            <p>Employees</p>
+        </div>
+        <div class="col-lg-4 col-md-4 mb-4">
+            <i class="fas fa-bed stat-icon"></i>
+            <h3 class="stat-counter" data-target="<?php echo $total_room_requests; ?>"></h3>
+            <p>Room Requests</p>
+        </div>
+    </div>
+    <div class="row text-center">
+        <!-- Second row with 2 centered columns -->
+        <div class="col-lg-4 col-md-6 mb-4 offset-lg-2">
+            <i class="fas fa-tools stat-icon"></i>
+            <h3 class="stat-counter" data-target="<?php echo $total_issues; ?>"></h3>
+            <p>Active Maintenance Requests</p>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <i class="fas fa-door-open stat-icon"></i>
+            <h3 class="stat-counter" data-target="<?php echo $room_availability_percentage; ?>"></h3>
+            <p>Room Availability (%)</p>
+        </div>
+    </div>
+</div>
+
+
 
             <!-- Admin Management Section -->
             <div class="services-section ">
@@ -169,48 +189,8 @@
 
     <div class="footer-spacing"></div> <!-- Spacing before the footer -->
 
-
+    <?php include 'footer.php' ?>
 </body>
-
-<footer class="page-footer custom-bg-black">
-    <div class="test">
-        <div class="wrapper">
-            <div class="button">
-                <div class="icon"><i class="fab fa-facebook-f"></i></div>
-                <span>Facebook</span>
-            </div>
-
-            <div class="button">
-                <div class="icon"><i class="fab fa-twitter"></i></div>
-                <span>Twitter</span>
-            </div>
-
-            <div class="button">
-                <div class="icon"><i class="fab fa-youtube"></i></div>
-                <span>Youtube</span>
-            </div>
-
-            <div class="button">
-                <div class="icon"><i class="fab fa-github"></i></div>
-                <span>Github</span>
-            </div>
-            
-            <div class="button">
-                <div class="icon"><i class="fab fa-instagram"></i></div>
-                <span>Instagram</span>
-            </div>
-        </div>
-
-        <div class="footer-image">
-            <img src="assets/img/logo.png" alt="Footer Image" />
-        </div>
-
-    </div>
-    
-    <div class="text-center custom-bg-black p-1">
-        <p>©ENSIA. All Rights Reserved.</p>
-    </div>
-</footer>
 
 
 </html>

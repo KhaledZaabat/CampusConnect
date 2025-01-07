@@ -1,20 +1,26 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Get all the nav items
-    const navItems = document.querySelectorAll(".nav-item");
+    const navItems = document.querySelectorAll("#nav-item");
+    const servicesDropdown= document.querySelector("#nav-drop");
+    navItems.forEach(nav => nav.classList.remove("active"));
 
-    // load the active nav item from LocalStorage
-    const activeNavIndex = localStorage.getItem("activeNav");
-    if (activeNavIndex !== null) {
+    const activeNavIndex = sessionStorage.getItem("activeNav");
+    
+    if (activeNavIndex) {
         navItems[activeNavIndex].classList.add("active");
     }
+    servicesDropdown.addEventListener('click', () => {
+        navItems.forEach(nav => nav.classList.remove("active"));
+        sessionStorage.removeItem("activeNav");
+    });
 
     navItems.forEach((item, index) => {
         item.addEventListener("click", function() {
             navItems.forEach(nav => nav.classList.remove("active"));
+
             item.classList.add("active");
 
-            // save the index of the clicked nav item to LocalStorage
-            localStorage.setItem("activeNav", index);
+            sessionStorage.setItem("activeNav", index);
         });
     });
+
 });

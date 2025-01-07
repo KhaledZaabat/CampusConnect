@@ -1,3 +1,62 @@
+<?php
+session_start();
+
+require 'headerAdmin.php' ;
+$message = ""; // For displaying success messages
+$errors = []; // To hold validation errors
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $employeeId = $_SESSION['user']['Id']; 
+    $currentPassword = $_POST['currentPassword'];
+    $newPassword = $_POST['newPassword'];
+    $confirmNewPassword = $_POST['confirmNewPassword'];
+
+    // Validate current password
+    if (empty($currentPassword)) {
+        $errors['currentPassword'] = 'Current password is required.';
+    }
+
+    // Validate new password length
+    if (strlen($newPassword) < 8) {
+        $errors['newPassword'] = 'New password must be at least 8 characters long.';
+    }
+
+    // Validate password confirmation
+    if ($newPassword !== $confirmNewPassword) {
+        $errors['confirmNewPassword'] = 'Passwords do not match.';
+    }
+
+    // Process password change if no errors
+    if (empty($errors)) {
+        // Fetch the current hashed password from the database
+        $query = $conn->prepare("SELECT password FROM employee WHERE id = ?");
+        $query->bind_param("s", $employeeId);
+        $query->execute();
+        $result = $query->get_result();
+        $user = $result->fetch_assoc();
+
+        if (!$user || !password_verify($currentPassword, $user['password'])) {
+            $errors['currentPassword'] = 'Current password is incorrect.';
+        } else {
+            // Hash the new password
+            $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+
+            // Update the password in the database
+            $update = $conn->prepare("UPDATE employee SET password = ? WHERE id = ?");
+            $update->bind_param("ss", $hashedPassword, $employeeId);
+
+            if ($update->execute()) {
+                $message = "Password changed successfully!";
+            } else {
+                $errors['general'] = 'Error: Could not update password.';
+            }
+        }
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -11,54 +70,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
     <link rel="stylesheet" href="assets/css/StudentProfile.css">
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <link rel="icon" href="assets/img/logo.png" type="image/png">
 </head>
 
-<header>
-    <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
-        <div class="container">
-            <a class="col-3 navbar-brand-logo" href="#">
-                <img class="logo_img" src="assets/img/logo.png" alt="Brand Logo">
-            </a>
-            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
-                <span class="visually-hidden">Toggle navigation</span>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active"><a class="nav-link" href="AdminHome.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AdminNews.html">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="CanteenManagement.html">Canteen Schedule</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
-                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <li class="dropdown-header">Maintenance</li>
-                            <li><a class="dropdown-item" href="/maintenance/report">Student Issues</a></li>
-                            <li><a class="dropdown-item" href="#">Lost & Found Page</a></li>
-                            <li class="dropdown-header">Housing</li>
-                            <li><a class="dropdown-item" href="#">Rooms Requests</a></li>
-                            <li class="dropdown-header">Users</li>
-                            <li><a class="dropdown-item" href="crudstud.html">Manage Students</a></li>
-                            <li><a class="dropdown-item" href="crudadmin.html">Manage Employees</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="dropdown col-3 text-center">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="User Image" width="32" height="32" class="rounded-circle">
-                </a>
-                <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="UserProfile.html">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+
 
 <body>
+
+
     <div class="container-xl px-4 mt-4">
         <hr class="mt-0 mb-4">
         <div class="row">
@@ -102,47 +123,70 @@
                                 <input class="form-control" id="inputRole" type="text" value="Chef" readonly>
                             </div>
                         </form>
-                    </div>
+                        </div>
+</div>
+                        <!-- Password Change Section -->
+            <div class="card mb-4">
+                <div class="card-header">Change Password</div>
+                <div class="card-body">
+                <form id="changePasswordForm" method="POST" action="">
+    <?php if (!empty($message)): ?>
+        <div class="alert alert-success"><?= $message ?></div>
+    <?php endif; ?>
+
+    <?php if (!empty($errors['general'])): ?>
+        <div class="alert alert-danger"><?= $errors['general'] ?></div>
+    <?php endif; ?>
+
+    <div class="mb-3">
+        <label class="small mb-1" for="currentPassword">Current Password</label>
+        <input class="form-control <?= isset($errors['currentPassword']) ? 'is-invalid' : '' ?>" 
+               id="currentPassword" 
+               name="currentPassword" 
+               type="password">
+        <?php if (isset($errors['currentPassword'])): ?>
+            <div class="invalid-feedback"><?= $errors['currentPassword'] ?></div>
+        <?php endif; ?>
+    </div>
+
+    <div class="mb-3">
+        <label class="small mb-1" for="newPassword">New Password</label>
+        <input class="form-control <?= isset($errors['newPassword']) ? 'is-invalid' : '' ?>" 
+               id="newPassword" 
+               name="newPassword" 
+               type="password">
+        <?php if (isset($errors['newPassword'])): ?>
+            <div class="invalid-feedback"><?= $errors['newPassword'] ?></div>
+        <?php endif; ?>
+    </div>
+
+    <div class="mb-3">
+        <label class="small mb-1" for="confirmNewPassword">Confirm New Password</label>
+        <input class="form-control <?= isset($errors['confirmNewPassword']) ? 'is-invalid' : '' ?>" 
+               id="confirmNewPassword" 
+               name="confirmNewPassword" 
+               type="password">
+        <?php if (isset($errors['confirmNewPassword'])): ?>
+            <div class="invalid-feedback"><?= $errors['confirmNewPassword'] ?></div>
+        <?php endif; ?>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Change Password</button>
+</form>
+
+
                 </div>
             </div>
         </div>
-    </div>
+                    
+                </div>
+            </div>
 
     <div class="footer-spacing"></div> <!-- Spacing before the footer -->
+    <?php include 'footer.php' ?>
+
 </body>
 
-<footer class="page-footer custom-bg-black">
-    <div class="test">
-        <div class="wrapper">
-            <div class="button">
-                <div class="icon"><i class="fab fa-facebook-f"></i></div>
-                <span>Facebook</span>
-            </div>
-            <div class="button">
-                <div class="icon"><i class="fab fa-twitter"></i></div>
-                <span>Twitter</span>
-            </div>
-            <div class="button">
-                <div class="icon"><i class="fab fa-youtube"></i></div>
-                <span>Youtube</span>
-            </div>
-            <div class="button">
-                <div class="icon"><i class="fab fa-github"></i></div>
-                <span>Github</span>
-            </div>
-            <div class="button">
-                <div class="icon"><i class="fab fa-instagram"></i></div>
-                <span>Instagram</span>
-            </div>
-        </div>
-        <div class="footer-image">
-            <img src="assets/img/logo.png" alt="Footer Image" />
-        </div>
-    </div>
-    <div class="text-center custom-bg-black p-1">
-        <p>©ENSIA. All Rights Reserved.</p>
-    </div>
-</footer>
 
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
 </html>

@@ -50,3 +50,12 @@ body {
         0 2px 5px rgba(0, 0, 0, 0.15), /* Light outer shadow */
         inset 0 0 5px rgba(0, 0, 0, 0.05); /* Soft inner shadow */
 }
+
+.input-error {
+    border-color: red;
+}
+
+.text-danger {
+    font-size: 0.875em;
+}
+
