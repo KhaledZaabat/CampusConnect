@@ -39,7 +39,7 @@ if ($userid && $_SESSION['user']['isStud'] === false) {
 
         <?php if ($_SESSION['user']['Role'] === 'Admin'): ?>
             <li class="nav-item active"><a class="nav-link" href="AdminHome.php">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="AdminNews.php">News</a></li>
+            <li class="nav-item"><a class="nav-link" href="news.php">News</a></li>
             <li class="nav-item"><a class="nav-link" href="CanteenManagement.php">Canteen Schedule</a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" Role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>

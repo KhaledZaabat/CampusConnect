@@ -29,12 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    $maxFileSize = 2 * 1024 * 1024; // 2MB
-    if ($_FILES['image']['size'] > $maxFileSize) {
-        echo "<script>alert('File size exceeds the limit of 2MB.');</script>";
-        exit;
-    }
-
     // Directory to store uploaded images
     $uploadDir = 'uploads/profile_pics/';
     if (!is_dir($uploadDir)) {
