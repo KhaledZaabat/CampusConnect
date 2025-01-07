@@ -1,9 +1,11 @@
 <?php
 session_start();
 require 'db_connection.php';
+
 if ($_SESSION['user']['Role'] !== 'Admin'){
-    die("just admins can access this page");
+    die(json_encode(['success' => false, 'message' => 'Only admins can access this page']));
 }
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Capture and sanitize form inputs
     $studentID = htmlspecialchars(trim($_POST['StudentID'])) ?? null;
@@ -14,19 +16,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $bloc = htmlspecialchars(trim($_POST['bloc']));
     $floor = (int) $_POST['floor'];
     $room = (int) $_POST['room'];
-    $password = $firstName . " " . $lastName ;
+    $password = $firstName . " " . $lastName;
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
     // File upload validation
     if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
-        echo "<script>alert('Error uploading image.');</script>";
-        exit;
+        die(json_encode(['success' => false, 'message' => 'Error uploading image.']));
     }
 
     $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
     $fileExtension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
     if (!in_array($fileExtension, $allowedExtensions)) {
-        echo "<script>alert('Invalid file type. Please upload an image.');</script>";
-        exit;
+        die(json_encode(['success' => false, 'message' => 'Invalid file type. Please upload an image.']));
     }
 
     // Directory to store uploaded images
@@ -40,33 +41,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $filePath = $uploadDir . $fileName;
 
     if (!move_uploaded_file($_FILES['image']['tmp_name'], $filePath)) {
-        echo "<script>alert('Error saving uploaded file.');</script>";
-        exit;
+        die(json_encode(['success' => false, 'message' => 'Error saving uploaded file.']));
     }
 
-        // Check if room is already taken
-        $roomCheckQuery = "SELECT s.Id FROM student s
-        JOIN room r ON s.roomId = r.Id
-        JOIN floor f ON r.FloorID = f.Id
-        JOIN block b ON f.BlockID = b.Id
-        WHERE b.blockName = ? AND f.FloorNumber = ? AND r.RoomNumber = ?";
+    // Check if room is already taken
+    $roomCheckQuery = "SELECT s.Id FROM student s
+                      JOIN room r ON s.roomId = r.Id
+                      JOIN floor f ON r.FloorID = f.Id
+                      JOIN block b ON f.BlockID = b.Id
+                      WHERE b.blockName = ? AND f.FloorNumber = ? AND r.RoomNumber = ?";
 
-$roomCheckStmt = $conn->prepare($roomCheckQuery);
-$roomCheckStmt->bind_param("sss", $bloc, $floor, $room);
-$roomCheckStmt->execute();
-$roomCheckResult = $roomCheckStmt->get_result();
-$roomCheckStmt->close();
+    $roomCheckStmt = $conn->prepare($roomCheckQuery);
+    $roomCheckStmt->bind_param("sss", $bloc, $floor, $room);
+    $roomCheckStmt->execute();
+    $roomCheckResult = $roomCheckStmt->get_result();
+    $roomCheckStmt->close();
 
-// If the room is taken, prevent insertion
-if ($roomCheckResult->num_rows > 0) {
-echo "<script>
- alert('Room is already occupied! Please select a different room.');
- window.location.href = 'addstud.php';
-</script>";
-exit; // Prevent further code execution
-}
+    if ($roomCheckResult->num_rows > 0) {
+        // Store the error message in the session
+        $_SESSION['error'] = 'Room is already occupied! Please select a different room.';
+        // Redirect to 'crudstud.php'
+        header('Location: crudstud.php');
+        exit; // Stop further script execution
+    }
+    
 
-    // Retrieve room ID based on selected bloc, floor, and room
+    // Get room ID
     $roomQuery = "SELECT r.Id 
                   FROM room r
                   JOIN floor f ON r.FloorID = f.Id
@@ -80,43 +80,27 @@ exit; // Prevent further code execution
     $stmt->close();
 
     if (!$roomData) {
-        echo "<script>alert('Room not found for the provided bloc, floor, and room number.');</script>";
-        exit;
+        die(json_encode(['success' => false, 'message' => 'Room not found for the provided bloc, floor, and room number.']));
     }
 
     $roomId = $roomData['Id'];
 
-    // Insert student data into database
+    // Insert student data
     $insertQuery = "INSERT INTO student (Id, firstName, lastName, Email, Password, phone, roomId, img_path)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $insertStmt = $conn->prepare($insertQuery);
     $insertStmt->bind_param("ssssssis", $studentID, $firstName, $lastName, $email, $hashedPassword, $phone, $roomId, $filePath);
 
     if ($insertStmt->execute()) {
-        echo "<script>
-                alert('Student added successfully!');
-                window.location.href = 'crudstud.php';
-              </script>";
+        // Store success message in session and redirect to 'crudstud.php'
+        $_SESSION['success'] = 'Student added successfully!';
+        header('Location: crudstud.php');
+        exit;
     } else {
-        echo "<script>alert('Error adding student: " . $conn->error . "');</script>";
+        echo json_encode(['success' => false, 'message' => 'Error adding student: ' . $conn->error]);
     }
 
     $insertStmt->close();
+    exit;
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Student</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container">
-    <h1>Add Student</h1>
-    <a href="crudstud.php" class="btn btn-secondary">Back to Student List</a>
-</div>
-</body>
-</html>

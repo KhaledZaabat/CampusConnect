@@ -51,15 +51,13 @@ $result_days = mysqli_query($conn, $query_days);
                 
                 $first_type = true;
                 while ($type = mysqli_fetch_assoc($result_types)) {
-                    echo $first_type ? "<tr><td rowspan=\"$type_count\">{$day['day']}</td>" : "<tr>";
-                    
+                    echo $first_type ? "<tr><td rowspan=\"$type_count\" data-day-id=\"{$day['id']}\">{$day['day']}</td>" : "<tr>";                    
                     $query_meals = "SELECT id, meal, amount FROM meals 
                                   WHERE dayid = {$day['id']} 
                                   AND typeid = {$type['id']}";
                     $result_meals = mysqli_query($conn, $query_meals);
                     
-                    echo "<td>{$type['type']}</td><td class=\"input-container\">";
-                    while ($meal = mysqli_fetch_assoc($result_meals)) {
+                    echo "<td data-type-id=\"{$type['id']}\">{$type['type']}</td><td class=\"input-container\">";                    while ($meal = mysqli_fetch_assoc($result_meals)) {
                         echo "<input type=\"text\" value=\"{$meal['meal']}\" data-id=\"{$meal['id']}\" disabled><br>";
                     }
                     echo '<div class="button-container">
