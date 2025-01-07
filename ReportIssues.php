@@ -1,3 +1,10 @@
+<?php
+session_start();
+$studentId = $_SESSION['user']['Id'] ;
+
+ require 'headerStud.php';
+?>
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 <head>
@@ -24,11 +31,7 @@
     
 
 <body>
-<?php
-session_start();
 
- require 'headerStud.php';
-?>
     <div class="Form-container">
         <h1>Campus Problem Declaration Form</h1>
         <form id="problem-form" action="#" method="post" enctype="multipart/form-data">
