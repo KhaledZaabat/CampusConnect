@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
     if (isset($_POST['update'])) {
         // Update the employee
-        $stmt = $conn->prepare("UPDATE employee SET firstName = ?, lastName = ?, Email = ?, phone = ?, Role = ? WHERE Id = ?");
+        $stmt = $conn->prepare("UPDATE employee SET firstName = ?, lastName = ?, Email = ?, Phone = ?, Role = ? WHERE Id = ?");
         $stmt->bind_param("ssssss", $firstName, $lastName, $email, $phone, $role, $userId);
 
         if ($stmt->execute()) {
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (move_uploaded_file($_FILES['image']['tmp_name'], $filePath)) {
         
-                $stmt = $conn->prepare("INSERT INTO employee (Id, firstName, lastName, Email, Role, phone, Password, img_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt = $conn->prepare("INSERT INTO employee (Id, firstName, lastName, Email, Role, Phone, Password, img_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->bind_param("ssssssss", $userId, $firstName, $lastName, $email, $role, $phone, $hashedPassword , $filePath);
                 
                 if ($stmt->execute()) {
@@ -93,7 +93,7 @@ if (isset($_GET['edit_id'])) {
 } 
 
 // Fetch employees for the employee list
-$employees = $conn->query("SELECT Id, firstName, lastName, Email, Role, phone, img_path FROM employee");
+$employees = $conn->query("SELECT Id, firstName, lastName, Email, Role, Phone, img_path FROM employee");
 ?>
 
 <!DOCTYPE html>
@@ -223,7 +223,7 @@ $employees = $conn->query("SELECT Id, firstName, lastName, Email, Role, phone, i
                 <td><input type="text"id="Fname" class="tableinput name" value="<?php echo htmlspecialchars($row['firstName']); ?>" disabled></td>
                 <td><input type="text" id="Lname" class="tableinput name Lname" value="<?php echo htmlspecialchars($row['lastName']); ?>" disabled></td>
                 <td><input type="text" id="email" class="tableinput emailinput" value="<?php echo htmlspecialchars($row['Email']); ?>" disabled></td>
-                <td><input type="text" id="phone" class="tableinput phone" value="<?php echo htmlspecialchars($row['phone']); ?>" disabled></td> 
+                <td><input type="text" id="phone" class="tableinput phone" value="<?php echo htmlspecialchars($row['Phone']); ?>" disabled></td> 
                 <td>
                     <select class="tableinput roleinput" id="role" disabled>
                         <option value="Maintenance" <?php echo $row['Role'] == 'Maintenance' ? 'selected' : ''; ?>>Maintenance</option>
