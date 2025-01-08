@@ -25,21 +25,35 @@ if ($result && $result->num_rows > 0) {
 } else {
     $errors['general'] = "Failed to load user profile data.";
 }
-
-$roomId = $profileData['roomId'] ?? null;
-$roomNumber = "";
-
-if ($roomId) {
-    $query = $conn->prepare("SELECT FloorID, RoomNumber, blockid FROM room WHERE id = ?");
-    $query->bind_param("s", $roomId);
+//Getting room number
+$query = $conn->prepare("
+    SELECT 
+        CONCAT(b.blockName, f.FloorNumber, r.RoomNumber) AS roomNumber
+    FROM 
+        student s
+    JOIN 
+        room r ON s.roomId = r.Id
+    JOIN 
+        floor f ON r.FloorID = f.Id
+    JOIN 
+        block b ON f.Id = b.Id
+    WHERE 
+        s.id = ?
+");
+if ($query) {
+    $query->bind_param("s", $studentId);
     $query->execute();
     $result = $query->get_result();
-
     if ($result && $result->num_rows > 0) {
         $roomData = $result->fetch_assoc();
-        $roomNumber = $roomData['FloorID'] . $roomData['RoomNumber'] . $roomData['blockid'];
+        $roomNumber = $roomData['roomNumber'] ?? 'N/A';
+    } else {
+        $roomNumber = 'Room data not found.';
     }
+} else {
+    die("Query preparation failed: " . $conn->error);
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

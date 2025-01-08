@@ -1,10 +1,10 @@
-<?php 
+<?php
 session_start();
 
-if ($_SESSION['user']['Role'] !== 'Admin' && $_SESSION['user']['Role'] !== 'Maintenance'){
+if ($_SESSION['user']['Role'] !== 'Admin' && $_SESSION['user']['Role'] !== 'Maintenance') {
     die("just admins And Maintenance Employees can access this page");
 }
-require 'headerAdmin.php' ;
+require 'headerAdmin.php';
 
 ?>
 
@@ -29,7 +29,8 @@ require 'headerAdmin.php' ;
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
     <script src="assets/js/navbar.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
