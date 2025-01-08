@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require 'headerStud.php';
 
@@ -11,7 +11,6 @@ $sql = "SELECT r.Id, r.RoomNumber, f.FloorNumber, b.blockName
         WHERE s.roomId IS NULL";
 
 $result = $conn->query($sql);
-
 $rooms = [];
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -26,15 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room-submit'])) {
     } else {
         error_log("POST data: " . print_r($_POST, true));
         // Validate required fields
-        if (empty($_POST['dorm-block']) || 
-            $_POST['floor'] === "" || 
-            empty($_POST['room-number']) || 
-            empty($_POST['reason']) || 
-            empty($_POST['type'])) {
-            
-        
+        if (
+            empty($_POST['dorm-block']) ||
+            $_POST['floor'] === "" ||
+            empty($_POST['room-number']) ||
+            empty($_POST['reason']) ||
+            empty($_POST['type'])
+        ) {
+
+
             $message = "All fields are required";
-    } else {
+        } else {
             $userId = $_SESSION['user']['Id'];
             $dormBlock = $_POST['dorm-block'];
             $floor = $_POST['floor'];
@@ -51,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room-submit'])) {
                 $checkStmt = $conn->prepare("SELECT userId FROM roomrequest WHERE userId = ? AND description IS NULL");
                 $checkStmt->bind_param("s", $userId); // 's' is for string (varchar type for userId)
                 $checkStmt->execute();
-                
+
                 if ($checkStmt->get_result()->num_rows > 0) {
                     throw new Exception("You already have a pending room request");
                 }
@@ -73,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room-submit'])) {
                     AND NOT EXISTS (
                         SELECT 1 FROM student s WHERE s.roomId = r.Id
                     )");
-                
+
                 $roomStmt->bind_param("sii", $dormBlock, $floor, $roomNumber);
                 $roomStmt->execute();
                 $roomResult = $roomStmt->get_result();
@@ -88,22 +89,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room-submit'])) {
                 $insertStmt = $conn->prepare("
                     INSERT INTO roomrequest (userId, roomId, reason, description, type) 
                     VALUES (?, ?, ?, ?, ?)");
-                
-                    $specialRequirements = $specialRequirements ?? '';
-                    $insertStmt->bind_param("sisss", $userId, $roomId, $reason, $specialRequirements, $type);
-                    try {
-                        // SQL logic...
-                        $insertStmt->execute();
-                        if ($insertStmt->affected_rows === 0) {
-                            throw new Exception("No rows inserted. Insert statement failed.");
-                        }
-                        $conn->commit();
-                        $message = "Room booking request submitted successfully!";
-                    } catch (Exception $e) {
-                        $conn->rollback();
-                        error_log($e->getMessage()); // Logs to the server's error log
-                        $message = "Error: " . $e->getMessage();
-                    }    
+
+                $specialRequirements = $specialRequirements ?? '';
+                $insertStmt->bind_param("sisss", $userId, $roomId, $reason, $specialRequirements, $type);
+                try {
+                    // SQL logic...
+                    $insertStmt->execute();
+                    if ($insertStmt->affected_rows === 0) {
+                        throw new Exception("No rows inserted. Insert statement failed.");
+                    }
+                    $conn->commit();
+                    $message = "Room booking request submitted successfully!";
+                } catch (Exception $e) {
+                    $conn->rollback();
+                    error_log($e->getMessage()); // Logs to the server's error log
+                    $message = "Error: " . $e->getMessage();
+                }
             } catch (Exception $e) {
                 $conn->rollback();
                 $message = $e->getMessage();
@@ -115,19 +116,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room-submit'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Book Room</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
     <link rel="icon" href="assets/img/logo.png" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Rooms.css">
 </head>
+
 <body>
     <?php if ($message): ?>
         <div class="alert <?php echo strpos($message, 'success') !== false ? 'alert-success' : 'alert-danger'; ?>">
@@ -163,11 +169,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room-submit'])) {
             </tbody>
         </table>
         <div class="pagination">
-        <button id="prev" disabled><i class="fas fa-arrow-left"></i></button>
-        <span id="page-num">1</span>
-        <button id="next"><i class="fas fa-arrow-right"></i></button>
+            <button id="prev" disabled><i class="fas fa-arrow-left"></i></button>
+            <span id="page-num">1</span>
+            <button id="next"><i class="fas fa-arrow-right"></i></button>
+        </div>
     </div>
-</div>
 
     </div>
 
@@ -211,14 +217,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room-submit'])) {
 
             <label class="checkbox">
                 <input type="checkbox" name="confirm" id="confirm-checkbox" required>
-                    I confirm that the information provided is correct
+                I confirm that the information provided is correct
             </label>
             <div id="checkbox-error" class="error-message" style="display: none;"></div>
 
             <button class="submit" type="submit" name="room-submit">Submit</button>
-            </form>
+        </form>
     </div>
     <script src="assets/js/Rooms.js"></script>
     <?php include 'footer.php' ?>
 </body>
+
 </html>

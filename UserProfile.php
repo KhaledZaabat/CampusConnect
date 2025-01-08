@@ -1,12 +1,36 @@
 <?php
 session_start();
 
-require 'headerAdmin.php' ;
+require 'headerAdmin.php';
 $message = ""; // For displaying success messages
 $errors = []; // To hold validation errors
 
+if (!isset($_SESSION['user']['Id'])) {
+    die("Unauthorized access.");
+}
+
+$employeeId = $_SESSION['user']['Id'];
+
+// Fetch user profile data from the database
+$query = $conn->prepare("SELECT firstName, lastName, Email, Phone, img_path, Role FROM employee WHERE id = ?");
+if (!$query) {
+    die("Query preparation failed: " . $conn->error);
+}
+
+$query->bind_param("s", $employeeId);
+$query->execute();
+$result = $query->get_result();
+
+if ($result && $result->num_rows > 0) {
+    $profileData = $result->fetch_assoc();
+} else {
+    $errors['general'] = "Failed to load user profile data.";
+}
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $employeeId = $_SESSION['user']['Id']; 
+    $employeeId = $_SESSION['user']['Id'];
     $currentPassword = $_POST['currentPassword'];
     $newPassword = $_POST['newPassword'];
     $confirmNewPassword = $_POST['confirmNewPassword'];
@@ -67,8 +91,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
     <link rel="stylesheet" href="assets/css/StudentProfile.css">
     <script src="assets/js/navbar.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -84,103 +111,101 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <hr class="mt-0 mb-4">
         <div class="row">
             <div class="col-xl-4">
-                <!-- Profile picture card-->
+                <!-- Profile picture card -->
                 <div class="card mb-4 mb-xl-0">
                     <div class="card-header">Profile Picture</div>
                     <div class="card-body text-center">
-                        <img class="img-account-profile rounded-circle mb-2" src="assets/img/test.jpg" alt="Profile Image">
+                        <img class="img-account-profile rounded-circle mb-2"
+                            src="<?= !empty($profileData['img_path']) ? $profileData['img_path'] : 'assets/img/default.jpg'; ?>"
+                            alt="Profile Image">
                     </div>
                 </div>
             </div>
             <div class="col-xl-8">
-                <!-- Account details card-->
+                <!-- Account details card -->
                 <div class="card mb-4">
                     <div class="card-header">Account Details</div>
                     <div class="card-body">
                         <form>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputFirstName">First Name</label>
-                                <input class="form-control" id="inputFirstName" type="text" value="John" readonly>
+                                <input class="form-control" id="inputFirstName" type="text"
+                                    value="<?= $profileData['firstName'] ?>" readonly>
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputLastName">Last Name</label>
-                                <input class="form-control" id="inputLastName" type="text" value="Doe" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label class="small mb-1" for="inputUserID">User ID</label>
-                                <input class="form-control" id="inputUserID" type="text" value="123456" readonly>
+                                <input class="form-control" id="inputLastName" type="text"
+                                    value="<?= $profileData['lastName'] ?>" readonly>
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputEmail">Email</label>
-                                <input class="form-control" id="inputEmail" type="email" value="johndoe@email.com" readonly>
+                                <input class="form-control" id="inputEmail" type="email"
+                                    value="<?= $profileData['Email'] ?>" readonly>
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputPhone">Phone Number</label>
-                                <input class="form-control" id="inputPhone" type="tel" value="+1234567890" readonly>
+                                <input class="form-control" id="inputPhone" type="tel"
+                                    value="<?= $profileData['Phone'] ?>" readonly>
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputRole">Role</label>
-                                <input class="form-control" id="inputRole" type="text" value="Chef" readonly>
+                                <input class="form-control" id="inputRole" type="text"
+                                    value="<?= $profileData['Role'] ?>" readonly>
                             </div>
                         </form>
-                        </div>
-</div>
-                        <!-- Password Change Section -->
-            <div class="card mb-4">
-                <div class="card-header">Change Password</div>
-                <div class="card-body">
-                <form id="changePasswordForm" method="POST" action="">
-    <?php if (!empty($message)): ?>
-        <div class="alert alert-success"><?= $message ?></div>
-    <?php endif; ?>
+                    </div>
+                </div>
+                <!-- Password Change Section -->
+                <div class="card mb-4">
+                    <div class="card-header">Change Password</div>
+                    <div class="card-body">
+                        <form id="changePasswordForm" method="POST" action="">
+                            <?php if (!empty($message)): ?>
+                                <div class="alert alert-success"><?= $message ?></div>
+                            <?php endif; ?>
 
-    <?php if (!empty($errors['general'])): ?>
-        <div class="alert alert-danger"><?= $errors['general'] ?></div>
-    <?php endif; ?>
+                            <?php if (!empty($errors['general'])): ?>
+                                <div class="alert alert-danger"><?= $errors['general'] ?></div>
+                            <?php endif; ?>
 
-    <div class="mb-3">
-        <label class="small mb-1" for="currentPassword">Current Password</label>
-        <input class="form-control <?= isset($errors['currentPassword']) ? 'is-invalid' : '' ?>" 
-               id="currentPassword" 
-               name="currentPassword" 
-               type="password">
-        <?php if (isset($errors['currentPassword'])): ?>
-            <div class="invalid-feedback"><?= $errors['currentPassword'] ?></div>
-        <?php endif; ?>
-    </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="currentPassword">Current Password</label>
+                                <input class="form-control <?= isset($errors['currentPassword']) ? 'is-invalid' : '' ?>"
+                                    id="currentPassword" name="currentPassword" type="password">
+                                <?php if (isset($errors['currentPassword'])): ?>
+                                    <div class="invalid-feedback"><?= $errors['currentPassword'] ?></div>
+                                <?php endif; ?>
+                            </div>
 
-    <div class="mb-3">
-        <label class="small mb-1" for="newPassword">New Password</label>
-        <input class="form-control <?= isset($errors['newPassword']) ? 'is-invalid' : '' ?>" 
-               id="newPassword" 
-               name="newPassword" 
-               type="password">
-        <?php if (isset($errors['newPassword'])): ?>
-            <div class="invalid-feedback"><?= $errors['newPassword'] ?></div>
-        <?php endif; ?>
-    </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="newPassword">New Password</label>
+                                <input class="form-control <?= isset($errors['newPassword']) ? 'is-invalid' : '' ?>"
+                                    id="newPassword" name="newPassword" type="password">
+                                <?php if (isset($errors['newPassword'])): ?>
+                                    <div class="invalid-feedback"><?= $errors['newPassword'] ?></div>
+                                <?php endif; ?>
+                            </div>
 
-    <div class="mb-3">
-        <label class="small mb-1" for="confirmNewPassword">Confirm New Password</label>
-        <input class="form-control <?= isset($errors['confirmNewPassword']) ? 'is-invalid' : '' ?>" 
-               id="confirmNewPassword" 
-               name="confirmNewPassword" 
-               type="password">
-        <?php if (isset($errors['confirmNewPassword'])): ?>
-            <div class="invalid-feedback"><?= $errors['confirmNewPassword'] ?></div>
-        <?php endif; ?>
-    </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="confirmNewPassword">Confirm New Password</label>
+                                <input
+                                    class="form-control <?= isset($errors['confirmNewPassword']) ? 'is-invalid' : '' ?>"
+                                    id="confirmNewPassword" name="confirmNewPassword" type="password">
+                                <?php if (isset($errors['confirmNewPassword'])): ?>
+                                    <div class="invalid-feedback"><?= $errors['confirmNewPassword'] ?></div>
+                                <?php endif; ?>
+                            </div>
 
-    <button class="btn btn-primary" type="submit">Change Password</button>
-</form>
+                            <button class="btn btn-primary" type="submit">Change Password</button>
+                        </form>
 
 
+                    </div>
                 </div>
             </div>
+
         </div>
-                    
-                </div>
-            </div>
+    </div>
 
     <div class="footer-spacing"></div> <!-- Spacing before the footer -->
     <?php include 'footer.php' ?>

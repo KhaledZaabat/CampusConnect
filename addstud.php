@@ -30,11 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die(json_encode(['success' => false, 'message' => 'Invalid file type. Please upload an image.']));
     }
 
-    $maxFileSize = 2 * 1024 * 1024; // 2MB
-    if ($_FILES['image']['size'] > $maxFileSize) {
-        die(json_encode(['success' => false, 'message' => 'File size exceeds the limit of 2MB.']));
-    }
-
     // Directory to store uploaded images
     $uploadDir = 'uploads/profile_pics/';
     if (!is_dir($uploadDir)) {
