@@ -32,7 +32,6 @@ $conn->close();
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css"> <!-- fonts -->
     <link rel="stylesheet" href="assets/css/styles.css"> <!-- custom css -->
     <link rel="stylesheet" href="assets/css/HOME.css"> <!-- custom css -->
-    <script src="assets/js/navbar.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/Home.js"></script>
 
