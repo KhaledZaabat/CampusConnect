@@ -119,6 +119,88 @@ window.addEventListener('DOMContentLoaded', function() {
 //     }
 // }
 
+// Add this to your crud.js file
+document.addEventListener('DOMContentLoaded', function() {
+    const studentForm = document.getElementById('student');
+    
+    studentForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        fetch('addstud.php', {
+            method: 'POST',
+            body: formData
+        })
+       .then(response => response.json())
+       .then(data => {
+        if (data.success) {
+            // Show success message
+            Swal.fire({
+                title: 'Success!',
+                text: 'Student added successfully!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                // Clear the form
+                studentForm.reset();
+                document.getElementById('image-preview').style.display = 'none';
+                
+                // Add the new student to the table
+                const tbody = document.getElementById('student-table-body');
+                const newRow = createStudentRow(data.student);
+                tbody.insertBefore(newRow, tbody.firstChild);
+                
+                // Refresh pagination
+                currentPage = 1;
+                header("Location: /University_Residence_Services_Platform/crudstud.php");
+            });
+            } else {
+                // Show error message
+                Swal.fire({
+                    title: 'Error!',
+                    text: data.message || 'An error occurred while adding the student.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                title: 'Error!',
+                text: 'An error occurred while processing your request.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    });
+    
+    // Helper function to create a new table row for the student
+    function createStudentRow(student) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><img src="${student.img_path}" alt="Student Image" class="student-img"></td>
+            <td><input type="text" class="tableinput idinput" value="${student.Id}" disabled></td>
+            <td><input type="text" class="tableinput name" value="${student.firstName}" disabled></td>
+            <td><input type="text" class="tableinput name Lname" value="${student.lastName}" disabled></td>
+            <td><input type="text" class="tableinput emailinput" value="${student.Email}" disabled></td>
+            <td><input type="text" class="tableinput phone" value="${student.phone}" disabled></td>
+            <td><input type="text" class="tableinput roominput" value="${student.blockName} ${student.FloorNumber} ${student.RoomNumber}" disabled></td>
+            <td>
+                <div class="button-container">
+                    <a href="editstud.php?userId=${student.Id}" class="btn edit"><i class="fas fa-edit"></i></a>
+                    <form action="deletestud.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this student?')">
+                        <input type="hidden" name="userId" value="${student.Id}">
+                        <button type="submit" id="deleteButton" class="delete"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                </div>
+            </td>
+        `;
+        return tr;
+    }
+});
+
 // // Reset error message and border style
 // function resetError(input) {
 //     if (input) {

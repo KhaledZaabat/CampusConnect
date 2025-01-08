@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $email = $_POST['email'];
-    $phone = $_POST['phone'];
+    $phone = $_POST['Phone'];
     $role = $_POST['role'];
 
     // Process image upload
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Update the employee information in the database
-    $updateStmt = $conn->prepare("UPDATE employee SET firstName = ?, lastName = ?, Email = ?, phone = ?, Role = ?, img_path = ? WHERE Id = ?");
+    $updateStmt = $conn->prepare("UPDATE employee SET firstName = ?, lastName = ?, Email = ?, Phone = ?, Role = ?, img_path = ? WHERE Id = ?");
     $updateStmt->bind_param("sssssss", $firstName, $lastName, $email, $phone, $role, $imgPath, $userId);
     
     if ($updateStmt->execute()) {
@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <input type="text" id="firstName" class="form-control" name="firstName" value="<?php echo htmlspecialchars($employee['firstName']); ?>" required>            
                 <input type="text" id="lastName" class="form-control" name="lastName" value="<?php echo htmlspecialchars($employee['lastName']); ?>" required>
                 <input type="email" id="email" class="form-control" name="email" value="<?php echo htmlspecialchars($employee['Email']); ?>" required>
-                <input type="text" id="phone" class="form-control" name="phone" value="<?php echo htmlspecialchars($employee['phone']); ?>" required>
+                <input type="text" id="phone" class="form-control" name="phone" value="<?php echo htmlspecialchars($employee['Phone']); ?>" required>
                 <select id="role" class="form-control" name="role">
                     <option value="Maintenance" <?php echo ($employee['Role'] == 'Maintenance') ? 'selected' : ''; ?>>Maintenance</option>
                     <option value="Housing" <?php echo ($employee['Role'] == 'Housing') ? 'selected' : ''; ?>>Housing</option>
