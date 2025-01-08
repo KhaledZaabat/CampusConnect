@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgInput = document.getElementById("file");
         const found = document.getElementById("found");
         const missing = document.getElementById("missing");
-        const imageFile = imgInput.files[0] ? imgInput.files[0] : new File([], "assets/img/no-img.png");
+        const imageFile = imgInput.files[0];
     
         // Validate required fields
         if (!title.value || !description.value) {
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
         const postElement = document.createElement("div");
         postElement.className = "col-md-6 col-lg-4 mt-5";
-        const imageDataUrl = submissionData.img ? `data:image/jpeg;base64,${submissionData.img}` : 'assets/listings_img/no-img.png';
+        const imageDataUrl = submissionData.img ? `data:image/jpeg;base64,${submissionData.img}` : 'assets/img/no-img.png';
         const postContent = `
         <div data-post-index="${submissionData.Id}" class="post-c blog-grid">
             <div id="post">
