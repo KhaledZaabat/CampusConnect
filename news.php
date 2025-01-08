@@ -13,7 +13,7 @@ else if ($_SESSION['user']['Role'] === null){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>NewsAdmin</title>
+    <title>News</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
@@ -113,8 +113,10 @@ else if ($_SESSION['user']['Role'] === null){
 
         while ($row = $result->fetch_assoc()) {
             echo "<div class='news-item'>";
+            echo "<a href='newsdetails.php?id=" . $row['Id'] . "' style='text-decoration: none; color: inherit;'>";
             echo "<h3>" . htmlspecialchars($row['title']) . "</h3>";
             echo "<small>Published on: " . htmlspecialchars($row['Date']) . "</small>";
+            echo "</a>";
             if ($_SESSION['user']['Role'] === 'Admin') {
                 echo "<div class='news-actions'>";
                 echo "<a href='AddNews.php?id=" . $row['Id'] . "' class='Edit'>Edit</a>";

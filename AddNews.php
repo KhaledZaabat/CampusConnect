@@ -241,11 +241,6 @@ require 'headerAdmin.php';
                     });
                 } else if (data.message) {
                     responseMessage.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
-                    if (!<?php echo $isEdit ? 'true' : 'false' ?>) {
-                        // Clear form for new submissions
-                        this.reset();
-                        newsContent.innerHTML = '';
-                    }
                 }
             })
             .catch(error => {
