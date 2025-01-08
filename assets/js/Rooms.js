@@ -4,25 +4,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmCheckbox = document.getElementById('confirm-checkbox');
 
     form?.addEventListener('submit', (event) => {
-        event.preventDefault();
         let isValid = true;
-
+    
         if (!roomNumber.value.trim()) {
             isValid = false;
         }
-
+    
         if (!confirmCheckbox.checked) {
             isValid = false;
         }
-
-        if (isValid) {
-            // Since we're no longer using AJAX, submit the form normally.
-            form.submit();
-        } else {
-            // Show an error if validation fails (could be an alert or custom message)
-            alert('Please fill in all required fields and confirm the terms.');
+    
+        if (!isValid) {
+            event.preventDefault();
+            alert('Please fill in all required fields');
         }
     });
+    
 
     const searchInput = document.getElementById('search');
     const roomTableBody = document.getElementById('room-table-body');
@@ -44,13 +41,26 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        filteredRows = rows.filter((row) =>
-            row.textContent.toLowerCase().includes(searchTerm)
-        );
+        const searchTerm = searchInput.value.trim().toLowerCase();
+    
+        // Filter rows based on block, floor, and room number (e.g., "A25")
+        filteredRows = rows.filter((row) => {
+            const [block, floor, room] = Array.from(row.querySelectorAll('td')).map((col) => col.textContent.toLowerCase().trim());
+    
+            // Match against full or partial combinations like "A35", "A", "25", etc.
+            const combinedText = `${block}${floor}${room}`; // Combine block, floor, and room without spaces
+            return (
+                block.includes(searchTerm) || // Match block
+                floor.includes(searchTerm) || // Match floor
+                room.includes(searchTerm) || // Match room
+                combinedText.includes(searchTerm) // Match full combination
+            );
+        });
+    
         currentPage = 1;
         renderTable();
     });
+    
 
     document.getElementById('prev').addEventListener('click', () => {
         if (currentPage > 1) {

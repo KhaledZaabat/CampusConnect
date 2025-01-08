@@ -39,7 +39,7 @@ if ($userid && $_SESSION['user']['isStud'] === false) {
 
         <?php if ($_SESSION['user']['Role'] === 'Admin'): ?>
             <li id="nav-item" class="nav-item"><a class="nav-link" href="AdminHome.php">Home</a></li>
-            <li id="nav-item" class="nav-item"><a class="nav-link" href="AdminNews.php">News</a></li>
+            <li id="nav-item" class="nav-item"><a class="nav-link" href="news.php">News</a></li>
             <li id="nav-item" class="nav-item"><a class="nav-link" href="CanteenManagement.php">Canteen Schedule</a></li>
             <li id="nav-drop" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" Role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
@@ -47,9 +47,8 @@ if ($userid && $_SESSION['user']['isStud'] === false) {
                     <li class="dropdown-header">Maintenance Services</li>
                     <li><a class="dropdown-item" href="ReceivingIssues.php">Manage Issues</a></li>
                     <li><a class="dropdown-item" href="lostfound.php">Lost&Found items</a></li>
-                    <li class="dropdown-header">Housing Services</li>
-                    <li><a class="dropdown-item" href="#">Book Rooms</a></li>
-                    <li><a class="dropdown-item" href="roomRequests.php">Change Rooms</a></li>
+                    <li class="dropdown-header">Housing Services</li>                    
+                    <li><a class="dropdown-item" href="roomRequests.php">Book/Change Rooms</a></li>
                     <li class="dropdown-header">Users</li>
                     <li><a class="dropdown-item" href="crudstud.php">Manage Students</a></li>
                     <li><a class="dropdown-item" href="crudadmin.php">Manage Employees</a></li>

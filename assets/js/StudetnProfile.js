@@ -1,13 +1,13 @@
-// Profile data array
-const profileData = {
-    profilePicture: "assets/img/test.jpg",
-    firstName: "John",
-    lastName: "Doe",
-    studentID: "123456",
-    email: "johndoe@email.com",
-    phoneNumber: "+1234567890",
-    roomNumber: "101A"
-};
+// JavaScript for interactivity or live profile updates
+document.addEventListener("DOMContentLoaded", () => {
+    // Example: Add a button to dynamically toggle between light and dark themes
+    const themeButton = document.getElementById("themeToggle");
+    themeButton.addEventListener("click", () => {
+        const htmlElement = document.documentElement;
+        const currentTheme = htmlElement.getAttribute("data-bs-theme");
+        htmlElement.setAttribute("data-bs-theme", currentTheme === "light" ? "dark" : "light");
+    });
+});
 
 // Populate profile data
 document.addEventListener("DOMContentLoaded", () => {

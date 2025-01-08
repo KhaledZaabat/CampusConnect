@@ -1,184 +1,183 @@
-const newsData = [
-    { id: 1, title: "Recruitment announcement – Assistant Professors (MA)", date: "2024-04-11", description: "The National School of Artificial Intelligence is organizing a recruitment competition for the position of Assistant Professors.", link: "newsDetails.html" },
-    { id: 2, title: "Upcoming AI Conference in December 2024", date: "2023-04-11", description: "Join us for the latest discussions on advancements in artificial intelligence, hosted by industry leaders.", link: "newsDetails.html" },
-    { id: 3, title: "New AI Research Lab Opening in 2025", date: "2024-04-11", description: "A state-of-the-art research facility dedicated to AI innovations will be opening next year.", link: "newsDetails.html" },
-    { id: 4, title: "Student Hackathon: Innovating AI Solutions", date: "2024-04-11", description: "A hackathon designed for students to create innovative AI solutions.", link: "newsDetails.html" },
-    { id: 5, title: "ENSIA Celebrates AI Awareness Week", date: "October 25, 2024", description: "A week-long celebration to raise awareness about AI technologies.", link: "newsDetails.html" },
-    { id: 6, title: "AI and Ethics: A Panel Discussion", date: "November 1, 2024", description: "Explore the ethical implications of AI with top researchers.", link: "newsDetails.html" },
-    { id: 7, title: "Free Online AI Courses Now Available", date: "November 5, 2024", description: "ENSIA launches free online courses in AI for students and professionals.", link: "newsDetails.html" },
-    { id: 8, title: "AI in Healthcare: Breakthrough Innovations", date: "November 10, 2024", description: "Discover how AI is transforming healthcare industries.", link: "newsDetails.html" },
-    { id: 9, title: "ENSIA's AI Summer Camp Applications Open", date: "November 15, 2024", description: "Applications for the AI Summer Camp are now open for students worldwide.", link: "newsDetails.html" },
-    { id: 10, title: "AI in Climate Change Research", date: "November 20, 2024", description: "How AI is being used to address global climate challenges.", link: "newsDetails.html" },
-    { id: 11, title: "ENSIA Robotics Team Wins AI Championship", date: "November 22, 2024", description: "ENSIA's robotics team secures first place in the AI Championship.", link: "newsDetails.html" },
-    { id: 12, title: "ENSIA Alumni Make Waves in AI Startups", date: "November 23, 2024", description: "Prominent alumni launch groundbreaking AI startups.", link: "newsDetails.html" },
-];
+document.addEventListener('DOMContentLoaded', function() {
+    const newsContainer = document.getElementById('news-container');
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const paginationControls = document.getElementById('pagination-controls');
+    
+    const itemsPerPage = 5;
+    let currentPage = 1;
+    let originalItems = [];
+    let filteredItems = [];
 
-const maxItemsPerPage = 10;
-let currentPage = 1;
+    // Store original news items with their complete content
+    document.querySelectorAll('.news-item').forEach(item => {
+        originalItems.push({
+            element: item.cloneNode(true),
+            searchContent: (item.textContent || '').toLowerCase()
+        });
+    });
+    filteredItems = [...originalItems];
 
-// Function to render news items
-function renderNews(newsItems, page = 1) {
-    const startIndex = (page - 1) * maxItemsPerPage;
-    const endIndex = startIndex + maxItemsPerPage;
-    const itemsToDisplay = newsItems.slice(startIndex, endIndex);
+    function displayNews(items, page) {
+        newsContainer.innerHTML = '';
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedItems = items.slice(start, end);
 
-    const container = document.getElementById("news-container");
-    container.innerHTML = itemsToDisplay.map((news) => `
-        <div class="news-item">
-            <h3><a href="${news.link}" class="text-primary">${news.title}</a></h3>
-            <p class="date">${news.date}</p>
-            <p>${news.description.substring(0, 100)}...</p>
-            <div class="edit-delete-container">
-                <span class="Edit" onclick="editNews(${news.id})">Edit</span> | 
-                <span class="Delete" onclick="deleteNews(${news.id})">Delete</span>
-            </div>
-        </div>
-    `).join("");
+        paginatedItems.forEach(item => {
+            newsContainer.appendChild(item.element.cloneNode(true));
+        });
 
-    renderPagination(newsItems, page);
-}
+       
+    }
 
-// Function to render pagination
-function renderPagination(newsItems, currentPage) {
-    const totalPages = Math.ceil(newsItems.length / maxItemsPerPage);
-    const paginationContainer = document.getElementById("pagination-controls");
+    function createPaginationButton(text, isActive = false, clickHandler) {
+        const button = document.createElement('button');
+        button.textContent = text;
+        button.className = isActive ? 'active' : '';
+        button.onclick = clickHandler;
+        return button;
+    }
 
-    paginationContainer.innerHTML = Array.from({ length: totalPages }, (_, i) => `
-        <button class="btn ${i + 1 === currentPage ? "btn-primary" : "btn-outline-primary"}" onclick="goToPage(${i + 1})">${i + 1}</button>
-    `).join("");
-}
+    function updatePagination(items) {
+        const pageCount = Math.ceil(items.length / itemsPerPage);
+        paginationControls.innerHTML = '';
 
-// Go to a specific page
-function goToPage(page) {
-    currentPage = page;
-    const searchTerm = document.getElementById("search-input").value.toLowerCase();
-    const filteredNews = searchTerm
-        ? newsData.filter(news => news.title.toLowerCase().includes(searchTerm))
-        : newsData;
+        if (pageCount <= 1) return;
 
-    renderNews(filteredNews, currentPage);
-}
+        if (currentPage > 1) {
+            paginationControls.appendChild(
+                createPaginationButton('Previous', false, () => {
+                    currentPage--;
+                    updateDisplay();
+                })
+            );
+        }
 
-// Search functionality
-document.getElementById("search-input").addEventListener("input", () => {
-    const searchTerm = document.getElementById("search-input").value.toLowerCase();
-    const filteredNews = searchTerm
-        ? newsData.filter(news => news.title.toLowerCase().includes(searchTerm))
-        : newsData;
+        // Show limited page numbers with ellipsis
+        let startPage = Math.max(1, currentPage - 2);
+        let endPage = Math.min(pageCount, startPage + 4);
+        
+        if (startPage > 1) {
+            paginationControls.appendChild(createPaginationButton('1', false, () => {
+                currentPage = 1;
+                updateDisplay();
+            }));
+            if (startPage > 2) paginationControls.appendChild(document.createTextNode('...'));
+        }
 
-    currentPage = 1;
-    renderNews(filteredNews, currentPage);
+        for (let i = startPage; i <= endPage; i++) {
+            paginationControls.appendChild(
+                createPaginationButton(i.toString(), i === currentPage, () => {
+                    currentPage = i;
+                    updateDisplay();
+                })
+            );
+        }
+
+        if (endPage < pageCount) {
+            if (endPage < pageCount - 1) paginationControls.appendChild(document.createTextNode('...'));
+            paginationControls.appendChild(
+                createPaginationButton(pageCount.toString(), false, () => {
+                    currentPage = pageCount;
+                    updateDisplay();
+                })
+            );
+        }
+
+        if (currentPage < pageCount) {
+            paginationControls.appendChild(
+                createPaginationButton('Next', false, () => {
+                    currentPage++;
+                    updateDisplay();
+                })
+            );
+        }
+    }
+
+    function updateDisplay() {
+        if (filteredItems.length === 0) {
+            newsContainer.innerHTML = '<div class="no-results">No news items found.</div>';
+            paginationControls.innerHTML = '';
+        } else {
+            displayNews(filteredItems, currentPage);
+            updatePagination(filteredItems);
+        }
+    }
+
+    function handleSearch() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        
+        if (searchTerm === '') {
+            filteredItems = [...originalItems];
+        } else {
+            filteredItems = originalItems.filter(item => 
+                item.searchContent.includes(searchTerm)
+            );
+        }
+        
+        currentPage = 1;
+        updateDisplay();
+    }
+
+    let searchTimeout;
+    searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(handleSearch, 300);
+    });
+    
+    searchButton.addEventListener('click', handleSearch);
+
+    // Initial display
+    updateDisplay();
+
+    
+    
+
 });
 
-function editNews(newsId) {
-    const newsItem = newsData.find(news => news.id === newsId);
-    if (newsItem) {
+document.addEventListener('DOMContentLoaded', function() {
+    const newsContainer = document.getElementById('news-container');
+
+    newsContainer.addEventListener('click', function(e) {
+        if (e.target.classList.contains('Delete')) {
+            e.preventDefault();
+            const id = e.target.getAttribute('data-id');
+            handleDelete(id);
+        }
+    });
+
+    function handleDelete(id) {
         Swal.fire({
-            title: "Edit News",
-            html: `
-                <div style="text-align: left; padding: 20px; max-width: 80%; display: flex; flex-direction: column; gap: 20px;">
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <label for="edit-title" style="flex: 1; text-align: left; white-space: nowrap;"><strong>Title:</strong></label>
-                        <input id="edit-title" class="swal2-input" value="${newsItem.title}" maxlength="70" style="flex: 3; padding: 8px; display: block;">
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <label for="edit-date" style="flex: 1; text-align: left; white-space: nowrap;"><strong>Date:</strong></label>
-                        <input id="edit-date" class="swal2-input" type="date" value="${newsItem.date}" style="flex: 3; padding: 8px; display: block;">
-                    </div>
-                    <div style="display: flex; align-items: flex-start; gap: 20px;">
-                        <label for="edit-description" style="flex: 1; text-align: left; white-space: nowrap; margin-top: 8px;"><strong>Description:</strong></label>
-                        <button class="swal2-confirm" onclick="editDescriptionModal(${newsItem.id})">Edit Description</button>
-                    </div>
-                </div>
-            `,
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: "Save Changes",
-            cancelButtonText: "Cancel",
-            preConfirm: () => {
-                const editedTitle = document.getElementById("edit-title").value.trim();
-                const editedDate = document.getElementById("edit-date").value;
-
-                if (!editedTitle || !editedDate) {
-                    Swal.showValidationMessage("All fields are required.");
-                }
-
-                return { title: editedTitle, date: editedDate };
-            }
-        }).then((editResult) => {
-            if (editResult.isConfirmed) {
-                const { title, date } = editResult.value;
-                newsItem.title = title;
-                newsItem.date = date;
-
-                goToPage(currentPage);
-
-                Swal.fire({
-                    title: "Updated!",
-                    text: `The news titled "${title}" has been successfully updated.`,
-                    icon: "success"
-                });
-            }
-        });
-    }
-}
-
-function editDescriptionModal(newsId) {
-    const newsItem = newsData.find(news => news.id === newsId);
-    if (newsItem) {
-        Swal.fire({
-            title: "Edit Description",
-            html: `
-                <textarea id="large-description" style="width: 100%; height: 300px; padding: 10px; resize: none;">${newsItem.description}</textarea>
-            `,
-            showCancelButton: true,
-            confirmButtonText: "Save Description",
-            cancelButtonText: "Cancel",
-            preConfirm: () => {
-                const editedDescription = document.getElementById("large-description").value.trim();
-                if (!editedDescription) {
-                    Swal.showValidationMessage("Description cannot be empty.");
-                }
-                return editedDescription;
-            }
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                newsItem.description = result.value;
-                goToPage(currentPage);
-                Swal.fire({
-                    title: "Updated!",
-                    text: "The description has been successfully updated.",
-                    icon: "success"
+                const formData = new FormData();
+                formData.append('id', id);
+
+                fetch('deleteNews.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire('Deleted!', 'News has been deleted.', 'success')
+                            .then(() => location.reload());
+                    } else {
+                        Swal.fire('Error!', data.message, 'error');
+                    }
+                })
+                .catch(() => {
+                    Swal.fire('Error!', 'Something went wrong', 'error');
                 });
             }
         });
     }
-}
-
-function deleteNews(newsId) {
-    const index = newsData.findIndex(news => news.id === newsId);
-    if (index !== -1) {
-        const newsTitle = newsData[index].title; 
-
-        Swal.fire({
-            title: "Are you sure?",
-            text: `You are about to delete the news: "${newsTitle}". This action cannot be undone.`,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, Delete it!",
-            cancelButtonText: "Cancel"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                newsData.splice(index, 1);
-                goToPage(currentPage);
-                Swal.fire({
-                    title: "Deleted!",
-                    text: `The news titled "${newsTitle}" has been successfully deleted.`,
-                    icon: "success"
-                });
-            }
-        });
-    }
-}
-
-// Initial rendering
-renderNews(newsData);
+});

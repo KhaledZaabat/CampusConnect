@@ -1,5 +1,13 @@
+<?php
+session_start();
+$studentId = $_SESSION['user']['Id'];
+
+require 'headerStud.php';
+?>
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -15,20 +23,19 @@
     <script src="assets/js/navbar.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <!-- font awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
     <script src="assets/js/navbar.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </head>
 
-    
+
 
 <body>
-<?php
-session_start();
 
- require 'headerStud.php';
-?>
     <div class="Form-container">
         <h1>Campus Problem Declaration Form</h1>
         <form id="problem-form" action="#" method="post" enctype="multipart/form-data">
@@ -92,7 +99,8 @@ session_start();
             <!-- Confirmation -->
             <label class="checkbox">
                 <input type="checkbox" id="confirm" name="confirm">
-                I confirm that the above information is correct and understand that dorm management will address my issue as soon as possible.
+                I confirm that the above information is correct and understand that dorm management will address my
+                issue as soon as possible.
             </label>
             <span class="error-message" id="confirm-error"></span>
 
