@@ -161,16 +161,28 @@ document.addEventListener("DOMContentLoaded", () => {
             if (result.isConfirmed) {
                 const changes = [];
                 inputFields.forEach((input, index) => {
-                    console.log('Checking input:', input.value);
-                    // Check if input is in the Weight/Amount column
-                    const isAmountColumn = input.closest('td').cellIndex === 3;
+                    const td = input.closest('td');
+                    // Get the parent row
+                    const row = td.closest('tr');
+                    // Get all cells in this row
+                    const cells = Array.from(row.cells);
+                    // Find the index of the input's container relative to visible cells
+                    const isAmountColumn = cells.indexOf(td) === cells.length - 1;
+            
+                    console.log('Input:', {
+                        value: input.value,
+                        rowCells: cells.length,
+                        isLastColumn: isAmountColumn,
+                        dataset: input.dataset
+                    });
+                    
                     changes.push({
                         id: input.dataset.id,
                         value: input.value,
                         type: isAmountColumn ? 'amount' : 'meal'
                     });
                 });
-                console.log('Changes:', changes);
+                console.log('Final changes array:', JSON.stringify(changes, null, 2));
     
                 try {
                     const response = await fetch('canteen_edit.php', {
@@ -201,25 +213,82 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".button-container").forEach(container => {
         const inputContainer = container.closest(".input-container");
         if (!inputContainer) return;
-
+    
         const row = inputContainer.closest('tr');
-        const dayCell = row.cells[0].rowSpan > 1 ? row.cells[0] : row.previousElementSibling?.cells[0];
+        
+        // Improved day cell finding logic
+        let dayCell = row.cells[0];
+        if (!dayCell.hasAttribute('data-day-id')) {
+            // If current row doesn't have day-id, look for previous rows
+            let currentRow = row;
+            while (currentRow.previousElementSibling) {
+                currentRow = currentRow.previousElementSibling;
+                const prevDayCell = currentRow.cells[0];
+                if (prevDayCell && prevDayCell.hasAttribute('data-day-id')) {
+                    dayCell = prevDayCell;
+                    break;
+                }
+            }
+        }
+        
+        // Get IDs with logging
         const dayId = dayCell?.dataset.dayId;
-        const typeId = row.cells[1].dataset.typeId;
-
+        const typeCell = row.querySelector('td[data-type-id]');
+        const typeId = typeCell?.dataset.typeId;
+    
+        // Debug logging
+        console.log('Row data:', {
+            dayId: dayId,
+            typeId: typeId,
+            rowHTML: row.innerHTML
+        });
+    
         const addButton = container.querySelector(".add");
         if (addButton) {
             addButton.addEventListener("click", async () => {
                 const inputs = inputContainer.querySelectorAll("input");
                 if (inputs.length < 7) {
+                    // Log the values before sending
+                    console.log('Attempting to add item:', {
+                        dayId: dayId,
+                        typeId: typeId,
+                        inputCount: inputs.length
+                    });
+    
+                    if (!dayId || !typeId) {
+                        await Swal.fire("Error", "Could not determine day or meal type", "error");
+                        return;
+                    }
+    
                     try {
+                        const requestData = { 
+                            dayId: parseInt(dayId), 
+                            typeId: parseInt(typeId), 
+                            meal: "New Item", 
+                            amount: "0" 
+                        };
+    
+                        console.log('Sending request:', requestData);
+    
                         const response = await fetch('canteen_add.php', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ dayId, typeId, meal: "New Item", amount: "0" })
+                            body: JSON.stringify(requestData)
                         });
-
-                        const data = await response.json();
+    
+                        // Log raw response for debugging
+                        const responseText = await response.text();
+                        console.log('Raw server response:', responseText);
+    
+                        let data;
+                        try {
+                            data = JSON.parse(responseText);
+                        } catch (e) {
+                            console.error('Failed to parse response:', e);
+                            await Swal.fire("Error", "Invalid server response", "error");
+                            return;
+                        }
+    
                         if (data.success) {
                             const newInput = document.createElement("input");
                             newInput.type = "text";
@@ -228,17 +297,20 @@ document.addEventListener("DOMContentLoaded", () => {
                             newInput.dataset.id = data.mealId;
                             inputContainer.insertBefore(newInput, container);
                             inputContainer.insertBefore(document.createElement("br"), container);
-                            location.reload(); 
+                            location.reload();
                         } else {
-                            await Swal.fire("Error adding item", data.message || "", "error");
+                            console.error('Server error:', data);
+                            await Swal.fire("Error adding item", data.message || "Server error occurred", "error");
                         }
                     } catch (error) {
-                        await Swal.fire("Error adding item", "", "error");
+                        console.error('Request error:', error);
+                        await Swal.fire("Error adding item", error.message || "Network error occurred", "error");
                     }
                 } else {
                     await Swal.fire("Can't add more than 7!");
                 }
             });
+    
         }
 
         const deleteButton = container.querySelector(".Delete");
