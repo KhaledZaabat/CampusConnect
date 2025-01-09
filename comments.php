@@ -32,7 +32,11 @@ if ($method === 'POST') {
         $postId = $data['postId'];
         $content = $data['content'];
         $userId = $data['userId'];
-    
+        if (strlen($content) > 100) {
+            echo "content must be less than 100 characters.";
+            exit;
+        }
+
         if ($postId && $content && $userId) {
             $stmt = $conn->prepare('INSERT INTO comment (PostId, Content, UserId, Datetime) VALUES (?, ?, ?, NOW())');
             $stmt->bind_param('isi', $postId, $content, $userId);
@@ -40,10 +44,8 @@ if ($method === 'POST') {
             if ($stmt->execute()) {
                 $commentId = $conn->insert_id;
     
-                // Initialize the variable to store the firstName
                 $FirstName = null;
     
-                // First query: Check in the student table
                 $stmt = $conn->prepare('SELECT firstName FROM student WHERE Id = ?');
                 $stmt->bind_param('s', $userId);
                 $stmt->execute();
@@ -59,7 +61,7 @@ if ($method === 'POST') {
                     $stmt->fetch();
                 }
     
-                $stmt->close(); // Close the statement
+                $stmt->close();
     
                 if ($FirstName) {
                     echo json_encode(['success' => true, 'username' => $FirstName, 'Id' => $commentId]);
