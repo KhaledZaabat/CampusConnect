@@ -310,7 +310,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Apply filters based on status and type
             function applyFilters(filter) {
                 filteredRequests = allRequests.filter(request => {
-                    if (filter === 'All') return true;
+                    if (filter === 'All') return trueas
                     if (['Pending', 'Approved', 'Rejected'].includes(filter)) {
                         return request.status === filter;
                     }
@@ -339,6 +339,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             // Display rows in the table
+
             function displayRows(requestsToShow, tbody) {
                 tbody.innerHTML = '';
 
