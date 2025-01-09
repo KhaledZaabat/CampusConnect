@@ -31,8 +31,8 @@ h1 {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
     font-weight: 600;
-    color: white;
-    background-color: #007bff;
+    color: white !important;
+    background-color: #007bff !important;
     border: none;
     border-radius: 5px;
     cursor: pointer;
