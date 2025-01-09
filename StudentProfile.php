@@ -36,10 +36,11 @@ $query = $conn->prepare("
     JOIN 
         floor f ON r.FloorID = f.Id
     JOIN 
-        block b ON f.Id = b.Id
+        block b ON f.BlockID = b.Id
     WHERE 
-        s.id = ?
+        s.Id = ?
 ");
+
 if ($query) {
     $query->bind_param("s", $studentId);
     $query->execute();
@@ -53,7 +54,6 @@ if ($query) {
 } else {
     die("Query preparation failed: " . $conn->error);
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

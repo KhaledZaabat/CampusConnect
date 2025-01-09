@@ -21,53 +21,81 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Log the incoming request data
     error_log("POST Data: " . print_r($_POST, true));
 
-    // Check if 'action' and 'id' are set in the POST request
     if (!empty($_POST['action']) && !empty($_POST['id'])) {
         $action = $_POST['action'];
         $requestId = intval($_POST['id']);
 
-        // Validate the action
         if ($action !== 'approve' && $action !== 'reject') {
             die(json_encode(['error' => 'Invalid action specified']));
         }
 
-        // Validate the ID
         if ($requestId <= 0) {
             die(json_encode(['error' => 'Invalid request ID']));
         }
 
         try {
+            $conn->begin_transaction();
             $status = ($action === 'approve') ? 'Approved' : 'Rejected';
 
-            // Prepare and execute the update
+            // Update the roomrequest status
             $stmt = $conn->prepare("UPDATE roomrequest SET status = ? WHERE id = ?");
             if (!$stmt) {
                 throw new Exception("Prepare failed: " . $conn->error);
             }
-
             $stmt->bind_param('si', $status, $requestId);
-
             if (!$stmt->execute()) {
                 throw new Exception("Execute failed: " . $stmt->error);
             }
 
             if ($stmt->affected_rows > 0) {
+                if ($action === 'approve') {
+                    // Fetch the userId and roomId from roomrequest
+                    $stmt = $conn->prepare("SELECT userId, roomId FROM roomrequest WHERE id = ?");
+                    if (!$stmt) {
+                        throw new Exception("Prepare failed: " . $conn->error);
+                    }
+                    $stmt->bind_param('i', $requestId);
+                    if (!$stmt->execute()) {
+                        throw new Exception("Execute failed: " . $stmt->error);
+                    }
+                    $result = $stmt->get_result();
+                    $row = $result->fetch_assoc();
+                    if (!$row) {
+                        throw new Exception("Request ID not found");
+                    }
+
+                    $userId = $row['userId'];
+                    $newRoomId = $row['roomId'];
+
+                    // Update the student's roomId
+                    $stmt = $conn->prepare("UPDATE student SET roomId = ? WHERE Id = ?");
+                    if (!$stmt) {
+                        throw new Exception("Prepare failed: " . $conn->error);
+                    }
+                    $stmt->bind_param('is', $newRoomId, $userId);
+                    if (!$stmt->execute()) {
+                        throw new Exception("Execute failed: " . $stmt->error);
+                    }
+                }
+
+                $conn->commit();
                 $stmt->close();
                 echo json_encode(['success' => true, 'message' => "Request successfully {$status}"]);
             } else {
                 throw new Exception("No rows were updated");
             }
-
         } catch (Exception $e) {
+            $conn->rollback();
             error_log("Error in room request processing: " . $e->getMessage());
             die(json_encode(['error' => 'Database error: ' . $e->getMessage()]));
         }
-
     } else {
         die(json_encode(['error' => 'Missing required parameters: action and/or id']));
     }
     exit;
 }
+
+
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -286,7 +314,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if (['Pending', 'Approved', 'Rejected'].includes(filter)) {
                         return request.status === filter;
                     }
-                    if (['Book', 'Change'].includes(filter)) {
+                    if (['book', 'change'].includes(filter)) {
                         return request.type === filter;
                     }
                     return false;
