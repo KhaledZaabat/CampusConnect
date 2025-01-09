@@ -23,7 +23,7 @@ if ($userid && $_SESSION['user']['isStud'] === false) {
 }
 
 ?>
-
+<script src="assets/js/navbar.js"></script>
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">
@@ -38,10 +38,10 @@ if ($userid && $_SESSION['user']['isStud'] === false) {
     <ul class="navbar-nav mx-auto">
 
         <?php if ($_SESSION['user']['Role'] === 'Admin'): ?>
-            <li class="nav-item active"><a class="nav-link" href="AdminHome.php">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="news.php">News</a></li>
-            <li class="nav-item"><a class="nav-link" href="CanteenManagement.php">Canteen Schedule</a></li>
-            <li class="nav-item dropdown">
+            <li id="nav-item" class="nav-item"><a class="nav-link" href="AdminHome.php">Home</a></li>
+            <li id="nav-item" class="nav-item"><a class="nav-link" href="news.php">News</a></li>
+            <li id="nav-item" class="nav-item"><a class="nav-link" href="CanteenManagement.php">Canteen Schedule</a></li>
+            <li id="nav-drop" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" Role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
                 <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
                     <li class="dropdown-header">Maintenance Services</li>
@@ -72,7 +72,7 @@ if ($userid && $_SESSION['user']['isStud'] === false) {
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="UserProfile.php">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
         </ul>
     </div>
 </div>

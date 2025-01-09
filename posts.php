@@ -68,37 +68,41 @@ if ($method === 'GET') {
 
 elseif ($method === 'POST') {
     if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        // Define the temporary directory for storing uploaded images
-        $uploadDir = 'uploads/'; // Ensure this directory is writable by the server
+        // temporary storing uploaded images
+        $uploadDir = 'uploads/'; 
         $uploadFile = $uploadDir . basename($_FILES['image']['name']);
     
-        // Move the uploaded file to the temporary directory
         if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
-            // Get the absolute file path of the uploaded image
             $imagePath = realpath($uploadFile);
     
-            // Ensure the file exists and is accessible
             if ($imagePath && file_exists($imagePath)) {
                 $title = htmlspecialchars($_POST['title']);
                 $description = htmlspecialchars($_POST['description']);
                 $type = htmlspecialchars($_POST['listingType']);
                 $userId = $_SESSION['user']['Id'];
                 $datetime = date("Y-m-d H:i:s");
-    
-                // Use LOAD_FILE to insert the image from the server's file system
+                if (strlen($title) > 100) {
+                    echo "Title must be less than 100 characters.";
+                    exit;
+                }
+                
+                if (strlen($description) > 300) {
+                    echo "Description must be less than 300 characters.";
+                    exit;
+                }
                 $sql = "INSERT INTO lostandfoundpost (Title, Content, UserId, Datetime, Type, img)
                         VALUES (?, ?, ?, ?, ?, LOAD_FILE(?))";
     
-                // Prepare and bind parameters
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("ssssss", $title, $description, $userId, $datetime, $type, $imagePath);
     
-                // Execute the statement
                 if ($stmt->execute()) {
                     echo json_encode(['success' => true, 'id' => $conn->insert_id]);
                 } else {
                     echo json_encode(['error' => 'Failed to save post: ' . $stmt->error]);
                 }
+                unlink($imagePath);
+
             } else {
                 echo json_encode(['error' => 'File does not exist or is not accessible.']);
             }

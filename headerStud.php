@@ -26,7 +26,7 @@ if ($studentId && $_SESSION['user']['isStud']===true) {
 
 ?>
 
-
+<script src="assets/js/navbar.js"></script>
 <header>
     <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar">
         <div class="container">

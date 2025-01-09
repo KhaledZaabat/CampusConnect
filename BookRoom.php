@@ -225,6 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room-submit'])) {
         </form>
     </div>
     <script src="assets/js/Rooms.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <?php include 'footer.php' ?>
 </body>
 
