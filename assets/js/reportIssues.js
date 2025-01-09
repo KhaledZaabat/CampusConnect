@@ -1,5 +1,26 @@
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
+    const fileInput = document.getElementById('file'); // Image input element
+    const imagePreviewContainer = document.getElementById('image-preview'); // Preview container
+    const previewImage = document.getElementById('preview-img'); // Preview image element
+
+    // Preview Image Functionality
+    fileInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewImage.src = e.target.result; // Set the image source
+                imagePreviewContainer.style.display = 'block'; // Show the preview container
+            };
+            reader.readAsDataURL(file); // Read the file as a data URL
+        } else {
+            // Hide the preview if no file is selected
+            imagePreviewContainer.style.display = 'none';
+            previewImage.src = '';
+        }
+    });
 
     form.addEventListener('submit', function (event) {
         let isValid = true;
@@ -64,9 +85,29 @@ document.addEventListener('DOMContentLoaded', function () {
             confirm.classList.add('error'); // Add error class
         }
 
-        // If all fields are valid, submit the form
         if (isValid) {
-            form.submit(); // Submits the form
+            Swal.fire({
+                title: 'Confirm Submission',
+                text: 'Are you sure you want to submit this form?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, submit it!',
+                cancelButtonText: 'No, cancel',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Show success alert after confirmation
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Your form has been submitted successfully.',
+                        icon: 'success',
+                        timer: 2000, // Display success alert for 2 seconds
+                        showConfirmButton: false, // No confirm button
+                    }).then(() => {
+                        // Submit the form after the success alert
+                        form.submit();
+                    });
+                }
+            });
         }
     });
 });

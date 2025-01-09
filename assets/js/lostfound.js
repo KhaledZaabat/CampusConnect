@@ -37,13 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
         xhr.send();
     }
     
-
     fetch_posts();
     
-
-
-
-
     document.querySelectorAll(".filter").forEach((filter) => {
         filter.addEventListener("click", (event) => {
             event.preventDefault();
@@ -209,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="meta meta-style2">
                         <ul>
                             <li><i class="fas fa-calendar-alt icon-blue"></i>${submissionData.Datetime}</li>
-                            <li><a href="#!"><i class="fas fa-user icon-blue"></i> ${submissionData.FirstName}</a></li>
+                            <li><i class="fas fa-user icon-blue"></i> ${submissionData.FirstName}</li>
                         <li id="comments-toggle-${submissionData.Id}" data-post-index="${submissionData.Id}" class="comments-toggle"><i class="fas fa-comments icon-blue"></i></li> 
                         </ul>
 

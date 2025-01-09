@@ -1,9 +1,74 @@
 <?php
 session_start();
-$studentId = $_SESSION['user']['Id'];
-
 require 'headerStud.php';
+
+if (!isset($_SESSION['user']['Id'])) {
+    die("Unauthorized access.");
+}
+$studentId = $_SESSION['user']['Id'];
+$message = ""; // For success or error messages
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Capture and sanitize form inputs
+    $problemType = htmlspecialchars(trim($_POST['problem-type']));
+    $description = htmlspecialchars(trim($_POST['problem-description']));
+    $urgency = htmlspecialchars(trim($_POST['urgency']));
+    $reportedBefore = htmlspecialchars(trim($_POST['reported-before'])) === 'yes' ? true : false;
+
+    // Validate inputs
+    if (empty($problemType) || empty($description) || empty($urgency)) {
+        $message = "Please fill in all required fields.";
+    } else {
+        // File upload handling
+        $uploadDir = 'uploads/IssuesPhotos/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        $filePath = "uploads\\IssuesPhotos\\Default.png"; // Default to no file
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            $fileExtension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+
+            if (!in_array($fileExtension, $allowedExtensions)) {
+                $message = "Invalid file type. Please upload an image.";
+            } elseif ($_FILES['image']['size'] > 2 * 1024 * 1024) { // 2MB limit
+                $message = "File size exceeds the limit of 2MB.";
+            } else {
+                // Generate unique file name
+                $fileName = $studentId . '_' . time() . '.' . $fileExtension;
+                $filePath = $uploadDir . $fileName;
+
+                if (!move_uploaded_file($_FILES['image']['tmp_name'], $filePath)) {
+                    $message = "Error saving uploaded file.";
+                }
+            }
+        }
+
+        // Insert issue into database if there are no errors
+
+        if (empty($message)) {
+
+            $query = $conn->prepare(
+                "INSERT INTO issue (description, type, urgency, duplicated, studentId, img_path) 
+                VALUES (?, ?, ?, ?, ?, ?)"
+            );
+
+            if ($query) {
+                $query->bind_param("sssiis", $description, $problemType, $urgency, $reportedBefore, $studentId, $filePath);
+                if ($query->execute()) {
+                    $message = "Issue reported successfully!";
+                } else {
+                    $message = "Failed to report the issue.";
+                }
+            } else {
+                $message = "Query preparation failed: " . $conn->error;
+            }
+        }
+    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -30,6 +95,8 @@ require 'headerStud.php';
         href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
     <script src="assets/js/navbar.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 
@@ -38,8 +105,7 @@ require 'headerStud.php';
 
     <div class="Form-container">
         <h1>Campus Problem Declaration Form</h1>
-        <form id="problem-form" action="#" method="post" enctype="multipart/form-data">
-
+        <form id="problem-form" action="reportIssues.php" method="post" enctype="multipart/form-data">
             <!-- Problem Type -->
             <label for="problem-type">Problem Type</label>
             <select id="problem-type" name="problem-type">
@@ -73,9 +139,7 @@ require 'headerStud.php';
             <label for="Media">Add an image (Optional)</label>
             <div class="form-group mt-2">
                 <label for="file" class="custom-file-upload">
-                    <div class="icon" id="upload-icon">
-                        <!-- SVG icon here -->
-                    </div>
+                    <div class="icon" id="upload-icon"></div>
                     <div class="text" id="upload-text">
                         <span>Click to upload image</span>
                     </div>

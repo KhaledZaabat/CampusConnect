@@ -81,7 +81,15 @@ elseif ($method === 'POST') {
                 $type = htmlspecialchars($_POST['listingType']);
                 $userId = $_SESSION['user']['Id'];
                 $datetime = date("Y-m-d H:i:s");
-    
+                if (strlen($title) > 100) {
+                    echo "Title must be less than 100 characters.";
+                    exit;
+                }
+                
+                if (strlen($description) > 300) {
+                    echo "Description must be less than 300 characters.";
+                    exit;
+                }
                 $sql = "INSERT INTO lostandfoundpost (Title, Content, UserId, Datetime, Type, img)
                         VALUES (?, ?, ?, ?, ?, LOAD_FILE(?))";
     
