@@ -297,6 +297,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if (Array.isArray(data)) {
                         allRequests = data;
                         filteredRequests = [...allRequests];
+                        prioritizePendingRequests(); // Add this line
                         renderTable(currentPage);
                     } else {
                         throw new Error('Invalid data format received');
@@ -306,19 +307,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     alert('Error loading requests: ' + error.message);
                 }
             }
-
+            // Sort requests to prioritize pending requests
+            function prioritizePendingRequests() {
+                filteredRequests.sort((a, b) => {
+                    if (a.status.toLowerCase() === 'pending' && b.status.toLowerCase() !== 'pending') return -1;
+                    if (a.status.toLowerCase() !== 'pending' && b.status.toLowerCase() === 'pending') return 1;
+                    return 0;
+                });
+            }
             // Apply filters based on status and type
             function applyFilters(filter) {
                 filteredRequests = allRequests.filter(request => {
-                    if (filter === 'All') return trueas
+                    if (filter === 'All') return true;
                     if (['Pending', 'Approved', 'Rejected'].includes(filter)) {
-                        return request.status === filter;
+                        return request.status.toLowerCase() === filter.toLowerCase();
                     }
-                    if (['book', 'change'].includes(filter)) {
-                        return request.type === filter;
+                    if (['Book', 'Change'].includes(filter)) {
+                        return request.type.toLowerCase() === filter.toLowerCase();
                     }
                     return false;
                 });
+
+                prioritizePendingRequests(); // Add this line
                 currentPage = 1;
                 renderTable(currentPage);
             }

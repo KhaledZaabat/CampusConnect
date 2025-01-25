@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['issueId']) && isset($
 
 // Fetch issues from the database
 $query = "
-    SELECT 
+  SELECT 
         i.Id, 
         i.description, 
         i.type AS problemType, 
@@ -44,13 +44,14 @@ $query = "
     JOIN 
         floor f ON r.FloorID = f.Id
     JOIN 
-        block b ON f.Id = b.Id
+        block b ON f.BlockID = b.Id
 ";
 
 $result = $conn->query($query);
 
 $issues = [];
 if ($result->num_rows > 0) {
+
     while ($row = $result->fetch_assoc()) {
         $issues[] = $row;
     }
@@ -119,7 +120,7 @@ $conn->close();
             if (filteredIssues.length === 0) {
                 container.innerHTML = `
             <div class="no-issues-container">
-                <img src="https://www.exploreworld.com/_next/image?url=%2Fimages%2Fno-data.gif&w=1080&q=75" alt="No Issues">
+                <img src="uploads\\IssuesPhotos\\NoResult.gif" alt="No Issues">
                 <h3>No Issues to display</h3>
                 <p>It seems there are no Issues available at the moment. Please check back later!</p>
             </div>`;
