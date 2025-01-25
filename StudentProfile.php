@@ -1,6 +1,21 @@
 <?php
 session_start();
-require 'headerStud.php';
+// Database configuration
+$host = 'localhost';
+$dbname = 'campus_connect';
+$username = 'root';
+$password = '';
+
+// Initialize error variable
+$error = "";
+
+// Connect to the database
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 $message = "";
 $errors = [];
 
@@ -8,7 +23,7 @@ if (!isset($_SESSION['user']['Id'])) {
     die("Unauthorized access.");
 }
 
-$studentId = $_SESSION['user']['Id'] ?? null; // Check if the session variable exists
+$studentId = $_SESSION['user']['Id'] ; // Check if the session variable exists
 
 // Fetch Student profile data from the database
 $query = $conn->prepare("SELECT firstName, lastName, Email, Phone, img_path, roomId FROM student WHERE id = ?");
@@ -60,11 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $currentPassword = $_POST['currentPassword'] ?? '';
     $newPassword = $_POST['newPassword'] ?? '';
     $confirmNewPassword = $_POST['confirmNewPassword'] ?? '';
-
-    // Validate session and inputs
-    if (!$studentId) {
-        $errors[] = 'User is not logged in.';
-    }
+    
     if (empty($currentPassword)) {
         $errors[] = 'Current password is required.';
     }
@@ -80,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         // Fetch the current password from the database
-        $query = $conn->prepare("SELECT password FROM student WHERE id = ?");
+        $query = $conn->prepare("SELECT password FROM student WHERE Id = ?");
         if ($query) {
             $query->bind_param("s", $studentId);
             $query->execute();
@@ -121,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-
+require 'headerStud.php';
 ?>
 
 <!DOCTYPE html>
@@ -259,42 +270,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script>
         document.getElementById("changePasswordForm").addEventListener("submit", function (event) {
-            event.preventDefault();
+    event.preventDefault();
 
-            const form = this;
-            const formData = new FormData(form);
-            const responseMessage = document.getElementById("responseMessage");
+    const form = this;
+    const formData = new FormData(form);
+    const responseMessage = document.getElementById("responseMessage");
 
-            responseMessage.innerHTML = "";
+    responseMessage.innerHTML = "";
 
-            fetch("", {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.errors) {
-                        responseMessage.innerHTML = `<div class="alert alert-danger">${data.errors}</div>`;
-                    } else if (data.message) {
-                        responseMessage.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
-                    } else {
-                        responseMessage.innerHTML = `<div class="alert alert-danger">Unexpected error occurred.</div>`;
-                    }
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    responseMessage.innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
-                });
-        });
+    fetch("", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+        // Ensure response is parsed as JSON
+        return response.json();
+    })
+    .then(data => {
+        if (data.errors) {
+            // If errors exist, show danger alert
+            responseMessage.innerHTML = `<div class="alert alert-danger">${data.errors}</div>`;
+        } else if (data.message) {
+            // If message exists, show success alert
+            responseMessage.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+            // Optional: reset form after successful password change
+            form.reset();
+        }
+    })
+    .catch(error => {
+        console.error("Detailed Error:", error);
+        responseMessage.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+    });
+});
     </script>
 </body>
-
-</html>
-
-</body>
-
-
-
-
 
 </html>
