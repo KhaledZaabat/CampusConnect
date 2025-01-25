@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
+<style>
+  .foot {
+    text-decoration: none; /* Removes underline decoration */
+    color: inherit; /* Ensures the text color inherits from the parent */
+  }
+</style>
 
 <footer class="page-footer custom-bg-black">
     <div class="test">
         <div class="wrapper">
-            <div class="button">
-                <div class="icon"><i class="fab fa-facebook-f"></i></div>
-                <span>Facebook</span>
-            </div>
+        <a href="https://web.facebook.com/maalma03" target="_blank" class="foot">
+  <div class="button">
+    <div class="icon"><i class="fab fa-facebook-f"></i></div>
+    <span>Facebook</span>
+  </div>
+</a>
 
-            <div class="button">
-                <div class="icon"><i class="fab fa-twitter"></i></div>
-                <span>Twitter</span>
-            </div>
+<a href="https://github.com/search?q=ensia&type=repositories" target="_blank" class="foot">
+  <div class="button">
+    <div class="icon"><i class="fab fa-github"></i></div>
+    <span>Github</span>
+  </div>
+</a>
 
-            <div class="button">
-                <div class="icon"><i class="fab fa-youtube"></i></div>
-                <span>Youtube</span>
-            </div>
-
-            <div class="button">
-                <div class="icon"><i class="fab fa-github"></i></div>
-                <span>Github</span>
-            </div>
-            
-            <div class="button">
-                <div class="icon"><i class="fab fa-instagram"></i></div>
-                <span>Instagram</span>
-            </div>
+<a href="https://www.instagram.com/mahelma03/" target="_blank" class="foot">
+  <div class="button">
+    <div class="icon"><i class="fab fa-instagram"></i></div>
+    <span>Instagram</span>
+  </div>
+</a>
         </div>
 
         <div class="footer-image">
