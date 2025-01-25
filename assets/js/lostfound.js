@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="no-posts-message text-center py-5">
                     <h3>No posts to display</h3>
                     <p>It seems there are no posts available at the moment. Please check back later!</p>
-                    <img src="https://www.exploreworld.com/_next/image?url=%2Fimages%2Fno-data.gif&w=1080&q=75" alt="No Data"> 
+                    <img src="uploads/IssuesPhotos/NoResult.gif" alt="No Data"> 
                 </div>
             `;
             return;

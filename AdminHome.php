@@ -168,7 +168,7 @@ $conn->close();
                         <h3>Manage News</h3>
                         <p>Create and publish campus news and announcements.</p>
                         <div class="card-btn-container">
-                            <a href="AdminNews.php"><div class="card-btn">Update News</div></a>
+                            <a href="news.php"><div class="card-btn">Update News</div></a>
                         </div>
                     </div>
                     
@@ -177,7 +177,7 @@ $conn->close();
                         <h3>Manage Other Services</h3>
                         <p>Oversee maintenance requests, housing services, and more.</p>
                         <div class="card-btn-container">
-                            <a href="changeRoom.php"><div class="card-btn">Manage Rooms</div></a>
+                            <a href="roomRequests.php"><div class="card-btn">Manage Rooms</div></a>
                             <a href="ReceivingIssues.php"><div class="card-btn">Students Issues</div></a>
                         </div>
                     </div>
