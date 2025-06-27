@@ -1,11 +1,11 @@
+title: CampusConnect Project
+admin_login:
+  username: 7
+  password: Khaled Zaabat
+student_login:
+  username: 777
+  password: Khaled Zaabat
 ---
-### Note :
-Before reading remember that to enter as admin use this :
-USERNAME : 7 
-Passwrod :  Khaled Zaabat
-as Student : 
-USERNAME : 777 
-Passwrod :  Khaled Zaabat
 #### Project Name: CampusConnect
 <img src="https://github.com/KhaledZaabat/CampusConnect/blob/main/assets/img/logo.png" alt="logo" width="300"/>
 
