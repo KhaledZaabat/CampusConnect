@@ -4,7 +4,6 @@
 
 - ---
 note: |
-  ### Note :
   Before reading remember that to enter as admin use this :
 
   USERNAME : 7 
@@ -13,6 +12,7 @@ note: |
 
   as Student : 
   USERNAME : 777 
+  
   Passwrod :  Khaled Zaabat
 
 - ---
