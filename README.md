@@ -3,13 +3,18 @@
 <img src="https://github.com/KhaledZaabat/CampusConnect/blob/main/assets/img/logo.png" alt="logo" width="300"/>
 
 - ---
-### Note :
-Before reading remember that to enter as admin use this :
-USERNAME : 7 
-Passwrod :  Khaled Zaabat
-as Student : 
-USERNAME : 777 
-Passwrod :  Khaled Zaabat
+note: |
+  ### Note :
+  Before reading remember that to enter as admin use this :
+
+  USERNAME : 7 
+
+  Passwrod :  Khaled Zaabat
+
+  as Student : 
+  USERNAME : 777 
+  Passwrod :  Khaled Zaabat
+
 - ---
 #### Description:
 CampusConnect is a web-based system developed to help students living in university accommodations to interact with various services. The system provides access and a view of the most valued services, which include accommodation management, maintenance reporting, enrollment in activities, and access to documents. Admin will be able to operate and manage the system by viewing student data, news, and the status of services. The system will be in both English and Arabic to serve a diverse number of students.
