@@ -3,7 +3,7 @@
 <img src="https://github.com/KhaledZaabat/CampusConnect/blob/main/assets/img/logo.png" alt="logo" width="300"/>
 
 - ---
-note: |
+### Note: 
   Before reading remember that to enter as admin use this :
 
   USERNAME : 7 
